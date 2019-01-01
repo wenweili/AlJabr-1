@@ -1,0 +1,96 @@
+% Copyright 2018  李文威 (Wen-Wei Li).
+% Permission is granted to copy, distribute and/or modify this
+% document under the terms of the Creative Commons
+% Attribution 4.0 International (CC BY 4.0)
+% http://creativecommons.org/licenses/by/4.0/
+
+% 《代数学方法》卷一自订封面页, 由主档引入.
+
+\setCJKfamilyfont{coverfont}{Noto Serif CJK SC Bold}	% 设置书名字体
+\setCJKfamilyfont{cover-author-font}{Noto Sans CJK SC}	% 设置作者字体
+\colorlet{octa}{cyan!50!gray}	% Color for the octahedron
+
+\begin{titlepage}\begin{tikzpicture}[remember picture, overlay, pencildraw/.style={
+		color=octa, thick,
+		decorate,
+		decoration={random steps, segment length=1pt, amplitude=0.7pt}
+	}]
+
+	\node[anchor=center] (title) at ([xshift=19em, yshift=-10em] current page.north west)
+		{ \fontsize{45}{45}\CJKfamily{coverfont}代数学方法};
+
+	\node[anchor=center] (volume) at ([yshift=-7em] title.center) {\fontsize{30}{30}\CJKfamily{coverfont}卷一：基础架构};
+
+	\node[anchor=west] (author) at ([yshift=-5em, xshift=4pt] volume.south west) {\fontsize{18}{18}\CJKfamily{cover-author-font}李文威};
+	\node[anchor=west] at ([xshift=2.4em] author.east) {\fontsize{18}{18}\CJKfamily{cover-author-font}著};
+
+	\draw[line width=2pt, color=black!70!gray] ([xshift=-2.5em, yshift=1em] author.north west) -- ++(25em,0);
+	\shade[top color=gray, bottom color=black,] ([xshift=-1em, yshift=1em] title.north west) rectangle ++(-1em,-20em);
+
+	% The anchors for the pictures at lower-right corner.
+	\coordinate (pic) at ([xshift=-23em, yshift=22em] current page.south east);
+	\coordinate (pic2) at ([xshift=3em] pic);
+	
+	% The pentagon axiom
+	\begin{scope}[shift = (pic2), scale=1.5, opacity=0.55]
+			\node (P0) at (90:2.3cm) {$((X \otimes Y) \otimes Z) \otimes W$};
+			\node (P1) at (90+72:2cm) {$(X \otimes (Y \otimes Z)) \otimes W$} ;
+			\node (P2) at (90+2*72:2cm) {\makebox[5ex][r]{$X \otimes ((Y \otimes Z) \otimes W)$}};
+			\node (P3) at (90+3*72:2cm) {\makebox[5ex][l]{$X \otimes (Y \otimes (Z \otimes W))$}};
+			\node (P4) at (90+4*72:2cm) {$(X \otimes Y) \otimes (Z \otimes W)$};
+			\path[commutative diagrams/.cd, every arrow, every label]
+				(P0) edge node[swap] {$a(X,Y,Z) \otimes \identity_W$} (P1)
+				(P1) edge node[swap] {$a(X, Y \otimes Z, W)$} (P2)
+				(P2) edge node[swap, inner sep=1em] {$\identity_X \otimes a(Y,Z,W)$} (P3)
+				(P4) edge node {$a(X, Y, Z \otimes W)$} (P3)
+				(P0) edge node {$a(X \otimes Y, Z, W)$} (P4);
+	\end{scope}
+	
+	% The octahedron
+	\begin{scope}[shift=(pic), rotate=-30, scale=2]
+		\coordinate (A1) at (pic);
+		\coordinate (A2) at (6em, 2em);
+		\coordinate (A3) at (10em, 0);
+		\coordinate (A4) at (4em, -2em);
+		\coordinate (B1) at (5em, 5em);
+		\coordinate (B2) at (5em, -5em);
+	\end{scope}
+
+	\begin{scope}[loosely dashed, opacity=0.6]
+		\draw[pencildraw] (A1) -- (A2) -- (A3);
+		\draw[pencildraw] (B1) -- (A2) -- (B2);
+	\end{scope}
+	\draw[pencildraw, fill=octa!10,opacity=0.6] (A1) -- (A4) -- (B1);
+	\draw[pencildraw, fill=octa!20,opacity=0.6] (A1) -- (A4) -- (B2);
+	\draw[pencildraw, fill=octa!30,opacity=0.6] (A3) -- (A4) -- (B1);
+	\draw[pencildraw, fill=octa!50,opacity=0.6] (A3) -- (A4) -- (B2);
+	\draw[pencildraw] (B1) -- (A1) -- (B2) --node[sloped, below] {\small\sffamily \today} (A3) --cycle;
+\end{tikzpicture}
+
+\clearpage	% 进入内页
+\begin{center}
+	\Large{\sffamily\bfseries\thmheiti 网络版} \\ \vspace{2em}
+	\Large{\sffamily\bfseries\thmheiti 编译日期: \today} \\ \vspace{1em}
+%	版面: B5 (176×250mm) \\ \vspace{1em}
+	本书已由高等教育出版社发行 \\
+	(2019 年 1 月第 1 版) \\
+	\texttt{ISBN: 978-7-04-050725-6}
+\end{center}
+\vfill
+
+\begin{flushleft} \small
+	李文威 \\
+	个人主页: \href{http://www.wwli.url.tw}{www.wwli.url.tw} \\
+	(含勘误表等信息)
+\end{flushleft}
+\vspace{1.5em}
+\begin{tabular*}{\textwidth}{ccc}
+	\includegraphics{ccby.png}
+	& \begin{minipage}[b]{0.6\textwidth}
+		\small\sffamily
+		本作品采用知识共享 署名 4.0 国际 许可协议进行许可. 访问 \url{http://creativecommons.org/licenses/by/4.0/} 查看该许可协议.
+	\end{minipage}
+\end{tabular*}
+
+\cleardoublepage
+\end{titlepage}

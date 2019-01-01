@@ -1,0 +1,1144 @@
+% LaTeX source for book ``代数学方法'' in Chinese
+% Copyright 2018  李文威 (Wen-Wei Li).
+% Permission is granted to copy, distribute and/or modify this
+% document under the terms of the Creative Commons
+% Attribution 4.0 International (CC BY 4.0)
+% http://creativecommons.org/licenses/by/4.0/
+
+% To be included
+\chapter{域扩张}\label{sec:field-ext}
+本章考虑域的一般结构, 但不涉及 Galois 群. 域论探讨的基本课题是域嵌入, 或者说是域的扩张. 我们主要考察代数扩张, 这自然地联系于多项式及其根的性质. 本书采取的角度是系统地利用代数闭包的存在性, 对代数扩张作尽量广泛的处理. 由于我们将域 $F$ 的扩张视为一类特殊的 $F$-代数, 扩张中的极小多项式, 迹和范数等概念业已在第七章处理过, 本章只作必要的回顾, 不再重复证明.
+
+\begin{wenxintishi}
+	处理代数扩张的基本工具是域嵌入的存在性和嵌入的延拓, 这些论断归根结柢都是关于多项式及其根的性质, 所以域论绝不抽象. 初读时可以略过 \S\S\ref{sec:pins}--\ref{sec:tensor-field}. 有限域的完整探讨留待下一章.
+\end{wenxintishi}
+
+\section{扩张的几种类型}
+域是交换除环. 域的子环如本身也是域则称为子域. 由于域没有非平凡的真理想, 任意域 $E$ 和 $F$ 之间的所有环同态 $F \to E$ 都是单的; 换言之, 域论的主角乃是域嵌入 $F \hookrightarrow E$. 同一个嵌入可以从不同视角观察:
+\begin{compactitem}
+	\item 给定嵌入 $u: F \to E$ 相当于赋 $E$ 以 $F$-代数的结构;
+	\item 如将 $F$ 等同于 $u(F) \subset E$, 则可视 $F$ 为域 $E$ 的子域;
+	\item 承上, 亦可称 $E$ 是 $F$ 的\emph{扩张}或\emph{扩域}, 本书记作符号 $E|F$, 许多文献记作 $E/F$.\index{yukuozhang@域扩张 (field extension)}\index[sym1]{E/F@$E \mid F$, $E/F$}
+\end{compactitem}
+留意到 $E$ 透过乘法自然地成为 $F$-向量空间. 本书不要求扩域 $E|F$ 中的 $F$ 是 $E$ 的子域而 $F \hookrightarrow E$ 是包含映射, 尽管这种假设颇为方便, 并且在下述的同构意义下也是正当的.
+ 
+\begin{convention}\index{yukuozhang!嵌入 (embedding)}
+	对于域扩张 $E|F$, $E'|F$, 定义其间的 $F$-嵌入 $\phi: E \to E'$ 为使下图交换的环同态
+	\[\begin{tikzcd}[column sep=small, row sep=small]
+		E \arrow[rr, "\phi"] & & E' \\
+		& F \arrow[hookrightarrow, lu] \arrow[hookrightarrow, ru] &
+	\end{tikzcd}\]
+	全体 $F$-嵌入 $E \to E'$ 构成集合 $\Hom_F(E, E')$; 这无非是 $F$-代数范畴中的 $\Hom$-集. 准此要领, 可定义 $F$ 的扩域之间的同构和自同构概念.
+\end{convention}
+对扩张 $E|F$ 如上, 若 $E$ 的 $F$-子代数本身成域, 则称为 $E|F$ 的\emph{子扩张}. 从嵌入角度看, $u: F \hookrightarrow E$ 的子扩张是 $E$ 中满足 $E' \supset u(F)$ 的子域; 因而当 $F \subset E$ 时, $E|F$ 的子扩张也唤作\emph{中间域}.\index{zhongjianyu@中间域 (intermediate field)}
+
+对域 $F$ 可定义其特征 $\text{char}(F)$ (定义 \ref{def:ring-characteristic}): $\text{char}(F)$ 生成 $\Ker[\Z \to F]$. 域特征或是零或是素数 $p$. 相应地, 域 $F$ 的最小子域或者是 $\Q$ (特征零的情形), 或者是 $\F_p := \Z/p\Z$ (特征为素数 $p$ 的情形), 称作 $F$ 的\emph{素子域}. 任何 $F$ 的子域都是 $F$ 对素子域的子扩张. 对任意 $u: F \hookrightarrow E$ 皆有 $\text{char}(E)=\text{char}(F)$, 而且 $u$ 限制在素子域上是恒等映射. \index{tezheng}\index[sym1]{char}\index{suziyu}
+
+\begin{definition}
+	令 $E|F$ 为域扩张.
+	\begin{itemize}
+		\item 定义 $E|F$ 的次数为基数 $[E:F] := \dim_F E$;\index{yukuozhang!次数 (degree)}\index[sym1]{$[E:F]$}
+		\item 如 $[E:F]$ 有限则称 $E|F$ 是\emph{有限扩张};\index{yukuozhang!有限}
+		\item 若 每个 $x \in E$ 在 $F$ 上都是代数元 (定义 \ref{def:algebraic-element}), 亦即存在 $P \in F[X] \smallsetminus \{0\}$ 使得 $P(x)=0$, 则称 $E|F$ 是\emph{代数扩张}.\index{yukuozhang!代数}
+		\item 对于 $x \in E$, 定义 $F[x]$ 为 $x$ 生成的 $F$-子代数 (见 \S\ref{sec:integrality-finiteness} 开头的讨论), 多元情形 $F[x,y, \ldots]$ 的定义类此;
+		\item 承上, 定义 $F(x)|F$ 为 $x$ 在 $F$ 上生成的子扩张, 域 $F(x)$ 的元素为 $\frac{P(x)}{Q(x)}$ 的形式, 其中 $P,Q \in F[X]$ 且 $Q(x) \neq 0$, 多元情形 $F(x,y,\ldots)$ 的定义类此;\index[sym1]{$F(x,y,\ldots)$}
+		\item 承上, 若一族 $E$ 中元素 $\{x_i\}_{i \in I}$满足 $F(x_i : i \in I) = E$, 则称 $\{x_i\}_{i \in I}$ 是 $E|F$ 的生成集, 具有有限生成集的扩张称为\emph{有限生成扩张}, 能由单个元素生成的称为\emph{单扩张}.\index{yukuozhang!单扩张}
+	\end{itemize}
+\end{definition}
+
+有限扩张 $E|F$ 必有限生成: 若 $x_1, \ldots, x_k$ 是 $E$ 作为 $F$-向量空间的基, 那么当然有 $E=F(x_1, \ldots, x_k)$. 此外, $[E:F]=1 \iff F \rightiso F \cdot 1 = E$, 经常直接写作 $E=F$.
+
+\begin{example}\label{eg:field-basic-examples}
+	在深入一般理论之前, 我们先浏览两个源于19世纪的经典案例.\index{shuyu@数域 (number field)}\index{hanshuyu@函数域 (function field)}
+	\begin{itemize}
+		\item 代数数按定义是 $\CC$ 中满足多项式方程 $P(\alpha)=0$ 的元素, 其中 $P \in \Q[t]$ 非零 ($t$ 表变元). 数论中研究向 $\Q$ 添进有限个代数数 $\alpha_1, \ldots, \alpha_n$ 所得到的扩域, 称为数域, 按我们的记号就是 $\Q(\alpha_1, \ldots, \alpha_n)|\Q$, 以及这些域之间的嵌入及次数, 自同构等性质. 我们马上会证明这些扩张都是有限代数扩张, 并且全体代数数构成 $\CC$ 的子域 $\overline{\Q}$. 如是添元操作 $F \leadsto F(\alpha, \beta, \ldots)$ 是域论独具特色的手法.
+		\item 设 $X$ 为复一维的光滑紧复流形, 它们作为实流形是二维的, 又称紧 Riemann 曲面. 全体 $X$ 上的亚纯函数构成 $X$ 的函数域 $\CC(X)$. 可证明紧 Riemann 曲面之间的满全纯映射 $f: X \to Y$ 透过亚纯函数的拉回诱导域嵌入 $f^*: \CC(Y) \hookrightarrow \CC(X)$. 域扩张 $\CC(X)|\CC(Y)$ 的次数正好是 $f$ 在几何意义下的映射度. 当 $Y$ 取为复射影直线 $\mathbb{P}^1$ 时, $\CC(Y)$ 等同于单变元有理函数域 $\CC(t)$, 它的有限扩域 $\CC(X)$ 则称为复代数函数域. 代数曲线论的一条基本定理断言: 函数域之间的 $\CC$-嵌入如实地反映了 Riemann 曲面之间所有非平凡的全纯映射. 由此可以约略体会 $\CC(X)$ 的几何含义.
+	\end{itemize}
+	数域和函数域之间存在微妙的类比, 这始于 Dedekind 和 Weber 的深刻洞见 \cite{DW82}.
+\end{example}
+
+\begin{definition}\index{yukuozhang!复合 (compositum)}
+	设 $\Omega|F$ 为域扩张, $(E_i|F)_{i \in I}$ 为其中一族子扩张, 定义其\emph{复合} $\bigvee_{i \in I} E_i$ 为 $\Omega$ 中包含所有 $E_i$ 的最小域, 其元素形如有理分式
+	\begin{gather}\label{eqn:fields-compositum}
+		\frac{P(x_{i_1}, \ldots, x_{i_n})}{Q(x_{i_1}, \ldots, x_{i_n})}, \quad Q(x_{i_1}, \ldots, x_{i_n}) \neq 0
+	\end{gather}
+	其中 $n \geq 0$, $P, Q \in F[X_1, \ldots, X_n]$, $i_1, \ldots, i_n \in I$, $x_{i_k} \in E_{i_k}$. 有限多个子扩张的复合也写作 $E_1 E_2$ 等等.
+\end{definition}
+若将 $\Omega|F$ 的全体子扩张按 $\subset$ 作成偏序集, 那么复合给出其中任意子集的上确界, 下确界则由子扩张的交 $\bigcap_{i \in I} E_i$ 给出.
+
+设 $L|E$, $E|F$ 为域扩张, 嵌入的合成 $F \hookrightarrow E \hookrightarrow L$ 给出域扩张 $L|F$. 这种结构称为域扩张的塔. 以下是引理 \ref{prop:free-transitivity} 和推论 \ref{prop:norm-trace-transitivity-2} 的直接应用. \index{yukuozhang!塔 (tower)}
+\begin{proposition}[次数的塔性质]\label{prop:field-tower-degree}
+	对于 $L$, $E$, $F$ 如上,
+	\begin{compactitem}
+		\item 域扩张的次数满足 $[L:F]=[L:E][E:F]$;
+		\item 若 $(x_i)_{i \in I}$ 和 $(y_j)_{j \in J}$ 分别是 $L$ 在 $E$ 上和 $E$ 在 $F$ 上的一组基, 则 $(x_i y_j)_{(i,j) \in I \times J}$ 是 $L$ 在 $F$ 上的一组基.
+	\end{compactitem}
+\end{proposition}
+次数的整除性质妙用无穷. 举例明之, 当 $[L:F]$ 为素数时可知中间域 $E$ 必为 $L$ 或 $F$.
+
+现在转向本章的关键之一, 即代数扩张的研究. 下列性质是一切论证的起点.
+\begin{enumerate}
+	\item 对于扩张 $E|F$ 中的代数元 $x \in E$ 可定义其在 $F$ 上的\emph{极小多项式} $P_x \in F[X]$ (定义 \ref{def:algebraic-element}); 对任意 $Q \in F[X]$ 皆有 $Q(x) = 0 \iff P_x \mid Q$.
+	\item 承上, 引理 \ref{prop:minimal-polynomial} 断言 $P_x$ 总不可约, 而且 $F(x) = F[x]$; 我们有 $F$-代数的同构
+		\begin{align*}
+			F[X]/(P_x) & \longrightiso F(x) \\
+			f + (P_x) & \longmapsto f(x) = \text{ev}_x(f), \\
+			X + (P_x) & \longmapsto x
+		\end{align*}
+		因此极小多项式可谓内在地刻画了域 $F(x)$ 的结构, 由此亦可见 $[F(x):F] = \deg P_x$.
+	\item 对 $E|F$ 的任意子扩张 $E'|F$, 上述 $x \in E$ 在 $E'$ 上当然也是代数的, 而且 $x$ 在 $E'$ 上的极小多项式必整除 $P_x$, 因此 $[E'(x):E'] \leq [F(x):F]$.
+\end{enumerate}
+我们将在 \S\ref{sec:splitting-field} 给出构造代数扩张的一般方法.
+
+\begin{example}[二次扩张]
+	设 $\text{char}(F) \neq 2$, 则满足 $[E:F]=2$ 的扩张必形如 $E = F(\sqrt{a})$, 其中 $a \in F^\times \smallsetminus F^{\times 2}$; 此处惯例是以 $\sqrt{a} \in E$ 表 $a$ 的任一平方根. 诚然, $[E:F]=2$ 蕴涵 $x \in E \smallsetminus F \implies E = F(x) \simeq F[X]/(P_x)$. 将极小多项式 $P_x = X^2 + tX + s$ 配方为 $(X + \frac{t}{2})^2 + (s - \frac{t^2}{4})$, 可进一步假设 $P_x = X^2 - a$, 这就给出了 $x = \sqrt{a}$.
+\end{example}
+
+\begin{lemma}\label{prop:finiteness-generation}
+	若域扩张 $E|F$ 满足 $E=F(y_1, \ldots, y_m)$, 其中每个 $y_i$ 都是 $F$-上的代数元, 则 $E|F$ 为有限扩张, 此时 $E=F[y_1, \ldots, y_m]$.
+\end{lemma}
+\begin{proof}
+	由 $F(y_1, \ldots, y_m) = F(y_1, \ldots, y_{m-1})(y_m)$, $1 \leq m \leq n$, 命题 \ref{prop:field-tower-degree} 连同上述观察可得
+	\begin{align*}
+		[F(y_1, \ldots, y_n):F] & = \prod_{m=1}^n \left[ F(y_1, \ldots, y_m): F(y_1, \ldots, y_{m-1}) \right] \\
+		& = \prod_{m=1}^n \left[ F(y_1, \ldots, y_{m-1})(y_m): F(y_1, \ldots, y_{m-1}) \right] \\
+		& \leq \prod_{m=1}^n [F(y_m):F] \leq \infty,
+	\end{align*}
+	因而 $E|F$ 是有限扩张. 对 $m$ 递归可知
+	\begin{equation*}\begin{aligned}
+		E & = F(y_1, \ldots, y_{m-1})(y_m) = F(y_1, \ldots, y_{m-1})[y_m] \\
+		& = F[y_1, \ldots, y_{m-1}][y_m] = F[y_1, \ldots, y_m],
+	\end{aligned}\end{equation*}
+	明所欲证.
+\end{proof}
+
+\begin{lemma}\label{prop:finite-vs-algebraic}
+	有限扩张无非是有限生成的代数扩张.
+\end{lemma}
+\begin{proof}
+	定理 \ref{prop:integrality-finiteness} 确保有限扩张 $E|F$ 必为代数扩张, 而有限扩张当然也是有限生成的. 反方向是引理 \ref{prop:finiteness-generation} 的直接结论.
+\end{proof}
+
+我们经常要研讨扩张的性质在种种操作下的性状, 为节约笔墨, 引进 \cite[V. \S 1]{Lang02} 的术语如下.
+\begin{convention}\label{con:dist-extensions}\index{yukuozhang!特出 (distinguished)}
+	设 $\mathcal{E}$ 为某个由域扩张构成的类, 若以下性质成立则称 $\mathcal{E}$ 为\emph{特出}的:
+	\begin{enumerate}[\bfseries {D}.1]
+		\item 对任意域扩张的塔 $L|E$, $E|F$, 皆有 $(E|F \in \mathcal{E}) \wedge (L|E \in \mathcal{E}) \iff L|F \in \mathcal{E}$;
+		\item 设 $L|F$, $M|F$ 是给定的 $\Omega|F$ 的子扩张, 则 $L|F \in \mathcal{E} \implies LM|M \in \mathcal{E}$;
+		\item 设 $L|F$, $M|F$ 同上, $(L|F \in \mathcal{E}) \wedge (M|F \in \mathcal{E}) \implies LM|F \in \mathcal{E}$. 注意到这其实是前两条的推论, 它也蕴涵 $\mathcal{E}$ 在有限复合下封闭.
+	\end{enumerate}
+	经常以如下的域图表达上述三种情况:
+	\[ \begin{tikzcd}
+		L \arrow[dash,d] \\ E \arrow[dash,d] \\ F
+	\end{tikzcd} \quad \begin{tikzcd}[row sep=small, column sep=tiny]
+		& LM \arrow[dash,ld] \arrow[dash,rrdd] & & \\
+		L \arrow[dash,rrdd] & & & \\
+		& & & M \arrow[dash,ld] \\
+		& & F &\\
+	\end{tikzcd} \quad \begin{tikzcd}[column sep=small]
+		& LM \arrow[dash,ld] \arrow[dash,rd] & \\
+		L \arrow[dash,rd] & & M \arrow[dash,ld] \\
+		& F &
+	\end{tikzcd}\]
+	若将 \textbf{D.3} 强化为 $\Omega|F$ 中任意一族属于 $\mathcal{E}$ 的子扩张其复合仍属于 $\mathcal{E}$, 容许无穷复合, 则称 $\mathcal{E}$ \emph{对复合封闭}.
+\end{convention}
+
+取定如此一个特出的扩张类 $\mathcal{E}$, 我们可以在给定的扩张 $\Omega|F$ 里取并
+\[ \bigcup_{\substack{L|F: \; \Omega|F \;\text{的子扩张} \\ L|F \in \mathcal{E}}} L; \]
+假设 $F|F \in \mathcal{E}$ 使得并非空, 由于 $\mathcal{E}$ 对有限复合封闭, 此并集 $\bigcup_{L|F \in \mathcal{E}} L$ 对加法, 乘法与非零元的取逆皆封闭, 因而是 $\Omega$ 的子域. 事实上它也等于所有子扩张 $L|F \in \mathcal{E}$ 的复合.
+
+取并的条件可以进一步放宽: 给定 $\Omega|F$, 若其中一族子扩张 $\mathcal{E}$ 对 $\subset$ 构成定义 \ref{def:filtrant-poset} 下的滤过偏序集, 则其并仍为子扩张; 当一族子扩张对有限复合封闭时, 它对 $\subset$ 自动成为滤过偏序集. 下面看个例子.
+\begin{example}
+	给定域扩张 $E|F$, 令 $\mathcal{E} = \{ E|F\; \text{的有限生成子扩张} \}$. 那么 $\mathcal{E}$ 中元素是形如 $F(a_1, \ldots, a_m)$ 的子扩张, 其中 $m \in \Z_{\geq 1}$ 而 $a_1, \ldots, a_m \in E$. 由于
+	\[ F(a_1, \ldots, a_m) F(b_1, \ldots, b_n) = F(a_1, \ldots, a_m, b_1, \ldots, b_n), \]
+	可见 $\mathcal{E}$ 对有限复合封闭, 但它显然不对无穷复合封闭. 对 $\mathcal{E}$ 中子扩张取并的结果是整个 $E|F$, 理由很简单: 对任意 $x \in E$ 皆有 $x \in F(x)$.
+\end{example}
+
+\begin{lemma}\label{prop:finite-ext-dist}
+	有限扩张是特出的.
+\end{lemma}
+\begin{proof}
+	对于 \textbf{D.1} 考量的扩张 $E|F$ 和 $L|E$, 命题 \ref{prop:field-tower-degree} 的等式 $[L:F]=[L:E][E:F]$ 蕴涵 $L|F$ 有限当且仅当 $L|E$ 和 $E|F$ 皆有限. 今考虑 \textbf{D.2}: 取 $\Omega|F$ 中的子扩张 $L|F$, $M|F$ 使得 $L|F$ 有限, 可表作 $L=F(x_1, \ldots, x_n)$, 每个 $x_i$ 皆为代数元. 于是 $LM = M(x_1, \ldots, x_n)|M$. 每个 $x_i$ 在 $M$ 上也是代数元, 从引理 \ref{prop:finiteness-generation} 立得 $LM|M$ 有限. 于是有限扩张是特出的.
+\end{proof}
+
+\begin{proposition}\label{prop:alg-ext-dist}
+	代数扩张是有限子扩张的并. 代数扩张是特出的而且对复合封闭.
+\end{proposition}
+\begin{proof}
+	任一代数扩张 $E|F$ 是所有 $F(x)|F$ 的并, 其中 $x$ 取遍 $E$ 的元素, 因而是有限子扩张的并.
+
+	今证明代数扩张的特出性. 考虑域扩张 $L|E$ 和 $E|F$ 及性质 \textbf{D.1}. 显然 $L|F$ 代数蕴涵 $L|E$ 和 $E|F$ 皆代数. 今假设 $L|E$ 和 $E|F$ 皆为代数扩张, 对 $x \in L$ 令 $P_x \in E[X]$ 为其极小多项式, $P_x$ 的系数生成有限生成子扩张 $E_0|F$, 故引理 \ref{prop:finite-vs-algebraic} 确保 $[E_0:F]$ 有限; 又由 $[E_0(x) : E_0] \leq \deg P_x$ 可知 $[F(x):F] \leq [E_0(x):F] = [E_0(x):E_0] [E_0:F]$ 亦有限, 所以 $x$ 在 $F$ 上为代数元.
+
+	现证明 $\Omega|F$ 的任两个代数子扩张 $L|F$, $M|F$ 的复合 $LM|F$ 仍是代数的 (性质 \textbf{D.3}). 任意 $x \in LM$ 表为 \eqref{eqn:fields-compositum} 的形式时只牵涉有限多个 $L$ 和 $M$ 里的元素, 由于 $L$ 和 $M$ 的有限生成子扩张必为有限扩张 (引理 \ref{prop:finite-vs-algebraic}), 两个有限扩张的复合仍然有限 (引理 \ref{prop:finite-ext-dist}), 故 $x$ 在 $F$ 上是代数的. 此性质可以推广到任意一族代数子扩张 $E_i|F$ 的复合, 这是因为任意 $x \in \bigvee_i E_i$ 总落在有限多个 $E_i$ 的复合里.
+
+	若只假设 $L|F$ 是代数扩张, 则因为 $LM|M$ 是所有 $M(x)|M$ 的复合 ($x \in L$), 而且 $[M(x):M] \leq [F(x):F] < \infty$, 从前两步知 $LM|M$ 是代数扩张. 这就证出了 \textbf{D.2}.
+\end{proof}
+
+\begin{proposition}\label{prop:alg-ext-cardinality}
+	对任意代数扩张 $E|F$ 皆有
+	\begin{compactitem}
+		\item $|E|=|F|$, 若 $|F|$ 无穷;
+		\item $|E| \leq \aleph_0$, 若 $|F|$ 有限.
+	\end{compactitem}
+	这里 $\aleph_0$ 表示第一个无穷基数.
+\end{proposition}
+\begin{proof}
+	令 $\text{Irr}(F)_n$ 表示 $F[X]$ 中 $n$ 次不可约首一多项式所成子集, $\text{Irr}(F) := \displaystyle\bigcup_{n \geq 1} \text{Irr}(F)_n$. 定义映射 $m: E \to \text{Irr}(F)$, 它映 $x \in E$ 至其极小多项式 $P_x \in F[X]$. 多项式的根数不超过次数, 因而基数的运算 (详见 \S\ref{sec:cardinal-number}) 给出
+	\begin{align*}
+		|E| & = \sum_{n \geq 1} \left| m^{-1}(\text{Irr}(F)_n) \right| \leq \sum_{n \geq 1} n \left| \text{Irr}(F)_n \right| \\
+		& \leq \sum_{n \geq 1} n |F|^{n-1}.
+	\end{align*}
+	当 $|F|$ 无穷时, 推论 \ref{prop:cardinal-max} 蕴涵 $n|F|^{n-1} = |F|$, 从而 $|E| \leq |\Z_{\geq 1}| \cdot |F| = \aleph_0 |F| = |F|$. 当 $|F|$ 有限时, 同样由推论 \ref{prop:cardinal-max} 可知 $|E| \leq |\Z_{\geq 1}| \cdot |\Z_{\geq 1}| = \aleph_0$.
+\end{proof}
+
+\section{代数闭包}
+域论的原初目的是研究多项式的根. 对于域扩张 $E|F$ 中的任一代数元 $x \in E$, 我们业已定义了相应的极小多项式 $P_x \in F[X]$, 它是满足 $P_x(x)=0$ 的首一不可约多项式. 反过来说, 从给定的域 $F$ 和非常值多项式 $P \in F[X]$ 出发, 我们能否构造扩域 $E|F$ 使得 $P$ 在 $E$ 中有根? 显然只须考虑 $P$ 不可约的情形. 构造的思路是``形式地''向 $F$ 添根; 引理 \ref{prop:minimal-polynomial} 的同构 $F[X]/(P_x) \xrightarrow{X \mapsto x} F(x)=F[x]$ 为我们指出一条明路.
+
+\begin{proposition}[L.\ Kronecker]\label{prop:adjunction-root}
+	设 $P \in F[X]$ 为不可约多项式, 定义 $F$-代数 $E := F[X]/(P)$. 则 $E|F$ 是域扩张, $[E:F] = \deg P$ 且陪集 $x := X + (P) \in E$ 满足 $P(x)=0$.
+\end{proposition}
+\begin{proof}
+	因为 $F[X]$ 是主理想环而 $P$ 不可约, $(P)$ 是极大理想. 因而 $E$ 确实是域. 显然 $E$ 作为 $F$-向量空间有一组基 $\{ x^i : 0 \leq i \leq \deg P \}$. 视 $P$ 为 $E[X]$ 的元素, 在 $E$ 中容易计算 $P(x) = P(X + (P)) = P(X) + (P) = 0$. 明所欲证.
+\end{proof}
+
+\begin{example}[A.\ L.\ Cauchy, 1847]\label{eg:Cauchy-C}
+	复数域 $\CC$ 可按以下方式构造为实系数多项式的等价类. 二次多项式 $X^2+1 \in \R[X]$ 无实根, 故不可约. 按命题 \ref{prop:adjunction-root} 构造 $\R$ 的二次扩域 $\R[X]/(X^2+1)$; 记陪集 $X + (X^2+1)$ 为 $i$, 则 $\R[X]/(X^2+1) = \R \oplus \R i$ 作为 $\R$-代数的结构完全由关系式 $i^2 + 1=0$ 确定, 这正是复数域的刻画. 因此 $\R[X]/(X^2+1) \simeq \CC$.
+\end{example}
+
+\begin{proposition}\label{prop:field-embedding}
+	设 $E|F$, $L|F$ 为域扩张.
+	\begin{compactenum}[(i)]
+		\item 设 $\phi: E \to L$ 为 $F$-嵌入, $u \in E$ 为 $F$ 上代数元, 则 $\phi(u)$ 也是 $F$ 上代数元并且与 $u$ 有同样的极小多项式.
+		\item 若代数元 $u \in E$ 和 $v \in L$ 具有同样的极小多项式 $P$, 则存在唯一的 $F$-嵌入 $\iota: F(u) \to L$ 使得 $\iota(u)=v$; 它满足 $\Image(\iota)=F(v)$.
+	\end{compactenum}
+\end{proposition}
+\begin{proof}
+	先看第一部分. 设 $P \in F[X]$ 为 $u$ 的极小多项式, 因为 $\phi$ 是 $F$-代数的同态故 $P(\phi(u)) = \phi(P(u)) = \phi(0) =0$, 从而 $\phi(u)$ 是代数元; 又由于 $P$ 已不可约, 它必然是 $\phi(u)$ 的极小多项式.
+
+	今考虑第二部分. 由于 $u$ 生成 $F(u)$, 所求 $F$-嵌入 $\iota: F(u) \to L$ 完全由 $u$ 的像 $v$ 确定, 而且 $\iota(F(u))=F(v)$. 仅须证明 $\iota$ 存在. 请看交换图表:
+	\begin{equation*}\begin{tikzcd}[row sep=tiny]
+		F(u) \arrow[bend left=20, rr, "\iota"] & F[X]/(P) \arrow[l, "\sim"'] \arrow[r, "\sim"] & F(v) \arrow[hookrightarrow, r] & L \\
+		u \arrow[phantom, u, sloped, "\in" description] & X+(P) \arrow[mapsto, l] \arrow[mapsto, r] \arrow[phantom, u, sloped, "\in" description] & v \arrow[phantom, u, sloped, "\in" description] &
+	\end{tikzcd}\end{equation*}
+\end{proof}
+
+利用命题 \ref{prop:adjunction-root}, 我们可以对 $F$ 和 $P \in F[X]$ 逐步构造有限扩张 $F = F_0 \hookrightarrow F_1 \hookrightarrow \cdots \hookrightarrow F_m = E$, 每次添入 $P \in F_i[X]$ 的一个根, 使得 $P$ 最后在 $E$ 中分解成一次因子的积. 从理论角度看, 一劳永逸的办法是构造充分大的扩张 $\overline{F}|F$ 使得每个 $P \in F[X]$ 在 $\overline{F}$ 上都分解成一次因式的积. 这导向了代数闭域和代数闭包的概念.
+
+\begin{definition}\index{yu!代数闭 (algebraically closed)}
+	如果域 $E$ 上的每个非常值多项式 $P \in E[X]$ 都有根, 亦即有一次因子, 则称 $E$ 是\emph{代数闭域}.
+\end{definition}
+熟知的代数闭域例子是复数域 $\CC$, 这是代数基本定理的内容.
+
+\begin{lemma}\label{prop:alg-closed-no-ext}
+	域 $E$ 是代数闭域当且仅当它没有非平凡的代数扩张, 亦即: $L|E$ 为代数扩张 $\iff L=E$.
+\end{lemma}
+\begin{proof}
+	设 $E$ 代数闭而 $L|E$ 是代数扩张, 对任意 $x \in L$, 它在 $E$ 上的极小多项式 $P_x$ 必有一次因子; 又由于 $P_x$ 不可约, 从而 $\deg P_x = 1$ 故 $x \in E$.
+	
+	反之假设 $E$ 非代数闭, $P \in E[X]$ 在 $E$ 上无根; 可以假设 $P$ 不可约, 命题 \ref{prop:adjunction-root} 遂给出 $E$ 的扩域 $L := E[X]/(P)$ 使得 $[L:E] = \deg P > 1$. 证毕
+\end{proof}
+
+\begin{lemma}\label{prop:alg-closed-decomp}
+	设 $E|F$ 是代数扩张, 则 $E$ 是代数闭域的充要条件是每个非常数多项式 $P \in F[X]$ 在 $E$ 中皆分解成一次因子.
+\end{lemma}
+\begin{proof}
+	必要性是代数闭域定义的直接结论, 现证充分性. 鉴于引理 \ref{prop:alg-closed-no-ext}, 仅须对每个代数扩张 $L|E$ 证明 $L=E$. 命题 \ref{prop:alg-ext-dist} 确保 $L|F$ 也是代数扩张, 对任意 $x \in L$, 极小多项式 $P_x \in F[X]$ 按假设在 $E[X]$ 中分解为 $P_x = \prod_{i=1}^n (X - \alpha_i)$, 从而 $P_x(x)=0$ 确保存在 $1 \leq i \leq n$ 使得 $x = \alpha_i \in E$. 明所欲证.
+\end{proof}
+以上引理的条件还可以改进为: 每个非常数多项式 $P \in F[X]$ 在 $E$ 中皆有根. 我们将在命题 \ref{prop:alg-closed-root} 利用 Galois 理论证之.
+
+\begin{definition}\index{daishubibao@代数闭包 (algebraic closure)}
+	域扩张 $\overline{F}|F$ 若满足
+	\begin{inparaenum}[(i)]
+		\item $\overline{F}$ 为代数闭域,
+		\item $\overline{F}|F$ 为代数扩张,
+	\end{inparaenum}
+	则称之为 $F$ 的\emph{代数闭包}.
+\end{definition}
+命题 \ref{prop:alg-ext-dist} 即刻导向一条常用性质: 设 $E|F$ 为代数扩张, 而 $\overline{E}|E$ 是 $E$ 的代数闭包, 那么 $\overline{E}|F$ 也是 $F$ 的代数闭包.
+
+\begin{theorem}[E.\ Steinitz]\label{prop:alg-closure}
+	对任意域 $F$, 代数闭包 $\overline{F}|F$ 存在, 并且在 $F$-同构的意义下唯一.
+\end{theorem}
+\begin{proof}[E.\ Artin]
+	先说明唯一性. 令 $\overline{F}|F$, $\overline{F}'|F$ 为代数闭包, 定义 $\mathcal{P}$ 为全体资料 $(E, \iota)$ 所成集合, 其中 $E|F$ 是 $\overline{F}|F$ 的子扩张而 $\iota \in \Hom_F(E, \overline{F}')$. 显然 $\left( F, F \hookrightarrow \overline{F}' \right) \in \mathcal{P}$ 故 $\mathcal{P}$ 非空. 赋予 $\mathcal{P}$ 偏序
+	\[ (E, \iota) \leq (E_1, \iota_1) \iff (E \subset E_1) \wedge (\iota_1|_E = \iota). \]
+	易见 $(\mathcal{P}, \leq)$ 中每个链 $\{ (L_i, \iota_i)\}_{i \in I}$ 都有个上界 $(L, \iota)$: 取子扩张 $L := \bigcup_i L_i$ 和 $\iota: L \to \overline{F}'$ 使得 $\iota|_{L_i} = \iota_i$ 即是. Zorn 引理 (定理 \ref{prop:Zorn}) 遂确保 $(\mathcal{P}, \leq)$ 有极大元 $(E, \phi)$.
+	
+	我们断言 $E=\overline{F}$. 设若不然, 取 $u \in \overline{F} \smallsetminus E$, 它在 $E$ 上有极小多项式 $P_u \in E[X]$. 透过 $\phi$ 将 $\overline{F}'$ 视为 $E$ 的扩域, 那么 $P_u$ 在 $\overline{F}'$ 中必有一根 $v$, 故命题 \ref{prop:field-embedding} 给出唯一的 $E$-嵌入 $E(u) \hookrightarrow \overline{F}'$ 映 $u$ 为 $v$; 这与 $\phi$ 的极大性矛盾.
+	
+	只须再证 $\phi(\overline{F})=\overline{F}'$ 便有 $F$-同构 $\phi: \overline{F} \rightiso \overline{F}'$. 由 $\overline{F}$ 代数闭可知其同构像 $\phi(\overline{F})$ 亦然, 又由于 $\overline{F}'|F$ 为代数扩张可知 $\overline{F}'|\phi(\overline{F})$ 亦是代数扩张, 于是乎引理 \ref{prop:alg-closed-no-ext} 断言 $\phi(\overline{F})=\overline{F}'$. 唯一性证毕.
+	
+	我们对存在性部分给两种论证. 其一虽然利索, 但要用到 \S\ref{sec:algebra-tensor-product} 介绍的 $F$-代数的张量积构造. 对每个不可约多项式 $P \in F[X]$, 按之前讨论可用命题 \ref{prop:adjunction-root} 逐步构造有限扩张 $E_P|F$, 使得 $P$ 在 $E_P$ 上分解成一次因子之积. 该如何找到一个由全体 $E_P$ 生成的扩域, 或退而求其次, 寻求如此的交换 $F$-代数? 范畴观点提供了一条线索: 考虑交换 $F$-代数的无穷张量积 (定义-定理 \ref{def:inf-tensor-product})
+	\[ A := \bigotimes_{\substack{P \in F[X] \\ \text{不可约首一} }} E_P. \]
+	我们有一族 $F$-同态 $E_P \hookrightarrow A$, 其像生成交换 $F$-代数 $A$; 注记 \ref{rem:algebra-otimes-zero} 保证 $A$ 非零. 基于选择公理的命题 \ref{prop:existence-maximal-ideal} 断言 $A$ 有极大理想 $I$, 故商代数 $\overline{F} := A/I$ 为域, 而且仍由一族 $F$-嵌入 $E_P \to \overline{F}$ 的像生成, 因而 $\overline{F}|F$ 为使得每个 $P$ 分解为一次因子的代数扩张. 命题 \ref{prop:alg-closed-decomp} 立即蕴涵 $\overline{F}$ 代数闭.
+	
+	第二种论证是直接以定理 \ref{prop:Zorn} 寻求 $F$ 的一个极大代数扩张. 取充分大的集合 $\Omega$ 使得 $|\Omega| > \max\{|F|, \aleph_0\}$, 而且 $F \subset \Omega$; 我们的目的是将所有的代数扩张嵌入为``宇宙''集 $\Omega$ 的子集. 定义集合 $\mathcal{Q}$ 为全体代数扩张 $E|F$, 适合于
+	\begin{inparaenum}[(i)]
+		\item 作为集合有 $F \subset E \subset \Omega$,
+		\item 域扩张 $E|F$ 由包含映射 $F \hookrightarrow E$ 确定.
+	\end{inparaenum}
+	易见 $\mathcal{Q}$ 确为集合, $F|F \in \mathcal{Q}$. 接着赋予 $\mathcal{Q}$ 偏序
+	\[ E|F \leq E_1|F \iff E \subset E_1 \quad (\text{子域}). \]
+	熟悉的并集构造表明 $(\mathcal{Q}, \leq)$ 中每个链都有上界, 故存在极大元 $\overline{F}|F$. 我们断言 $\overline{F}$ 的代数扩张 $L|\overline{F}$ 只能是 $L=\overline{F}$, 如是则从引理 \ref{prop:alg-closed-no-ext} 导出 $\overline{F}$ 代数闭. 首务是调整 $L|F$ 为 $\mathcal{Q}$ 的元素.
+	
+	命题 \ref{prop:alg-ext-cardinality} 断言对任意代数扩张 $E|F$ 皆有 $|E| \leq \max\{|F|, \aleph_0\} < |\Omega|$, 这当然适用于 $E = L, \overline{F}$. 我们需要一点基数的估计:
+	\begin{itemize}
+		\item 根据 $\Omega$ 的选取, $|\Omega \smallsetminus \overline{F}|$ 和 $|\overline{F}|$ 皆非零, 其中必有一者无穷; 事实上 $|\Omega \smallsetminus \overline{F}| \geq |\overline{F}|$, 否则推论 \ref{prop:cardinal-max} 将导出矛盾 $|\Omega| = \max\{|\Omega \smallsetminus \overline{F}|, |\overline{F}|\} = |\overline{F}| < |\Omega|$.
+		\item 于是 $|\Omega| = \max\{|\Omega \smallsetminus \overline{F}|, |\overline{F}|\} = |\Omega \smallsetminus \overline{F}|$, 进而
+			\[ |L \smallsetminus \overline{F}| \leq |L| \leq \max\{|F|, \aleph_0\} < |\Omega| = |\Omega \smallsetminus \overline{F}|. \] 
+		\item 故存在集合的单射 $f: L \hookrightarrow \Omega$ 使得 $f|_{\overline{F}} = \identity_{\overline{F}}$; 将域结构用 $f$ 搬到 $f(L)$ 上, 不动 $\overline{F} \subset \Omega$ 的域结构, 这就使 $f(L)|F$ 成为 $\mathcal{Q}$ 的一员.
+	\end{itemize}
+	在 $(\mathcal{Q}, \leq)$ 中遂有 $f(L)|F \geq \overline{F}|F$. 极大性质蕴涵 $f(L)=\overline{F}$, 故 $L=\overline{F}$. 明所欲证.
+\end{proof}
+
+\begin{corollary}\label{prop:alg-ext-embedding}
+	设 $\overline{F}|F$ 为代数闭包, $E|F$ 为代数扩张, 则存在 $F$-嵌入 $\iota \in \Hom_F(E, \overline{F})$. 当 $E|F$ 有限时 $|\Hom_F(E, \overline{F})| \leq [E:F]$.
+\end{corollary}
+\begin{proof}
+	取 $E$ 的代数闭包 $\overline{E}$ 并视 $E$ 为其子域. 由定义可知 $\overline{E}|F$ 也是代数闭包, 唯一性遂给出 $F$-同构 $\phi: \overline{E} \rightiso \overline{F}$. 取 $\iota := \phi|_E$ 即证出第一个断言. 今假设 $E = F(x_1, \ldots, x_n)$ 为 $F$ 的有限扩张, 考虑限制映射
+	\begin{multline*}
+		\Hom_F(F(x_1, \ldots, x_n), \overline{F}) \xrightarrow{\text{res}_n} \Hom_F(F(x_1, \ldots, x_{n-1}), \overline{F}) \xrightarrow{\text{res}_{n-1}} \\
+		\cdots \xrightarrow{\text{res}_1} \Hom_F(F, \overline{F}) = \{\ast\}.
+	\end{multline*}
+	对于任意 $\phi \in \Hom_F(F(x_1, \ldots, x_{i-1}), \overline{F})$, 命题 \ref{prop:field-embedding} 确保原像集 $\text{res}_i^{-1}(\phi)$ 的大小不超过 $x_i$ 在 $F(x_1, \ldots, x_{i-1})$ 上的极小多项式次数, 因此
+	\[ \left| \Hom_F(F(x_1, \ldots, x_n), \overline{F}) \right| \leq \prod_{i=1}^n [F(x_1, \ldots, x_i): F(x_1, \ldots, x_{i-1})] = [E:F], \]
+	明所欲证.
+\end{proof}
+
+\begin{proposition}\label{prop:alg-closure-sub}
+	若 $\Omega$ 是代数闭域, $\Omega|F$ 为域扩张, 令 $\overline{F} := \{ x \in \Omega: \text{在 $F$ 上代数} \}$, 则 $\overline{F}|F$ 是 $F$ 的代数闭包.
+\end{proposition}
+\begin{proof}
+	每个 $x \in \overline{F}$ 生成有限扩张 $F(x)=F[x]$, 而代数扩张对复合封闭, 因此 $\overline{F} = \bigvee_{x \in \overline{F}} F(x)$ 确实是 $F$ 的代数扩张. 每个首一不可约多项式 $P \in F[X]$ 皆在 $\Omega$ 中分解成一次因子 $\prod_\alpha (X-\alpha)$, 按定义有 $\alpha \in \overline{F}$, 于是引理 \ref{prop:alg-closed-decomp} 蕴涵 $\overline{F}$ 是代数闭域.
+\end{proof}
+
+从 $\CC$ 的代数闭性出发, 代数闭包的第一个例子是 $\CC|\R$. 其次是取 $\CC$ 中全体 $\Q$ 上代数数所成子域 $\overline{\Q}$, 这是因为命题 \ref{prop:alg-closure-sub} 断言 $\overline{\Q}$ 是 $\Q$ 的代数闭包. 对于一般情形, 定理 \ref{prop:alg-closure} 仅抽象地给出代数闭包 $\overline{F}|F$ 的存在和唯一性; 证明的任一条进路都避不开选择公理, 因而是非构造性的.
+
+\section{分裂域和正规扩张}\label{sec:splitting-field}
+我们已经看到任何非常数的 $P \in F[X]$ 都在某个有限扩张 $E|F$ 上分解为一次因子. 本节旨在对这类构造作更细致的梳理.
+
+\begin{definition}\index{fenlieyu@分裂域 (splitting field)}
+	设 $\mathcal{P}$ 为 $F[X]$ 中一族非常数多项式. 若域扩张 $E|F$ 满足于
+	\begin{compactitem}
+		\item 每个 $P \in \mathcal{P}$ 皆在 $E$ 上分解成一次因子, 亦即 $P = c_P \prod_{j=1}^{n_P}(X - \alpha_{P,j})$, 其中 $\alpha_{P,j} \in E$, $c_P \in F^\times$,
+		\item 诸根 $\left\{ \alpha_{P,j} : P \in \mathcal{P},\; 1 \leq j \leq n_P \right\}$ 在 $F$ 上生成 $E$.
+	\end{compactitem}
+	则称 $E|F$ 为多项式族 $\mathcal{P}$ 的\emph{分裂域}.
+\end{definition}
+分裂域总是代数扩张. 可以想象, 最复杂的应当是 $\mathcal{P} := F[X] \smallsetminus F$ 的情形, 此时引理 \ref{prop:alg-closed-decomp} 表明分裂域正是 $F$ 的代数闭包, 存在性已经证明. 不过在针对多项式方程的研究中, 我们更常考虑的是单个多项式 $P \in F[X]$ 的分裂域.
+
+\begin{proposition}
+	对任一族非常数多项式 $\mathcal{P}$, 分裂域 $E|F$ 总是存在, 并在 $F$-同构的意义下唯一; 任意 $n \geq 1$ 次多项式 $P$ 的分裂域在 $F$ 上的次数 $\leq n!$.
+\end{proposition}
+\begin{proof}
+	首先证明存在性. 取代数闭包 $\overline{F}|F$. 每个 $P \in \mathcal{P}$ 都在 $\overline{F}$ 上分解为 $P = c_P \prod_{j=1}^{n_P}(X - \alpha_{P,j})$. 取由所有根生成的子扩张 $E = F\left( \alpha_{P,j} : P \in \mathcal{P},\; 1 \leq j \leq n_i \right)$ 即所求. 若要在 $\overline{F}|F$ 的子扩张中寻求 $\mathcal{P}$ 的分裂域, 这显然是唯一选择.
+
+	现证唯一性. 设 $E|F$, $E'|F$ 为 $\mathcal{P}$ 的分裂域, 分别取代数闭包 $\overline{F}|E$ 和 $\overline{F}'|E‘$, 以下不妨视 $E \subset \overline{F}$, $E' \subset \overline{F}'$. 由定义可知 $\overline{F}|F$ 和 $\overline{F}'|F$ 也是代数闭包, 因此定理 \ref{prop:alg-closure} 给出 $F$-同构 $u: \overline{F} \rightiso \overline{F}'$. 既然 $E|F$ 由 $\mathcal{P}$ 中所有多项式在 $\overline{F}$ 中的根生成, 同样性质透过 $u$ 照搬到 $u(E) \subset \overline{F}'$, 于是 $u(E)|F$ 等同于 $E'|F$, 所求的 $F$-同构无非是 $u|_E$.
+
+	至于次数, 假设 $\deg P = n \geq 1$, 多项式 $P$ 在分裂域 $E$ 中的根记为 $\alpha_1, \ldots, \alpha_n$. 当 $n=1$ 时显然 $E=F$, 当 $n>1$ 时记 $F_1 := F(\alpha_1)$, 由于 $[F_1:F] \leq \deg P = n$ 而 $E$ 是 $P/(X-\alpha_1)$ 在 $F_1$ 上的分裂域, 可用命题 \ref{prop:field-tower-degree} 递归地推出 $[E:F] = [E:F_1][F_1:F] \leq (n-1)! n = n!$.
+\end{proof}
+
+\begin{lemma}\label{prop:alg-ext-endomorphism}
+	对任意代数扩张 $L|F$, 任何 $F$-嵌入 $\iota: L \to L$ 都是同构. 换言之 $\End_F(L)=\Aut_F(L)$.
+\end{lemma}
+\begin{proof}
+	仅须说明 $\iota$ 为满射. 对任意 $y \in L$, 其极小多项式 $P_y$ 在 $L$ 中的根记为 $y_1, \ldots, y_m$, 并定义 $L|F$ 的子扩张 $L_0 := F(y_1, \ldots, y_m)$. 由于 $F$-嵌入 $\iota$ 诱导根集 $\{y_1, \ldots, y_m\}$ 上的置换, 故 $\iota|_{L_0}: L_0 \hookrightarrow L_0$. 引理 \ref{prop:finite-vs-algebraic} 断言 $L_0|F$ 有限, 基于维数考量可知 $\iota|_{L_0}$ 实为同构; 特别地, $y \in \Image(\iota)$.
+\end{proof}
+
+\begin{definition-theorem}\label{def:normal-ext}\index{yukuozhang!正规 (normal)}
+	对于代数扩张 $E|F$, 以下性质等价:
+	\begin{enumerate}[\bfseries {N}.1]
+		\item 任一不可约多项式 $P \in F[X]$ 若在 $E$ 中有根, 则它在 $E[X]$ 中分解为一次因子之积.
+		\item 取定代数闭包 $\overline{F}|E$ 并视 $E$ 为 $\overline{F}$ 的子域, 则任意 $\iota \in \Hom_F(E, \overline{F})$ 皆满足 $\iota(E)=E$.
+		\item 存在一族非常数多项式 $\mathcal{P}$ 使得 $E|F$ 是 $\mathcal{P}$ 的分裂域.
+	\end{enumerate}
+	满足以上任一条的代数扩张称为\emph{正规扩张}.
+\end{definition-theorem}
+\begin{proof}
+	(\textbf{N.1}) $\implies$ (\textbf{N.2}): 给定 $\iota \in \Hom_F(E, \overline{F})$, 记 $x \in E$ 的极小多项式为 $P_x \in F[X]$, 则 $\iota(x)$ 仍是 $P_x$ 的根. 根据条件 $P_x$ 在 $E[X]$ 中分解为一次因子 $(X-\alpha_1) \cdots (X-\alpha_n)$, 因而 $\exists i,\; \iota(x) = \alpha_i \in E$. 由于 $x$ 可任取, 立见 $\iota(E) \subset E$. 应用引理 \ref{prop:alg-ext-endomorphism} 可得 $\iota(E)=E$.
+	
+	(\textbf{N.2}) $\implies$ (\textbf{N.1}): 若 $P$ 有根 $x \in E$, 设 $y \in \overline{F}$ 为 $P$ 的任意根. 命题 \ref{prop:field-embedding} 给出 $F$-嵌入 $\iota_0: F(x) \to \overline{F}$ 使得 $\iota_0(x)=y$. 借助于 $\iota_0$ 可将 $\overline{F}|F(x)$ 看作代数闭包, 推论 \ref{prop:alg-ext-embedding} 给出以下交换图表
+	\[\begin{tikzcd}[row sep=small, column sep=small]
+		E \arrow[rr, "\exists\; \iota"] & & \overline{F} \\
+		& F(x) \arrow[hookrightarrow, lu, "\text{包含}"] \arrow[ru, "\iota_0"'] &
+	\end{tikzcd} \quad \text{于是}\; \iota \in \Hom_F(E, \overline{F}). \]
+	因此 $y = \iota_0(x) = \iota(x) \in E$, 可见 $P$ 的所有根都在 $E$ 里.
+	
+	(\textbf{N.1}) $\implies$ (\textbf{N.3}): 取 $\mathcal{P}$ 为所有在 $E$ 中有根的不可约多项式, 条件蕴涵分裂域 $\subset E$. 由于每个 $x \in E$ 都是极小多项式 $P_x$ 的根, 相应的分裂域正是 $E$.
+	
+	(\textbf{N.3}) $\implies$ (\textbf{N.2}): 对每个 $\iota \in \Hom_F(E, \overline{F})$ 和 $P \in \mathcal{P}$, 嵌入 $\iota$ 诱导 $R_x := \{x \in \overline{F}: P(x)=0 \}$ 上的置换. 分裂域 $E$ 由 $\bigcup_{P \in \mathcal{P}} R_x$ 在 $F$ 上生成, 故 $\iota(E)=E$.
+\end{proof}
+
+顺势引进以下术语.
+\begin{definition}\index{gonge}
+	称 $\Omega|F$ 的两个子扩张 $E|F$, $E'|F$ 为共轭的, 如果存在 $\sigma \in \Aut_F(\Omega)$ 使得 $\sigma(E)=E'$; 如果对 $x, y \in \Omega$ 存在 $\sigma \in \Aut_F(\Omega)$ 使得 $\sigma(x)=y$, 则称 $x$ 与 $y$ 共轭.
+\end{definition}
+元素的共轭显然是等价关系. 来由之一是 $\Omega|F = \CC|\R$ 的情形: 由于 $\CC = \R \oplus \R i \simeq \R[X]/(X^2+1)$, 而 $X^2+1$ 的根为 $\pm i$, 自同构 $\sigma \in \Aut_{\R}(\CC)$ 由像 $\sigma(i) = \pm i$ 唯一确定, 所以 $\sigma$ 必为 $\identity_{\CC}$ 或复共轭 $x + yi \mapsto x - yi$.
+
+\begin{proposition}\label{prop:normal-ext-prolongation}
+	设 $L|F$ 为正规扩张, $E|F$ 为其子扩张, 则任何 $\iota \in \Hom_F(E, L)$ 都能延拓为某个 $\tilde{\iota} \in \Aut_F(L)$.
+\end{proposition}
+\begin{proof}
+	根据引理 \ref{prop:alg-ext-endomorphism}, 仅须延拓 $\iota$ 为 $\tilde{\iota}: L \to L$ 即可. 取 $L$ 的代数闭包 $\overline{F}$, 仍记 $E \xrightarrow{\iota} L \hookrightarrow \overline{F}$ 的合成为 $\iota$, 那么 $\iota: E \to \overline{F}$ 也是 $E$ 的代数闭包; 进一步, 它还给出 $F$ 的代数闭包, 符号 $\overline{F}$ 因之是合理的. 对代数闭包 $E \xrightarrow{\iota} \overline{F}$ 和包含映射 $E \hookrightarrow L$ 应用推论 \ref{prop:alg-ext-embedding}, 立得域嵌入 $\tilde{\iota}: L \to \overline{F}$ 使得 $\tilde{\iota}|_E = \iota$. 若能说明 $\tilde{\iota}(L) \subset L$ 便可完成证明.
+
+	既然 $\overline{F}$ 通过 $\iota$ 成为 $F$ 的代数闭包, 从 $L|F$ 的正规性和 \textbf{N.2} 立可导出 $\overline{\iota}(L) \subset L$, 明所欲证.
+%	先考虑 $L=\overline{F}$ 是 $F$ 的代数闭包的情形, 那么 $\iota: E \hookrightarrow \overline{F}$ 也给出 $E$ 的代数闭包. 推论 \ref{prop:alg-ext-embedding} 表明下图可以补入虚线箭头 $\tilde{\iota}$ 使之交换
+%	\[\begin{tikzcd}[column sep=small, row sep=small]
+%		\overline{F} \arrow[dashed, rr, "\exists\; \tilde{\iota}"] & & \overline{F} \\
+%		& E \arrow[hookrightarrow, lu] \arrow[ru, "\iota"'] &
+%	\end{tikzcd}\]
+%	此即所需的 $\tilde{\iota}$. 对一般的 $L$ 可取其代数闭包 $\overline{F}$, 它也是 $F$ 的代数闭包; 按上一步将 $E \xrightarrow{\iota} L \hookrightarrow \overline{F}$ 的合成延拓为 $\overline{\iota}: \overline{F} \to \overline{F}$. 从 $L$ 的正规性用 \textbf{N.2} 导出 $\overline{\iota}|_L: L \to L$.
+\end{proof}
+
+由此引出正规扩张定义 \textbf{N.2} 的一条有用推广.
+\begin{corollary}\label{prop:normal-subext}
+	对于正规扩张 $L|F$, 其子扩张 $E|F$ 正规的充要条件是:
+	\begin{compactdesc}
+		\item[\bfseries {N}.2$'$] 对每个 $\sigma \in \Aut_F(L)$ 都有 $\sigma(E) \subset E$.
+	\end{compactdesc}
+	作为应用, 若在代数扩张的四层塔 $L|E|K|F$ 中, $L|F$ 和 $E|F$ 皆正规, 那么 $\Hom_F(K, L) = \Hom_F(K, E)$.
+\end{corollary}
+\begin{proof}
+	取定代数闭包 $\overline{F}|L$. 若 $E|F$ 正规, 则因为 $\Aut_F(L) \subset \Hom_F(L, \overline{F})$, 按 \textbf{N.2} 必有 $\sigma(E) \subset E$. 反之设 $\forall\sigma\; \sigma(E) \subset E$, 命题 \ref{prop:normal-ext-prolongation} 确保任何 $\iota \in \Hom_F(E, \overline{F})$ 总能延拓到 $\overline{F} \to \overline{F}$, 后者在 $L$ 上的限制记为 $\sigma$; 条件 \textbf{N.2} 确保 $\sigma \in \End_F(L) = \Aut_F(L)$, 故 $\iota(E) = \sigma(E) \subset E$. 这就证出第一部分.
+
+	至于第二部分, 显然 $\Hom_F(K,E) \subset \Hom_F(K,L)$. 若 $\iota \in \Hom_F(K,L)$, 用命题 \ref{prop:normal-ext-prolongation} 延拓 $\iota$ 为 $\sigma \in \Aut_F(L)$, 再由第一部分导出 $\iota(K) \subset \sigma(E) \subset E$. 证毕.
+\end{proof}
+在 \textbf{N.2$'$} 中取 $L = \overline{F}$, 立见正规扩张无非是 $\overline{F}|F$ 中对共轭关系封闭的子扩张.
+
+\begin{corollary}\label{prop:root-conjugate}
+	代数闭包 $\overline{F}|F$ 中两个元素 $x$, $y$ 共轭当且仅当它们有相同的极小多项式.
+\end{corollary}
+\begin{proof}
+	显然 $F$-自同构保持元素的极小多项式不变. 反之设 $x,y$ 同为不可约多项式 $P \in F[X]$ 的根. 命题 \ref{prop:field-embedding} 给出 $F$-嵌入 $\iota: F(x) \to \overline{F}$ 使得 $\iota(x)=y$. 以命题 \ref{prop:normal-ext-prolongation} 将 $\iota$ 延拓为 $\sigma \in \Aut_F(\overline{F})$, 即得共轭关系 $\sigma(x)=y$.
+\end{proof}
+
+虽然正规扩张的子扩张未必正规, 对于其它操作仍有良好的封闭性.
+
+\begin{proposition}\label{prop:normal-ext-properties}
+	正规扩张满足以下性质.
+	\begin{enumerate}[(i)]
+		\item 扩张 $L|F$ 正规 $\implies$ 对任意中间域 $E$, 扩张 $L|E$ 正规.
+		\item 设 $L|F$, $M|F$ 为 $\Omega|F$ 的子扩张, 则 $L|F$ 正规 $\implies$ $LM|M$ 正规.
+		\item 在给定扩张 $\Omega|F$ 中, 任一族正规子扩张之复合与交依然正规.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	设 $L|F$, $M|F$ 皆是 $\Omega|F$ 的子扩张, 若 $L|F$ 是 $\mathcal{P} \subset F[X]$ 的分裂域, 则 $LM|M$ 是 $\mathcal{P} \subset M[X]$ 的分裂域, 故为正规扩张. 这就证明了 (ii); 取特例 $\Omega=L$ 而 $M=E \subset L$ 就得到 (i).
+	
+	设 $\{L_i|F\}_{i \in I}$ 是 $\Omega|F$ 的一族正规子扩张, 其交 $\bigcap_i L_i|F$ 与复合 $\bigvee_i L_i | F$ 仍是代数扩张 (命题 \ref{prop:alg-ext-dist}). 取定包含 $\bigvee_i L_i$ 的代数闭包 $\overline{F}$, 它同时也是 $\bigcap_i L_i$, 每个 $L_i$ 以及 $F$ 的代数闭包, 而复合 $\bigvee_i L_i$ 可视作 $\overline{F}|F$ 中的复合. 我们先证 $\bigvee_i L_i|F$ 正规: 对任意 $\iota \in \Hom_F\left(\bigvee_i L_i , \overline{F}\right)$, 正规性蕴涵
+	\begin{gather*}
+		\iota\left( \bigvee_{i \in I} L_i \right) = \bigvee_{i \in I} \iota(L_i) = \bigvee_{i \in I} L_i.
+	\end{gather*}
+	接着证明 $\bigcap_i L_i|F$ 正规: 因为 $\bigvee_i L_i \big| \bigcap_i L_i$ 是代数扩张, 推论 \ref{prop:alg-ext-embedding} 断言任意 $\iota \in \Hom_F\left(\bigcap_i L_i , \overline{F}\right)$ 皆可延拓为 $\bigvee_i L_i \to \overline{F}$, 继而也能限制到每个 $L_i$ 上; 正规性蕴涵
+	\begin{gather*}
+		\iota\left( \bigcap_{i \in I} L_i \right) = \bigcap_{i \in I} \iota(L_i) = \bigcap_{i \in I} L_i.
+	\end{gather*}
+	明所欲证.
+\end{proof}
+
+\begin{definition}\label{def:normal-closure}\index{zhengguibibao@正规闭包 (normal closure)}
+	设 $E|F$ 为代数扩张, $\overline{F}|E$ 为选定的代数闭包. 定义 $E|F$ 的\emph{正规闭包} $M|F$ 为 $\overline{F}|F$ 中所有含 $E|F$ 的正规子扩张之交.
+\end{definition}
+因为 $\overline{F}|F$ 正规, 此交非空. 命题 \ref{prop:normal-ext-properties} 表明 $M|F$ 是 $\overline{F}|F$ 中包含 $E$ 的最小正规子扩张. 进一步,
+\[ M \xlongequal{\because\; \textbf{N.2$'$}} \bigvee_{\sigma \in \Aut_F(\overline{F})} \sigma(E) \xlongequal{\because \text{命题 \ref{prop:normal-ext-prolongation}}} \bigvee_{\sigma \in \Hom_F(E, \overline{F})} \sigma(E). \]
+进一步假设 $E|F$ 有限, 则推论 \ref{prop:alg-ext-embedding} 蕴涵以上复合仅含有限项, 此时 $M|F$ 也是有限扩张. 且看个标准例子.
+
+\begin{example}\label{eg:x3-2-splitting}
+	$\overline{\Q}|\Q$ 的子扩张 $\Q(2^{1/3})|\Q$ 非正规, 因为 $\Q(2^{1/3}) \subset \R$ 而 $2^{1/3}$ 在 $\overline{\Q}$ 中尚有共轭 $\omega 2^{1/3}$, $\omega^2 2^{1/3}$, 其中 $\omega = e^{2\pi i/3}$: 它们是极小多项式 $X^3 - 2$ 在 $\overline{\Q}$ 中的根. 正规闭包是 $\Q(2^{1/3},\omega)$.
+\end{example}
+
+\section{可分性}
+对于任意域 $F$, 命题 \ref{prop:polynomial-derivation} 按习见的公式 $(\sum_{k \geq 0} a_k X^k)' = \sum_{k \geq 1} ka_k X^{k-1}$ 在 $F[X]$ 上定义了求导运算 $P \mapsto P'$. 以下选定代数闭包 $\overline{F}|F$. 记非零多项式 $P, Q$ 的最大首一公因式为 $(P, Q)$, 这是唯一确定的.
+
+\begin{lemma}\label{prop:coprime-basechange}
+	设 $P,Q \in F[X]$ 非零, $L|F$ 是任意域扩张, 则 $(P,Q)=1$ 在 $F[X]$ 中成立当且仅当它在 $L[X]$ 中成立.
+\end{lemma}
+\begin{proof}
+	若 $P,Q$ 在 $F[X]$ 中有非常数的公因子, 则在 $L[X]$ 中亦然. 若两者在 $F[X]$ 中互素, 则存在 $U,V \in F[X]$ 使得 $UP+VQ=1$, 而此式又在 $L[X]$ 中蕴涵 $P,Q$ 互素.
+\end{proof}
+
+\begin{lemma}\label{prop:separable-polynomial-gen}
+	非零多项式 $P \in F[X]$ 在其分裂域上有重根的充要条件是 $(P,P') \neq 1$.
+\end{lemma}
+\begin{proof}
+	引理 \ref{prop:coprime-basechange} 表明条件 $(P, P') \neq 1$ 在 $F$ 上和在分裂域 $L$ 上是等价的. 一切化约为以下熟知的等式: 对任意域扩张 $L|F$ 和 $c \in L$, 存在 $Q \in L[X]$ 使得
+	\begin{gather}\label{eqn:derivation-linear-approx}
+		P = P(c) + (X-c) P'(c) + (X-c)^2 Q.
+	\end{gather}
+	诚然, 由于 $X \mapsto X-c$ 诱导 $L[X]$ 作为 $L$-代数的自同构, 问题容易化约到 $c=0$ 的明显情形.
+\end{proof}
+附带一提, 检验重根的另一种方式是运用例 \ref{eg:polynomial-discriminant} 介绍的判别式.
+
+\begin{theorem}\label{prop:separable-polynomial}
+	对于不可约多项式 $P \in F[X]$, 以下陈述等价.
+	\begin{enumerate}[(i)]
+		\item $P$ 在代数闭包 $\overline{F}$ 上有重根,
+		\item $P$ 在其分裂域上有重根,
+		\item $P'=0$,
+		\item $\mathrm{char}(F)=p > 0$, 而且 $P$ 形如 $\sum_{k \geq 0}^n a_k X^{pk}$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	(i) $\implies$ (ii) 属显然.
+
+	(ii) $\implies$ (iii): 若 $P$ 在分裂域上有重根则 $(P,P') \neq 1$, 然而 $P$ 不可约而 $\deg P' < \deg P$, 唯一的可能是 $P'=0$.
+	
+	(iii) $\implies$ (iv): 设 $P = \sum_{h \geq 0} b_h X^h$, 条件 $P'=0$ 相当于 $\forall h \in \Z_{\geq 1},\; h b_h = 0$. 由于 $\deg P > 0$, 仅当 $p := \text{char}(F) > 0$ 时条件才可能成立, 此时 $p \nmid h \implies b_h = 0$. % 故 $P$ 形如 $\sum_{k \geq 0} a_k X^{pk}$, 其中 $a_k := b_{pk}$.
+	
+	(iv) $\implies$ (i): 设 $P = \sum_{k \geq 0} a_k X^{pk} = P_1(X^p)$, 这里 $P_1 := \sum_{k \geq 0} a_k X^k$. 令 $y_1, \ldots, y_k \in $ 为 $P_1$ 在 $\overline{F}$ 中的根; 对每个 $y_i$, 取 $x_i \in \overline{F}$ 满足于 $x_i^p = y_i$. 由 $\text{char}(F)=p$ 之故, 应用 \eqref{eqn:freshmen-dream} 可得
+	\[ (X^p-y_i) =  (X-x_i)^p, \]
+	因此 $x_i$ 作为 $P$ 的根其重数 $\geq p > 0$.
+\end{proof}
+
+\begin{definition}[可分元]
+	在域扩张 $E|F$ 中, 若代数元 $x \in E$ 的极小多项式 $P_x \in F[X]$ 在分裂域上无重根, 则称 $x$ 在 $F$ 上为\emph{可分}元.
+\end{definition}
+
+以上定理给出可分性的初步判准. 为了进一步剖析, 以下假设 $\text{char}(F)=p > 0$ 并回忆定理 \ref{prop:separable-polynomial} (iv) 的构造: 设 $P \in F[X]$ 不可约而且 $P'=0$. 则必可写成 $P(X) = P_1(X^p)$ 之形式. 观察到
+\begin{align*}
+	F[X] & \longrightarrow F[X] \\
+	f(X) & \longmapsto f(X^p)
+\end{align*}
+是 $F$-代数的同态, 并且 $\deg f(X^p) = p f(X)$. 于是 $P$ 不可约确保 $P_1$ 亦不可约. 如果 $P'_1 = 0$ 则续行如是操作, 得到 $P_1(X) = P_2(X^p)$ 而 $P_2$ 仍不可约. 基于次数考量, 迭代必在有限步内停止, 并给出 % FIXME: $\deg f(X^p) = p \deg f(X)$
+\begin{gather}\label{eqn:P-to-P-flat}
+	P(X) = P^\flat\left( X^{p^m} \right), \quad P^\flat \in F[X]:\; \text{不可约}, \; (P^\flat)' \neq 0.
+\end{gather}
+将 $P^\flat$ 在 $\overline{F}[X]$ 中分解为一次因子 $c \prod_{i=1}^k (X - y_i)$, 定理 \ref{prop:separable-polynomial} 蕴涵 $i = j \iff y_i=y_j$. 对每个 $y_i$ 取 $x_i \in \overline{F}$ 使得 $x_i^{p^m} = y_i$. 同样由 \eqref{eqn:freshmen-dream} 可知 $X^{p^m} - y_i = (X - x_i)^{p^m}$, 因此 $x_i$ 是唯一的. 结论: $P$ 在 $\overline{F}[X]$ 中分解为
+\begin{gather*}
+	P = c \prod_{i=1}^k (X - x_i)^{p^m}, \quad i=j \iff x_i = x_j
+\end{gather*}
+特别地, $P$ 在分裂域中的根其重数一律为 $p^m$. 此处思路是将问题拆作两段, 一是无重根或曰``可分''的多项式 $P^\flat$, 二是形如 $X^{p^m} - y_i$ 的``纯不可分''多项式, 尔后探讨可分性时会反复运用这个构造. 现在我们可以着手定义可分扩张.
+
+\begin{definition}\index[sym1]{$[E:F]_s$}\index{yukuozhang!可分次数 (separable degree)}
+	设 $E|F$ 为代数扩张, 定义其\emph{可分次数}为 $[E:F]_s := |\Hom_F(E, \overline{F})|$.
+\end{definition}
+因为 $F$ 的代数闭包在同构意义下唯一, $[E:F]_s$ 的定义与 $\overline{F}|F$ 的选取无关. 此外推论 \ref{prop:alg-ext-embedding} 还蕴涵 $[E:F]_s \geq 1$.
+
+\begin{proposition}\label{prop:field-tower-sdegree}
+	若 $L|E$ 和 $E|F$ 为代数扩张, 则 $[L:F]_s = [L:E]_s [E:F]_s$, 其中 $[L:E]_s = \Hom_E(L, \overline{F})$ 可由任意 $F$-嵌入 $\sigma: E \to \overline{F}$ 来定义, 乘法是基数的乘法.
+\end{proposition}
+\begin{proof}
+	将选定的嵌入 $F \hookrightarrow \overline{F}$ 延拓为 $\tau: L \to \overline{F}$ 可以分作两步. 第一步是延拓到 $\sigma: E \to \overline{F}$, 第二步是将每个 $\sigma$ 延拓为 $\tau: L \to \overline{F}$. 第一步按定义恰有 $[E:F]_s$ 种选择.
+
+	接着考虑给定之 $\sigma \in \Hom_F(E, \overline{F})$. 因为 $F \hookrightarrow \overline{F}$ 给出代数扩张, $E \xrightarrow{\sigma} \overline{F}$ 亦然, 而 $\overline{F}$ 又是代数闭的, 故 $E \xrightarrow{\sigma} \overline{F}$ 给出 $E$ 的代数闭包. 于是第二步按定义对每个 $\sigma$ 都恰有 $[L:E]_s$ 种选择. 基数相乘得出 $[L:F]_s = [L:E]_s [E:F]_s$.
+\end{proof}
+
+单扩张 $F(x)|F$ 的可分次数可直接从 $x$ 的极小多项式计算.
+\begin{lemma}\label{prop:field-sdegree-F(x)}
+	考虑形如 $F(x)|F$ 的有限扩张, 记 $x$ 的极小多项式为 $P_x$. 则 $[F(x):F]_s$ 等于 $P_x$ 在 $\overline{F}$ 中的根数 (不计重数). 当 $\mathrm{char}(F)=0$ 时 $[F(x):F]_s = [F(x):F] = \deg P_x$. 若 $p := \mathrm{char}(F) > 0$, 按 \eqref{eqn:P-to-P-flat} 将 $P_x$ 写作
+	\[ P_x(X) = P^\flat_x\left( X^{p^m} \right), \]
+	则 $[F(x):F]_s = \deg P^\flat_x$, $[F(x):F] = p^m [F(x):F]_s$. 特别地, $x$ 可分当且仅当 $[F(x):F]_s = [F(x):F]$.
+\end{lemma}
+\begin{proof}
+	命题 \ref{prop:field-embedding} 断言 $[F(x):F]_s$ 等于 $P_x$ 在 $\overline{F}$ 中的根数 (不计重数). 定理 \ref{prop:separable-polynomial} 表明仅当 $p := \mathrm{char}(F) > 0$ 时才可能有重根, 在对 \eqref{eqn:P-to-P-flat} 的讨论中业已说明相异根恰有 $\deg P^\flat_x$ 个, 每个重数皆为 $p^m$.
+\end{proof}
+
+对于一般的有限扩张 $E|F$, 推论 \ref{prop:alg-ext-embedding} 断言 $[E:F]_s \leq [E:F]$, 我们还能进一步得到整除性.
+\begin{definition-theorem}\label{def:insep-deg}
+	以下仅考虑有限扩张.
+	\begin{enumerate}[(i)]
+		\item 对每个 $E|F$ 皆有 $[E:F]_s \mid [E:F]$, 于是可定义 $E|F$ 的\emph{不可分次数}为 \index{yukuozhang!不可分次数 (inseparable degree)}\index[sym1]{$[E:F]_i$}
+			\[ [E:F]_i := \frac{[E:F]}{[E:F]_s}. \]
+		\item 仅当 $p := \text{char}(F) > 0$ 时才可能有 $[E:F]_i > 1$, 此时它必为 $p^m$ 的形式.
+		\item 有限扩张的不可分次数满足 $[L:F]_i = [L:E]_i [E:F]_i$.
+		\item 以下等价:
+			\begin{inparaenum}[(a)]
+				\item $E$ 在 $F$ 上有一族可分生成元,
+				\item 等式 $[E:F]_s = [E:F]$ 成立,
+				\item $E$ 中每个元素在 $F$ 上皆可分.
+			\end{inparaenum}
+		\item 对于单扩张 $F(x)|F$, 极小多项式 $P_x$ 在 $\overline{F}$ 中每个根的重数都是 $[F(x):F]_i$; 特别地, $x$ 在 $F$ 上可分当且仅当 $[F(x):F]_i = 1$.
+	\end{enumerate}
+\end{definition-theorem}
+\begin{proof}
+	我们首先证明 (i). 设 $E = F(x_1, \ldots, x_n)$, 置 $F_m := F(x_1, \ldots, x_m)$, 比较命题 \ref{prop:field-tower-degree} 和 \ref{prop:field-tower-sdegree} 可知对每一段中间扩张 $F_m|F_{m-1}$ 证明 $[F_m:F_{m-1}]_s | [F_m:F_{m-1}]$ 即足. 因此不妨假设 $E = F(x)$, 这是引理 \ref{prop:field-sdegree-F(x)} 处理过的情形, 由之也一并得到 (ii).
+	
+	性质 (iii) 是 $[L:F]$ 和 $[L:F]_s$ 的相应性质的直接结论.
+
+	从上述论证看出: 若 $E$ 的每个生成元 $x_m$ 在 $F$ 上皆可分, 那么在 $F_{m-1}$ 上当然也可分, 于是 $[E:F] = \prod_{i=1}^n [F_m : F_{m-1}] = \prod_{i=1}^n [F_m : F_{m-1}]_s = [E:F]_s$. 若假设 $[E:F]=[E:F]_s$, 则对任意 $x \in E$ 皆有 $[F(x):F]_i \mid [E:F]_i = 1$, 引理 \ref{prop:field-sdegree-F(x)} 遂确保 $x$ 可分. 至此证出 (iv). 最后 (v) 是引理 \ref{prop:field-sdegree-F(x)} 的直接结论.
+\end{proof}
+
+\begin{definition}\index{yukuozhang!可分 (separable)}
+	若代数扩张 $E|F$ 里的每个元素在 $F$ 上皆可分, 则称为\emph{可分扩张}. 因此有限扩张 $E|F$ 可分当且仅当 $[E:F]_s = [E:F]$, 或等价地说 $[E:F]_i = 1$.
+\end{definition}
+
+\begin{proposition}\label{prop:sep-ext-dist}
+	可分扩张是约定 \ref{con:dist-extensions} 意义下的特出扩张, 并对复合封闭.
+\end{proposition}
+\begin{proof}
+	先确立性质 \textbf{D.1}, 作以下简单观察:
+	\begin{compactitem}
+		\item 若 $x \in L$ 在 $F$ 上可分 (即: 极小多项式在 $\overline{F}$ 中无重根), 自然也在 $E$ 上可分, 因此 $L|F$ 可分蕴涵 $L|E$ 可分, 显然也蕴涵 $E|F$ 可分.
+		\item 若 $L|E$, $E|F$ 皆可分, 对任意 $x \in L$ 考虑极小多项式 $Q_x \in E[X]$, 其系数生成 $E|F$ 的有限子扩张 $E_0|F$. 定义--定理 \ref{def:insep-deg} 之 (iv) 说明 $E_0|F$ 可分, 而 $x$ 又在 $E_0$ 上可分, 于是 $E_0(x) \supset F(x)$ 及定义--定理 \ref{def:insep-deg} 之 (iii) 和 (v) 蕴涵
+			\[ [F(x):F]_i \quad \text{整除} \quad [E_0(x):F]_i = [E_0(x):E_0]_i [E_0:F]_i = 1, \]
+			故 $x$ 在 $F$ 上可分.
+	\end{compactitem}
+	特出扩张的性质 \textbf{D.2}, \textbf{D.3} 与复合封闭性都是以下性质的结论: 若代数扩张 $E|F$ 有一族在 $F$ 上可分的生成元, 则 $E|F$ 可分. 诚然, 这是因为任意 $x$ 可以用有限多个生成元表示, 从而可化约到有限扩张情形, 再应用定义--定理 \ref{def:insep-deg} 之 (iv).
+\end{proof}
+
+可分扩张的复合封闭性使得我们能定义闭包的概念.
+\begin{definition}\label{def:sep-closure}\index{kefenbibao@可分闭包 (separable closure)}
+	任意扩张 $\Omega|F$ 的可分子扩张之复合仍为可分扩张, 称为 $F$ 在 $\Omega$ 中的可分闭包. 在代数闭包 $\overline{F}|F$ 中的可分闭包简称为 $F$ 的\emph{可分闭包}, 记作 $F^\mathrm{sep}|F$.
+\end{definition}
+可分闭包也有以下内禀的刻画, 不必绕道 $\overline{F}|F$.
+\begin{proposition}
+	可分闭包 $F^\mathrm{sep}|F$ 是正规扩张: 它实际是 $\mathcal{P} := \{P \in F[X]: \text{不可约},\; P' \neq 0 \}$ 的分裂域.
+\end{proposition}
+此外还可以仿照定义代数闭包的方式, 将 $F^\text{sep}|F$ 定义为 $F$ 极大可分扩张; 参看引理 \ref{prop:alg-closed-no-ext}.
+
+\begin{definition}\label{def:perfect-field}\index{yu!完全 (perfect)}
+	若域 $F$ 的所有代数扩张都可分, 则称 $F$ 为\emph{完全域}.
+\end{definition}
+
+对于 $p := \text{char}(F) > 0$ 情形的研究, \eqref{eqn:freshmen-dream} 将扮演关键角色; 它确保下述性质.
+\begin{itemize}
+	\item 对任意 $m \geq 0$ 定义 $F^{p^m} := \left\{x^{p^m} : x \in F \right\}$, 则它是 $F$ 的子域; 诚然, $F^{p^m}$ 对乘法和非零元的取逆 $y \mapsto y^{-1}$ 封闭, 包含素子域 $\F_p$, 并且对加法和加法取逆 $y \mapsto -y = \underbracket{(-1)}_{\in \F_p} \cdot y$ 也封闭.
+	\item 任意 $a \in F$ 在 $\overline{F}$ 中有唯一的 $p^m$ 次根, 不妨记为 $a^{p^{-m}}$.
+\end{itemize}
+
+\begin{lemma}\label{prop:pins-polynomial}
+	设 $p := \text{char}(F) > 0$, $m \geq 1$. 多项式 $X^{p^m} - a \in F[X]$ 不可约当且仅当 $a \notin F^p$.
+\end{lemma}
+\begin{proof}
+	若 $a = b^p$, $b \in F$, 则 $X^{p^m}-a = \left( X^{p^{m-1}}-b \right)^p$ 可约. 以下假设 $a \notin F^p$.
+
+	令 $P$ 为 $\alpha := a^{p^{-m}} \in \overline{F}$ 在 $F$ 上的极小多项式. 由于 $X^{p^m}-a =(X-\alpha)^{p^m}$ 在 $F[X]$ 中的任何素因子都有根 $\alpha$, 因而被 $P$ 整除, 从 $F[X]$ 的唯一分解性可知存在正整数 $k$ 使得 $X^{p^m}-a = P^k$; 目标是说明 $k=1$. 比较次数可知 $k = p^n$ ($n \leq m$), 继而比较常数项可知 $-a \in F^{p^n}$, 于是 $a \in F^{p^n}$; 条件表明 $n=0$, 证毕.
+\end{proof}
+特别地, 若 $x \in E \smallsetminus F$ 而 $a := x^p \in F$, 那么引理 \ref{prop:pins-polynomial} 蕴涵 $X^p - a \in F[X]$ 是 $x$ 的极小多项式; 从引理 \ref{prop:field-sdegree-F(x)} 立见 $[F(x):F]_s = 1$. 在 \S\ref{sec:pins} 将对这类多项式作更完整的讨论. 我们先将焦点转回完全域.
+
+\begin{theorem}\label{prop:perfect-field-char}\index{daishu!完全}
+	域 $F$ 是完全域当且仅当
+	\begin{inparaenum}[(a)]
+		\item $\text{char}(F)=0$, 或者
+		\item $p := \text{char}(F) > 0$ 而 $F = F^p$.
+	\end{inparaenum}
+\end{theorem}
+\begin{proof}
+	根据定理 \ref{prop:separable-polynomial}, 仅须在 $p := \text{char}(F) > 0$ 的情形下验证 $F=F^p$ 等价于所有不可约的 $P \in F[X]$ 皆满足 $P' \neq 0$. 首先设 $F=F^p$, 若 $P' = 0$ 则有表达式 $P = \sum_{k \geq 0} a_k X^{pk}$, 取 $a'_k \in F$ 使得 $(a'_k)^p = a_k$, 这将导致 $P = (\sum_{k \geq 0} a'_k X^k)^p$ 可约.
+	
+	反之设 $\exists a \in F \smallsetminus F^p$. 引理 \ref{prop:pins-polynomial} 表明 $P := X^p - a \in F[X]$ 不可约, 同时 $P' = pX^{p-1} = 0$. 证毕.
+\end{proof}
+
+\begin{corollary}
+	有限域都是完全域.
+\end{corollary}
+\begin{proof}
+	有限域 $F$ 的特征必为某素数 $p$, 否则 $\Q \hookrightarrow F$. 映射 $x \mapsto x^p$ 是 $F$ 的加法群自同态, 其核为 $\{x \in F: x^p=0 \} = \{0\}$ 故为单射, 有限性遂蕴涵 $F=F^p$.
+\end{proof}
+
+\section{本原元素定理}
+本节伊始, 我们先回顾第五章习题中的一道结果.
+\begin{theorem}\label{prop:field-subgroup-cyclic}
+	令 $F$ 为域, 则 $F^\times$ 的任何有限子群都是循环群. 特别地, 当 $F$ 为有限域时 $F^\times$ 是循环群.
+\end{theorem}
+\begin{proof}
+	在 \S\ref{sec:ring} 的习题中业已勾勒了一套基于分圆多项式的进路, 此处改用有限生成交换群的结构定理 (推论 \ref{prop:finite-abelian-structure}) 另作证明. 设 $A \subset F^\times$ 为有限群, 根据前引结果, 存在 $> 1$ 的整数 $d_1 \mid \cdots \mid d_n$ 使得 $A \simeq \bigoplus_{i=1}^n \Z/d_i\Z$. 由此可见 $\left\{a\in A: a^{d_n}=1 \right\}$ 有 $\prod_{i=1}^n d_i$ 个元素, 然而多项式 $X^{d_n}-1$ 在 $F$ 中至多有 $d_n$ 个根, 于是 $n=1$, 故 $A$ 确为循环群.
+\end{proof}
+
+\begin{definition}\index{benyuanyuansu@本原元素 (primitive element)}
+	设 $E|F$ 为有限扩张, 若 $u \in E$ 满足于 $E=F(u)$ 则称 $u$ 为 $E|F$ 的\emph{本原元素}.
+\end{definition}
+
+\begin{example}
+	先尝试二次数域的情形. 设 $p,q$ 为相异素数. 易见 $p$ 在 $\Q(\sqrt{q}) = \Q + \Q\sqrt{q}$ 中无平方根, 故 $[\Q(\sqrt{p},\sqrt{q}): \Q] = [\Q(\sqrt{p},\sqrt{q}):\Q(\sqrt{q})] [\Q(\sqrt{q}):\Q] = 4$. 验证 $u := \sqrt{p}+\sqrt{q}$ 是 $\Q(\sqrt{p}, \sqrt{q})|\Q$ 的本原元素如下:
+	\[ u^3 = \left( \sqrt{p}+\sqrt{q} \right)^3 = p\sqrt{p} + 3p\sqrt{q} + 3q\sqrt{p} + q\sqrt{q} = (p+3q)\sqrt{p} + (3p+q)\sqrt{q}, \]
+	从而 $\sqrt{q} = (2p-2q)^{-1}(u^3 - (p+3q)u) \in \Q(u)$, 又由 $\sqrt{p} = u - \sqrt{q} \in \Q(u)$ 知 $u$ 确为本原元素.
+\end{example}
+对于更一般的域扩张, 类似运算很快会变得十分棘手, 所幸我们有以下的一般定理.
+
+\begin{theorem}\label{prop:prim-element-separable}
+	有限可分扩张 $E|F$ 必有本原元素. 当 $F$ 无穷而 $E=F(x_1, \ldots, x_n)$ 时, 结果可以进一步强化为: 设 $x_2, \ldots, x_n$ 在 $F$ 上可分, 则本原元素可取作 $x_1, \ldots, x_n$ 在 $F$ 上的线性组合.
+\end{theorem}
+\begin{proof}
+	若 $F$ 有限则 $E$ 亦有限, 定理 \ref{prop:field-subgroup-cyclic} 给出 $E^\times$ 的生成元 $u$; 显然 $E^\times = \lrangle{u} \implies E=F(u)$. 有限域的情形得证.
+	
+	假设 $F$ 无穷而 $E=F(x_1, \ldots, x_n)$, 先考察 $n=2$ 的情形. 令 $P_1, P_2$ 为 $x_1, x_2$ 各自的极小多项式. 今将证明对于``一般的'' $t \in F$ 有 $E=F(x_1 + tx_2)$; 留意到 $x_1 = (x_1 + tx_2) - tx_2$, 故证明 $x_2 \in F(x_1 + tx_2)$ 即可.
+	
+	将 $F(x_1, x_2)$ 嵌入代数闭包 $\overline{F}$ 并在 $F(x_1 + tx_2)[X]$ 中考虑元素
+	\[ P_1(x_1 + tx_2 - tX), \quad P_2(X). \]
+	由于两者在 $\overline{F}$ 中有公共根 $x_2$, 引理 \ref{prop:coprime-basechange} 蕴涵它们的最大首一公因式 $R \in F(x_1 + tx_2)[X]$ 满足 $\deg R \geq 1$. 如能取 $t$ 使得 $\deg R=1$ 则必有 $R = X-x_2$, 此时如愿导出 $x_2 \in F(x_1 + tx_2)$.
+	
+	反设 $\deg R > 1$, 从 $R \mid P_2$ 和 $P_2$ 无重根 (这里用上可分性) 可知 $R$ 在 $\overline{F}$ 中有根 $y \neq x_2$. 同样地, $R \mid P_1(x_1 + tx_2 - tX)$ 蕴涵 $P_1(x_1 + t(x_2-y))=0$, 遂有
+	\begin{gather*}
+		x_1 + t(x_2 - y) = z, \quad z \in \overline{F}:\; P_1(z)=0.
+	\end{gather*}
+	对每个 $P_1$ 的根 $z$ 和 $P_2$ 的根 $y \neq x_2$, 上式都唯一确定了 $t$. 因为根数有限而 $F$ 无穷, 总能取 $t$ 使得上式对每组 $(z,y)$ 皆不成立, 于是 $\deg R = 1$.
+	
+	当 $n > 2$ 时, 可利用 $F(x_1, \ldots, x_n) = F(x_1, \ldots, x_{n-1})(x_n)$ 递归地论证.
+\end{proof}
+
+下述刻画则给出了存在本原元素的充要条件. 为了陈述方便, 以下设 $F \subset E$.
+\begin{theorem}[E.\ Steinitz]\label{prop:prim-element}
+	有限扩张 $E|F$ 是单扩张 (亦即存在本原元素) 当且仅当仅有有限个中间域 $F \subset M \subset E$.
+\end{theorem}
+\begin{proof}
+	当 $F$ 有限时 $E$ 亦有限, 此时当然仅有有限个中间域, 而定理 \ref{prop:prim-element-separable} 断言存在本原元素. 以下只处理 $F$ 无穷的情形.
+	
+	先假设 $E = F(u)$. 对任意中间域 $M$, 令 $u$ 在 $M$ 上的极小多项式为 $P_M \in M[X]$; 于是 $P_M \mid P_F$. 我们断言 $M|F$ 由 $P_M$ 的系数 $c_0, \ldots, c_m$ 生成. 诚然, $P_M$ 既然在 $M$ 上不可约, 在 $F(c_0, \ldots, c_m) \subset M$ 上亦不可约, 因此
+	\[ [E:M] = \deg P_M = [E:F(c_0, \ldots, c_m)], \]
+	于是 $M=F(c_0, \ldots, c_m)$, 亦即 $M$ 可由 $P_M$ 重构. 由此见得映射
+	\[\begin{tikzcd}[row sep=tiny, column sep=small]
+		\{ \text{中间域}\; F \subset M \subset L \} \arrow[r] & \{ P_F \;\text{在 $E[X]$ 中的首一因式} \} \\
+		M \arrow[mapsto, r] & P_M
+	\end{tikzcd}\]
+	是单射, 右侧有限导致左侧亦有限.
+	
+	今假设仅有有限个中间域 $M$. 每个 $M$ 同时也是 $E$ 的 $F$-向量子空间. 利用 $F$ 无穷的条件, 我们断言有限多个真子空间不能覆盖整个 $E$, 于是取 $u \in E \smallsetminus \bigcup\{M : M \subsetneq E \}$ 即为本原元素. 下面证明断言: 设若不然, 则 $E$ 可被有限多个线性超平面覆盖, 亦即
+	\[ E = \bigcup_{i=1}^k \{x \in E : L_i(x) = 0\}, \]
+	其中 $L_1, \ldots, L_k: E \to F$ 是一些非零 $F$-线性映射; 那么 $\prod_{i=1}^k L_i$  是在 $E \simeq F^{[E:F]}$ 上恒取零值的 $k$ 次多项式函数, 这与命题 \ref{prop:polynomial-function} 相悖.
+\end{proof}
+借用代数几何的术语, 证明最后一段实际说明了单扩张 $E|F$ 中 $E$ 的``一般'' (即: 扣除有限个 $M \subsetneq E$) 元素都是本原元素.
+
+我们将在习题中给出扩张无本原元素的具体例子, 并验证此时确有无穷多个中间域.
+
+\section{域扩张中的范数与迹}\label{sec:norm-trace-fields} \index{ji-trace}\index{fanshu}
+对于有限扩张 $E|F$, 定义 \ref{def:norm-trace} 对任意 $F$-代数 $E$ 定义了从 $E$ 映到 $F$ 的范数 $\Nm_{E|F}$ 与迹 $\Tr_{E|F}$ 两种映射, 它们分别是乘法幺半群和加法群的同态. 对于域扩张的塔 $L|E|F$, 定理 \ref{prop:norm-trace-transitivity} 给出
+\[ \Nm_{L|F} = \Nm_{E|F} \Nm_{L|E}, \quad \Tr_{L|F}=\Tr_{E|F}\Tr_{L|E}. \]
+
+对域扩张 $E|F$ 和元素 $x \in E$, 其范数和迹的计算遂可拆作两段:
+\[ \Nm_{E|F}(x) = \Nm_{F(x)|F}(\Nm_{E|F(x)}(x)), \quad \Tr_{E|F}(x)=\Tr_{F(x)|F}(\Tr_{E|F(x)}(x)), \]
+而 $E|F(x)$ 段是容易的: 因为 $x \in F(x)$, \S\ref{sec:trace-norm-disc} 列出的性质表明
+\begin{gather}\label{eqn:norm-trace-field-prepa}
+	\Nm_{E|F(x)}(x) = x^{[E:F(x)]}, \quad \Tr_{E|F(x)}(x) = [E:F(x)] x.
+\end{gather}
+一如既往, 合理的策略是从考察 $\Nm_{F(x)|F}(x)$ 和 $\Tr_{F(x)|F}(x)$ 入手.
+
+\begin{theorem}\label{prop:norm-trace-F(x)}
+	设 $x$ 在 $F$ 上的极小多项式为 $P_x = X^n + a_{n-1}X^{n-1} + \cdots + a_0$, 则
+	\[ \Nm_{F(x)|F}(x) = (-1)^n a_n, \quad \Tr_{F(x)|F}(x) = -a_{n-1}. \]
+\end{theorem}
+\begin{proof}
+	使用原始定义 \ref{def:norm-trace}. 取 $F$-向量空间 $F(x)$ 的基 $1, x, \ldots, x^{n-1}$ (计入顺序). 因为 $x \cdot x^{n-1} = \sum_{i=0}^{n-1} (-a_i)x^i$, 对应于左乘映射 $m_x: a \mapsto xa$ 的矩阵是
+	\[ A := \begin{pmatrix}
+		0 & \cdots & 0 & -a_0 \\
+		1 & & & -a_1 \\
+		& \ddots & & \vdots \\
+		& & 1 & -a_{n-1}
+	\end{pmatrix}\]
+	容易计算 $\Nm_{F(x)|F}(x) = \det(A) = (-1)^n a_0$, 而 $\Tr_{F(x)|F}(x) = \Tr(A) = -a_{n-1}$.
+\end{proof}
+
+\begin{theorem}\label{prop:norm-trace-field}
+	对于有限扩张 $E|F$ 和 $x \in E$, 取定代数闭包 $\overline{F}|F$, 则有
+	\begin{align*}
+		\Nm_{E|F}(x) & = \prod_{\sigma \in \Hom_F(E, \overline{F})} \sigma(x)^{[E:F]_i}, \\
+		\Tr_{E|F}(x) & = [E:F]_i \sum_{\sigma \in \Hom_F(E, \overline{F})} \sigma(x) \\
+		& = \begin{cases}
+			\sum_{\sigma \in \Hom_F(E, \overline{F})} \sigma(x), & E|F\; \text{可分} \\
+			0, & E|F\; \text{不可分}.
+		\end{cases}
+	\end{align*}
+\end{theorem}
+\begin{proof}
+	记 $x$ 的极小多项式为 $P_x = X^n + a_{n-1}X^{n-1} + \cdots + a_0$. 定理 \ref{prop:norm-trace-F(x)} 中的 $(-1)^n a_0$ 和 $-a_{n-1}$ 分别是 $P_x$ 在 $\overline{F}$ 中诸根的积与和, 计入重数; 根的重数皆等于 $[F(x):F]_i$ (定义--定理 \ref{def:insep-deg} (v)). 配合命题 \ref{prop:field-embedding} 可将此改写为
+	\begin{align*}
+		\Nm_{F(x)|F}(x) & = \prod_{\sigma \in \Hom_F(F(x), \overline{F})} \sigma(x)^{[F(x):F]_i} , \\
+		\Tr_{F(x)|F}(x) & = [F(x):F]_i \sum_{\sigma \in \Hom_F(F(x), \overline{F})} \sigma(x).
+	\end{align*}
+	每个 $\sigma \in \Hom_F(F(x), \overline{F})$ 到 $E$ 有 $[E: F(x)]_s$ 种延拓, 是以 \eqref{eqn:norm-trace-field-prepa} 给出
+	\begin{align*}
+		\Nm_{E|F}(x) & = \Nm_{F(x)|F}(x)^{[E:F(x)]} = \prod_{\sigma \in \Hom_F(F(x), \overline{F})} \sigma(x)^{[F(x):F]_i [E:F(x)]} \\
+		& = \prod_{\sigma \in \Hom_F(E, \overline{F})} \sigma(x)^{[F(x):F]_i [E:F(x)]_i [E:F(x)]_s \big/ [E:F(x)]_s} \\
+		& = \prod_{\sigma \in \Hom_F(E, \overline{F})} \sigma(x)^{[E:F]_i}.
+	\end{align*}
+	同样运算中以加代乘, 便得出 $\Tr_{E|F}(x) = [E:F]_i \sum_{\sigma \in \Hom_F(E, \overline{F})} \sigma(x)$. 由于 $E|F$ 可分当且仅当 $[E:F]_i = 1$, 而不可分情形必为特征 $p > 0$ 且 $[E:F]_i = p^m$, $m \geq 1$, 此时 $[E:F]_i \cdot 1_{\overline{F}} = 0$.
+\end{proof}
+
+以上公式有助于了解定义 \ref{def:discriminant} 后讨论的迹型式
+\begin{align*}
+	\Tr_{E|F}: E \times E & \longrightarrow F \\
+	(x,y) & \longmapsto \Tr_{E|F}(xy).
+\end{align*}
+这是 $E$ 上的对称双线性型. 更广泛地说, 设 $V$, $W$ 是有限维 $F$-向量空间, $B: V \times W \to F$ 是双线性映射, 如果
+\[ B(v,\cdot) = 0 \iff v=0, \quad B(\cdot,w)=0 \iff w=0 \]
+则称 $B$ 是非退化的. 今假设 $\dim_F V = \dim_F W = n$. 若 $V$ 的一组基 $x_1, \ldots, x_n$ 和 $W$ 的一组基 $y_1, \ldots, y_n$ (计顺序) 满足于
+\[ B(x_i, y_j) = \begin{cases} 1, & i=j \\ 0, & i \neq j \end{cases} \]
+则称两者相对偶. 线性代数的基本理论蕴涵 $V$, $W$ 有一对对偶基当且仅当 $B$ 非退化, 这时任意 $(x_i)_i$ 都有唯一的对偶基.
+
+\begin{theorem}
+	设 $E=F(x)$, 其中 $x$ 的极小多项式 $P_x$ 为 $n$ 次, 记
+	\[ \frac{P_x}{X-x} = \sum_{i=0}^{n-1} b_i X^i \quad \in E[X]. \]
+	若 $P'_x(x) \neq 0$, 则对 $E$ 的基 $1, x, \ldots, x^n$, 相对于 $\Tr_{E|F}$ 的对偶基为
+	\[ \frac{b_0}{P'_x(x)}, \ldots, \frac{b_{n-1}}{P'_x(x)}. \]
+\end{theorem}
+\begin{proof}
+	取定代数闭包 $\overline{F}$ 并将 $E$ 嵌入. 令 $x_1, \ldots, x_n \in \overline{F}$ 为 $P_x$ 的根, 定理 \ref{prop:separable-polynomial} 确保无重根, 而且 $E|F$ 可分. 一并注意到对每个 $1 \leq i,k \leq n$ 皆有
+	\[ \left. \frac{P_x}{X - x_i} \right|_{X=x_k} = \begin{cases}
+		P'_x(x_k), & k =i \\
+		0, & k \neq i.
+	\end{cases}\]
+	(这是初等的, 参看 \eqref{eqn:derivation-linear-approx}). 我们首先断言
+	\[ \sum_{i=1}^n \frac{P_x}{X-x_i} \cdot \frac{x_i^j}{P'_x(x_i)} = X^j, \quad 0 \leq j \leq n-1. \]
+	对每个 $j$, 从以上观察得知两边之差是有 $n$ 个根 $x_1, \ldots, x_n$ 的 $\leq n-1$ 次多项式, 故两边相等. 此式又可写作
+	\[ \sum_{\sigma \in \Hom_F(E,\overline{F})} \sigma \left( \frac{P_x}{X-x} \cdot \frac{x^j}{P'_x(x)} \right) = X^j \qquad
+	\begin{tikzpicture}[baseline]
+			\matrix[matrix of math nodes, left delimiter={\|}]
+				{\sigma \leftrightarrow i \\ \sigma(x)=x_i \\ };
+	\end{tikzpicture} \]
+	此处将 $\sigma$ 作用在多项式系数上, 自然地延拓为 $F$-代数的同态 $E[X] \xrightarrow{\sigma} \overline{F}[X]$. 比较 $X^i$ 在两边的系数并应用定理 \ref{prop:norm-trace-field} 可得
+	\[ \Tr_{E|F}\left(  x^j \cdot \frac{b_i}{P'_x(x)}\right)=\sum_{\sigma \in \Hom_F(E,\overline{F})} \sigma \left( b_i \cdot \frac{x^j}{P'_x(x)} \right)  = \begin{cases} 1, & i=j, \\ 0, & i \neq j \end{cases} \]
+	此即对偶基的条件.
+\end{proof}
+
+对于可分有限扩张 $E|F$, 定理 \ref{prop:prim-element-separable} 确保上述定理的前提成立, 而对不可分有限扩张恒有 $\Tr_{E|F}=0$. 以下推论是水到渠成的.
+\begin{corollary}\label{prop:separable-discriminant}
+	有限扩张 $E|F$ 的迹型式 $\Tr_{E|F}: E \times E \to F$ 非退化当且仅当 $E|F$ 可分.
+\end{corollary}
+
+如果只为论证 $\Tr_{E|F}$ 非退化, 稍后介绍的定理 \ref{prop:indep-character-Artin} 能够给出更短的证明, 不过对偶基的显式描述在代数数论等场合相当管用, 这是玄虚的论证所不及处. 我们留作习题.
+
+\section{纯不可分扩张}\label{sec:pins}
+由于不可分现象仅在特征 $p > 0$ 时出现, 本节固定素数 $p$, 考虑的域一概为特征 $p$.
+\begin{definition}[纯不可分元]
+	设 $\Omega|F$ 为域扩张, 若代数元 $x \in \Omega$ 的极小多项式形如 $P_x = X^{p^m}-a \in F[X]$, 其中 $m \geq 0$, 则称 $x$ 在 $F$ 上是\emph{纯不可分元}.
+\end{definition}
+由引理 \ref{prop:field-sdegree-F(x)} 知 $x$ 是纯不可分元当且仅当 $[F(x):F] = [F(x):F]_i = p^m$, 这又等价于 $[F(x):F]_s = 1$; 此时 \eqref{eqn:P-to-P-flat} 给出的可分多项式 $P^\flat_x$ 为一次的 $X-a$. 以下是引理 \ref{prop:pins-polynomial} 的直接结论.
+
+\begin{proposition}
+	假设存在 $k \geq 0$ 使得 $x^{p^k} \in F$. 取 $m := \min\left\{k \geq 0 : x^{p^k} \in F \right\}$, $a := x^{p^m}$, 则 $x$ 是以 $X^{p^m}-a$ 为极小多项式的纯不可分元.
+\end{proposition}
+
+\begin{definition-theorem}\label{def:pins}\index{yukuozhang!纯不可分 (purely inseparable)}
+	对于代数扩张 $E|F$, 以下条件等价.
+	\begin{enumerate}[(i)]
+		\item $E$ 中每个元素在 $F$ 上都是纯不可分元;
+		\item $E|F$ 由一族纯不可分元生成;
+		\item $[E:F]_s = 1$ (回忆可分次数对任何代数扩张皆有定义);
+	\end{enumerate}
+	当任一条件成立时, 称 $E|F$ 为\emph{纯不可分扩张}.
+\end{definition-theorem}
+\begin{proof}
+	(i) $\implies$ (ii): 显然.
+
+	(ii) $\implies$ (iii): 取代数闭包 $\overline{F}|F$, 并回忆 $\Hom_F(E, \overline{F})$ 非空 (推论 \ref{prop:alg-ext-embedding}), $\iota \in \Hom_F(E, \overline{F})$ 由它在一族生成元上的作用确定. 先前的讨论已指出每个不可分生成元 $x$ 的极小多项式都形如 $X^{p^m} - a$, 故 $\iota \in \Hom_F(E, \overline{F})$ 必将 $x$ 映至 $X^{p^m} - a$ 在 $\overline{F}$ 中的唯一根 $a^{-p^m}$, 这就意谓着 $[E:F]_s = |\Hom_F(E, \overline{F})| = 1$.
+	
+	(iii) $\implies$ (i): 设 $x \in E$, 命题 \ref{prop:field-tower-sdegree} 蕴涵 $1 = [E:F]_s = [E:F(x)]_s [F(x):F]_s$, 于是 $[F(x):F]_s = 1$. 按先前讨论可知这等价于 $x$ 纯不可分.
+\end{proof}
+
+若取定代数闭包 $\overline{F}|E$, 并定义 $\overline{F}$ 的子域 (简单验证留予读者)
+\[ F^{p^{-\infty}} := \{ x \in \overline{F}: \exists m \geq 1,\; x^{p^m} \in F \}  \]
+则 $E|F$ 纯不可分等价于 $E \subset F^{p^{-\infty}}$. 可见 $F^{p^{-\infty}}$ 实为 $F$ 上所有形如 $X^{p^m}-a$ 的多项式的分裂域, 也称作 $F$ 的\emph{完全闭包}. 习题将阐释这个术语的由来.
+
+\begin{lemma}
+	纯不可分扩张必为正规扩张.
+\end{lemma}
+\begin{proof}
+	用正规扩张的刻画 (\textbf{N.1}): 纯不可分扩张中任意元素的极小多项式恰有一根.
+\end{proof}
+
+\begin{proposition}\label{prop:pins-dist}
+	纯不可分扩张在约定 \ref{con:dist-extensions} 的意义下是特出的, 并且对复合封闭.
+\end{proposition}
+\begin{proof}
+	先确立性质 \textbf{D.1}. 取定代数闭包 $\overline{F}|L$. 若 $L \subset E^{p^{-\infty}}$, $E \subset F^{p^{-\infty}}$, 则从定义易见 $L \subset F^{p^{-\infty}}$. 反之 $L \subset F^{p^{-\infty}} \implies (L \subset E^{p^{-\infty}}) \wedge (E \subset F^{p^{-\infty}})$ 则更显然.
+
+	至于 \textbf{D.2}, 注意到 $L|F$ 纯不可分蕴涵每个 $x \in L$ 都在 $M$ 上纯不可分 (因为 $x^{p^m} \in F \subset M$). 由于 $L$ 生成扩张 $LM|M$, 定义--定理 \ref{def:pins} 的 (ii) 说明 $LM|M$ 纯不可分. 同样基于生成元的论证表明纯不可分的任意复合仍是纯不可分扩张.
+\end{proof}
+
+\begin{lemma}\label{prop:pins-sep}
+	若代数扩张 $E|F$ 既可分又是纯不可分, 则 $[E:F]=1$.
+\end{lemma}
+\begin{proof}
+	因为可分和纯不可分扩张都是特出的, 仅须考虑 $E=F(x)$ 的情形. 条件相当于 $[E:F]_s = [E:F]_i = 1$.
+\end{proof}
+
+任意代数扩张可以拆成两段: 先是极大可分子扩张, 继而是纯不可分扩张.
+\begin{proposition}\label{prop:pins-devissage}
+	对于任意代数扩张 $E|F$, 记子扩张 $E^\flat|F$ 为 $F$ 在 $E$ 中的可分闭包 (定义 \ref{def:sep-closure}), 则 $E|E^\flat$ 是纯不可分扩张.
+\end{proposition}
+\begin{proof}
+	将任一 $x \in E$ 的极小多项式记为 $P_x \in F[X]$, 实行 \eqref{eqn:P-to-P-flat} 的操作以得到 $P_x(X) = P_x^\flat\left( X^{p^m} \right)$, 其中 $P_x^\flat$ 不可约且在代数闭包上无重根. 这就表明 $y := x^{p^m}$ 在 $F$ 上可分, 于是 $x^{p^m} \in F(y) \subset E^\flat$ 表明 $x$ 在 $E^\flat$ 上纯不可分.
+\end{proof}
+
+既然纯不可分扩张是特出的, 我们同样能对 $E|F$ 定义极大纯不可分子扩张 $E^\natural$, 或称 $F$ 在 $E$ 中的\emph{纯不可分闭包}. 与前述结果比较, 人们自然会问: $E|E^\natural$ 是否可分? 对此有以下简单的刻画.
+\begin{proposition}\label{prop:pins-compositum}
+	沿用以上符号, 扩张 $E|E^\natural$ 可分 $\iff E = E^\flat E^\natural$.
+\end{proposition}
+\begin{proof}
+	($\implies$): 已知 $E|E^\flat$ 纯不可分, 故 $E | E^\flat E^\natural$ 亦然; 同理知 $E|E^\natural$ 可分蕴涵 $E | E^\flat E^\natural$ 可分, 运用引理 \ref{prop:pins-sep} 可得 $E = E^\flat E^\natural$.
+	
+	($\impliedby$): 仅须观察到 $E^\flat|F$ 可分蕴涵 $E^\flat E^\natural | E^\natural$ 可分.
+\end{proof}
+习题将给出 $E|E^\natural$ 不可分的例子. 之后我们会证明正规扩张总满足 $E|E^\natural$ 可分 (定理 \ref{prop:normal-ext-structure}).
+
+\section{超越扩张}
+选定域 $F$. 扩张 $\Omega|F$ 中的非代数元称作超越元. 于是 $x \in \Omega$ 是超越元当且仅当 $F$-代数的同态
+\begin{align*}
+	F[X] & \longrightarrow \Omega \\
+	X & \longmapsto x
+\end{align*}
+为单, 此时 $F[X] \rightiso F[x] \subsetneq F(x) \leftiso F(X)$; 例如数学分析中熟知的 $\pi, e \in \R$ 皆是 $\Q$ 上的超越元, 证明参见 \cite[\S 7]{ZhP}. 受此启发, 多变元情形亦有如下定义.
+
+\begin{definition}\label{def:alg-indep}\index{daishuwuguan@代数无关 (algebraically independent)}
+	子集 $\mathcal{X} \subset \Omega$ 若满足以下条件, 则称它在 $F$ 上是\emph{代数无关}的: 对所有 $n \geq 1$, 相异元 $x_1, \ldots, x_n \in \mathcal{X}$ 和多项式 $P \in F[X_1, \ldots, X_n]$, 我们有
+	\[ P(x_1, \ldots, x_n)=0 \iff P=0. \]
+\end{definition}
+换言之, $\mathcal{X}$ 的元素在 $F$ 上除 $0=0$ 外再无其它代数关系; 等价地说 $F[\mathcal{X}] \hookrightarrow \Omega$.
+
+\begin{example}
+	根据对称多项式基本定理 \ref{prop:fund-thm-symmetric-poly}, 初等对称多项式 $e_0, \ldots, e_n$ 在有理函数域 $F(X_1, \ldots, X_n)$ 中是代数无关的. 它们生成的子域无非是 $F(X_1, \ldots, X_n)^{\mathfrak{S}_n}$.
+\end{example}
+
+今后定义
+\[ \text{Indep}_F(\Omega) := \left\{ \mathcal{X} \subset \Omega: \text{代数无关} \}\right. \]
+按定义 $\emptyset \in \text{Indep}_F(\Omega)$, 而且 $\mathcal{X} \in \text{Indep}_F(\Omega)$ 蕴涵 $\mathcal{X}$ 的子集也都属于 $\text{Indep}_F(\Omega)$. 集合 $\text{Indep}_F(\Omega)$ 对 $\subset$ 构成非空偏序集.
+
+\begin{definition-theorem}\index{chaoyueji@超越基 (transcendence basis)}
+	任意扩张 $\Omega|F$ 皆有极大的代数无关子集 (容许为空), 这般子集称作 $\Omega|F$ 的\emph{超越基}.
+\end{definition-theorem}
+显然存在非空超越基当且仅当 $\Omega|F$ 非代数扩张.
+\begin{proof}
+	根据定理 \ref{prop:Zorn}, 仅须证明偏序集 $(\text{Indep}_F(\Omega), \subset)$ 中每个链 $\{ \mathcal{X}_i: i \in I\}$ 都有上界. 取 $\mathcal{X} := \bigcup_{i \in I} \mathcal{X}_i$. 由于任意 $x_1, \ldots, x_n \in \mathcal{X}$ 总包含于某个 $\mathcal{X}_i$, 代数无关性对 $\mathcal{X}$ 依然成立.
+\end{proof}
+
+设 $\mathcal{B}$ 为超越基, 根据以上讨论可知
+\begin{itemize}
+	\item 代数无关性等价于 $\mathcal{B}$ 生成的子扩张 $F(\mathcal{B})|F$ 自然地同构于以 $\mathcal{B}$ 为变元集的有理函数域;
+	\item $\Omega|F(\mathcal{B})$ 是代数扩张, 否则 $F(\mathcal{B})$ 上的超越元 $x \in \Omega$ 将使得 $\mathcal{B} \cup \{x\} \in \text{Indep}_F(\Omega)$;
+	\item 反过来说, 满足以上两个性质的子集 $\mathcal{B}$ 必为超越基.
+\end{itemize}
+
+一个域扩张能有多组超越基, 但其基数是唯一确定的. 我们着手来证明这点.
+\begin{lemma}\label{prop:generator-cardinal-field}
+	设 $\mathcal{B}$, $\mathcal{B}'$ 是 $\Omega|F$ 的两组超越基. 若 $\mathcal{B}$ 无穷则 $|\mathcal{B}'| \geq |\mathcal{B}|$.
+\end{lemma}
+\begin{proof}
+	每个 $b' \in \mathcal{B}'$ 在 $F(\mathcal{B})$ 上都有极小多项式 $P_{b'} \in F(\mathcal{B})[Y]$; 将其系数表作既约分式, 并定义有限集 $E_{b'} := \left\{ b \in \mathcal{B}: \text{在 $P_{b'}$ 系数中出现 } \right\}$. 取并 $\mathcal{B}'' := \bigcup_{b'} E_{b'} \subset \mathcal{B}$ 可知 $\Omega|F(\mathcal{B}'')$ 是代数扩张, 因此必有 $\mathcal{B}''=\mathcal{B}$. 于是 $\mathcal{B}'$ 也无穷. 推论 \ref{prop:cardinal-max} 蕴涵
+	\[ \max\{|\mathcal{B}'|, \aleph_0 \} = |\mathcal{B}'| \cdot \aleph_0 \geq \left| \bigcup_{b' \in \mathcal{B}'} E_{b'} \right| = |\mathcal{B}|, \]
+	最左端无非是 $|\mathcal{B}'|$.
+\end{proof}
+
+\begin{lemma}[换元性质]\label{prop:exchange-field}
+	设 $\mathcal{B}$, $\mathcal{B}'$ 是 $\Omega|F$ 的两组有限超越基, $b' \in \mathcal{B}' \smallsetminus \mathcal{B}$, 则存在 $b \in \mathcal{B} \smallsetminus \mathcal{B}'$ 使得 $(\mathcal{B}' \smallsetminus \{b'\}) \cup \{b\}$ 仍是超越基.
+\end{lemma}
+\begin{proof}
+	由 $\mathcal{B}'$ 非空可知 $\mathcal{B}$ 非空.	每个 $b \in \mathcal{B}$ 都在 $F(\mathcal{B}')$ 上代数, 因而是一个多项式 $P_b \in F[\mathcal{B}'][Y]$ 的根. 我们断言 $b'$ 必须出现在某个 $P_b$ 中: 设若不然, 那么每个 $b \in \mathcal{B}$ 都在 $F(\mathcal{B}' \smallsetminus \{b'\})$ 上代数, 因而 $\mathcal{B}' \smallsetminus \{b'\}$ 是超越基, 矛盾.
+	
+	取 $b \in \mathcal{B}$ 使得 $b'$ 在 $P_b$ 中出现. 定义 $\mathcal{B}'' := (\mathcal{B}' \smallsetminus \{b'\}) \cup \{b\}$.
+	\begin{compactenum}[(a)]
+		\item 每个 $\beta' \in \mathcal{B}'$ 都在 $F(\mathcal{B}'')$ 上代数: 运用 $P_b(b)=0$ 验证 $\beta' = b'$ 的情形即足.
+		\item 假若 $\mathcal{B}'' \notin \text{Indep}_F(\Omega)$, 由于 $\mathcal{B}' \smallsetminus \{b'\} \in \text{Indep}_F(\Omega)$ 可知 $b$ 在 $F(\mathcal{B}' \smallsetminus \{b'\})$ 上代数; 根据上一步观察可知 $b'$ 在 $F(\mathcal{B}' \smallsetminus \{b'\})$ 上亦代数, 矛盾.
+	\end{compactenum}
+	因此 $\mathcal{B}''$ 确为超越基. 最后观察到 $b \notin \mathcal{B}'$. 设若不然, 则 $b' \notin \mathcal{B} \implies b' \neq b \implies \mathcal{B}'' = \mathcal{B}' \smallsetminus \{b'\}$, 与超越基是极大代数无关子集这一定义矛盾.
+\end{proof}
+
+\begin{definition-theorem}\index{yukuozhang!超越次数 (transcendence degree)}\index[sym1]{trdeg@$\trdeg$}
+	域扩张 $\Omega|F$ 的任两组超越基 $\mathcal{B}$, $\mathcal{B}'$ 都满足 $|\mathcal{B}| = |\mathcal{B}'|$; 此共同的基数称为 $\Omega|F$ 的\emph{超越次数}, 记作 $\trdeg(\Omega|F)$.
+\end{definition-theorem}
+\begin{proof}
+	思路与定义--定理 \ref{def:dimension-vector-space} 一致. 若存在无穷的超越基, 那么引理 \ref{prop:generator-cardinal-field} 蕴涵所有超越基皆无穷, 而且 $|\mathcal{B}| \leq |\mathcal{B}'| \leq |\mathcal{B}|$, 于是 $|\mathcal{B}|=|\mathcal{B}'|$.
+		
+	假设所有超越基皆有限, 引理 \ref{prop:exchange-field} 蕴涵 $\Omega$ 中的全体超越基构成定义 \ref{def:matroid} 所述的拟阵, 命题 \ref{prop:matroid-rank} 立刻给出 $|\mathcal{B}|=|\mathcal{B}'|$.\index{nizhen}
+\end{proof}
+
+当 $\Omega$ 是代数闭域时, 综上可知 $\Omega$ 是 $F(\mathcal{B})$ 的代数闭包, 而 $F(\mathcal{B})$ 是以 $\mathcal{B}$ 为变元集的有理函数域. 以下推论因之是明白的.
+\begin{corollary}
+	设 $\Omega_1, \Omega_2$ 为 $F$ 的扩张, $\Omega_1, \Omega_2$ 皆代数闭, 则作为 $F$-代数有同构 $\Omega_1 \simeq \Omega_2$ 的充要条件是 $\trdeg(\Omega_1|F) = \trdeg(\Omega_2|F)$.
+\end{corollary}
+
+\begin{corollary}\label{prop:ACF-categoricity}
+	设 $E_1$, $E_2$ 为代数闭域, $\mathrm{char}(E_1)=\mathrm{char}(E_2)$ 而且 $\kappa := |E_1| = |E_2| > \aleph_0$, 则存在域同构 $E_1 \simeq E_2$.
+\end{corollary}
+\begin{proof}
+	令 $F$ 为 $E_1$, $E_2$ 共有的素域, $|F| \leq \aleph_0$. 取超越基 $\mathcal{B}_i \subset E_i$ (必无穷), 并注意到命题 \ref{prop:alg-ext-cardinality} 蕴涵 $\kappa = |F(\mathcal{B}_i)| = |F[\mathcal{B}_i]|$. 由推论 \ref{prop:cardinal-max} 可知
+	\begin{align*}
+		|\mathcal{B}_i| & \leq |F[\mathcal{B}_i]| \leq \sum_{n \geq 0} \left| \{P \in F[\mathcal{B}_i]: \deg P = n \} \right| \\
+		& \leq \sum_{n \geq 0} |\mathcal{B}_i| = |\mathcal{B}_i|.
+	\end{align*}
+	于是 $\kappa = |\mathcal{B}_i|$, 再利用前一推论遂有 $E_1 \simeq E_2$.
+\end{proof}
+作为特例, 所有特征零且基数为 $2^{\aleph_0} = |\CC|$ (例 \ref{eg:continuum}) 的代数闭域都与 $\CC$ 同构, 这在算术代数几何中是一个常用的小技巧. 按模型论的术语, 此推论相当于说特征 $p \geq 0$ 的代数闭域理论 $\text{ACF}_p$ 是 $\kappa$-等势同构的, 其中 $\kappa$ 是任意 $> \aleph_0$ 的基数; 详见 \cite[\S 6.1.1 和第 8 章]{Feng17}. \index{kappa-dengshitonggou@$\kappa$-等势同构 ($\kappa$-categoricity)} \index{moxinglun}
+
+\begin{proposition}
+	若 $\mathcal{C}$ 是 $L|E$ 的超越基而 $\mathcal{B}$ 是 $E|F$ 的超越基, 则 $\mathcal{B} \sqcup \mathcal{C}$ 给出 $L|F$ 的超越基, 特别地 $\trdeg(L|F) = \trdeg(L|E) + \trdeg(E|F)$.
+\end{proposition}
+\begin{proof}
+	细察定义可知 $\mathcal{C}$ 在有理函数域 $F(\mathcal{B}) \subset E$ 上代数无关蕴涵 $\mathcal{B} \sqcup \mathcal{C}$ 在 $F$ 上亦无关. 代数扩张的特出性 (命题 \ref{prop:alg-ext-dist}) 蕴涵 $E(\mathcal{C}) | F(\mathcal{B})(\mathcal{C}) = F(\mathcal{B} \sqcup \mathcal{C})$ 是代数的, 故 $L|F(\mathcal{B} \sqcup \mathcal{C})$ 亦然.
+\end{proof}
+
+\section{张量积的应用}\label{sec:tensor-field}
+考虑域扩张 $\Omega|F$ 的子扩张 $E|F$ 和 $E'|F$. 张量积的泛性质给出 $F$-代数的同态
+\begin{align*}
+	m: E \dotimes{F} E' & \longrightarrow EE' \subset \Omega \\
+	x \otimes y & \longmapsto xy.
+\end{align*}
+简单的事实: $E \dotimes{F} E' \neq \{0\}$ (注记 \ref{rem:algebra-otimes-zero}).
+
+\begin{lemma}
+	同态 $m$ 的核是素理想, $EE'$ 则可等同于 $\Image(m)$ 的分式域; 当 $E|F$ 和 $E'|F$ 为代数扩张时, $\Image(m)=EE'$.
+\end{lemma}
+\begin{proof}
+	第一个断言缘于 $\Image(m) \subset \Omega$ 是非零整环. 域复合的显式描述表明 $EE'$ 正是 $\Image(m)$ 的分式域. 若 $E|F$ 和 $E'|F$ 为代数扩张则 $EE'|F$ 亦然, 从而任何非零元 $x \in \Image(m)$ 之逆都落在 $F[x]$ 中, 从而 $\Image(m)$ 已然是域.
+\end{proof}
+
+\begin{definition}\index{xianxingwujiao@线性无交 (linearly disjoint)}
+	如果上述同态 $m$ 为单, 则称 $E|F$, $E'|F$ 为\emph{线性无交}的.
+\end{definition}
+线性无交性有初等的线性代数刻画如下, 它同时表明这和许多其它的域论性质一样, 本质上是``有限''的.
+
+\begin{proposition}
+	以下性质等价:
+	\begin{compactenum}[(i)]
+		\item 子扩张 $E|F$, $E'|F$ 线性无交;
+		\item 任意有限个 $F$ 上线性无关的元素 $x_1, \ldots, x_n \in E$ 在 $E'$ 上也线性无关;
+		\item 任意有限个 $F$ 上线性无关的元素 $y_1, \ldots, y_n \in E'$ 在 $E$ 上也线性无关.
+	\end{compactenum}
+\end{proposition}
+\begin{proof}
+	基于对称性, 仅须说明 (i) $\iff$ (ii). 给定线性无关元 $x_1, \ldots, x_n \in E$, 取 $F$-子空间 $W \subset E$ 使得 $\lrangle{x_1, \ldots, x_n} \oplus W = E$. 张量积保直和, 故下图的箭头 $i$ 为单射:
+	\[\begin{tikzcd}
+		\lrangle{x_1, \ldots, x_n} \dotimes{F} E' \arrow[hookrightarrow, r, "i", "\text{直和项}"' inner sep=0.6em] & \left( \lrangle{x_1, \ldots, x_n} \oplus W \right) \dotimes{F} E' \arrow[equal, r] & E \dotimes{F} E' \arrow[d, "m"] \\
+		{E'}^{\oplus n} \arrow[u, "\simeq"] \arrow[rr, "{(a_1, \ldots, a_n) \mapsto \sum_{i=1}^n a_i x_i}"'] & & EE'
+	\end{tikzcd}\]
+	易验证图表交换. 如 (i) 成立则 $m$ 为单射, 故底层的水平箭头亦单, 这无非是 (ii) 的改述. 反之假定 (ii) 成立. 根据张量积的构造, 任意 $E \dotimes{F} E'$ 的元素都属于一个形如 $\lrangle{x_1, \ldots, x_n} \dotimes{F} E'$ 的向量子空间, 不妨设 $x_1, \ldots, x_n$ 线性无关. 再次端详上图, 可知 $m$ 拉回到 $\lrangle{x_1, \ldots, x_n} \dotimes{F} E'$ 为单. 因此 $m$ 为单同态.
+\end{proof}
+
+张量积的另一个简单应用: 任两个扩域都能在某一个大扩域中作复合.
+\begin{proposition}
+	对任意域 $F$ 及域扩张 $F_1|F$, $F_2|F$, 总存在域扩张 $\Omega|F$ 及 $F$-嵌入 $\iota_i: F_i \hookrightarrow  \Omega$ ($i=1,2$). 特别地, 复合 $F_1 F_2$ 在 $\Omega$ 中有意义.
+\end{proposition}
+\begin{proof}
+	先前已提到 $F_1 \dotimes{F} F_2$ 是非零 $F$-代数. 由命题 \ref{prop:existence-maximal-ideal} 知它有极大理想 $\mathfrak{m}$. 于是可取 $\Omega := (F_1 \dotimes{F} F_2) \big/ \mathfrak{m}$ 及 $F$-代数的同态 $\iota_i: F_i \hookrightarrow F_1 \dotimes{F} F_2 \twoheadrightarrow \Omega$ ($i=1,2$).
+\end{proof}
+
+以下取定域 $F$ 及其代数闭包 $\overline{F}$. 
+\begin{definition}\label{def:etale-alg}\index{daishu!平展 (étale)}\index{daishu!可对角化 (diagonalizable)}
+	设 $A$ 为非零的交换 $F$-代数.
+	\begin{itemize}
+		\item 若存在 $F$-代数的同构 $A \simeq \underbracket{F \times \cdots \times F}_{n\;\text{项}} = F^n$, 其中 $n = \dim_F A$, 则称 $A$ 为可对角化的;
+		\item 若 $\overline{F}$-代数 $A \dotimes{F} \overline{F}$ (基变换, 见 \S\ref{sec:algebra-tensor-product}) 可对角化, 则称 $A$ 为\emph{平展}的.
+	\end{itemize}
+\end{definition}
+
+平展一词源于代数几何, 优点之一是它对基变换封闭. 着手证明下述断言之前, 先作两条简单观察: 可对角化代数的张量积显然可对角化, 其基变换亦然.
+\begin{lemma}\label{prop:etale-algebra-basechange}
+	设 $A, B$ 为平展 $F$-代数, 则 $A \dotimes{F} B$ 亦平展. 给定任意域扩张 $L|F$ 和平展 $F$-代数 $A$, 则 $L$-代数 $A \dotimes{F} L$ 也是平展的.
+\end{lemma}
+\begin{proof}
+	对于第一个断言, 命题 \ref{prop:algebra-base-change-monoidal} 提供了 $\overline{F}$-代数的自然同构
+	\[ (A \dotimes{F} B) \dotimes{F} \overline{F} \simeq (A \dotimes{F} \overline{F}) \dotimes{\overline{F}} (B \dotimes{F} \overline{F}), \]
+	从而问题化简到 $F=\overline{F}$ 而 $A$, $B$ 皆可对角化的情形. 对于第二个断言, 取定 $L$ 的代数闭包 $\overline{L}$, 则 $\overline{F}$ 可以嵌入 $\overline{L}$. 命题 \ref{prop:tensor-unit} 的自然同构给出
+	\[ (A \dotimes{F} L) \dotimes{L} \overline{L} \simeq A \dotimes{F} \overline{L} \simeq (A \dotimes{F} \overline{F}) \dotimes{\overline{F}} \overline{L} \]
+	将问题化简到 $F=\overline{F}$ 而 $A$ 可对角化的情形; 这都能归为先前的观察.
+\end{proof}
+
+对于任意域扩张 $E|F$, 给定 $E$-代数的同构 $\Lambda: A_E := A \dotimes{F} E \rightiso E^n$ 相当于给定一族 $\lambda_1, \ldots, \lambda_n \in \Hom_{E\dcate{Alg}}(A_E, E)$, 使其为对偶向量空间 $A_E^\vee := \Hom_E(A_E, E)$ 的一组基: 对应由 $\Lambda = (\lambda_1, \ldots, \lambda_n)$ 确定. 因为 $\overline{F}|F$ 是有限子扩张之并, 平展代数 $A$ 具备的同构 $A_{\overline{F}} \rightiso \overline{F}^n$ 总可以定义在充分大的有限子扩张 $E|F$ 上, 亦即 $A_E$ 可对角化.
+
+\begin{lemma}\label{prop:etale-algebra-subalgebras}
+	平展 $F$-代数 $A$ 仅有有限多个子代数和理想, 而且子代数和对真理想的商仍然平展. 更精确地说, 当 $A \simeq F^n$ 可对角化时:
+	\begin{itemize}
+		\item 子代数一一对应于无交并分解 $\{1, \ldots, n\} = I_1 \sqcup \cdots \sqcup I_r$, 相应的子代数由幂等元
+			\[ e_I := (x_i)_{i=1}^n, \quad x_i = \begin{cases} 1, & i \in I \\ 0, & i \notin I \end{cases}, \quad I = I_1, \ldots, I_r \]
+			生成, 因而亦可对角化;
+		\item 理想一一对应于子集 $I \subset \{1, \ldots, n\}$, 相应的理想由 $e_I$ 生成, 当 $I \neq \{1, \ldots, n\}$ 时商代数也是可对角化的.
+	\end{itemize}
+\end{lemma}
+\begin{proof}
+	先处理 $A = F^n$ 情形. 关于理想和商的断言相对容易, 以下专注探讨子代数 $B \subset A$. 坐标投影 $e_i: A \to F$ ($i=1, \ldots, n$) 限制在 $B$ 上给出 $B^\vee = \Hom_F(B,F)$ 的一组生成元 $\bar{e}_i \in \Hom_{F\dcate{Alg}}(B, F)$, 从中拣择一组基 $\bar{e}_{i_1}, \bar{e}_{i_2}, \ldots, \bar{e}_{i_r}$ 便给出 $B \rightiso F^r$, 故 $B$ 可对角化. 今定义 $f_j$ 为 $(0, \ldots, \underbracket{1}_{\text{第 $j$ 个}}, \ldots, 0) \in F^r$ 在 $B \rightiso F^r$ 下的原像. 如此则有 $B = F[f_1, \ldots, f_r]$ 和
+	\begin{gather*}
+		f_j^2 = f_j, \quad \sum_{j=1}^r f_j = 1, \\
+		j \neq k \implies f_j f_k = 0;
+	\end{gather*}
+	(比对模的情形 \S\ref{sec:indecomposable-mod}). 在 $A = F^n$ 中按坐标考察这组等式, 可知 $f_1, \ldots, f_r$ 必来自断言中的 $\{1, \ldots, n\} = I_1 \sqcup \cdots \sqcup I_r$.
+	
+	在平展情形下, $- \dotimes{F} \overline{F}$ 将 $A$ 的子代数 (或理想) 映到 $A \dotimes{F} \overline{F} \simeq \overline{F}^n$ 的子代数 (或理想), 这是单射: 因为对任何 $F$-子空间 $B \subset A$ 皆有 $(B \dotimes{F} \overline{F}) \cap (A \otimes 1) = B \otimes 1 = B$. 剩下的断言化约到可对角化的情形.
+\end{proof}
+
+我们对有限可分扩张得到精简的刻画.
+\begin{proposition}\label{prop:etale-algebra-separable}
+	有限扩张 $E|F$ 可分当且仅当 $E$ 是平展 $F$-代数, 此时有 $F^\mathrm{sep}$-代数的同构 $E \dotimes{F} F^\mathrm{sep} \simeq (F^\mathrm{sep})^{[E:F]}$.
+\end{proposition}
+\begin{proof}
+	设 $E$ 平展. 以命题 \ref{prop:pins-devissage} 将 $E|F$ 拆为纯不可分的 $E|E^\flat$ 和可分的 $E^\flat|F$. 为证明 $E|F$ 可分不妨设 $p := \text{char}(F) > 0$. 现在运用引理 \ref{prop:etale-algebra-subalgebras}: 在同构 $E \dotimes{F} \overline{F} \rightiso \overline{F}^n$ 下, $E^\flat \dotimes{F} \overline{F}$ 对应到由无交并 $\{1, \ldots, n\} = I_1 \sqcup \cdots \sqcup I_r$ 确定的子代数 $B$. 设 $x \in E \dotimes{F} \overline{F}$ 对应到 $y \in \overline{F}^n$, 则存在 $m \gg 0$ 使得 $y^{p^m} \in B$; 由于 $\overline{F}$ 中任意元素有唯一的 $p^m$-次方根, 从 $B$ 的显式描述可知 $y \in B$, 相应地 $x \in E^\flat \dotimes{F} \overline{F}$. 由于我们都在域上操作, $E^\flat \dotimes{F} \overline{F} = E \dotimes{F} \overline{F}$ 蕴涵 $E^\flat = E$, 故 $E|F$ 可分.
+	
+	今设 $E|F$ 可分, $n := [E:F]$. 由本原元素定理 \ref{prop:prim-element-separable} 不妨设 $E = F(u) \simeq F[X]/(P_u)$, 此处 $P_u$ 表 $u$ 的极小多项式. 由于在 $\overline{F}$ 上 $P_u = \prod_{i=1}^n (X-\alpha_i)$ 无重因子, 置 $L := F(\alpha_1, \ldots, \alpha_n) \subset F^\text{sep}$, 中国剩余定理 \ref{prop:CRT} 蕴涵 $L$-代数的同构
+	\[ E_L := E \dotimes{F} L \simeq L[X] \bigg/ ( \prod_{i=1}^n (X-\alpha_i) ) = \prod_{i=1}^n L[X]/(X-\alpha_i) \simeq L^n, \]
+	从而知 $E \dotimes{F} L$ 可对角化; 那么 $F^\mathrm{sep}$-代数 $E \dotimes{F} F^\mathrm{sep}$ 亦可对角化, 故 $E$ 平展. 断言的第二部分得证.
+\end{proof}
+\begin{remark}
+	由此可将定理 \ref{prop:prim-element-separable} 的前半部化为定理 \ref{prop:prim-element} 的特例: 可分扩张 $E|F$ 平展, 于是引理 \ref{prop:etale-algebra-subalgebras} 蕴涵 $E|F$ 仅有有限多个中间域.
+\end{remark}
+
+可分性与张量积的联系能够进一步拓展到无穷扩张, 甚至涵摄非代数扩张的情形. 这方面主要是 MacLane 的工作, 关键是运用 Teichmüller 引入的 $p$-基. 这套理论颇为精密, 可以划作交换环论的一支, 宜待适当时机再作处理.
+
+如果一个环没有非零的幂零元, 则称之为\emph{既约}的. 显然, 既约环的子环也是既约的.
+\begin{corollary}\label{prop:etale-alg-characterization}
+	对于 有限维交换非零 $F$-代数 $A$, 下述条件等价.
+	\begin{compactenum}[(i)]
+		\item $A$ 是平展代数.
+		\item 对任意域扩张 $E|F$, 代数 $A_E$ 皆为既约.
+		\item 代数 $A_{\overline{F}}$ 既约.
+		\item 存在 $F$ 的有限可分扩张 $E_1, \ldots, E_n$ ($n \geq 1$) 使得 $A \simeq E_1 \times \cdots \times E_n$.
+	\end{compactenum}
+\end{corollary}
+\begin{proof}
+	(i) $\implies$ (ii): 从 $A \hookrightarrow A \dotimes{F} \overline{F} \simeq \overline{F}^{\dim A}$ 知 $A$ 既约, 由于 $A_E$ 是平展 $E$-代数, 同理可知 $A_E$ 既约.
+
+	(ii) $\implies$ (iii) 属显然, 现证 (iii) $\implies$ (iv). 若 $A$ 为域则 $A|F$ 可分, 这是因为对任意 $u \in A$, 子域 $F[u] \simeq F[X]/(P_u)$ 基变换到 $\overline{F}$ 后既约, 由此可推得 $P_u$ 在 $\overline{F}$ 中无重根. 设若 $A$ 不是域, 则存在非零真理想 $\mathfrak{a} \subsetneq A$. 因为 $A$ 既约故 $\{0\} \neq \mathfrak{a}^2 \subset \mathfrak{a}$; 取 $\mathfrak{a}$ 之维数极小便可保证 $\mathfrak{a}^2 = \mathfrak{a}$. 今将证明存在幂等元 $e \in A$ 使得 $\mathfrak{a} = Ae$, 如是则有非平凡的直积分解 $A = eA \times (1-e)A$, 施递归于 $\dim_F A$ 便能将 $A$ 分解为可分扩张之直积.
+
+	取 $\mathfrak{a}$ 的生成元 $a_1, \ldots, a_m$, 则 $\mathfrak{a}^2 = \mathfrak{a}$ 蕴涵存在矩阵 $B \in M_m(\mathfrak{a})$ 使 $(a_1, \ldots, a_m) B = (a_1, \ldots, a_m)$, 亦即 $(a_1, \ldots, a_m) \left( 1_{m \times m} - B \right) = 0$. 运用伴随矩阵与行列式的关系 (定理 \ref{prop:matrix-det}), 进一步导出
+	\[ \det(1-B) (a_1, \ldots, a_m) = (a_1, \ldots, a_m) \left( 1_{m \times m} - B \right) \left( 1_{m \times m} - B \right)^\vee = 0. \]
+	于是 $\forall i,\; \det(1-B)a_i = 0$ (证定理 \ref{prop:integrality-finiteness} 时用过类似技术). 然而 $\det(1-B)$ 又可表为 $1-e$ 之形, $e \in \mathfrak{a}$; 容易验证 $\forall a \in \mathfrak{a},\; ea = a$, 因而 $Ae = \mathfrak{a}$ 而且 $e$ 是非零幂等元. 证毕.
+	
+	(iv) $\implies$ (i). 平展代数的直积仍平展, 从命题 \ref{prop:etale-algebra-separable} 即刻导出 $E_1|F, \ldots, E_n|F$ 有限可分蕴涵 $E_1 \times \cdots \times E_n$ 平展.
+\end{proof}
+
+至此, 单个平展代数的结构可谓完全清楚了. 读者或许要问: 既然平展代数无非是可分扩张的积, 引入此概念何益? 一个理由是基变换保持平展性质 (引理 \ref{prop:etale-algebra-basechange}), 寻求这种封闭性是现代数学的一个基本思想. 另一个理由则是平展 $F$-代数所成的范畴等价于有限 $\Gamma_F$-集范畴, 这里 $\Gamma_F$ 是 $F$ 的绝对 Galois 群, 配备 Krull 拓扑. 相关概念在第九章及其习题部分将有仔细解说.
+
+\begin{Exercises}
+	\item 证明对任意扩域 $\Omega|F$ 中的代数元 $\alpha \in \Omega$, 若 $[F(\alpha):F]$ 为奇数, 则 $F(\alpha)=F(\alpha^2)$.
+	\item 设 $\alpha, \beta \in \overline{F}$ 为不可约首一多项式 $P \in F[X]$ 的根. 证明当 $\deg P > 1$ 为奇数时 $\alpha+\beta \notin F$.
+	\begin{hint} 若 $c := \alpha + \beta \in F$, 则 $P(X)$ 和 $Q(X) := (-1)^{\deg P} P(c-X)$ 有公共根, 由此证明 $P=Q$, 然后将根按 $x \leftrightarrow c-x$ 配对.\end{hint}
+	\item 对于任意特征 $p>0$ 的域 $F$, 证明完全闭包 $K := F^{p^{-\infty}}$ 满足于 $K^p = K$ (即: $K$ 是完全域), 而且若 $E$ 为完全域而 $E|F$ 为代数扩张, 则 $K|F$ 可嵌入为 $E|F$ 的子扩张.
+	\item (G.\ Elencwajg) 置 $\F_2 := \Z/2\Z$, 取双变元有理函数域 $F := \F_2(u,v)$ 及多项式 $P := X^6 + uvX^2 + u \in F[X]$. 试证:
+		\begin{compactenum}[(i)]
+			\item $P$ 不可约, 而且 $E := F[X]/(P)$ 满足于 $[E:F]=6$, $[E:F]_s = 3$; \begin{hint} 用 Eisenstein 判准 (定理 \ref{prop:Eisenstein-criterion}) 证明 $P$ 不可约, 然后以引理 \ref{prop:field-sdegree-F(x)} 计算可分次数. \end{hint}
+			\item 纯不可分闭包 $E^\natural \subset E$ 等于 $F$. \begin{hint} 仅须证 $\beta \in E, \; \beta^2 \in F \implies \beta \in F$. 把所有项用基 $1, X, \ldots, X^5 \; \bmod P$ 展开来考察 $\beta^2 \in F$ 何时成立. \end{hint}
+		\end{compactenum}
+		于是此例中 $E|E^\natural$ 不可分.
+	\item 设 $p$ 为素数, $\F_p := \Z/p\Z$. 考虑二元有理函数域 $K := \F_p(X,Y)$.
+		\begin{enumerate}[(i)]
+			\item 验证 $K^p = \F_p(X^p, Y^p)$, $K=K^p(X,Y)$, 而且 $a \in K \implies [K^p(a) : K^p] \leq p$.
+			\item 由命题 \ref{prop:field-tower-degree} 和 \ref{prop:field-tower-sdegree} 推出
+				\begin{gather*}
+					[K:K^p] = [\F_p(X,Y):\F_p(X^p,Y)] \cdot [\F_p(X^p,Y):\F_p(X^p,Y^p)] = p^2, \\
+					[K:K^p]_s = [\F_p(X,Y):\F_p(X^p,Y)]_s \cdot [\F_p(X^p,Y):\F_p(X^p,Y^p)]_s = 1.
+				\end{gather*}
+			\item 验证 $\{ X^i Y^j: 0 \leq i,j < p \}$ 构成 $K^p$-向量空间 $K$ 的一组基.
+			\item 证明当 $c$ 遍历 $K^p$ 的元素时 (无穷多个), 中间域 $K^p(cX + Y)$ 各各相异.
+			\begin{hint} 假若 $c \neq c'$ 给出同样的中间域 $M$, 那么 $(c-c')X \in M$, 从而导出 $X,Y \in M$ 故 $M = K$, 由此可见矛盾. \end{hint}
+		\end{enumerate}
+		于是 $K|K^p$ 是有限纯不可分扩张, 有无穷多个中间域, 并且不是单扩张; 请对比定理 \ref{prop:prim-element} 和 \ref{prop:prim-element-separable} 的情形.
+	\item 对于任意域 $F$ 上的单变元有理函数域 $F(X)$ 及 $u := \frac{r}{s} \in F(X) \smallsetminus F$, 其中 $r,s \in F[X]$ 互素.
+		\begin{compactenum}[(i)]
+			\item 证明 $X$ 在 $F(u)$ 上是代数元, $u$ 在 $F$ 上是超越元;
+			\item 引入自由变元 $Z, W$, 证明 $P(Z,W) := r(Z) - Ws(Z)$ 作为 $F[Z,W]$ 的元素不可约, 继而 $P(Z,u)$ 作为 $F(u)[Z]$ 的元素不可约;
+			\item 导出 $[F(X):F(u)] = \max\{\deg r, \deg s\}$.
+		\end{compactenum}
+	\item 承上, 证明 $\Aut_F(F(X)) \simeq \PGL(2,F) := \GL(2,F)/F^\times$, 作用方式为 $\bigl( \begin{smallmatrix} a & b \\ c & d \end{smallmatrix} \bigr) \cdot X = \frac{aX+b}{cX+d}$.
+	\item (Lüroth 定理) 证明 $F(X)|F$ 的子扩张 $K|F$ 或者是 $F$, 或如上题的形式 $K=F(u)$. \index{Lüroth 定理}
+	\begin{hint}
+		设 $X$ 在 $K \neq F$ 上有极小多项式 $Q(Z) = Z^n + u_{n-1} Z^{n-1} + \cdots + u_0$; 取 $i$ 使得 $u = \frac{r}{s} = u_i \notin F$. 我们有 $Q(Z) \mid P(Z,u)$. 证明 $P(Z,u) \in F^\times Q(Z)$ 以得出 $K=F(u)$.
+	\end{hint}
+	\item 对以下的有限扩张 $E|F$ 确定 $\Nm_{E|F}(E^\times) \subset F^\times$:
+		\begin{compactenum}[(i)]
+			\item $E$, $F$ 为有限域; \hint{不妨使用 Galois 理论.}
+			\item $E=\CC$, $F=\R$;
+			\item $E=\Q(\sqrt{-1})$, $F=\Q$.
+		\end{compactenum}
+	\item 承上, 对于有限域 $E, F$ 证明 $\Tr_{E|F}(E)=F$.
+	\item 设 $F$ 为有限域, $a, b \in F^\times$, $c \in F$, 证明存在 $(x,y) \in F^2$ 使得 $ax^2 + by^2 = c$.
+	\item 令 $\sigma \in \Aut(\R)$.
+		\begin{enumerate}[(i)]
+			\item 证明 $x \geq 0 \iff \sigma(x) \geq 0$. \hint{$x \geq 0 \iff \exists y \in \R, \; x = y^2$}
+			\item 由此导出对所有有理数 $a < b$ 皆有 $\sigma([a,b]) = [a,b]$.
+			\item 证明 $\sigma = \identity_{\R}$.
+		\end{enumerate}
+	\item 证明 $\Aut(\CC)$ 无穷.
+	\item 证明 $\Q$ 的有限生成扩张皆可嵌入 $\CC|\Q$.
+	\item 构造互不同构的特征 $0$ 代数闭域 $F_1, F_2$ 使得 $|F_1|=|F_2|=\aleph_0$.
+	\item 令 $A$ 为域 $F$ 上的有限维交换代数. 证明 $A$ 平展的充要条件是定义 \ref{def:discriminant} 中的判别式 $d_A \neq 0$.
+	\begin{hint}
+		判别式非零当且仅当迹型式 $(x,y) \mapsto \Tr_{A|F}(xy)$ 非退化, 而此条件可以基变换到任意扩域上检验. 应用推论 \ref{prop:separable-discriminant} 和 \ref{prop:etale-alg-characterization}, 并注意到 $x \in A$ 幂零则 $\Tr_{A|F}(x)=0$.
+	\end{hint}
+\end{Exercises}

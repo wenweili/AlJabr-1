@@ -1,0 +1,73 @@
+% Copyright 2018  李文威 (Wen-Wei Li).
+% Permission is granted to copy, distribute and/or modify this
+% document under the terms of the Creative Commons
+% Attribution 4.0 International (CC BY 4.0)
+% http://creativecommons.org/licenses/by/4.0/
+
+% 目的: 字体相关设置, 呼叫相关宏包.
+% 将由 AJbook.cls 引入
+% 必须提供 \kaishu, \songti, \heiti, \thmheiti, \fangsong 几种字型切换命令, 在文档类中使用.
+\ProvidesFile{font-setup-open.tex}[2018/03/04]
+
+% 设置 xeCJK 字体及中文数字
+%\setmainfont{TeX Gyre Pagella}	% 设置西文衬线字体
+\setsansfont{TeX Gyre Heros}	% 设置西文无衬线字体
+
+% 自用模式: Fandol 字体 + 思源黑体 (Noto Sans CJK SC), 宜留意字体高低差异.
+\setCJKmainfont[
+	BoldFont=FandolSong-Bold.otf,
+	ItalicFont=FandolKai-Regular.otf
+]{FandolSong-Regular.otf}
+
+\setCJKsansfont[
+	BoldFont=FandolHei-Bold.otf
+]{FandolHei-Regular.otf}
+
+\setCJKmonofont[
+	BoldFont=FandolHei-Bold.otf,
+]{FandolHei-Regular.otf}
+
+
+\setCJKfamilyfont{kai}[
+	BoldFont=FandolKai-Regular.otf, ItalicFont=FandolKai-Regular.otf
+]{FandolKai-Regular.otf}
+
+\setCJKfamilyfont{song}[
+	BoldFont=FandolSong-Bold.otf,
+	ItalicFont=FandolKai-Regular.otf
+]{FandolSong-Regular.otf}
+
+\setCJKfamilyfont{fangsong}[
+	BoldFont=FandolSong-Bold.otf,
+	ItalicFont=FandolKai-Regular.otf
+]{FandolFang-Regular.otf}
+
+\setCJKfamilyfont{hei}[
+	BoldFont=FandolHei-Bold.otf,
+	ItalicFont=FandolHei-Regular.otf
+]{FandolHei-Regular.otf}
+
+\setCJKfamilyfont{hei2}{Noto Sans CJK SC}
+
+\setCJKfamilyfont{sectionfont}[
+	BoldFont=* Black
+]{Noto Sans CJK SC}
+
+\setCJKfamilyfont{pffont}[
+	BoldFont=* Medium
+]{Noto Sans CJK SC}	% 证明用的字体
+\setCJKfamilyfont{emfont}[
+	BoldFont=FandolHei-Regular.otf
+]{FandolHei-Regular.otf}	% 强调用的字体
+
+\defaultfontfeatures{Ligatures=TeX} 
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+% 以下设置字体相关命令, 用于定理等环境中.
+\newcommand\kaishu{\CJKfamily{kai}} % 楷体
+\newcommand\songti{\CJKfamily{song}} % 宋体
+\newcommand\heiti{\CJKfamily{hei}}	% 黑体
+\newcommand\thmheiti{\CJKfamily{hei2}}	% 用于定理名称的黑体
+\newcommand\fangsong{\CJKfamily{fangsong}} % 仿宋
+\renewcommand{\em}{\bfseries\CJKfamily{emfont}} % 强调

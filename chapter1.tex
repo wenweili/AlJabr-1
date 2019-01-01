@@ -1,0 +1,536 @@
+% LaTeX source for book ``代数学方法'' in Chinese
+% Copyright 2018  李文威 (Wen-Wei Li).
+% Permission is granted to copy, distribute and/or modify this
+% document under the terms of the Creative Commons
+% Attribution 4.0 International (CC BY 4.0)
+% http://creativecommons.org/licenses/by/4.0/
+
+% To be included
+\chapter{集合论}
+集合的基本概念和操作是中学数学或大学基础课的内容, 本章的目的是在这些基础上进行加固, 更新, 并补全一些常被遗漏的基本知识. 主角是:
+\begin{compactitem}
+	\item Zermelo--Fraenkel 公理集合论和选择公理的明确表述.
+	\item 序数理论和 Zorn 引理; 这是由于序数和超穷递归在一般代数教材中较少提及, 而 Zorn 引理即使有证明也往往十分迂回.
+	\item 关于基数的基本定义和操作.
+	\item 阐述 Grothendieck 宇宙的概念, 借以安全地运用范畴论.
+\end{compactitem}
+
+格于本书体裁, 对上述主题只能点到为止. 多数情形下, 数学工作者毋须直面集合论的深层结构, 需要时也可以视作已知结果. 因此读者可选择在必要时再回头查阅本章. 但严肃的范畴论研究绕不过集合. 另一方面, 序数, 基数和超穷递归是数理逻辑与集合论工作者的常备工具, 许多代数教材不谈则已, 一谈便是云山雾罩; 鉴于逻辑方法, 尤其是模型论 \cite{Feng17} 近来对几何与数论等领域的渗透, 了解这些内容应当是不无裨益的. \index{moxinglun@模型论 (model theory)}
+
+\begin{wenxintishi}
+	读者必须对朴素集合论有最初步的了解. Grothendieck 宇宙仅在触及较深课题, 须对范畴进行高阶操作时才会用上. 建议初学代数的读者暂且略过本章.
+\end{wenxintishi}
+
+\section{ZFC 公理一览}\label{sec:ZFC}
+何谓集合? G.\ Cantor 在 1895 年\cite[p.481]{Cantor95}作如是界说: ``集合意谓吾人感知或思想中一些确定的, 并且相互区别的对象汇集而成的整体, 这些对象称为该集合的元素.'' 百余年后回首, 仍然得承认 Cantor 的说法审慎而精当. 即便如此, 不加节制地操作这些``确定的'', ``相区别''的对象将导致悖论, 譬如著名的 Russell 佯谬\index{Russell 佯谬}便考虑了所有集合构成的``集合'' $\textbf{V}$, 构造其子``集合'' $\{x \in \textbf{V} : x \notin x\}$ 而导出矛盾. 现代集合论处理此问题的主流方法是限制概括原理 $\left\{x : x \text{ 满足性质 } P\right \}$ 的应用范围, 并在一阶逻辑与合适的公理系统下进行演绎. 例如: 以上提到的``集合'' $\textbf{V}$ 实非集合, 强名之只能称作类.\index{jihelun@集合论}
+
+本书采用通行的 Zermelo--Fraenkel 公理集合论, 并承认选择公理; 这套系统简称 ZFC\index{jihelun!ZFC}. 我们稍后将另加一条关于大基数的公理 (假设 \ref{hyp:universe}). 极笼统地说, ZFC 构筑于:
+\begin{itemize}
+	\item 一阶逻辑, 其中具有常见的 $\wedge$, $\neg$, $\implies$, $\forall$, $\exists$ 等逻辑联词与量词, 括号 $(\;)$, 变元 $x, y, z, \ldots$ 和等号 $=$ (视为二元谓词) 等; 可以判定一个公式是否合乎语言的规则, 例如括号的左右配对, 合规者称为合式公式. 这套语言是形式逻辑的标准基础, 可参看 \cite[第 2 章]{Feng17}.
+	\item 集合论所需的二元谓词 $\in$ 和以下将列出的公理 \textbf{A.1} --- \textbf{A.9}. 若 $x \in y$ 则称 $x$ 为 $y$ 的元素. ZFC 处理的所有对象 $x,y$ 等都应该理解为集合; 特别地, 集合的元素本身也是一个集合, 而集合 $s$ 和仅含 $s$ 的集合 $\{s\}$ 是两回事.
+\end{itemize}
+
+本书在逻辑层面诉诸常识, 我们不采取一阶逻辑的严格形式, 仅以数学工作者日用的素朴语言勾勒 ZFC 的公理, 后续的形式推导一并省去. 细节见诸任一本集合论书籍, 如 \cite{Je03,HY14}; 简明的综述则可参阅 \cite{sep-set-theory}.
+\begin{enumerate}[\bfseries {A}.1]
+	\item \emph{外延公理}: 若两集合有相同元素, 则两者相等.
+
+		空集 $\emptyset$ 的形式定义是 $\{u \in X: u \neq u\}$, 其中 $X$ 是任意集合. 外延公理一个近乎无聊的应用是证明 $\emptyset$ 无关 $X$ 的选取, 前提是集合确实存在, 这点既可以独立成另一条``存在公理'', 也可以由稍后的无穷公理保证.
+	\item \emph{配对公理}: 对任意 $x,y$, 存在集合 $\{x,y\}$, 其元素恰好是 $x$ 与 $y$.
+	
+		有序对 $(x,y)$ 的概念可用配对公理来实作: 我们能定义 $(x,y) := \{\{x\}, \{x,y\} \}$, 由此定义积集 $X \times Y := \{(x,y) : x \in X,\; y \in Y \}$; 准此要领可定义有限多个集合的积 $X \times Y \times \cdots$. 集合间的映射 $f: X \to Y$ 等同于它的图形 $\Gamma_f \subset X \times Y$: 对每个 $x \in X$, 交集 $\Gamma_f \cap (\{x\} \times Y)$ 是独点集, 记作 $\{f(x)\}$.
+	\item \emph{分离公理模式}: 设 $P$ 为关于集合的一个性质, 并以 $P(u)$ 表示集合 $u$ 满足性质 $P$, 则对任意集合 $X$ 存在集合 $Y = \{u \in X : P(u) \}$.
+	\item \emph{并集公理}:  对任意集合 $X$, 存在相应的并集 $\bigcup X := \{u : \exists v \in X \; \text{ 使得 }\; u \in v\}$.
+	
+		公理中的 $X$ 通常视作一族集合, $\bigcup X$ 也相应地写成 $\bigcup_{v \in X} v$.
+	\item \emph{幂集公理}: 对任意集合 $X$, 其子集构成一集合 $P(X) := \{u : u \subset X \}$.\index[sym1]{$P(X)$}
+	\item \emph{无穷公理}: 存在无穷集.
+
+		何谓无穷集? 此性质的刻画并不显然, 无穷公理可以用形式语言表作
+		\begin{gather}\label{eqn:infinity-axiom}
+			\exists x \bigl[ (\emptyset \in x) \;\wedge \;\forall y \in x \left(y \cup \{y\} \in x \right)  \bigr].
+		\end{gather}
+		这般的 $x$ 称为归纳集, 预设归纳集存在的用意在于萃取它的子集
+		\[ \left\{\emptyset, \{\emptyset\}, \{  \emptyset, \{\emptyset\}\}, \{  \emptyset, \{\emptyset\}, \{  \emptyset, \{\emptyset\}\}\}, \ldots \right\}, \]
+		这是我们马上要构造的可数无穷序数 $\omega$.
+	\item \emph{替换公理模式}: 设 $F$ 为以一个集合 $X$ 为定义域的函数, 则存在集合 $F(X) = \{ F(x) : x \in X\}$.
+	
+		分离和替换公理模式里的性质 $P$ 和函数 $F$ 并非集合论意义下的寻常定义, 故无循环论证之虞, 它们实际是由一阶逻辑的合式公式定义的: 以函数 $x \mapsto y$ 为例, 这可以诠释为一阶逻辑中带有两个自由变元 $x,y$ 的合式公式 $\varphi$, 适合于 $\forall x\; \exists! y\; \varphi(x,y)$. 由于对每个 $P$ 或 $F$ 都产生一条相应的公理, 它们被称作公理模式.
+	\item \emph{正则公理}: 任意非空集都含有一个对从属关系 $\in$ 极小的元素.
+	
+		正则公理的一个重要推论是对于任意集合 $x$, 不存在无穷的从属链 $x \ni x_1 \ni x_2 \ni \cdots$, 特别地 $x \notin x$. 由之可建立集合的层垒谱系, 见 \S\ref{sec:Grot-universe}.
+	\item \emph{选择公理}: 设集合 $X$ 的每个元素皆非空 , 则存在函数 $g: X \to \bigcup X$ 使得 $\forall x \in X, \; g(x) \in x$ (称作选择函数).\index{xuanzegongli@选择公理 (axiom of choice)}
+
+		选择公理中的 $X$ 应该设想为一族非空集, 选择函数 $g(x) \in x$ 意味着从每个集合 $x \in X$ 中挑出一个元素.
+\end{enumerate}
+
+严格来说, 在 ZFC 的形式系统内仅谈论集合. 一些常见的公理集合论如 NBG 系统 (von Neumann--Bernays--Gödel)\index{jihelun!NBG} 还定义了\emph{类}的概念: 凡集合都是类, 但还存在非集合的类, 称作\emph{真类}\index{zhenlei@真类 (proper class)}. 对于 ZFC 系统, 类只是权宜之计: 它只能在元语言的层次理解为满足某一给定性质的所有集合, 譬如所有的集合构成一类; 对类的操作化约为对一阶逻辑中合式公式的操作. 本书力求避开真类, 但在本章将不得不予处理.
+
+集合的并 $X \cup Y$, 交 $X \cap Y$, 差 $X \smallsetminus Y$, 积 $X \times Y$ 和子集$X \subset Y$ 等运算, 以及函数等都是派生的概念. 读者想必知之甚详, 故不再赘述. 由此出发, 可以进一步构造非负整数集 $\Z_{\geq 0}$, 整数集 $\Z$, 有理数集 $\Q$ 和实数集 $\R$ 等等. 我们将在 \S\ref{sec:order} 回顾集合论里构造 $\Z_{\geq 0}$ 的方式.
+
+以下简述商集的概念. 对于任意 $n \geq 1$, 集合 $X$ 上的 $n$ 元关系按定义是 $X^n = \underbracket{X \times \cdots \times X}_{n\; \text{项}}$ 的一个子集 $R$. 多数场合考虑的是二元关系, 此时以 $xRy$ 表示 $(x,y) \in R$. 满足以下性质的(二元)关系 $\sim$ 称作\emph{等价关系}:
+\begin{compactdesc}
+	\item[反身性] $x \sim x$,
+	\item[对称性] $x \sim y \implies y \sim x$,
+	\item[传递性] $(x \sim y) \wedge (y \sim z) \implies (x \sim z)$.
+\end{compactdesc}
+对于 $X$ 上的等价关系 $\sim$ 和任意 $x \in X$, 含 $x$ 的等价类记为 $[x] := \{y \in X: y \sim x \}$. \emph{商集}\index{shang@商 (quotient)}定义为全体等价类, 亦即 $X/\sim\; := \{[x] : x \in X \}$. 如此得到 $X$ 的无交并分解 (又称 $X$ 的划分) $X = \bigcup_{[x] \in X/\sim} [x]$, 而且 $x \sim y$ 当且仅当 $x,y$ 属于划分中的同一个子集. 易见 $X$ 上的等价关系一一对应于 $X$ 的划分.
+
+我们将采用习见的集合论符号, 例如 $X \subsetneq Y$ 代表 $X \subset Y$ 且 $X \neq Y$, 以 $X \sqcup Y$ 代表 $X$ 和 $Y$ 的无交并, $X^Y$ \index[sym1]{$X^Y$}代表所有函数 $f: Y \to X$ 构成的集合, 特别地 $2^X = P(X)$\index[sym1]{$2^X$}, 这里 $2$ 代表恰有两个元素的集合. 我们将用 $\{\text{pt}\}$ 表示仅有一个元素的集合. 进一步, 对于以某集合 $I$ 为指标的一族集合 $(X_i)_{i \in I}$ 可以定义
+\[ \begin{array}{ll}
+	\text{并 } \; \bigcup_{i \in I} X_i, & \text{交} \; \bigcap_{i \in I} X_i, \quad (I \neq \emptyset), \\
+	\text{无交并 } \; \bigsqcup_{i \in I} X_i, & \text{积} \; \prod_{i \in I} X_i.
+\end{array}\]
+对应于 $I=\emptyset$ 的并与无交并都是 $\emptyset$, 而积是 $\{\emptyset\}$. 空交的合理定义只能是全体集合构成的类 $\textbf{V}$, 这在 ZFC 系统内是犯规的.
+
+公理集合论是当代数学的正统基础. 它的表述范围之广, 形式化程度之高, 以至于数学本身也堪成为数学研究的对象, 诸如何谓证明, 一个命题能否被证明, 公理系统的一致性(无矛盾)等等都能被赋予明晰的数学内容, 这类研究统称元数学\index{yuanshuxue@元数学 (metamathematics)}. 数学实践中平素基于自然语言的定义和论证等等, ``原则上''都能改写为 ZFC 或其他公理集合论里的形式语言, 从而为其陈述和验证赋予一套坚实的基础. 幸抑不幸, 这种基础长期以来仅仅是一种姿态: 即便对看似单纯的集合论定理, 其形式表述往往都极尽繁琐, 遑论靠人工来验证乃至于领略. 然而随着符号逻辑, 计算机理论与相关技术的持续进展, 形势逐渐在起变化. 如四色定理, 素数定理, Kepler 猜想等结果现在已有了形式的验证, 而形式化方法的应用还不限于数学. 集合论之外的思想 (如类型论) 对此似乎是必要的, 至少是起了极大的简化效果. 可以确定的是: 随着理论与技术携手并进, 人们对数学基础与数学实践两方面的认知还会不断被改写.
+
+\section{序结构与序数}\label{sec:order}
+按照 Bourbaki 的观点, 序结构连同拓扑和代数结构一道组成了数学结构的三大母体. 以下依序介绍偏序, 全序与良序的概念.
+
+\begin{definition}\label{def:partial-order}\index{pianxuji@偏序集 (partially ordered set/poset)}\index{yuxuji@预序集 (pre-ordered set)}
+	\emph{偏序集}意指资料 $(P, \leq)$, 其中 $P$ 是集合而 $\leq$ 是 $P$ 上的二元关系 (偏序), 满足于
+	\begin{compactdesc}
+		\item[反身性] $\forall x \in P, \; x \leq x$;
+		\item[传递性] $(x \leq y) \wedge (y \leq z) \implies x \leq z$;
+		\item[反称性] $(x \leq y) \wedge (y \leq x) \implies x=y$.
+	\end{compactdesc}
+	仅满足反身性与传递性的结构称为\emph{预序集}. 预序集间满足 $x \leq y \implies f(x) \leq f(y)$ 的映射称为\emph{保序映射}.
+
+	一般用 $x < y$ 表示 $x \leq y$ 且 $x \neq y$. 符号 $\geq$ 和 $>$ 的意义是自明的. 今后谈及偏序集时经常省略其中的关系 $\leq$.
+\end{definition}
+
+设 $P, Q$ 为偏序集, 若映射 $\phi: P \to Q$ 满足 $(x < x') \implies (\phi(x) < \phi(x'))$, 则称 $\phi$ 是严格增的. 若 $\phi: P \to Q$ 是双射而且 $\phi, \phi^{-1}$ 皆保序, 则称 $\phi$ 为偏序集 $P,Q$ 之间的同构. 偏序集的同构类称为\emph{序型}. 偏序集的子集继承了自然的偏序结构.
+
+\begin{definition}\label{def:max-sup}\index{jidayuan@极大元 (maximal element)}\index{shangjie@上界 (upper bound), 上确界 (supremum)}\index{xiajie@下界 (lower bound), 下确界 (infimum)}
+	设 $P' \subset P$, 而 $P$ 是预序集,
+	\begin{compactitem}
+		\item 称 $x \in P$ 是 $P$ 的极大元, 如果不存在满足 $x < y$ 的元素 $y \in P$;
+		\item 称 $x \in P$ 是 $P'$ 的上界, 如果对每个 $x' \in P'$ 都有 $x' \leq x$;
+		\item 称 $x \in P$ 是 $P'$ 的上确界, 如果 $x$ 是其上界, 而且对每个上界 $y$ 皆有 $x \leq y$.
+	\end{compactitem}
+	同理可以定义极小元, 下界和下确界, 仅须把以上的 $\leq$ 换成 $\geq$. 对于偏序集 $P$, 根据反称性, 其子集 $P'$ 的上确界或下确界若存在则是唯一的, 分别记为 $\sup P'$ 和 $\inf P'$. \index[sym1]{sup@$\sup$}\index[sym1]{inf@$\inf$}
+\end{definition}
+
+\begin{definition}\label{def:filtrant-poset}\index{luguoxuji@滤过偏序集 (filtered poset)}
+	若偏序集 $P$ 非空, 而且对任何 $x,y \in P$ 子集 $\{x,y\}$ 皆有上界, 则称 $P$ 是\emph{滤过序集}.
+\end{definition}
+
+\begin{definition}\index{quanxuji@全序集 (totally ordered set)}\index{lian@链 (chain)}
+	若偏序集 $P$ 中的任一对元素 $x,y$ 皆可比大小 (即: 或者 $x \leq y$, 或者 $y \leq x$), 则称 $P$ 为\emph{全序集}. 全序集又称作\emph{线序集}或\emph{链}.
+\end{definition}
+显然全序集皆是滤过的.
+
+我们偶尔也会谈论一些类上的序或全序, 及其上界下界等等, 例如以下将考虑的序数类 $\textbf{On}$. 定义同上.
+
+\begin{definition}[G.\ Cantor]\label{def:well-ordered}\index{liangxuji@良序集 (well-ordered set)}
+	全序集 $P$ 如满足下述性质则称作\emph{良序集}: 每个 $P$ 的非空子集都有极小元.
+\end{definition}
+
+\begin{example}
+	取任一集合$X$, 则幂集 $P(X)$ 相对于包含关系 $\subset$ 成为滤过偏序集, 但一般不是全序. 后面要构作的非负整数集 $\Z_{\geq 0}$ 和实数集 $\R$ 都具有标准的全序结构; 其中$\Z_{\geq 0}$ 显然是良序集, $\R$ 则不是.
+\end{example}
+
+\begin{lemma}\label{prop:wellorder-automorphism}
+	设 $P$ 为良序集, 映射 $\phi: P \to P$ 严格增, 则对每个 $x \in P$ 皆有 $\phi(x) \geq x$. 特别地:
+	\begin{inparaenum}[(i)]
+		\item $P$ 没有非平凡的自同构,
+		\item 对任意 $x \in P$, 不存在从 $P$ 到 $P_{< x} := \{y \in P : y < x \}$ 的同构.
+	\end{inparaenum}
+\end{lemma}
+形如 $P_{< x}$ 的子集继承 $P$ 的良序, 称作 $P$ 的一个\emph{前段}.
+\begin{proof}
+	假设集合 $P_0 := \{x \in P : \phi(x) < x \}$ 非空, 对任意 $z \in P_0$ 由 $\phi$ 严格增可知 $\phi(\phi(z)) < \phi(z)$, 取 $z$ 为 $P_0$ 的极小元便导致矛盾. 第一个断言得证.
+
+	对于 (i), 代入 $\phi$ 和 $\phi^{-1}$ 以得到 $\forall x \; \phi(x)=x$. 对于 (ii), 一个同构 $\phi: P \to P_{< x}$ 必然是 $P$ 到自身的严格增映射并满足 $\phi(x) < x$, 与之前结果矛盾.
+\end{proof}
+
+序数的原初想法是良序集的序型; 假如循此进路, 则必须视之为类而非集合, 那么谈论序数全体 $\textbf{On}$ 便相当于操作``类的类'', 显然有些棘手. 幸亏我们能从每个良序型中挑出一个标准的良序集, 从而得到更精确的描述, 为此需要 von Neumann 的如下定义.
+\begin{definition}\label{def:ordinal}\index{xushu@序数 (ordinal)}
+	如果一个集合 $\alpha$ 的每个元素都是 $\alpha$ 的子集 (换言之, $\alpha \subset P(\alpha)$), 则称 $\alpha$ 为\emph{传递}的. 若传递集 $\alpha$ 对于 $\in$ 构成良序集, 则称 $\alpha$ 为\emph{序数}.
+\end{definition}
+
+显然 $\emptyset$ 是序数. 若 $\alpha$ 是序数, 则 $\alpha \sqcup \{\alpha\}$ 亦然. 序数的完整理论可参阅 \cite[\S 2]{Je03} 或 \cite[第四章]{HY14}, 以下仅摘录部分重要性质. 关于序数与良序型的联系请见命题 \ref{prop:ordinal-ordertype}.
+
+\begin{lemma}\label{prop:ordinal-property}
+	序数满足下述性质.
+	\begin{compactenum}[(i)]
+		\item 若 $\alpha$ 是序数, $\beta \in \alpha$, 则 $\beta$ 也是序数.
+		\item 对任两个序数 $\alpha, \beta$, 若 $\alpha \subsetneq \beta$ 则 $\alpha \in \beta$.
+		\item 对任两个序数 $\alpha, \beta$, 必有 $\alpha \subset \beta$ 或 $\beta \subset \alpha$.
+	\end{compactenum}
+\end{lemma}
+\begin{proof}
+	先证 (i). 据 $\alpha$ 的传递性可知 $\beta \subset \alpha$, 且 $(\beta, \in)$ 也是良序集. 接着证明 $\beta$ 传递: 设 $\tau \in \beta \subset \alpha$,  仅需证明 $x \in \tau \implies x \in \beta$ 即可. 由于 $\in$ 赋予 $\alpha$ 序结构, 由 $x \in \tau \in \beta$ 可知 $x \in \beta$.
+
+	对于 (ii), 以 $<$ 表示 $\in$ 并令 $\gamma$ 为 $(\beta \smallsetminus \alpha, <)$ 的极小元. 我们断言 $\alpha = \{x \in \beta : x < \gamma \}$, 而后者无非是 $\gamma$. 包含关系 $\supset$ 是显然的. 对于 $\subset$, 给定 $y \in \alpha \subset \beta$, 首先排除 $\gamma = y$; 其次, 由 $\alpha$ 的传递性有 $y \subset \alpha$, 依此排除 $\gamma < y$, 故 $y < \gamma$.
+
+	对于 (iii), 显见 $\gamma := \alpha \cap \beta$ 也是序数. 我们断言 $\gamma = \alpha$ 或 $\gamma = \beta$ 必居其一, 否则由上述结果可得 $\gamma \in \alpha$, $\gamma \in \beta$, 于是有 $\gamma \in \gamma$, 这同偏序的反称性矛盾.
+\end{proof}
+
+从引理立得以下直接推论.
+\begin{theorem}\label{prop:On-wellorder}
+	定义 $\textbf{On}$ 为序数构成的类. \index[sym1]{$\textbf{On}$}
+	\begin{compactitem}
+		\item 对序数定义 $\beta < \alpha$ 当且仅当 $\beta \in \alpha$, 则这定义了 $\textbf{On}$ 上的一个全序, 而且对任意序数 $\alpha$ 都有 $\alpha = \{ \beta : \beta < \alpha \}$.
+		\item 若 $C$ 是一个由序数构成的类, $C \neq \emptyset$, 则 $\inf C := \bigcap C$ 也是序数, 而且 $\inf C \in C$; 我们有 $\alpha \sqcup \{\alpha\} = \inf\{ \beta: \beta > \alpha \}$.
+		\item 若 $S$ 是一个由序数构成的集合, $S \neq \emptyset$, 则 $\sup S := \bigcup S$ 也是序数.
+	\end{compactitem}
+\end{theorem}
+由此可知 $\beta < \alpha$ 蕴涵 $\beta$ 是 $\alpha$ 的前段. 性质 $\alpha = \{\beta: \beta < \alpha \}$ 是理解序数构造的钥匙.
+
+给定序数 $\alpha$, 置 $\alpha + 1 := \alpha \sqcup \{\alpha\} > \alpha$, 称为 $\alpha$ 的\emph{后继}; 它是大于 $\alpha$ 的最小序数. 若 $\alpha$ 不是任何序数的后继, 则不难看出 $\alpha = \sup\{\beta: \beta < \alpha\}$, 这样的 $\alpha$ 称为\emph{极限序数}\index{xushu!极限序数 (limit ordinal)}. 约定空 $\sup$ 为 $\emptyset$ 使得``零序数'' $\emptyset$ 是极限序数.
+
+\begin{proposition}\label{prop:Ord-class}
+	序数类 $\textbf{On}$ 是真类.
+\end{proposition}
+\begin{proof}
+	前述结果表明若 $\textbf{On}$ 是集合, 则 $\sup(\textbf{On})$ 有定义, 而且序数 $\sup(\textbf{On}) + 1$ 将严格大于所有序数, 包括它自己!
+\end{proof}
+这被称为 Burali-Forti 佯谬 (1897年)\index{Burali-Forti 佯谬}, 它面世要早于 Russell 佯谬 (1902年), 尽管后者影响更大.
+
+\begin{example}[无穷序数 $\omega$ 的构造] \index[sym1]{omega@$\omega$}
+	考虑序数 $0 := \emptyset$, 不断取后继得到序数
+	\[ 1 := 0 + 1, \quad 2 := 1+1, \quad 3=2+1, \ldots \]
+	等等. 现在我们着手定义最小的非零极限序数 $\omega$, 这样的序数如存在则必包含所有 $0,1,2, \ldots$, 而且实由它们构成. 首务是证明非零极限序数存在: 回忆无穷公理 \textbf{A.6} 中归纳集的概念, 若 $x$ 是归纳集, 取 $\alpha := \{y \in x : y \subset x, \; y \in \textbf{On} \}$. 按定义直接验证以下性质:
+	\begin{inparaenum}[(a)]
+		\item $\emptyset \in \alpha$ 故 $\alpha$ 非空,
+		\item $\alpha$ 是序数,
+		\item $y \in \alpha \implies y + 1 \in \alpha$, 因此 $\alpha$ 确为极限序数.
+	\end{inparaenum}
+	取序数 $\omega := \inf\{ \text{非零极限序数} \}$ 即所求. 满足 $n < \omega$ 的序数 $n$ 称为\emph{有限序数}.
+
+	在同构意义下, 序数 $\omega = \{n : n=0, 1, \ldots \}$ 不外是我们直觉中的良序集 $\Z_{\geq 0}$; 这也可以看作是从空集出发, 在 ZFC 框架下定义非负整数集的一种手法. 更明确地说, $\omega$ 连同其中元素的后继运算 $n \mapsto n+1$ 满足 Peano 的算术公理 (见 \cite[第零章, \S 2]{DN00}), 而这是我们实际操作整数时所需的全部性质, 定理 \ref{prop:transfinite-induction} 将触及其中关键的一条: 数学归纳法.
+\end{example}
+
+\section{超穷递归及其应用}
+定理 \ref{prop:On-wellorder} 表明真类 $\textbf{On}$ 对 $\leq$ 也有良序性质: 任何由序数构成的类都有极小元. 这立即导向以下结果.
+\begin{theorem}[超穷归纳法]\label{prop:transfinite-induction} \index{chaoqiongguinafa@超穷归纳法 (transfinite induction)}
+	令 $C$ 为一个由序数构成的类. 假设
+	\begin{compactenum}[(i)]
+		\item $0 \in C$,
+		\item $\alpha \in C \implies \alpha+1 \in C$,
+		\item 设 $\alpha$ 为极限序数, 若对每个 $\beta < \alpha$ 皆有 $\beta \in C$, 则 $\alpha \in C$,
+	\end{compactenum}
+	那么 $C = \textbf{On}$. 如果仅考虑小于某 $\theta$ 的序数而非 $\textbf{On}$ 整体, 断言依然成立.
+\end{theorem}
+\begin{proof}
+	设若不然, 取不在 $C$  中的最小序数 $\alpha \neq 0$, 无论它是后继或极限序数都导致矛盾.
+\end{proof}
+\begin{remark}
+	回忆到 $\theta = \{\alpha \in \textbf{On}: \alpha < \theta \}$. 如取 $\theta = \omega$ 则得到经典的数学归纳法, 此时不涉及情况 (iii).
+\end{remark}
+
+定理 \ref{prop:transfinite-induction} 常用以递归地构造一列以序数枚举的数学对象, 它基于某规则 $G$ 如下:
+\begin{compactdesc}
+	\item[第零项] $a_0 = G(0)$ 给定,
+	\item[后继项] 设 $\alpha = \beta+1$, 已知 $a_\beta$, 则可以确定 $a_\alpha = a_{\beta + 1} = G(a_\beta)$,
+	\item[极限项] 设 $\alpha$ 是极限序数, 已知 $\{a_\beta : \beta < \alpha \}$, 则可以确定 $a_\alpha = G(\{a_\beta : \beta < \alpha \})$.
+\end{compactdesc}
+不难想象这将唯一确定一列集合 $a_\alpha$, 兹改述并证明如下. 考虑函数 $G: \textbf{V} \to \textbf{V}$, 虽然 $\textbf{V}$ 是真类, 然而如早先所述, $G$ 可以诠释为一阶逻辑中的某类公式而不影响以下操作. 引入 $\theta$-列的概念: 这是指函数 $a: \theta \to \textbf{V}$, 亦可理解为形如 $\{a_\alpha : \alpha < \theta \}$ 的列.
+
+\begin{theorem}[超穷递归原理]
+	对任意序数 $\theta$, 存在唯一的 $\theta$-列 $a$ 使得 $\alpha < \theta \implies a(\alpha) = G(a|_\alpha)$. 特别地, 存在唯一的函数 $a: \textbf{On} \to \textbf{V}$ 使得对每个序数 $\alpha$ 皆有 $a(\alpha) = G(a|_\alpha)$.
+\end{theorem}
+几点说明:
+\begin{inparaenum}[(a)]
+	\item 替换公理模式 \textbf{A.7} 确保函数限制 $a|_\alpha$ 可以按寻常方法等同于集合 $\{ (\beta, a(\beta)) : \beta \in \alpha \}$, 故 $G$ 对之可以取值;
+	\item 我们将函数限制 $a|_0$ 理解为空集 $0$, 故按定义 $a(0) = G(0)$;
+	\item 定理前半段只要求 $G$ 对形如 $\alpha \to \textbf{V}$ 的函数有定义, 其中 $\alpha < \theta$.
+\end{inparaenum}
+\begin{proof}
+	第一步, 若 $\theta$-列 $a, a'$ 皆满足所示性质, 我们断言 $\alpha < \theta$ 蕴涵 $a(\alpha) = a'(\alpha)$, 如是则 $a=a'$: 这对 $\alpha=0$ 已知; 设若这对所有 $\beta < \alpha$ 成立, 那么 $a|_\alpha = a'|_\alpha$ 故 $a(\alpha) = a'(\alpha)$; 应用定理 \ref{prop:transfinite-induction} 遂得以上断言.
+	
+	第二步是 $\theta$-列 $a$ 的存在性. 当 $\theta=0$ 时为显然. 今设 $\theta > 0$, 并且对任意 $\xi < \theta$, 所求 $\xi$-列 $a[\xi]$ 皆存在, 则由替换公理模式知 $a[\xi]$ 确实是集合间的映射; 由第一步可将诸 $a[\xi]$ 拼接为定义在 $\theta$ 上的函数 $a$ 使得 $a|_\xi = a[\xi]$, 而性质 $\alpha < \theta \implies a(\alpha) = G(a|_\alpha)$ 是容易的.
+	
+	最后, 由于 $\textbf{On}$ 无极大元, 根据前两步可以唯一地定义 $a: \textbf{On} \to \textbf{V}$.
+\end{proof}
+
+借助超穷递归原理, 能对序数定义类似于非负整数的运算如次. 以下在情形 (iii) 总假设 $\beta$ 是极限序数:
+\begin{itemize}
+	\item 加法: \begin{inparaenum}[(i)] \item $\alpha + 0 := \alpha$,  \item $\alpha + (\beta + 1) = (\alpha + \beta) + 1$, \item $\alpha + \beta = \sup\{ \alpha + \xi : \xi < \beta\}$. \end{inparaenum}
+	\item 乘法: \begin{inparaenum}[(i)] \item $\alpha \cdot 0 := 0$, \item $\alpha \cdot (\beta + 1) = \alpha \cdot \beta + \alpha$, \item $\alpha \cdot \beta = \sup\{\alpha \cdot \xi : \xi < \beta\}$. \end{inparaenum}
+	\item 指数: \begin{inparaenum}[(i)] \item $\alpha^0 := 1$, \item $\alpha^{\beta + 1} = \alpha^\beta \cdot \alpha$, \item $\alpha^\beta = \sup\{\alpha^\xi : \xi < \beta\}$. \end{inparaenum}
+\end{itemize}
+可以验证序数对加法和乘法都满足结合律, 但一般不满足交换律. 施之于 $\alpha, \beta < \omega$ 便得到非负整数上的加法和乘法 (当然这时必须验证交换律). 至此, 我们已经基于公理集合论为 $\Z_{\geq 0}$ 上的算术奠定了基础, 将之加工为 $\Z$ 及 $\Q$ 则可以说是代数学的任务, 手法是大家熟知的. 一般性的工具将在定义--定理 \ref{def:K-group} 和 \S\ref{sec:comm-ring-intro} 予以介绍.
+
+\begin{proposition}\label{prop:ordinal-ordertype}
+	对任意良序集 $P$, 存在唯一的序数 $\alpha$ 和良序集之间的同构 $\phi: P \rightiso \alpha$.
+\end{proposition}
+\begin{proof}
+	序数和同构的唯一性源自引理 \ref{prop:wellorder-automorphism} 和引理 \ref{prop:ordinal-property}. 可设 $P \neq \emptyset$, 并选取 $\mho \notin P$ (易见存在性). 以下将以超穷递归定义一族元素 $a_\alpha \in P \sqcup \{\mho\}$, 其中 $\alpha$ 取遍所有序数. 设 $a_0 := \text{min}(P)$, 并递归地定义
+	\[ a_\alpha := \begin{cases}
+		\text{min}\left( P \smallsetminus \{a_\beta : \beta < \alpha \} \right), & \{a_\beta : \beta < \alpha \} \subsetneq P \\
+		\mho, & \{a_\beta : \beta < \alpha \} = P.
+	\end{cases}\]
+	由于 $P$ 是集合, 必存在最小的序数 $\theta$ 使得 $a_\theta = \mho$, 否则这将蕴涵单射 $a: \textbf{On} \to P$, 分离公理模式 \textbf{A.3} 确保 $a(\textbf{On}) \subset P$ 是集合, 而替换公理模式 \textbf{A.7} 蕴涵 $\textbf{On} = a^{-1}(a(\textbf{On}))$ 亦是集合, 此与命题 \ref{prop:Ord-class} 矛盾. 可验证 $a_\alpha \mapsto \alpha$ 定义了偏序集的同构 $P \to \{\beta : \beta < \theta\} = \theta$.
+\end{proof}
+
+以下两个重要结果都依赖于选择公理 \textbf{A.9}. 其中 Zorn 引理是代数学的基本工具之一. 之前的论证技巧还会反复出现.
+\begin{theorem}[Zermelo 良序定理, 1904]\label{prop:wellorder-principle}\index{Zermelo 良序定理}
+	任意集合 $S$ 都能被赋予良序.
+\end{theorem}
+\begin{proof}
+	我们断言 $S$ 和某个序数 $\theta$ 间存在双射. 选取元素 $\mho \notin S$ 如上. 由选择公理, 可以在 $S$ 的每个子集 $S'$ 里拣选元素 $g(S')$. 设 $a_0 := g(S)$, 并用超穷递归对每个序数 $\alpha$ 定义
+	\[ a_\alpha := \begin{cases}
+		g \left( S \smallsetminus \{ a_\beta : \beta < \alpha \} \right), & S \neq \{ a_\beta : \beta < \alpha \} \\
+		\mho, & S = \{ a_\beta : \beta < \alpha \}.
+	\end{cases}\]
+	与先前类似, 因 $S$ 是集合, 故可取极小的 $\theta$ 使得 $a_\theta = \mho$, $S = \{a_\beta: \beta < \theta\}$, 后者和序数 $\theta = \{\beta : \beta < \theta \}$ 之间有显然的双射, 于是导出 $S$ 上的良序.
+\end{proof}
+
+\begin{theorem}[Zorn 引理]\label{prop:Zorn}\index{Zorn 引理}
+	设 $P$ 为非空偏序集, 而且 $P$ 中每个链都有上界, 则 $P$ 含有极大元.
+\end{theorem}
+\begin{proof}
+	类似于前一个证明. 假定 $P$ 不含极大元. 任取 $a_0 \in P$, 并用超穷递归对每个序数 $\alpha$ 定义 $a_\alpha \in P$, 使得 $\alpha < \beta \Rightarrow a_\alpha < a_\beta$, 其方法如次: 设对每个 $\beta < \alpha$ 都定义了 $a_\beta$ 如上, 则 $(a_\beta)_{\beta < \alpha}$ 在 $P$ 中成一链. 若 $\alpha$ 是极限序数, 则此链必有上界 $a_\alpha \notin C_\alpha$; 若 $\alpha = \gamma + 1$ 是后继序数, 因 $P$ 无极大元故存在 $a_\alpha \in P$ 使得 $a_\alpha > a_\gamma$. 真类 $\textbf{On}$ 据此可以嵌入 $P$, 仿照命题 \ref{prop:ordinal-ordertype} 的论证导出 $\textbf{On}$ 亦是集合, 矛盾.
+\end{proof}
+已知选择公理, 良序定理和 Zorn 引理相互等价, 任择一者连同 \textbf{A.1} -- \textbf{A.8} 皆给出 ZFC. 本书以选择公理为出发点.
+
+\section{基数}\label{sec:cardinal-number}
+基数是描述集合大小的一种标杆, 我们从等势的概念出发, 随后联系到序数.
+
+\begin{definition}\index{dengshi@等势 (equipollence)}
+	若两集合 $X, Y$ 之间存在双射 $\phi: X \to Y$, 则称 $X, Y$ \emph{等势}.
+
+	等势构成了集合间的等价关系, 集合 $X$ 的等势类记作 $|X|$. 若存在单射 $\phi: X \to Y$, 则记作 $|X| \leq |Y|$.
+\end{definition}
+
+关系 $\leq$ 显然只依赖于等势类, 并满足传递性: $|X| \leq |Y|$, $|Y| \leq |Z|$ 蕴涵 $|X| \leq |Z|$. 我们用 $|X| < |Y|$ 表示 $|X| \leq |Y|$, $|X| \neq |Y|$.  以下证明 $\leq $满足反称性, 因而在等势类上定义了偏序.
+
+\begin{theorem}[Schröder--Bernstein]\label{prop:Schröder-Bernstein}
+	若两集合 $X,Y$ 满足 $|X| \leq |Y|$ 和 $|Y| \leq |X|$, 则 $|X|=|Y|$.
+\end{theorem}
+\begin{proof}
+	考虑单射 $f: X \to Y$ 和 $g: Y \to X$. 我们可以在断言中以 $g(Y)$ 代替 $Y$, 从而化约到 $Y \subset X$ 而 $g$ 是包含映射的情形, 即 $f(X) \subset Y \subset X$. 置 $X_0 := X$, $Y_0 := Y$, 我们递归地对所有 $n \in \Z_{\geq 0}$ 定义
+	\begin{align*}
+		X_{n+1} & := f(X_n), \\
+		Y_{n+1} & := f(Y_n).
+	\end{align*}
+	从而得到一列嵌套的子集
+	\[ \underbracket{X_0}_{=X} \supset \underbracket{Y_0}_{=Y} \supset \cdots \supset X_n \supset Y_n \supset X_{n+1} \supset \cdots . \]
+	定义映射 $\phi: X \to Y$ 如下
+	\[ \phi(x) = \begin{cases}
+		f(x), & \text{如果}\; \exists n \geq 0, \; x \in X_n \smallsetminus Y_n, \\
+		x, & \text{其他情形}.
+	\end{cases} \]
+	容易验证 $\phi$ 是良定的双射.
+\end{proof}
+
+许多书籍直接将基数定义为等势类. 一如序数的情形, 本章的进路是为每个等势类指定标准的代表元, 从而将基数理解为一类特别的序数. 在此先回顾等势类的基本运算:
+\begin{compactenum}[(i)]
+	\item $|X|+|Y| = |X \sqcup Y|$,
+	\item $|X| \cdot |Y| = |X \times Y|$, 
+	\item $|X|^{|Y|} = |X^Y|$.
+\end{compactenum}
+推而广之, 设 $(X_i)_{i \in I}$ 为以集合 $I$ 为指标的一族集合, 则可定义基数和
+\begin{gather}\label{eqn:cardinal-infinite-sum}
+	\sum_{i \in I} |X_i| := \left\lvert \bigsqcup_{i \in I} X_i \right\rvert.
+\end{gather}
+与积
+\begin{gather}\label{eqn:cardinal-infinite-prod}
+	\prod_{i \in I} |X_i| := \left\lvert \prod_{i \in I} X_i \right\rvert.
+\end{gather}
+可验证两者都是良定的运算. 关于基数之无穷和与无穷积的进一步讨论可参阅 \cite[pp.52-55]{Je03}.
+
+另外注意到 $2^{|X|} = |P(X)|$. 下述定理是熟知的.
+
+\begin{theorem}[Cantor]\label{prop:Cantor}
+	对任意集合 $X$ 皆有 $|P(X)| > |X|$.
+\end{theorem}
+\begin{proof}
+	存在单射 $X \to P(X)$, 然而任何映射 $\phi: X \to P(X)$ 皆非满: 仅需验证集合 $Y := \{x \in X : x \notin \phi(x) \}$ 不在 $\phi$ 的像里.
+\end{proof}
+
+\begin{definition}\index{jishu@基数 (cardinal)}
+	序数 $\kappa$ 称为\emph{基数}, 如果对任意序数 $\lambda < \kappa$ 都有 $|\lambda| < |\kappa|$.
+\end{definition}
+换言之, 基数无非是一个等势类中的极小序数. 现在我们用选择公理联系等势类和基数.
+
+\begin{proposition}
+	对任意集合 $X$, 可取最小的序数 $\alpha(X)$ 使得 $|X|=|\alpha(X)|$. 则 $X \mapsto \alpha(X)$ 给出等势类和基数的一一对应. 特别地, 对任意集合 $X, Y$ 必有 $|X| \leq |Y|$ 或 $|Y| \leq |X|$.
+\end{proposition}
+\begin{proof}
+  序数 $\alpha(X)$ 的存在性源于定理 \ref{prop:wellorder-principle}, 它显然是基数. 其余断言是显然的. 
+\end{proof}
+
+据此可以谈论一个集合的基数. 不难证明有限序数和 $\omega$ 都是基数. \emph{有限集}是基数为有限序数的集合, \emph{可数集}是基数为 $\omega$ 的集合, 其余称为\emph{不可数集}; 注意到任何无穷集总是包含一份与 $\Z_{\geq 0}$ 等势的子集, 这是因为无穷序数皆包含 $\omega$. 为了符号上方便, 今后我们将经常混同集合的等势类及相应的基数. \index{keshuji@可数集 (countable set)}
+
+\begin{lemma}\label{prop:cardinal-sup}
+	对任意序数 $\alpha$ 都存在基数 $\kappa > \alpha$. 如果 $S$ 是一个由基数构成的集合, 则 $\sup S$ 也是基数.
+\end{lemma}
+\begin{proof}
+	一个集合及其子集上所有可能的良序结构形成一个集合, 而 $\textbf{On}$ 是真类, 因此对任意 $X$ 总存在序数 $\theta$ 使得 $|\theta| > |X|$; 取 $X=\alpha$ 便得到第一个断言. 对于第二个断言, 假定存在序数 $\beta < \alpha := \sup S$ 使得 $|\beta| = |\alpha|$. 根据上确界性质, 必存在 $\kappa \in S$ 满足 $\kappa > \beta$, 因此 $|\beta| \leq |\kappa| \leq |\alpha| = |\beta|$, $|\beta|=|\kappa|$, 这与 $\kappa$ 是基数矛盾.
+\end{proof}
+
+任意无穷集 $\alpha$ 都满足 $|\alpha \sqcup \{\alpha\}| = |\alpha|$ (处理 $\alpha=\Z_{\geq 0}$ 的情形即可), 所以无穷基数必为极限序数. 无穷基数称作 $\aleph$ 数. 引理 \ref{prop:cardinal-sup} 告诉我们如何用序数枚举无穷基数: 递归地定义\index[sym1]{aleph@$\aleph_\alpha$}
+\begin{align*}
+	\aleph_0 & := \omega, \quad \text{这是最小的无穷基数}; \\
+	\aleph_{\alpha+1} & := \text{大于 $\aleph_\alpha$ 的最小基数}; \\
+	\aleph_\alpha & := \sup_{\beta < \alpha} \aleph_\beta, \quad \text{若 $\alpha$ 是极限序数}.
+\end{align*}
+特别地, 基数全体构成一个真类.
+
+\begin{example}[Cantor]\label{eg:continuum}
+	我们证明 $|\R| = 2^{\aleph_0}$. 首先留意到 $|\Q|=|\Z_{\geq 0}|=\aleph_0$. Dedekind 分割 $x \mapsto \{r \in \Q: r < x \}$ 给出 $\R \hookrightarrow P(\Q)$, 于是 $|\R| \leq |P(\Q)|=2^{\aleph_0}$. 另一方面, 区间 $[0,1]$ 包含 Cantor 集
+	\[ C := \left\{ \sum_{n=1}^\infty a_n 3^{-n}: \forall n, \; a_n = 0 \;\text{或}\; 2  \right\}, \]
+	形式如上的 $3$ 进制表法是唯一的, 因此 $|\R| \geq |C| = 2^{\aleph_0}$. 应用定理 \ref{prop:Schröder-Bernstein} 即得所求.
+\end{example}
+
+集合论中常称实数集为``连续统''. 著名的连续统假设断言 $2^{\aleph_0} = \aleph_1$. 已知若预设 ZFC 公理系统的一致性, 那么无论是连续统假设 (P.\ Cohen, 1963) 或其否定 (K.\ Gödel, 1940) 都无法从 ZFC 的公理推出.
+
+\begin{theorem}[$\alpha \times \alpha$ 上的典范良序]\label{prop:Ord2-canonical}
+	真类 $\textbf{On}^2 = \textbf{On} \times \textbf{On}$ 上存在良序 $\prec$ 使得对每个序数 $\alpha$ 皆有 $\textbf{On}^2_{\prec (0, \alpha)} = (\alpha \times \alpha, \prec)$, 称作 $\alpha \times \alpha$ 上的典范良序. 进一步, $(\aleph_\alpha \times \aleph_\alpha, \prec)$ 的序型为 $\aleph_\alpha$; 作为推论, $\aleph_\alpha \cdot \aleph_\alpha = \aleph_\alpha$.
+\end{theorem}
+\begin{proof}
+	在 $\textbf{On}^2$ 上定义 $(\alpha, \beta) \prec (\alpha', \beta')$ 当且仅当
+	\begin{compactitem}
+		\item $\max\{\alpha, \beta\} < \max\{\alpha', \beta'\}$, 或者
+		\item $\max\{\alpha, \beta\} = \max\{\alpha', \beta'\}$, 此时以字典序比大小 (即先比较第一个分量, 相等则比第二个分量).
+	\end{compactitem}
+	易见 $\prec$ 是 $\textbf{On}^2$ 上的良序. 而且 $0$ 是最小序数故 $(\alpha', \beta') \prec (0, \alpha) \iff \alpha', \beta' < \alpha$. 于是 $\textbf{On}^2_{\prec (0, \alpha)} = \alpha \times \alpha$.
+	
+	如果 $(\aleph_\alpha \times \aleph_\alpha, \prec)$ 的序型为 $\aleph_\alpha$, 那么基数的定义 (一个等势类中的极小序数) 说明 $|\aleph_\alpha \times \aleph_\alpha| = \aleph_\alpha$, 以基数乘法来表示即 $\aleph_\alpha \cdot \aleph_\alpha = \aleph_\alpha$. 下面就来证明关于序型的断言.
+
+	反设 $\alpha$ 为使得 $(\aleph_\alpha \times \aleph_\alpha, \prec)$ 不同构于 $\aleph_\alpha$ 的最小序数. 此处必有 $\alpha > 0$, 因为 $(\aleph_0 \times \aleph_0, \prec) \simeq \aleph_0$ 由下图给出.
+	\begin{center}\begin{tikzpicture}
+		\matrix (A) [matrix of math nodes, row sep=3mm, column sep=4mm] {
+			9 & \cdots & \\
+			4 & 5 & 8 \\
+			1 & 3 & 7 \\
+			0 & 2 & 6 \\
+		};
+		\draw[ultra thick, -stealth, black!30] (A-4-1) -- (A-3-1) -- (A-4-2) -- (A-3-2) -- (A-2-1) -- (A-2-2) -- (A-4-3);
+	\end{tikzpicture} \qquad \begin{tikzpicture}
+		\draw[->] (0,0) -- (1.5, 0) node[right] {$\aleph_0$};
+		\draw[->] (0,0) -- (0, 1.5) node [above] {$\aleph_0$};
+	\end{tikzpicture}\end{center}
+	令序数 $\gamma$ 表 $(\aleph_\alpha \times \aleph_\alpha, \prec)$ 之序型, 并取同构 $f: \gamma \rightiso (\aleph_\alpha \times \aleph_\alpha, \prec)$. 基数的性质给出
+	\[ \gamma \geq |\gamma| = |\aleph_\alpha \times \aleph_\alpha| \geq \aleph_\alpha; \]
+	而 $\alpha$ 的选取蕴涵 $\gamma \neq \aleph_\alpha$, 故 $\gamma > \aleph_\alpha$. 既然 $\aleph_\alpha$ 是 $\gamma$ 的真前段, 限制 $f$ 就得到从 $\aleph_\alpha$ 至 $(\aleph_\alpha \times \aleph_\alpha, \prec)$ 的某个真前段的同构. 根据 $\prec$ 的定义, 存在序数 $\sigma < \aleph_\alpha$ 使得 $f(\aleph_\alpha) \subset \sigma \times \sigma$. 由于 $\alpha$ 无穷, $\sigma$ 亦然.
+	
+	根据基数定义, 存在 $\beta < \alpha$ 使得 $|\sigma| = \aleph_\beta$. 关于 $\alpha$ 的极小性假设蕴涵 $\aleph_\beta \cdot \aleph_\beta = \aleph_\beta$. 但这么一来
+	\[ \aleph_\alpha = |f(\aleph_\alpha)| \leq |\sigma| \cdot |\sigma| = \aleph_\beta \cdot \aleph_\beta = \aleph_\beta \]
+	遂与 $\beta < \alpha \implies \aleph_\beta < \aleph_\alpha$ 矛盾. 证毕.
+\end{proof}
+
+\begin{corollary}\label{prop:cardinal-max}
+	对任意非零基数 $\kappa$, $\lambda$, 设其一无穷, 则
+	\begin{inparaenum}[(i)]
+		\item $\kappa + \lambda = \kappa \cdot \lambda = \max\{\lambda, \kappa\}$;
+		\item 若 $2 \leq \kappa \leq \lambda$, 则 $\kappa^\lambda = 2^\lambda$.
+	\end{inparaenum}
+\end{corollary}
+\begin{proof}
+	先证明 (i). 不妨设 $\lambda$ 无穷而且 $\lambda \geq \kappa > 0$. 基数运算的定义蕴涵
+	\[ \lambda \leq \kappa + \lambda \leq \kappa \cdot \lambda \leq \lambda \cdot \lambda. \]
+	鉴于 Schröder--Bernstein 定理 \ref{prop:Schröder-Bernstein}, 一切化约到证明 $\lambda = \lambda \cdot \lambda$; 为此可将 $\lambda$ 视同于某个 $\aleph_\alpha$ 并应用定理 \ref{prop:Ord2-canonical} 即可. 断言 (ii) 归结为 $2^\lambda \leq \kappa^\lambda \leq (2^{\lambda})^\lambda = 2^{\lambda \cdot \lambda} = 2^\lambda$, 因此时 $\lambda$ 必无穷.
+\end{proof}
+
+正则基数的概念将在 \S\ref{sec:Grot-universe} 派上用场, 不妨这么看: 正则基数是无法由更小的基数拼凑而成的无穷基数. \index{jishu!正则基数 (regular cardinal)}
+\begin{definition}\label{def:regular-cardinal}
+	一个无穷基数 $\alpha$ 称为\emph{正则基数}, 如果不存在极限序数 $\beta < \alpha$ 和严格增的序数列 $\{ a_\xi : \xi < \beta \}$ 使得 $\sup \{a_\xi : \xi < \beta\} = \alpha$.
+\end{definition}
+
+作为例子, 以下说明形如 $\aleph_{\gamma+\omega}$ 的基数均非正则, 这里 $\gamma$ 可以是任意序数: 在定义中取 $\beta := \gamma + \omega$ 和 $a_\xi := \aleph_\xi$, 关系 $\alpha := \aleph_\beta > \beta$ 理应是明显的; 而 $\aleph$ 数的定义表明 $\sup \{ a_\xi : \xi < \beta \} = \sup \{ \aleph_{\gamma + n} : n < \omega \} = \aleph_{\gamma+\omega}$.
+
+\section{Grothendieck 宇宙}\label{sec:Grot-universe}
+关于 Grothendieck 宇宙的第一手材料是 \cite[Exp.\ I, Appendice]{SGA4-1}.
+
+\begin{definition}\index{yuzhou@宇宙 (universe)}
+	本书所谓的\emph{宇宙}, 意谓一个满足下述性质的集合 $\mathcal{U}$.
+	\begin{enumerate}[\bfseries {U}.1]
+		\item $u \in \mathcal{U} \implies u \subset \mathcal{U}$, 即: $\mathcal{U}$ 是传递集;
+		\item $u,v \in \mathcal{U} \implies \{u, v\} \in \mathcal{U}$;
+		\item $u \in \mathcal{U} \implies P(u) \in \mathcal{U}$;
+		\item 若 $I \in \mathcal{U}$, 一族集合 $\{u_i : i \in I\}$ 满足 $\forall i, \; u_i \in \mathcal{U}$, 则 $\bigcup_{i \in I} u_i \in \mathcal{U}$;
+		\item $\Z_{\geq 0} \in \mathcal{U}$, 换言之: $\emptyset \in \mathcal{U}$ (请回忆 \S\ref{sec:order} 中构造非负整数的方法).
+	\end{enumerate}
+	对于集合 $X$, 若 $X \in \mathcal{U}$ 则称为 $\mathcal{U}$-集; 若 $X$ 和一个 $\mathcal{U}$-集等势, 则称为 $\mathcal{U}$-小集.\index{U-ji@$\mathcal{U}$-集}
+\end{definition}
+
+给定宇宙 $\mathcal{U}$, 不难验证以下推论:
+\begin{itemize}
+	\item $u \subset v \in \mathcal{U} \implies u \in \mathcal{U}$;
+	\item $u \in \mathcal{U} \implies \bigcup u = \bigcup_{x \in u} x  \in \mathcal{U}$;
+	\item $u, v \in \mathcal{U} \implies u \times v \in \mathcal{U}$;
+	\item 若 $I \in \mathcal{U}$, 一族集合 $\{u_i : i \in I\}$ 满足 $\forall i, \; u_i \in \mathcal{U}$, 则 $\prod_{i \in I} u_i \in \mathcal{U}$.
+\end{itemize}
+
+这套概念的神髓在于在 $\mathcal{U}$ 内部可以实行大部分常见的数学操作而不涉及真类, 这就为棘手的集合论问题建起一道防火墙. 然而是否有充分多、充分大的宇宙可资调用则是另一个问题, 为此我们引入以下假设.
+
+\begin{hypothesis}[A.\ Grothendieck]\label{hyp:universe}
+	对任何集合 $X$, 存在宇宙 $\mathcal{U}$ 使得 $X \in \mathcal{U}$.
+\end{hypothesis}
+
+展开相关讨论前, 不妨先勾勒集合的层垒谱系. 以超穷递归定义一族由序数枚举的集合 $V_\alpha$ 如下: \index{jihelun!层垒谱系 (cumulative hierachy)}
+\begin{align*}
+	V_0 & := \emptyset, \\
+	V_{\alpha+1} & := P(V_\alpha), \\
+	V_\alpha & :=\bigcup_{\beta < \alpha} V_\beta, \quad \text{如果 $\alpha$ 是极限序数}.
+\end{align*}
+
+不难验证每个 $V_\alpha$ 都是传递集 (定义 \ref{def:ordinal}), 并包含 $\alpha$ 作为子集, 而且 $\alpha < \beta \implies V_\alpha \subset V_\beta$.
+
+\begin{proposition}
+	任一集合都属于某个 $V_\alpha$, 其中 $\alpha$ 是序数.
+\end{proposition}
+\begin{proof}
+	首先证明以下性质: 任何非空的类 $C$ 都有一个相对于 $\in$ 的极小元 $x$. 任取 $S \in C$. 若 $S \cap C = \emptyset$ 则 $S$ 即所求的极小元. 若 $S \cap C \neq \emptyset$, 则存在传递集 $T$ 使得 $T \supset S$, 其递归构造如下:
+	\[ S_0 := S, \quad S_{n+1} := \bigcup S_n, \quad T := \bigcup_{n \in \Z_{\geq 0}} S_n; \]
+	循定义可见 $T$ 是传递的. 令 $X := T \cap C$, 这是非空集故正则公理 \textbf{A.8} 确保 $X$ 中有相对于 $\in$ 的极小元 $x$. 仅须说明 $x$ 相对于 $(C, \in)$ 同样极小: 设若不然, 存在 $y \in x \cap C$, 则 $T$ 传递和 $x \in T$ 将蕴涵 $y \in T \cap C = X$, 与 $x$ 对 $(X, \in)$ 极小相悖.
+
+	现在取 $C$ 为所有不在任一个 $V_\alpha$ 内的集合构成的类. 假设 $C$ 不空, 应用上述性质可知 $C$ 中存在一个相对于 $\in$ 的极小元 $x$. 因此若 $z \in x$ 则 $z$ 属于某个 $V_\alpha$; 对之取最小的 $\alpha = \alpha(z)$ 使得 $z \in V_\alpha$. 由于 $x$ 是集合, 应用替换公理模式 \textbf{A.7} 知 $\mathcal{O} := \{\alpha(z) : z \in x \}$ 是一个由序数组成之集合, 置 $\theta := \sup \mathcal{O}$. 于是 $x \subset V_\theta$ 故 $x \in V_{\theta+1}$, 矛盾.
+\end{proof}
+
+集合 $V_\omega$ 的元素称作遗传有限集, 这些集合皆有限, 这对于一些组合学或计算机方面的应用或许足够, 但很难想象如何在其中开展分析或几何学等理论. 因此 $V_\omega$ 对数学家是远远不够用的. Grothendieck 学派原来的定义不含 $\Z_{\geq 0} \in \mathcal{U}$, 导致 $V_0, V_\omega$ 都是它们意义下的宇宙; 本书的假设排除了这两者.
+
+\begin{definition}\index{jishu!强不可达 (strongly inaccessible)}
+	满足以下性质的基数 $\kappa$ 称为强不可达基数:
+	\begin{enumerate}[\bfseries {I}.1]
+		\item $\kappa$ 不可数,
+		\item $\kappa$ 是正则基数 (定义 \ref{def:regular-cardinal}),
+		\item 对任意基数 $\lambda$ 皆有 $\lambda < \kappa \implies 2^\lambda < \kappa$.
+	\end{enumerate}
+\end{definition}
+可以证明 \textbf{I}.3 蕴涵 $\lambda, \nu < \kappa \implies \lambda^\nu < \kappa$, 见 \cite[p.58]{Je03}. 强不可达基数是现代集合论着力研究的大基数的一员. Bourbaki 在 \cite[Exp. I, Appendice]{SGA4-1} 中证明了以下结果.
+\begin{theorem}
+	宇宙正是层垒谱系中形如 $V_\kappa$ 的成员, 其中 $\kappa$ 是一个强不可达基数.
+\end{theorem}
+
+强不可达基数的性质告诉我们: 从 $V_\kappa$ 的元素出发, 在 ZFC 系统内无论怎么操作都不会超出 $V_\kappa$. 假若读者对数理逻辑有些了解, 则可以更精确地说: 对于强不可达基数 $\kappa$, 宇宙 $\mathcal{U} := V_\kappa$ 连同属于关系 $\in$ 构成了 ZFC 的一个\emph{模型} \cite[Lemma 12.13]{Je03}, 相当于在集合论内部虚拟地运行了一套集合论. 不妨这么看: 若把 $V_\kappa$ 的元素看作 ``集合'', 则就模型 $(V_\kappa, \in)$ 观之, ``类''就是 $V_{\kappa+1} = P(V_\kappa)$ 的元素.
+
+\begin{remark}
+	假设 \ref{hyp:universe} 等价于对任意基数 $\lambda$, 存在强不可达基数 $\kappa$ 使得 $\lambda < \kappa$. 这是颇强的要求. 对于大多数的范畴论构造和数学论证, 我们顶多只要求存在某个宇宙 $\mathcal{U}$; 换言之, 日常生活中只需要单个强不可达基数. 这个要求依然有些奢侈, 原因是在 ZFC 系统内无法证明强不可达基数的存在性 \cite[Theorem 12.12]{Je03}.
+\end{remark}
+
+数学工作者究竟需不需要宇宙? 如何看待强不可达基数假设? 这些议题处在数学, 哲学与群体心理学的交界, 请有兴趣的读者移步 \cite{Shu08}.
+
+\begin{Exercises}
+	\item 设 $X, Y$ 为全序集, 定义新的全序集
+		\begin{compactenum}[(i)]
+			\item $X \sqcup Y$, 其序结构限制到 $X$ 和 $Y$ 上分别是原给定的序, 并且对所有 $x \in X$, $y \in Y$ 都有 $x < y$;
+			\item $X \times Y$, 配备反字典序: $(x_1, y_1) < (x_2, y_2)$ 当且仅当 $y_1 < y_2$, 或 $y_1=y_2$ 而 $x_1 < x_2$.
+		\end{compactenum}
+		证明对于序数 $\alpha, \beta$, 序数 $\alpha + \beta$ 与 $\alpha \beta$ 作为良序集分别同构于 $\alpha \sqcup \beta$ 与 $\alpha \times \beta$.
+		\begin{hint} 对 $\beta$ 行超穷归纳. \end{hint}
+	\item 证明序数运算的下述性质.
+		\begin{compactenum}[(i)]
+			\item $\beta < \gamma \implies \alpha + \beta < \alpha + \gamma$;
+			\item 若 $\alpha < \beta$, 则存在唯一的 $\delta$ 使得 $\beta = \alpha + \delta$. \begin{hint} 取 $\delta$ 为良序集 $\{\xi : \alpha \leq \xi < \beta \}$;\end{hint}
+			\item (带余除法) 对于 $\gamma, \alpha > 0$, 存在唯一的 $\beta, \rho$ 使得 $\rho < \alpha$ 且 $\gamma = \alpha \beta + \rho$. \begin{hint}取满足 $\alpha\beta < \gamma$ 的最大序数 $\beta$, 并应用 (ii); \end{hint}
+			\item 若 $\alpha > 1$, 则 $\beta < \gamma \implies \alpha^\beta < \alpha^\gamma$.
+		\end{compactenum}
+	\item 举例说明对于序数 $\alpha, \beta$, 一般而言 $\alpha \beta \neq \beta \alpha$. \begin{hint}不妨取 $\alpha < \beta = \omega$.\end{hint}
+	\item 证明任意序数 $\gamma > 0$ 皆有唯一的 Cantor 标准形
+		\[ \gamma= \omega^{\alpha_1} k_1 + \cdots + \omega^{\alpha_n} k_n, \]
+		其中 $n \in \Z_{\geq 1}$, $\gamma \geq \alpha_1 > \cdots > \alpha_n$ 皆为序数, 而 $k_1, \ldots, k_n \in \Z_{\geq 1}$. \begin{hint}对 $\gamma$ 作超穷递归: 取最大的 $\alpha$ 使得 $\gamma \geq \omega^\alpha $, 再用带余除法表 $\gamma = \omega^\alpha k + \rho$, 这里的 $k$ 必为有限序数. 用超穷归纳法可证唯一性.\end{hint}
+	\item 证明 $f(a,b) = 2^a(2b+1)-1$ 是从 $\Z_{\geq 1} \times \Z_{\geq 1}$ 到 $\Z_{\geq 1}$ 的双射.
+	\item 以下结果称作 König 引理: 设 $\kappa_i, \lambda_i$ 为两族以 $i \in I$ 为下标的基数, 且对每个 $i \in I$ 皆有 $\kappa_i < \lambda_i$. 证明
+		\[ \sum_{i \in I} \kappa_i < \prod_{i \in I} \lambda_i. \]
+		导出 Cantor 定理 $\kappa \leq 2^\kappa$ 作为特例.
+		\begin{hint}
+			容易看出 $\leq$ 成立. 接着取 $E := \prod_i E_i$, 其中 $|E_i| = \lambda_i$; 若断言不成立, 则存在分解 $E = \bigcup_i F_i$, 其中 $F_i \subset E$, $|F_i| = \kappa_i$. 为导出矛盾, 将每个 $f \in E$ 按分量表成 $(f_j)_{j \in I}$, $f_j \in E_j$, 并考虑集合
+			\[ G_i := \Image\left[ F_i \hookrightarrow E \xrightarrow{\text{取 $i$ 分量}} E_i \right], \quad i \in I. \]
+			说明 $G_i \subsetneq E_i$. 然后取 $f \in \prod_i (E_i \smallsetminus G_i)$ 并导出 $f \notin \bigcup_i F_i$, 矛盾. 这里和 Cantor 定理一样使用了对角线论证法.
+		\end{hint}
+\end{Exercises}

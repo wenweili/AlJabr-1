@@ -1,0 +1,125 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8
+
+% LaTeX source for book ``代数学方法'' in Chinese
+% Copyright 2018  李文威 (Wen-Wei Li).
+% Permission is granted to copy, distribute and/or modify this
+% document under the terms of the Creative Commons
+% Attribution 4.0 International (CC BY 4.0)
+% http://creativecommons.org/licenses/by/4.0/
+
+% 《代数学方法》卷一: 基础结构 / 李文威
+% 使用自定义的文档类 AJbook.cls. 自动载入 xeCJK. 需要额外档案如下:
+% font-setup-HEP.tex/font-setup-open.tex, coverpage.tex, titles-setup.tex, mycommand.sty, myarrows.sty
+% 文档类选项 (key/val 格式):
+% mydraft = true (未定稿, 底部显示日期) 或 false (成品), 默认 false,
+% mycolors = true (链接带颜色无框) 或 false (黑色无框), 默认 true,
+% coverpage = 封面档档名, 默认为空 (此时不制作封面), 若为 *.pdf 的形式则直接引入 PDF 页面.
+% fontsetup = 字体设置档档名,
+% titlesetup = 章节格式设置档名.
+
+% 需动用 imakeidx + xindy (两份索引), biblatex + biber (书目). 
+% 索引用土法进行中文排序: 如 \index{zhongwen@中文} 等.
+\documentclass[
+%	draftmark = true,
+	colors = true,
+%	colors = false,
+	coverpage = coverpage.tex,
+%	coverpage = coverpage.pdf,
+	fontsetup = font-setup-open.tex,
+%	fontsetup = font-setup-HEP.tex,
+	titlesetup = titles-setup.tex
+]{AJbook}
+
+\usepackage{mathrsfs}
+\usepackage{stmaryrd} \SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n}	% 避免警告 (stmryd 不含粗体故)
+\usepackage{array}
+\usepackage{makecell}	% 便于制表
+\usepackage{tikz-cd}  % 使用 TikZ 绘图
+\usetikzlibrary{positioning, patterns, calc, matrix, shapes.arrows, shapes.symbols}
+\usepackage{braids}
+\usepackage{tqft}
+\usepackage{ytableau}
+
+% PGF plots 用于封面绘制
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+
+% 设置章节深度
+%\setcounter{secnumdepth}{1}
+
+% 必要时仅引入部分档案
+% \includeonly{}
+
+\usepackage{myarrows}				% 使用自定义的可伸缩箭头
+\usepackage{mycommand}				% 引入自定义的惯用的命令
+
+% 生成索引: 选用 xindy + imakeidx
+\usepackage[xindy, splitindex]{imakeidx}
+\makeindex[
+	columns=2,
+	program=truexindy,
+	intoc=true,
+	options=-M texindy -I xelatex -C utf8,
+	title={名词索引暨英译}]	% 名词索引
+\makeindex[
+	columns=3,
+	program=truexindy,
+	intoc=true,
+	options=-M numeric-sort -M latex -M latex-loc-fmts -M makeindex -I xelatex -C utf8,
+	name=sym1,
+	title={符号索引}]	% 符号索引
+
+\usepackage[unicode, bookmarksnumbered]{hyperref}	% 启动超链接和 PDF 文档信息所需
+% 设置 PDF 文件信息
+\hypersetup{
+	pdfauthor = {李文威 (Wen-Wei Li)},
+	pdftitle = {代数学方法: 第一卷},
+	pdfkeywords = {Algebra},
+	CJKbookmarks = true}
+
+% 用 bibLaTeX 生成参考文献
+% 载入书目库: 文档类业已引入 biblatex + biber
+\addbibresource{Al-jabr.bib}
+
+\begin{document}
+	\frontmatter	% 制作封面和目录.
+	
+	\mainmatter		% 正文开始：逐章引入 TeX 代码
+
+	\include{prelude}
+	\include{chapter1}
+	\include{chapter2}
+	\include{chapter3}
+	\include{chapter4}
+	\include{chapter5}
+	\include{chapter6}
+	\include{chapter7}
+	\include{chapter8}
+	\include{chapter9}
+	\include{chapter10}
+	
+	% 如有附录则在以下引入
+	% \appendix
+
+	\backmatter
+	% 使用 bibLaTeX 制作书目
+	\printbibliography[heading=bibintoc]
+
+
+	% 制作索引: 先是符号索引, 继而是名词索引暨英译
+	{\footnotesize
+	\printindex[sym1]
+	\indexprologue{中文术语按汉语拼音排序.}
+	\printindex
+	%	如有需要, 加入表格和图片索引
+	%	\cleardoublepage
+	% 	\phantomsection
+	%	\addcontentsline{toc}{chapter}{\listfigurename}
+	%	\listoffigures
+	%	\cleardoublepage
+	% 	\phantomsection
+	%	\addcontentsline{toc}{chapter}{\listtablename}
+	%	\listoftables
+	}
+\end{document}

@@ -1,0 +1,138 @@
+% Copyright 2018  李文威 (Wen-Wei Li).
+% Permission is granted to copy, distribute and/or modify this
+% document under the terms of the Creative Commons
+% Attribution 4.0 International (CC BY 4.0)
+% http://creativecommons.org/licenses/by/4.0/
+
+% Some custom commands that I prefer
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mycommand}[2018/02/20 Package for my own commands]
+
+\newcommand\hmmax{0}	% default 3, Increase the capacity of fonts
+\newcommand\bmmax{0}	% default 4, Increase the capacity of fonts...
+\RequirePackage{bm}			% Bolface + other functionalities
+
+\renewcommand*\arraystretch{1.5} % Increase the space in arrays
+
+\RequirePackage{euscript}	% "Euler script" fonts
+
+% Customize the list structures (using paralist)
+\setdefaultitem{$\diamond$}{}{}{}
+\renewcommand{\descriptionlabel}[1]{\hspace{\labelsep} $\vartriangleright$\enskip {\heiti #1} \;}
+\renewcommand{\paradescriptionlabel}[1]{\normalfont \heiti #1 \enskip}
+
+% Some commands that I am used to.
+% Well-known algebraic structures
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\CC}{\ensuremath{\mathbb{C}}}
+\newcommand{\F}{\ensuremath{\mathbb{F}}}
+\newcommand{\A}{\ensuremath{\mathbb{A}}}
+
+
+% Algebra
+
+\newcommand{\gr}{\operatorname{gr}}
+\newcommand{\Ass}{\operatorname{Ass}}
+\newcommand{\topwedge}{\ensuremath{\bigwedge^{\mathrm{max}}}}
+\newcommand{\rank}{\operatorname{rk}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\Isom}{\operatorname{Isom}}
+\newcommand{\Hm}{\operatorname{H}}  % Homology/cohomology
+\newcommand{\Tr}{\operatorname{Tr}}	% trace
+\newcommand{\Nm}{\operatorname{N}}	% norm
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Resprod}{\ensuremath{{\prod}'}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\ord}{\operatorname*{ord}}
+\newcommand{\trdeg}{\operatorname{tr.deg}}
+\newcommand{\Gras}{\ensuremath{\mathbf{G}}}	% Grassmannians
+\newcommand{\WittV}{\operatorname{W}}	% Witt vectors
+
+% Analysis
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+\newcommand{\champ}[1]{\ensuremath{\frac{\partial}{\partial #1}}}
+\newcommand{\norme}[1]{\ensuremath{\| #1 \|}}
+\newcommand{\normeL}[2]{\ensuremath{\| #2 \|_{L^{#1}}}}
+\newcommand{\normeLs}[3]{\ensuremath{\| #3 \|_{L^{#1}, #2}}}
+
+% General things...
+\newcommand{\ceil}[1]{\ensuremath{\lceil #1 \rceil}}
+\newcommand{\lrangle}[1]{\ensuremath{\left\langle #1 \right\rangle}}
+\newcommand{\mes}{\operatorname{vol}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\pr}{\ensuremath{\mathbf{pr}}} % projection morphism
+
+% Categorical Terms (in my view)
+\newcommand{\Obj}{\operatorname{Ob}}	% Objects
+\newcommand{\Mor}{\operatorname{Mor}}	% Morphisms
+\newcommand{\cate}[1]{\ensuremath{\mathsf{#1}}}	% Font series for categories
+\newcommand{\dcate}[1]{\ensuremath{\text{-}\mathsf{#1}}}	% Categories with a pre-dash
+\newcommand{\cated}[1]{\ensuremath{\mathsf{#1}\text{-}}}	% Categories with a post-dash
+\newcommand{\identity}{\ensuremath{\mathrm{id}}}
+\newcommand{\prolim}{\ensuremath{\underleftarrow{\lim}}}
+\newcommand{\indlim}{\ensuremath{\underrightarrow{\lim}}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\iHom}{\ensuremath{\EuScript{H}\mathrm{om}}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\rightiso}{\ensuremath{\stackrel{\sim}{\rightarrow}}}
+\newcommand{\longrightiso}{\ensuremath{\stackrel{\sim}{\longrightarrow}}}
+\newcommand{\leftiso}{\ensuremath{\stackrel{\sim}{\leftarrow}}}
+\newcommand{\longleftiso}{\ensuremath{\stackrel{\sim}{\longleftarrow}}}
+\newcommand{\utimes}[1]{\ensuremath{\overset{#1}{\times}}}
+\newcommand{\dtimes}[1]{\ensuremath{\underset{#1}{\times}}}
+\newcommand{\dotimes}[1]{\ensuremath{\underset{#1}{\otimes}}}
+\newcommand{\dsqcup}[1]{\ensuremath{\underset{#1}{\sqcup}}}
+\newcommand{\munit}{\ensuremath{\mathbf{1}}} % unit in a monoidal category
+\newcommand{\Yinjlim}{\ensuremath{\text{\textquotedblleft}\varinjlim\text{\textquotedblright}}} % injective limit in the Yoneda category
+\newcommand{\Yprojlim}{\ensuremath{\text{\textquotedblleft}\varprojlim\text{\textquotedblright}}} % projective limit in the Yoneda category
+
+% Homological Algebra
+\newcommand{\Ker}{\operatorname{ker}}
+\newcommand{\Coker}{\operatorname{coker}}
+\newcommand{\Image}{\operatorname{im}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\otimesL}{\ensuremath{\overset{\mathrm{L}}{\otimes}}}
+
+% Geometry
+\newcommand{\Der}{\operatorname{Der}}
+\newcommand{\Lie}{\operatorname{Lie}}
+\newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Frob}{\operatorname{Fr}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+\newcommand{\PP}{\ensuremath{\mathbb{P}}}
+\newcommand{\mult}{\operatorname{mult}}
+\newcommand{\divisor}{\operatorname{div}}
+\newcommand{\Gm}{\ensuremath{\mathbb{G}_\mathrm{m}}}
+\newcommand{\Ga}{\ensuremath{\mathbb{G}_\mathrm{a}}}
+\newcommand{\Pic}{\operatorname{Pic}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Res}{\operatorname{Res}}
+
+% Groups
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SO}{\operatorname{SO}}
+\newcommand{\Or}{\operatorname{O}}
+\newcommand{\GSpin}{\operatorname{GSpin}}
+\newcommand{\Spin}{\operatorname{Spin}}
+\newcommand{\UU}{\operatorname{U}}
+\newcommand{\SU}{\operatorname{SU}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\PSL}{\operatorname{PSL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\Sp}{\operatorname{Sp}}
+\newcommand{\GSp}{\operatorname{GSp}}
+\newcommand{\PSp}{\operatorname{PSp}}
+\newcommand{\gl}{\ensuremath{\mathfrak{gl}}}
+\newcommand{\sli}{\ensuremath{\mathfrak{sl}}}
+\newcommand{\so}{\ensuremath{\mathfrak{so}}}
+\newcommand{\spin}{\ensuremath{\mathfrak{spin}}}
+\newcommand{\syp}{\ensuremath{\mathfrak{sp}}}
+\newcommand{\Ind}{\ensuremath{\mathrm{Ind}}}

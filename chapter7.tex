@@ -1,0 +1,1231 @@
+% LaTeX source for book ``代数学方法'' in Chinese
+% Copyright 2018  李文威 (Wen-Wei Li).
+% Permission is granted to copy, distribute and/or modify this
+% document under the terms of the Creative Commons
+% Attribution 4.0 International (CC BY 4.0)
+% http://creativecommons.org/licenses/by/4.0/
+
+% LaTeX source for book ``代数学方法'' in Chinese
+% Copyright 2018  李文威 (Wen-Wei Li).
+% Permission is granted to copy, distribute and/or modify this
+% document under the terms of the Creative Commons
+% Attribution 4.0 International (CC BY 4.0)
+% http://creativecommons.org/licenses/by/4.0/
+
+% To be included
+\chapter{代数初步}\label{sec:algebras}
+代数学中出现的许多环结构同时是域上的向量空间: 环的加法来自向量空间加法, 而乘法 $(x,y) \mapsto xy$ 是向量空间上的双线性型. 典型例子是域 $\Bbbk$ 上的 $n \times n$ 矩阵环 $M_n(\Bbbk)$. 实践中这类结构屡见不鲜, 称为域上的``代数''. 一般地说, 代数既可以看作是带有交换环 $R$ 的纯量乘法的环, 又能视为叠架在 $R$-模上的环结构; 后一视角在幺半范畴和辫结构的框架下有深远的推广.
+
+除了代数的一般概念, 包括张量积和域变换等操作, 本章还涉及:
+\begin{compactenum}
+	\item 整性和有限性: 这些概念常见于域论和交换环论, 本章乘势予以一般的处理. 这方面一个重要且有趣的结果是 Frobenius 定理 \ref{prop:division-R-algebra}, 它断言有限维可除 $\R$-代数在同构意义下只有 $\R, \CC, \mathbb{H}$ 三种.
+	\item 张量代数和由之衍生的对称代数和外代数: 它们是微分几何学的基本工具, 也是线性代数学的自然延伸; 譬如用外代数能为 $\CC^n$ 的全体 $k$-维子空间赋予自然的几何结构, 称为 Grassmann 簇. 为了进行有系统的探究, 代数和张量积的抽象概念实属必要, 分次结构的概念也会自然地出现. 范畴语言在这些问题上将展现它独有的威力.
+	\item 迹和范数也是域论所需的概念, 它们本质上无非是线性代数的某种推广; 是以本章将在一般的框架下加以梳理, 并处理一般交换环上的行列式理论.
+\end{compactenum}
+
+\begin{wenxintishi}
+	基于编排考量, 无法在本章多谈有趣的具体例子, 读者应以掌握矩阵代数的性质为首务. 因此本章的形式化风格也偏重, \S\ref{sec:integrality-finiteness} 和 \S\ref{sec:Grassmannian} 对此或有一定程度的调节作用. 
+
+	张量积和分次结构是研究张量代数的必要准备, 为此还需要范畴语言. 不过读者亦可反其道而行: 因为张量代数兴许是一种更``具体''的数学对象 (至少更实用), 由之贯通前述各项预备知识也不失为一种办法，这也合乎历史发展的顺序. \S\ref{sec:trace-norm-disc} 的结果只会在域论的研究中用到.
+	
+	张量代数的详细讨论理应是线性代数课程的内容, 读者可参照标准教材如 \cite[第六章]{Xi18}.
+\end{wenxintishi}
+
+\section{交换环上的代数}\label{sec:algebra-def}
+以下设 $R$ 为非零交换环, 其上的模不必分左右, 但以下习惯用左模的记法. 本书所谓的代数都是含幺结合代数.
+
+回忆到 $R$-模自动是 $(R,R)$-双模, 按 $rmr' := rr'm$ 定义双边纯量乘法便是. 以下将采用平衡积 (定义 \ref{def:balanced-product}) 的 $(R,R)$-双模版本, 在注记 \ref{rem:bimodule-balanced} 已有说明.
+
+\begin{definition}\label{def:algebra-naive}\index{daishu@代数 (algebra)}
+	环 $R$ 上的\emph{代数}意指一个兼具环与 $R$-模结构的集合 $A$, 使得环的加法等于 $R$-模的加法, 而环的乘法 $(x,y) \mapsto xy$ 是平衡积 $A \times A \to A$ (视 $A$ 为 $(R,R)$-双模), 后者等价于:
+	\[ (rx)y = x(ry) = r(xy), \quad x,y \in A, \; r \in R. \]
+	代数 $A_1$, $A_2$ 间的同态意谓 $R$-线性的环同态 $A_1 \to A_2$, 同理可对 $R$-代数定义同构的概念. 子代数是在纯量乘法下封闭的子环, 左/右理想和双边理想的定义类似.\index{tongtai}\index{tonggou}
+\end{definition}
+
+\begin{convention}
+	为了使理论规整, 如无另外申明, 本章不假设 $R$-代数 $A$ 是非零环. 这么作的便利可以从定义 \ref{def:algebra-mod-diagram} 察见端倪.
+\end{convention}
+
+代数 $A$ 对双边理想 $I$ 的全体(加法)陪集构成商 $A/I$, 它兼具现成的环结构和商模结构, 易见 $A/I$ 对此构成一个代数, 自然地称为商代数\index{shang}. 准此要领, 可以探讨 $R$-代数之间的同构, 商, 同态的核等等概念. 如果代数 $A$ 作为环是除环, 便称 $A$ 为\emph{可除代数}. \index{daishu!可除代数 (division algebra)}
+
+对于理想 $I \subset R$, 容易看出 $IA := \{ \sum_k t_k a_k : \forall k, \; t_k \in I, a_k \in A\}$ 构成 $A$ 的理想.
+
+以 $1$ 表 $A$ 的乘法幺元, $Z_A$ 表 $A$ 的中心. 因为定义蕴涵
+\[ rx = 1 \cdot rx = (r \cdot 1)x, \quad rx = rx \cdot 1 = x \cdot (r \cdot 1), \]
+纯量乘法可以无歧义地写作左乘或右乘. 又由于上式导致 $(rs) \cdot 1 = = r(s \cdot 1) = (r \cdot 1) (s \cdot 1)$, 映射 $r \mapsto r \cdot 1$ 给出环同态 $\sigma: R \to Z_A$. 反过来说, 给定环同态 $\phi: R \to A$ 也就赋予了 $A$ 一个 $R$-模结构 $\sigma(r)a = ra$, 左侧为环乘法, 右侧为模的纯量乘法; 它满足定义 \ref{def:algebra-naive} 当且仅当 $\Image(\sigma) \subset Z_A$.
+
+\begin{proposition}\label{prop:algebra-as-homomorphism}
+	在环 $A$ 上给定 $R$-代数结构相当于给定环同态 $\sigma: R \to Z_A$, 两者的对应由 $\sigma(r)a = ra$ 确定. 两个 $R$-代数间的同态 $\phi: A_1 \to A_2$ 无非是令下图交换的环同态 $\phi: A_1 \to A_2$:
+	\[\begin{tikzcd}[row sep=small]
+		A_1 \arrow[rr, "\phi"] & & A_2 \\
+		& R \arrow[lu, "\sigma_1"] \arrow[ru, "\sigma_2"'] &
+	\end{tikzcd}\]
+	其中同态 $\sigma_i: R \to Z_{A_i}$ 确定 $A_i$ 的 $R$-代数结构 ($i=1,2$).
+\end{proposition}
+\begin{proof}
+	先前已经说明了代数与同态 $R \to Z_A$ 的对应. 对于环同态 $\phi: A_1 \to A_2$ 如上, 记 $1_{A_i}$ 为 $A_i$ 的幺元, 由等式 $\phi(r a) = \phi(r \cdot 1_{A_1}) \phi(a)$ 可知 $\phi$ 是 $R$-线性的当且仅当 $\phi(r \cdot 1_{A_1}) = r \cdot 1_{A_2}$, 此即断言的条件.
+\end{proof}
+
+记 $R$-代数所成范畴为 $R\dcate{Alg}$. 当 $R$ 是域时可以谈论代数的维数.
+\begin{remark}
+	一个重要的特例是当 $R = \Z$ 时, $R$-代数与环是一回事, 或者说 $\cate{Ring} \simeq \Z\dcate{Alg}$; 所以代数可视为环的推广. 对此至少有两种解释.
+	\begin{enumerate}[(i)]
+		\item 交换群和 $\Z$-模是一回事, 或者说范畴 $\cate{Ab}$ 与 $\Z\dcate{Mod}$ 等价 (实为同构).
+		\item 对任何环 $A$ 存在唯一的同态 $\Z \to A$ \eqref{eqn:ring-struct-morphism}, 其像落在子环 $Z_A$ 中, 或者说 $\Z$ 是环范畴 $\cate{Ring}$ 的始对象.
+	\end{enumerate}
+\end{remark}
+
+代数的初步例子包括:
+\begin{itemize}
+	\item 任意除环 $D$ 皆是其素子域上的代数.
+	\item 交换环 $R$ 上幺半群环 (见 \S\ref{sec:polynomial-ring}) 是 $R$-代数; 作为特例, 群环与熟知的多项式环当然也是代数.
+	\item 交换环 $R$ 上的 $n \times n$-矩阵环 $M_n(R)$ 是 $R$-代数.
+\end{itemize}
+
+\begin{example}\index{Calkin 代数}
+	从可分无穷维 Hilbert 空间 $\mathcal{H}$ 映到自身的有界算子构成 $\CC$-代数 $B(\mathcal{H})$, 紧算子所成子集记作 $K(\mathcal{H})$. 由基本的算子理论 (如 \cite[\S 4.1]{Zh1}) 可知 $K(\mathcal{H})$ 是 $B(\mathcal{H})$ 的双边真理想. 商 $B(\mathcal{H})/K(\mathcal{H})$ 被称为 Calkin 代数, 它在算子理论和指标理论中是自然的对象; 考虑 $B(\mathcal{H})/K(\mathcal{H})$ 相当于考虑有界算子在紧算子微扰下的类. 此类代数还带有一些源于分析的额外结构 (所谓 $C^*$-代数), 这是代数学与分析学交融的例证之一.
+\end{example}
+
+视 $R$ 为 $R$-模. 对于任意 $R$-模 $M$,
+\begin{inparaenum}[(i)]
+	\item 指定 $M$ 中的元素 $m$ 相当于指定模同态 $\eta: R \to M$, 两者间的关系是 $\eta(1) = m$;
+	\item 指定 $(R,R)$-双模的平衡积 $m: M \times M \to M$ 相当于指定 $R$-模的同态 $\mu: M \dotimes{R} M \to M$ 使得 $\mu(x \otimes y) = m(x,y)$. 这是注记 \ref{rem:bimodule-balanced} 中张量积的泛性质的直接转译. 由于 $R$ 交换, 张量积理论在此较 \S\ref{sec:module-tensor-prod} 的情形大大简化了.
+\end{inparaenum}
+
+现在我们可以将定义 \ref{def:algebra-naive} 改写为以下的图表形式, 彼此之间的过渡应是容易的, 请读者试着验证. 我们将 $R$-模的张量积函子 $- \dotimes{R} -$ 简写作 $- \otimes -$.
+\begin{definition}\label{def:algebra-mod-diagram}
+	交换环 $R$-上的代数是以下结构
+	\begin{compactitem}
+		\item 一个 $R$-模 $A$,
+		\item 乘法态射 $\mu: A \otimes A \to A$,
+		\item 幺元或称单位态射 $\eta: R \to A$,
+	\end{compactitem}
+	使得以下各图表皆交换:
+	\begin{enumerate}[(i)]
+		\item 乘法结合律
+		\[\begin{tikzcd}
+		A \otimes (A \otimes A) \arrow[dash, rr, "\sim"] \arrow[d, "\identity \otimes \mu"'] & & (A \otimes A) \otimes A \arrow[d, "\mu \otimes \identity"] \\
+		A \otimes A \arrow[r, "\mu"'] & A & A \otimes A \arrow[l, "\mu"] \\
+		\end{tikzcd}\]
+		其中的自然同构 (``结合约束'') $A \otimes (A \otimes A) \simeq (A \otimes A) \otimes A$ 来自命题 \ref{prop:tensor-assoc};
+		\item 左/右幺元律
+		\[\begin{tikzcd}
+		A \otimes R \arrow[r, "\identity \otimes \eta"] \arrow[rd, "\simeq"'] & A \otimes A \arrow[d, "\mu"] & R \otimes A \arrow[l, "\eta \otimes \identity"'] \arrow[ld, "\simeq"] \\
+		& A &
+		\end{tikzcd} \]
+		其中的自然同构 $R \otimes A \simeq A$ 和 $A \otimes R \simeq A$ 来自命题 \ref{prop:tensor-unit}.
+	\end{enumerate}
+	从代数 $(A_1, \mu_1, \eta_1)$ 到 $(A_2, \mu_2, \eta_2)$ 的同态 $\phi: A_1 \to A_2$ 是使得下列各图交换的模同态:
+	\[\begin{tikzcd}
+		A_1 \otimes A_1 \arrow[r, "\mu_1"] \arrow[d, "\phi \otimes \phi"'] & A_1 \arrow[d, "\phi"] \\
+		A_2 \otimes A_2 \arrow[r, "\mu_2"'] & A_2
+	\end{tikzcd}\quad\begin{tikzcd}
+		A_1 \arrow[rr, "\phi"] & & A_2 \\
+		& R \arrow[lu, "\eta_1"] \arrow[ru, "\eta_2"'] &
+	\end{tikzcd}\]
+\end{definition}
+子代数, 左右理想等可以依法用图表和子模定义. 这种定义方法的特色在于: 一旦将 $R$-模范畴, 张量积函子 $- \otimes -$ 和扮演``幺元''角色的对象 $R$ 视为给定了的, $R$-代数的定义可以完全由箭头及其合成来表述. 当 $A$ 取为零模时就得到零代数.
+
+\begin{example}
+	回忆注记 \ref{rem:module-internal-Hom}: $R$-模之间的 $\Hom$-集有自然的 $R$-模结构, 同态合成是 $R$-双线性型, 因而任意 $R$-模 $M$ 的自同态构成一个 $R$-代数 $\End_R(M)$.
+\end{example}
+
+\begin{example}\label{eg:matrix-algebra-1}\index{daishu!矩阵}
+	在上个例子中取自由模 $M = R^{\oplus n}$. 其自同态代数无非是 $R$ 上的矩阵代数 $M_n(R)$. 熟知的矩阵理论告诉我们 $M_n(R)$ 是秩 $n^2$ 的自由 $R$-模, 具有一组基
+	\[ E_{ij} := (a_{kl})_{1 \leq k,l \leq n}, \quad a_{kl} = \begin{cases} 1, & (k,l)=(i,j) \\ 0 & (k,l) \neq (i,j) \end{cases}. \]
+	由于代数的乘法具双线性, $M_n(R)$ 的结构完全由基的乘法确定:
+	\begin{equation}\label{eqn:E_ij}\begin{aligned}
+		E_{ij} E_{kl} & = \begin{cases} E_{il}, & j=k, \\ 0, & j \neq k \end{cases} \\
+		& = \delta_{j,k} E_{il};
+	\end{aligned}\end{equation}
+	这里 $\delta_{j,k}$ 是 Kronecker 的 $\delta$ 记号: 当 $j=k$ 时 $\delta_{j,k}=1$, 否则为零.
+\end{example}
+
+一般说来, 如果代数 $A$ 作为 $R$-模带有一组基 $(e_i)_{i \in I}$ (当 $R$ 为域时总是有基), 那么 $A$ 的结构完全由基的乘法
+\[ e_i e_j = \sum_{k \in I} a^k_{i,j} e_k, \quad i,j \in I  \]
+所确定, 资料 $(a^k_{i,j} \in R)_{i,j,k \in I}$ 称为 $A$ 对这组基的\emph{结构常数}.
+
+进一步, 我们还可以考虑任意 $R$-代数 $A$ 上的 $n \times n$-矩阵环 $M_n(A)$, 借助 $a \mapsto \biggl( \begin{smallmatrix} a & & \\ & \ddots & \\ & & a \end{smallmatrix} \biggr)$ 将 $A$ 嵌入为 $M_n(A)$ 的子环, 从标准的矩阵操作遂可导出 $Z_A = Z_{M_n(A)}$; 特别地, $M_n(A)$ 也是 $R$-代数. 仍定义矩阵 $E_{ij}$ 如上, 则 $M_n$ 是自由左 $A$-模:
+\[ M_n(A) = \bigoplus_{1 \leq i,j \leq n} A E_{ij}, \]
+而 $M_n(A)$ 的 $R$-代数结构完全由上述分解, $A$ 的 $R$-代数结构, 等式 \eqref{eqn:E_ij} 连同 $a E_{ij} = E_{ij} a$ 所确定, 其中 $a \in A$ 而 $1 \leq i,j \leq n$.
+
+根据命题 \ref{prop:End-matrix}, 环 $M_n(A)$ 也可以理解为 $\End((A_A)^{\oplus n})$, 其中 $A_A$ 表示 $A$ 视为右 $A$-模, 而 $\End = \End_{\cated{Mod}A}$. 这就为 $M_n(A)$ 给出了一个内禀的, 不依赖基底选取的诠释: 它是一个秩 $n$ 自由右 $A$-模的自同态环. 由于 $R \hookrightarrow Z_A$ 在右 $A$-模上的纯量乘法给出自同态, 如此 $M_n(A)$ 的 $R$-代数结构亦属自明. 形如 $M_n(A)$ 的代数或其子代数是非交换环论不竭的思想源头, 一如学习线性代数时一般, 内禀观点与矩阵观点必须一并掌握.
+
+\section{整性, 有限性和 Frobenius 定理}\label{sec:integrality-finiteness}
+设 $A$ 为交换环 $R$ 上的代数; 本节一律假设 $A \neq \{0\}$. 对于任意 $x \in A$, 定义 $R[x]$ 为包含 $x$ 的最小子代数, 也说是 $x$ 生成的子代数. 单变元多项式的取值 \eqref{eqn:polynomial-ev} 给出满同态 \index[sym1]{$R[x]$}
+\begin{align*}
+	\text{ev}_x: R[X] & \longrightarrow R[x] \subset A \\
+	\left( f(X) = \sum_k a_k X^k \right) & \longmapsto f(x) = \sum_k a_k x^k 
+\end{align*}
+符号 $R[x]$ 的意义因而是直观的. 更一般地说, 对任意 $x,y, \ldots \in A$ 皆可考虑它们生成的子代数 $R[x,y, \ldots]$, 不过一般只考虑它们两两交换的情形, 此时多项式的取值依然给出满同态
+\[ \text{ev}_{(x,y, \ldots)}: R[X, Y, \ldots] \twoheadrightarrow R[x,y,\ldots]. \]
+于是 $R[x,y, \ldots]$ 总是交换的.
+
+\begin{definition}[整性]\label{def:integrality}\index{zhengyuan@整元 (integral element)}
+	若对 $x \in A$ 存在 $n \geq 1$ 与 $a_0, \ldots, a_{n-1} \in R$ 使得
+	\begin{equation}\label{eqn:integrality}
+		x^n + a_{n-1} x^{n-1} + \cdots + a_0 = 0
+	\end{equation}
+	则称 $x$ 在 $R$ 上是整的.
+\end{definition}
+譬如当 $R=\Z$, $A \subset \CC$ 时, $x \in A$ 整当且仅当它是整系数首一多项式的根, 亦即 $x$ 是代数整数.
+
+任意环 $S$ 上的一个左模 $N$ 称为是忠实的, 如果 $\text{ann}(M) = \{0\}$; 换言之 $s \in S$ 满足于 $sN=\{0\}$ 当且仅当 $s=0$. 右模亦同. 代数 $A$ 透过左乘成为忠实 $R[x]$-模, 事实上 $A$ 的任何包含 $1$ 的子模皆是忠实的.
+
+\begin{theorem}\label{prop:integrality-finiteness}
+	对任意 $x \in A$, 以下陈述等价:
+	\begin{enumerate}[(i)]
+		\item $x$ 在 $R$ 上为整;
+		\item $R[x]$ 是有限生成 $R$-模;
+		\item $x$ 包含于 $A$ 的一个忠实 $R[x]$-子模 $M$, 其中 $M$ 作为 $R$-模有限生成.
+	\end{enumerate}
+	作为 (iii) 的特例, 当 $A$ 是有限生成 $R$-模时每个 $x \in A$ 皆整.
+\end{theorem}
+论证将用到任意交换环上的行列式及伴随矩阵理论. 读者对域上的情形理应是熟悉的, 例如 \cite[命题 4.11]{Xi16}; 一般情形可以类似地论证, 我们会在定理 \ref{prop:matrix-det} 详述.
+\begin{proof}
+	(i) $\implies$ (ii). 设 $x$ 在 $R$ 上整, 由 \eqref{eqn:integrality} 可将任何以 $R$ 为系数的 $x$ 的多项式逐步改写成次数 $< n$ 的形式, 故 $R[x] = \sum_{k=0}^{n-1} R x^k$ 有限生成.
+	
+	(ii) $\implies$ (iii) 属显然.
+	
+	(iii) $\implies$ (i). 设 $x \in M = \sum_{k=1}^m R b_k$. 从 $xM \subset M$ 可知存在矩阵 $T = (t_{ij})_{1 \leq i,j \leq m} \in M_m(R)$ 使得
+	\[ x b_i = \sum_{j=1}^m t_{ij} b_j , \quad i = 1, \ldots, m \]
+	亦即矩阵等式
+	\begin{equation}\label{eqn:integrality-matrix}
+		( x \cdot 1_{m \times m} - T) \begin{pmatrix} b_1 \\ \vdots \\ b_m \end{pmatrix}  = \begin{pmatrix} 0 \\ \vdots \\ 0 \end{pmatrix}.
+	\end{equation}
+	暂且引入形式变元 $X$, 置 $S(X) := X \cdot 1_{m \times m} - T \in M_m(R[X])$, 记其伴随矩阵为 $S^\vee(X)$, 则 $S^\vee(X) S(X) = P(X) \cdot 1_{m \times m}$, 在此 $P(X) := \det(X \cdot 1_{m \times m} - T) \in R[X]$ 是 $T$ 的特征多项式, 它当然是 $m$ 次首一的. 将 \eqref{eqn:integrality-matrix} 两边同时左乘以 $S^\vee(x) = \text{ev}_x(S^\vee(X))$, 由 $M_m(R[x])$ 中的等式 $S^\vee(x)S(x) = P(x) \cdot 1_{m \times m}$ 遂得
+	\[ P(x) b_i = 0, \quad i=1, \ldots, m. \]
+	故 $P(x) M=0$, 忠实性条件遂蕴涵整性 $P(x)=0$.
+\end{proof}
+
+\begin{corollary}\label{prop:integrality-compositum}
+	设 $\{x_i\}_{i \in I}$ 是 $A$ 中一族对乘法两两交换的整元, 则它们生成的子代数 $R[\{x_i\}_{i \in I}]$ 中每个元素皆整. 作为推论, 若 $x, y \in A$ 是相交换的整元而 $r,s \in R$, 那么 $rx + sy$ 和 $xy$ 皆整.
+\end{corollary}
+\begin{proof}
+	由于 $R[\{x_i\}_{i \in I}]$ 中的每个给定元素可以由有限多个 $x_i$ 表达, 仅须考虑有限个元素 $x_1, \ldots, x_n$ 的情形即可. 考虑交换 $R$-代数 $R_m := R[x_1, \ldots, x_m] \subset A$, $R_0 := R$, 则对每个 $0 \leq m < n$:
+	\begin{compactitem}
+		\item $R_m \subset R_{m+1} = R_m[x_{m+1}]$,
+		\item $x_{m+1}$ 既在 $R$ 上整, 自然也在 $R_m$ 上整, 故定理 \ref{prop:integrality-finiteness} 之 (ii) 说明 $R_{m+1}$ 是有限生成 $R_m$-模.
+	\end{compactitem}
+	于是可以递归地推出 $R_n$ 是有限生成 $R$-模. 定理 \ref{prop:integrality-finiteness} 之 (iii) 蕴涵 $R_n$ 中的元素皆整 (取 $M = R_n$). 证毕.
+\end{proof}
+\begin{remark}
+	给定整元 $x$, $y$ 及其满足的多项式方程 \eqref{eqn:integrality}, 以上证明仅是抽象地指出 $x + y$ 和 $xy$ 为整. 如欲具体构造以 $x+y$ 或 $xy$ 为根的首一多项式, 经典的办法是使用\emph{结式}.
+\end{remark}
+
+实际应用中 $R$ 为域的情形占了相当比重. 因此以下取定一个域 $\Bbbk$, 并且令 $A$ 为 $\Bbbk$-代数. 此时 $\Bbbk[X]$ 是主理想环 (例 \ref{eg:polynomial-PID}). 因为域的真理想只有 $\{0\}$, 同态 $\Bbbk \to Z_A$ 必为单射, $\Bbbk$ 可以视同 $A$ 的子环.
+
+\begin{definition}\label{def:algebraic-element}\index{daishuyuan@代数元 (algebraic element)}
+	对 $\Bbbk$-代数 $A$ 中元素 $x$, 考察取值同态 $\text{ev}_x: \Bbbk[X] \to A$, 其核 $\Ker(\text{ev}_x)$ 可以表作主理想 $(P_x)$.
+	\begin{compactitem}
+		\item 若 $P_x = 0$, 则 $x$ 不是任何非零多项式在 $A$ 中的根, 我们说 $x$ 在 $\Bbbk$ 上是\emph{超越}的;
+		\item 若 $P_x \neq 0$, 则称 $x$ 在 $\Bbbk$ 上是\emph{代数}的; 将 $P_x$ 除以其最高次项系数, 可取 $P_x$ 为首一多项式以确保唯一性. 由于 $P_x$ 是 $\Ker(\text{ev}_x)$ 中最低次的首一多项式, 可以合理地称之为 $x$ 的\emph{极小多项式}. \index{jixiaoduoxiangshi@极小多项式 (minimal polynomial)} \index[sym1]{$P_x$}
+	\end{compactitem}
+\end{definition}
+以上讨论也说明在域 $\Bbbk$ 上整性等价于代数性. 多项式 $P_x$ 可谓内在地刻画了子代数 $\Bbbk[x] \simeq \Bbbk[X]/(P_x)$ 的结构.
+
+\begin{lemma}
+	设 $A$ 为 $\Bbbk$-代数, 对于 $A$ 中的代数元 $x$
+	\[ x\; \text{左可逆} \iff x\; \text{在 $\Bbbk[x]$ 中可逆} \iff x\; \text{右可逆}. \]
+\end{lemma}
+\begin{proof}
+	显然 $x \in \Bbbk[x]^\times$ 蕴涵 $x$ 在 $A$ 中左右皆可逆. 反过来说, 表极小多项式为 $P_x(X) = X^n + \cdots + a_1 X + a_0$. 若 $x$ 左可逆或右可逆, 则必有 $a_0 \neq 0$, 否则
+	\[ x(x^{n-1} + \cdots + a_1) = (x^{n-1} + \cdots + a_1)x = 0 \implies x^{n-1} + \cdots + a_1 = 0, \]
+	从而 $x$ 将是一个次数更低的多项式的根. 于是从
+	\[ x (x^{n-1} + \cdots + a_1) = -a_0 \in \Bbbk^\times \]
+	导出 $x \in \Bbbk[x]^\times$.
+\end{proof}
+
+\begin{lemma}\label{prop:minimal-polynomial}
+	若 $\Bbbk$-代数 $A$ 中没有零元之外的零因子, 则 $\Bbbk[x]$ 对任何代数元 $x \in A$ 都是域, 同时 $P_x$ 不可约而 $\dim_\Bbbk \Bbbk[x] = \deg P_x$.
+\end{lemma}
+\begin{proof}
+	将 $A$ 的 $\Bbbk$-子代数 $\Bbbk[x]$ 表作 $\Bbbk[X]/(P_x)$. 其中无非零的零因子故 $(P_x)$ 必为 $\Bbbk[X]$ 的素理想. 因为 $\Bbbk[X]$ 是主理想环, 定理 \ref{prop:PID-UFD} 蕴涵 $P_x$ 不可约且 $\Bbbk[X]/(P_x)$ 为域. 作为 $\Bbbk$-向量空间, $\Bbbk[X]/(P_x)$ 具有显然的基 $\{X^i: 0 \leq i < \deg P_x \}$, 故维数为 $\deg P_x$.
+\end{proof}
+
+在有限维 $\Bbbk$-代数 $A$ 中, 每个元素 $x$ 都是代数的. 如取定 $A$ 的一组基 $a_1, \ldots, a_n$, 则有 $\Bbbk$-代数的嵌入
+\begin{equation*}\begin{aligned}
+	m: A & \longrightarrow \End_\Bbbk(A) \simeq M_n(\Bbbk) \\
+	a & \mapsto \left[m_a: x \mapsto ax \right].
+\end{aligned}\end{equation*}
+因此 $A$ 能具体实现在矩阵代数中, 部分性质能借此约到矩阵情形, 譬如 $xy=1 \iff yx=1$. 然而这种情况并不多见.
+
+最早吸引数学家注意的是 $\Bbbk=\R$ 上的有限维代数, $\R$, $\CC$, $M_n(\R)$, 和例 \ref{eg:Hamilton-quaternion} 的四元数代数 $\mathbb{H}$ 是经典的例子. 其中实数域 $\R$ 和复数域 $\CC$ 是熟悉的, 矩阵代数 $M_n(\R)$ 既不交换也不可除, 而 $\mathbb{H}$ 的性质则引人瞩目: 它是 4 维非交换可除代数, 这是先贤们在寻求复数域推广的征途上获得的首个非凡成果. 自然的问题是: 在同构意义下, 是否还有其它的有限维可除 $\R$-代数? 答案是否定的.
+
+\begin{lemma}\label{prop:real-extension-C}
+	设环 $A$ 没有零元之外的零因子, 而 $x \in A$.
+	\begin{compactenum}[(i)]
+		\item 若 $A$ 是 $\CC$-代数而 $x$ 在 $\CC$ 上为代数元, 则 $\CC[x]=\CC$;
+		\item 若 $A$ 是 $\R$-代数而 $x$ 在 $\R$ 上为代数元, 则 $\R[x] = \R$ 或 $\R[x] \simeq \CC$.
+	\end{compactenum}
+	特别地, 若 $\CC$-代数 $A$ 的元素都是代数元, 则 $A=\CC$.
+\end{lemma}
+\begin{proof}
+	考虑 $x$ 在 $\R$ 或 $\CC$ 上的极小多项式 $P_x$, 由引理 \ref{prop:minimal-polynomial} 知 $P_x$ 不可约. 在 $\CC$-代数的情形, 代数基本定理断言不可约复多项式只能是一次的, 故 $\CC[x]=\CC$. 在 $\R$-代数的情形, 若 $\deg P_x = 1$ 则 $x \in \R$ 而 $\R[x] = \R$. 否则 $P_x$ 是无实根的二次多项式 $X^2 -2bX + c$: 这也是代数基本定理的推论. 以下证明 $\R[X]/(P_x) \simeq \CC$. 作配方
+	\[ P_x(X) = (X-b)^2 - b^2 + c = (c - b^2)(Y^2 + 1), \quad Y := \frac{X-b}{\sqrt{c - b^2}}. \]
+	任何 $f(X) \in \R[X]$ 都能改写成变元 $Y$ 的多项式, 记作 $\tilde{f}(Y) \in \R[Y]$. 所求同构表作
+	\[\begin{tikzcd}[row sep=tiny]
+		\R[X]/(P_x) \arrow[r, "\sim"] & \R[Y]/(Y^2+1) = \R \oplus \R Y \arrow[r, "\sim"] & \CC \\
+		f(X) \bmod (P_x) \arrow[mapsto, r] & \tilde{f}(Y) \bmod (Y^2+1) \arrow[mapsto, r] & \tilde{f}(i) \\
+		& r + sY \bmod (Y^2 + 1) \arrow[mapsto, r] & r + si
+	\end{tikzcd}\]
+	其中 $i \in \CC$ 是 $-1$ 的平方根. 读者不妨参酌例 \ref{eg:Cauchy-C}.
+\end{proof}
+
+\begin{theorem}[F.\ G.\ Frobenius, 1877]\label{prop:division-R-algebra}\index{Frobenius 定理}
+	设 $D$ 是可除 $\R$-代数, 并且其中每个元素都是代数元, 则 $D$ 同构于 $\R$, $\CC$ 或 $\mathbb{H}$.
+\end{theorem}
+留意到有限维代数中的元素都是代数元. 以下证明取自 \cite[(13.12)]{Lam01}, 它同时阐明 $\mathbb{H}$ 中乘法定义其实是自然而然的.
+\begin{proof}[R.\ Palais]
+	以下不妨设 $\dim_{\R}(D) \geq 2$ (否则 $D=\R$). 引理 \ref{prop:real-extension-C} 说明对任意 $x \in D \smallsetminus \R \implies \R[x] \simeq \CC$, 因而在 $D$ 中至少能嵌入一份 $\CC$. 以下固定一份嵌入 $\CC \hookrightarrow D$ 并以左乘赋予 $D$ 相应的 $\CC$-向量空间结构, 以 $i$ 表虚数单位 $\sqrt{-1}$. 定义
+	\[ D^\pm := \left\{ x \in D : xi = \pm ix \right\} = \left\{ x \in D: ixi^{-1} = \pm x \right\}; \]
+	注意到 $\Ad(i): x \mapsto ixi^{-1}$ 既是环自同构也是 $\CC$-线性映射, 而且 $\Ad(i)^2 = \identity_D$, 于是 $D$ 分解为 $\pm 1$-特征空间
+	\begin{align*}
+		D & = D^+ \oplus D^- \\
+		x & = x^+ + x^-, \quad x^\pm = \frac{x \pm \Ad(i)(x)}{2}.
+	\end{align*}
+	我们首先证明 $D^+ = \CC$. 从定义可验证 $D^+ \supset \CC$ 且 $D^+$ 为 $\CC$-代数, 其元素既然在 $\R$ 上为代数元, 在 $\CC$ 上亦复如是, 引理 \ref{prop:real-extension-C} 蕴涵 $D^+ = \CC$.
+
+	若 $D^- = \{0\}$ 则 $D = \CC$, 否则取 $j \in D^- \smallsetminus \{0\}$; 右乘映射 $t \mapsto tj$ 给出 $\CC$-线性单同态 $D^- \to D^+$, 于是 $1 \leq \dim_{\CC} D^- \leq \dim_{\CC} D^+ = 1$, 从而
+	\begin{gather*}
+		D^- = D^+ j, \\
+		D = \R \oplus \R i \oplus \R j \oplus \R ij.
+	\end{gather*}
+	因为 $j$ 在 $\R$ 上的极小多项式为二次不可约, $j^2 \in \R \oplus \R j$ 而 $j^2 \notin \R_{>0}$; 另一方面 $j^2 \in D^+ \implies j^2 \in \CC = \R \oplus \R i$. 于是 $j^2 \in \R_{<0}$. 以 $\R^\times$ 适当地拉伸 $j$ 后, 不妨假设 $j^2 = -1$. 于是 $D$ 的乘法完全由
+	\[ i^2 = j^2 = -1, \quad ji=-ij. \]
+	所确定. 比较例 \ref{eg:Hamilton-quaternion} 可知 $D \simeq \mathbb{H}$.
+\end{proof}
+若进一步放宽代数的乘法结合律, 则 $\mathbb{H}$ 还能嵌入称为\emph{八元数}代数的结构 $\mathbb{O}$. 从 $\R$ 出发, 逐步造出 $\CC$, $\mathbb{H}$, $\mathbb{O}$ 的一种手法是 Cayley--Dickson 过程或称``加倍'', 习题将有深入阐述. \index{bayuanshu@八元数 (octonion)}
+
+有限维可除代数在更一般的域如 $\Q$ 上的理论远为复杂, 与代数数论和几何学中的若干问题有着千丝万缕的联系. 以后我们还会回到这个课题.
+
+\section{代数的张量积}\label{sec:algebra-tensor-product}
+给定 $R$-代数 $A, B$, 本节将说明如何赋予 $A \otimes B$ 一个标准的 $R$-代数结构 (然非唯一选择). 与模论不同之处在于这里可以考虑无穷多个代数的张量积 (定义--定理 \ref{def:inf-tensor-product}). \index{zhangliangji!代数}
+
+\begin{definition}
+	设 $A$, $B$ 为 $R$-代数, 各自的乘法等映射记作 $\mu_A$, $\mu_B$ 等等. 定义两者的张量积为 $A \otimes B$ 配上乘法
+	\begin{multline*}
+		\mu_{A \otimes B}: (A \otimes B) \otimes (A \otimes B) \rightiso (A \otimes (B \otimes A)) \otimes B \rightiso (A \otimes (A \otimes B)) \otimes B \\
+		\rightiso (A \otimes A) \otimes (B \otimes B) \xrightarrow{\mu_A \otimes \mu_B} A \otimes B
+	\end{multline*}
+	其中无名的同构照例是 $R$-模对 $\otimes$ 的结合约束与交换约束, 以及幺元
+	\[ \eta_{A \otimes B}: R \rightiso R \otimes R \xrightarrow{\eta_A \otimes \eta_B} A \otimes B, \]
+	无名同构来自命题 \ref{prop:tensor-unit}, 或者具体说是 $r \mapsto r \otimes 1 = 1 \otimes r$. 如具体用一族生成元描述 $A \otimes B$ 中的运算, 即为
+	\begin{gather*}
+	(a \otimes b) \cdot (a' \otimes b') = aa' \otimes bb', \\
+	1_{A \otimes B} = 1_A \otimes 1_B.
+	\end{gather*}
+\end{definition}
+代数性质的验证繁而不难, 此处略去.
+
+\begin{lemma}\label{prop:algebra-otimes-comm}
+	承上, 交换约束 $c(A, B)$ 给出 $R$-代数的自然同构 $A \otimes B \rightiso B \otimes A$.
+\end{lemma}
+\begin{proof}
+	既可以用图表和各种约束满足的性质 (见 \S\ref{sec:braiding}) 验证 $c(A, B)$ 是代数的同构, 亦可直接从元素层面观察如下
+	\begin{gather*}
+	(a \otimes b) \cdot (a' \otimes b') = aa' \otimes bb' \xrightarrow{c(A, B)} bb' \otimes aa' = c(A,B)(a \otimes b) \cdot c(A,B)(a' \otimes b'), \\
+	c(A,B)(1_{A \otimes B}) = c(A,B)(1_A \otimes 1_B) = 1_B \otimes 1_A = 1_{B \otimes A}.
+	\end{gather*}
+\end{proof}
+
+另外注意到 $A \times B \to A \otimes B$ 限制到 $A \times {1_B}$ 和 ${1_A} \times B$ 上, 就给出自然的模同态 $\iota_A: A \to A \otimes B$ 和 $\iota_B: B \to A \otimes B$. 其像可以写作 $A \otimes 1$ 和 $1 \otimes B$, 它们生成 $A \otimes B$. 下述结果支持了这个记法的合理性.
+\begin{lemma}
+	当 $R$ 是域时, $\iota_A$ 和 $\iota_B$ 是嵌入.
+\end{lemma}
+\begin{proof}
+	分别取 $A$, $B$ 在 $R$ 上的基 $J_A$, $J_B$. 命题 \ref{prop:tensor-direct-sum} 给出 $R$-向量空间的自然同构 $A \dotimes{R} B \simeq \bigoplus_{\substack{a \in J_A \\ b \in J_B }} Ra \dotimes{R} Rb$. 无妨假设 $1_A \in J_A$, $1_B \in J_B$, 于是得知 $\iota_A$, $\iota_B$ 分别将 $A$, $B$ 嵌入为直和项.
+\end{proof}
+
+借此, 我们得到 $A \otimes B$ 的泛性质刻画.
+\begin{proposition}\label{prop:algebra-otimes-univ}
+	承上, $\iota_A$ 和 $\iota_B$ 是代数的同态, 它们的像在 $A \otimes B$ 中对乘法彼此交换. 资料 $(A \otimes B, \iota_A, \iota_B)$ 满足以下泛性质: 对于每一组资料 $(C, f_A, f_B)$, 其中 $C$ 是 $R$-代数而 $f_A: A \to C$ 和 $f_B: B \to C$ 的像相交换, 存在唯一的代数同态 $\phi: A \otimes B \to C$ 使下图交换
+	\[\begin{tikzcd}
+	A \arrow[r, "\iota_A"] \arrow[rd, "f_A"'] & A \otimes B \arrow[d, "\exists! \phi"] & B \arrow[l, "\iota_B"'] \arrow[ld, "f_B"] \\
+	& C &
+	\end{tikzcd}\]
+	在至多差一个唯一同构的意义下, 上述性质唯一地刻画了 $A \otimes B$.
+\end{proposition}
+\begin{proof}
+	容易看出 $\iota_A$ 和 $\iota_B$ 是代数的同态; 由 $(a \otimes 1)(1 \otimes b) = a \otimes b = (1 \otimes b)(a \otimes 1)$ 可知 $A \otimes 1$ 和 $1 \otimes B$ 相交换. 今给定资料 $(C, f_A, f_B)$, 断言中的交换图表说明合成映射 $A \times B \to A \otimes B \xrightarrow{\phi} C$ 必为 $(a, b) \mapsto f_A(a)f_B(b)$. 这样的映射是平衡积, 因而唯一地确定了 $\phi$. 至于 $\phi$ 的存在性, 平衡积 $(a, b) \mapsto f_A(a)f_B(b)$ 给出了 $\phi: A \otimes B \to C$, 而 $f_A$ 与 $f_B$ 的像相交换这点恰恰是令 $\phi$ 为代数同态所需的性质.
+\end{proof}
+读者在确保纸张存量的前提下, 不妨试着以图表重述这些性质与证明.
+
+\begin{remark}\label{rem:bimodule-as-module}\index{shuangmo}
+	现在我们可以解释如何将双模纳入左模或右模的框架, 为此仅需使用 $\Z$-代数的张量积. 令 $S, T$ 为环, 亦即 $\Z$-代数, 则有范畴间的同构
+	\[ \left(S \dotimes{\Z} T^\text{op}\right)\dcate{Mod} \simeq (S,T)\dcate{Mod} \simeq \cated{Mod}\left(S^\text{op} \dotimes{\Z} T\right). \]
+	这是因为赋交换群 $(M,+)$ 以 $(S,T)$-双模结构相当于指定像相交换的环同态 $S \to \End(M)$ 和 $T^\text{op} \to \End(M)$ (比照注记 \ref{rem:module-multiplication}), 这也就等于指定环同态 $S \dotimes{\Z} T^\text{op} \to \End(M)$ 或者 $\left( S^\text{op} \dotimes{\Z} T \right)^\text{op} \to \End(M)$.
+\end{remark}
+
+\begin{remark}\label{rem:algebra-otimes-zero}
+	非零 $R$-代数的张量积可以是零代数. 例如取 $a, b \in \Z_{>1}$ 互素, 则存在整数 $u,v$ 使得 $1 = ua+vb$, 因而 $\Z/a\Z \dotimes{\Z} \Z/b\Z = 0$. 然而当 $A$, $B$ 都是非零自由 $R$-模时, 推论 \ref{prop:module-tensor-free} 确保 $A \dotimes{R} B$ 自由且秩为 $A$, $B$ 的秩之和, 因而非零. 当 $R$ 是域时, 以上假设总是成立. 这套论证可以直接推广到稍后要讨论的无穷张量积 (定义--定理 \ref{def:inf-tensor-product}).
+\end{remark}
+
+\begin{example}
+	回到非交换代数基本范例: 矩阵代数. 以下置 $\otimes := \otimes_R$. 我们证明对任意 $R$-代数 $A$, $B$ 皆有同构
+	\begin{align}
+		M_n(A) \otimes B & \rightiso M_n(A \otimes B) \label{eqn:matrix-tensor-1} \\
+		M_n(R) \otimes M_m(R) & \rightiso M_{nm}(R). \label{eqn:matrix-tensor-2}
+	\end{align}
+	两者并用可得
+	\begin{gather}\label{eqn:matrix-tensor-3}
+		M_n(A) \otimes M_n(B) \simeq A \otimes M_n(R) \otimes M_m(R) \otimes \simeq M_{nm}(A \otimes B).
+	\end{gather}
+	先处理 \eqref{eqn:matrix-tensor-1}, 此映射无非是 $(a_{ij})_{i,j} \otimes b \mapsto (a_{ij} \otimes b)_{i,j}$. 命题 \ref{prop:tensor-direct-sum}, 例 \ref{eg:matrix-algebra-1} 及其后的讨论表明 $M_n(A) \otimes B$ 是自由左 $A \otimes B$-模
+	\[ M_n(A) \otimes B = \bigoplus_{i,j} (A \otimes B) (E_{ij} \otimes 1), \]
+	同时 $M_n(A \otimes B)$ 也是自由的: $M_n(A \otimes B) = \bigoplus_{i,j} (A \otimes B) E_{ij}$. 对于任意 $i,j$, 将 $(a \otimes b) E_{ij}$ 映至 $(a \otimes b) (E_{ij} \otimes 1)$, 此双射显然保持乘法结构, 由此可知 \eqref{eqn:matrix-tensor-1} 确为同构.
+		
+	接着解释 \eqref{eqn:matrix-tensor-2}. 首先抽象地令 $V$, $W$ 分别是与秩 $n$ 和 $m$ 的自由 $R$-模, 那么命题 \ref{prop:tensor-direct-sum} 蕴涵 $V \otimes W$ 是秩 $nm$ 自由 $R$-模, 张量积的函子性给出 $R$-代数的同态 $\End(V) \otimes \End(W) \to \End(V \otimes W)$.
+	
+	取定基以假设 $V = R^{\oplus n}$, $W = R^{\oplus m}$, 于是 $\End(V) \otimes \End(W)$ 等同于自由 $R$-模:
+	\[ M_n(R) \otimes M_m(R) = \bigoplus_{\substack{1 \leq i,j \leq n \\ 1 \leq r,s \leq m}} R E_{ij} \otimes E_{rs}  \]
+	作为 $R$-代数, 其乘法由 $(E_{ij} \otimes E_{rs}) \cdot (E_{kl} \otimes E_{tu}) = \delta_{j,k} \delta_{s,t} E_{il} \otimes E_{ru}$ 完全确定. 选定双射
+	\[ f: \{1, \ldots, n\} \times \{1, \ldots, m\} \xrightarrow{1:1} \{1, \ldots, nm\} \]
+	则可等同 $V \otimes W$ 与 $R^{\oplus nm}$, 易见图表
+	\[\begin{tikzcd}
+		\End(V) \otimes \End(W) \arrow[d, "\simeq"'] \arrow[r] & \End(V \otimes W) \arrow[d, "\simeq"] \\
+		M_n(R) \otimes M_m(R) \arrow[r] &  M_{nm}(R) \\
+		E_{ij} \otimes E_{rs} \arrow[mapsto, r] \arrow[phantom, sloped, u, "\in" description] & E_{f(i,r), f(j,s)} \arrow[phantom, sloped, u, "\in" description]
+	\end{tikzcd}\]
+	交换, 而第二行显为同构. 这就构造了所求的 \eqref{eqn:matrix-tensor-2}.
+\end{example}
+
+言归正传. 代数间张量积的定义与泛性质在多元情形 $\bigotimes_{i \in I} A_i$ 有直截了当的推广, 其中 $I$ 为有限集. 这般构造具有明了的函子性, 例如对同态族 $f_i: A_i \to A'_i$ 存在自然的 $\bigotimes_{i \in I} f_i : \bigotimes_{i \in I} A_i \to \bigotimes_{i \in I} A'_i$, 使得图表
+\[\begin{tikzcd}[row sep=small]
+	A_j \arrow[r, "f_j"] \arrow[d] & A'_j \arrow[d] \\
+	\bigotimes_i A_i \arrow[r, "{\bigotimes_i f_i}"'] & \bigotimes_i A'_i
+\end{tikzcd}\]
+对所有 $j \in I$ 交换, 如此等等.
+
+命题 \ref{prop:algebra-otimes-univ} 所述的泛性质能推广到任意一族 $(f_i: A_i \to C)_{i \in I}$, 这里 $I$ 可以是无穷集. 为了给出相应的泛对象, 亦即无穷张量积, 先作如是观察: 若 $J \subset I$ 是两个有限集, 仿照之前 $\iota_A$ 的构造可得到 $f_{JI}: \bigotimes_{i \in J} A_i \to \bigotimes_{i \in I} A_i$, 而且 $K \subset J \subset I \implies f_{JI} f_{KJ} = f_{KI}$. 现在令 $I$ 为任意集合并给定一族 $R$-代数 $(A_i)_{i \in I}$; 注意到 $I$ 的所有子集相对于 $\subset$ 构成 \S\ref{sec:group-limit} 定义的滤过偏序集. 环对滤过偏序的 $\varinjlim$ 已经在命题 \ref{prop:ring-filtrant-limit} 中构造了, 这可以毫无困难地推广到 $R$-代数的范畴.
+
+\begin{definition-theorem}\label{def:inf-tensor-product}
+	对于任意的 $R$-代数族 $(A_i)_{i \in I}$, 定义
+	\[ \bigotimes_{i \in I} A_i := \varinjlim_{\substack{J \subset I \\ \text{有限子集}}} \bigotimes_{i \in J} A_i \]
+	其中对于 $K \subset J$, 构造极限所用的态射是 $f_{KJ}: \bigotimes_{i \in K} A_i \to \bigotimes_{i \in J} A_i$. 它带有一族同态 $\iota_j: A_j \to \bigotimes_{i \in I} A_i$. 资料 $(\bigotimes_{i \in I} A_i, (\iota_i)_{i \in I})$ 满足类似于命题 \ref{prop:algebra-otimes-univ} 的泛性质.
+\end{definition-theorem}
+\begin{proof}[勾勒]
+	容易验证 $\iota_{i,J}: A_i \to \bigotimes_{i \in J} A_i$ 与同态族 $f_{KJ}$ 相容: $i \in K \subset J \implies f_{KJ} \circ \iota_{i,K} = \iota_{i,J}$, 因而我们得到 $\iota_i: A_i \to \bigotimes_{i \in I} A_i$, 验证它们是代数同态只是例行公事. 泛性质的验证一样是化约到有限张量积的情形: 对于资料 $(C, (f_i: A_i \to C)_{i \in I})$, 所求的 $\phi: \bigotimes_i A_i \to C$ 能且仅能是 $\phi_J: \bigotimes_{i \in J} A_i \to C$ 的 $\varinjlim_J$.
+\end{proof}
+
+\begin{corollary}\label{prop:tensor-alg-cocomplete}
+	张量积给出交换 $R$-代数范畴 $R\dcate{CAlg}$ 中的余积. 范畴 $R\dcate{CAlg}$ 是余完备的.
+\end{corollary}
+\begin{proof}
+	容易证明交换 $R$-代数的张量积仍然交换, 留作习题. 在命题 \ref{prop:algebra-otimes-univ} (或其无穷版本) 所述的张量积泛性质中, 若只计入交换的 $R$-代数 $C$, 得到的无非是余积的泛性质. 另一方面, $R\dcate{CAlg}$ 中任一对态射 $f, g: A \to B$ 总有余等化子 $\Coker(f,g)$, 它是 $B$ 对 $\{a \in A: f(a)-g(a)\}$ 所生成理想的商 (容许为零代数). 从定理 \ref{prop:limit-buildingblocks} 立刻导出一般 $\varinjlim$ 的存在性.
+\end{proof}
+
+最后, 我们用张量积来构作代数的\emph{基变换}\index{jibianhuan}. 请先回忆 \S\ref{sec:change-of-rings} 中的简单构造: 取定交换环的同态 $\phi: R \to S$, 视 $S$ 为 $R$-模. 对于任意 $R$-代数 $A$, 张量积 $A \dotimes{R} S$ 自然地具有 $S$-代数结构: 按命题 \ref{prop:algebra-as-homomorphism} 的观点, 这是因为 $\iota_S: S \to A \dotimes{R} S$ 的像落在 $A \dotimes{R} S$ 的中心里. % 此诸构造对变元 $A$ 显然有函子性.
+
+反向观之, 将一个 $S$-代数 $B$ 的纯量乘法透过 $\phi$ 拉回, 就得到一个 $R$-代数. 如只看模结构, 则这两套操作正是推论 \ref{prop:IP-vs-F} 的函子 $\begin{tikzcd} R\dcate{Mod} \arrow[r, yshift=0.5ex, "{P_{R \to S}}"] & S\dcate{Mod} \arrow[l, yshift=-0.5ex, "{\mathcal{F}_{R \to S}}"] \end{tikzcd}$. 计入乘法, 则以上讨论给出一对函子 $\begin{tikzcd} R\dcate{Alg} \arrow[r, yshift=0.5ex, "{P_{R \to S}}"] & S\dcate{Alg} \arrow[l, yshift=-0.5ex, "{\mathcal{F}_{R \to S}}"] \end{tikzcd}$.
+
+\begin{proposition}\label{prop:IP-vs-F-alg}
+	上述函子构成 $R$-代数和 $S$-代数范畴之间的伴随对 $(P_{R \to S}, \mathcal{F}_{R \to S})$. 对于同态 $Q \to R \to S$, 存在同构 $P_{R \to S} \circ P_{Q \to R} \simeq P_{Q \to S}$ 和等式 $\mathcal{F}_{Q \to R} \circ \mathcal{F}_{R \to S} = \mathcal{F}_{Q \to S}$.
+\end{proposition}
+\begin{proof}
+	设 $A$, $B$ 分别为 $R$-代数和 $S$-代数.	我们回顾 $(P_{R \to S}, \mathcal{F}_{R \to S})$ 在模的层次的伴随同构 \eqref{eqn:IP-adjunction-explicit-1}, 它映 $R$-模同态 $f: A \to B$ 至 $S$-模同态 $f': A \dotimes{R} S \to B$, $f'(a \otimes s) = f(a)s \in B$; 反过来, 将 $f'$ 与 $A \to A \dotimes{R} S$ 合成便回归 $f$. 欲证明这对函子在代数的层次相伴随, 仅须证明前述映射将代数同态映至代数同态, 而这是直截了当的.
+	
+	至于伴随性与合成同态 $Q \to R \to S$ 的性质, 可仿照引理 \ref{prop:IP-transitivity} 的办法处理.
+\end{proof}
+
+\begin{proposition}\label{prop:algebra-base-change-monoidal}
+	函子 $P_{R \to S}$ 是幺半函子: 存在自然的 $S$-代数同构
+	\[ P_{R \to S}(A) \dotimes{S} P_{R \to S}(B) \rightiso P_{R \to S}(A \dotimes{R} B). \]
+\end{proposition}
+\begin{proof}
+	主要是应用
+	\begin{align*}
+		(A \dotimes{R} S) \dotimes{S} (B \dotimes{R} S) & \longrightiso (A \dotimes{R} B) \dotimes{R} S \\
+		(a \otimes s) \otimes (b \otimes t) & \longmapsto (a \otimes b) \otimes st, \\
+		(a \otimes s) \otimes (b \otimes 1) & \longmapsfrom (a \otimes b) \otimes s
+	\end{align*}
+	细节繁而不难, 留给读者.
+\end{proof}
+
+环 $R$ 上的代数 $A$ 可以理解为一族以极大理想谱 $\MaxSpec(R)$ 为参数空间, ``代数地''变化的域上代数: 对每个极大理想 $\mathfrak{m}$ 取域 $R/\mathfrak{m}$ 上相应的代数为基变换 $P_{R \to R/\mathfrak{m}} (A) = A \dotimes{R} R/\mathfrak{m}$, 又称 $A$ 的 $\bmod\; \mathfrak{m}$ 约化, 此术语从下述结果看是合理的.
+\begin{lemma}
+	设 $A_1$, $A_2$ 为 $R$-代数, $\mathfrak{a}_i \subset A_i$ 为理想, 则存在自然的同构
+	\[ (A_1/\mathfrak{a}_1) \dotimes{R} (A_2/\mathfrak{a}_2) \rightiso A_1 \dotimes{R} A_2 \bigg/ \left( \mathfrak{a}_1 \dotimes{R} A_2 + A_1 \dotimes{R} \mathfrak{a}_2\right), \]
+	为了符号清爽, 这里我们将 $\mathfrak{a}_1 \otimes A_2$ 和 $A_1 \otimes \mathfrak{a}_2$ 等同于它们在 $A_1 \otimes A_2$ 中的像.
+	
+	作为推论, 对任意理想 $I \subset R$ 和 $R$-代数 $A$, 有自然同构 $A \dotimes{R} (R/I) \rightiso A/IA$.
+\end{lemma}
+\begin{proof}
+	对于第一个断言, 记 $\mathscr{A} := A_1 \otimes A_2 \big/ \left( \mathfrak{a}_1 \otimes A_2 + A_1 \otimes \mathfrak{a}_2\right)$, 必须对自明的同态 $\iota_i: A_i/\mathfrak{a}_i \to \mathscr{A}$ ($i=1,2$) 验证命题 \ref{prop:algebra-otimes-univ} 里的泛性质; 这是平凡的练习.
+
+	对于第二个断言, 我们取 $A_1 = A$, $\mathfrak{a}_1=\{0\}$, $A_2 = R$, $\mathfrak{a}_2 = I$, 并利用同构 $A \dotimes{R} R \rightiso A$, 它映 $A \otimes I$ 的像为 $IA$.
+\end{proof}
+
+\section{分次代数}
+代数上的分次结构在应用中是自然而然的, 初步例证是多项式代数 $R[X] = \bigoplus_{n \geq 0} R X^n$. 我们还会进一步研究分次代数间的张量积, 这是 \S\ref{sec:algebra-tensor-product} 中构造的推广.
+
+\begin{definition}[分次模与分次代数]\label{def:graded-module-alg}\index{mo!分次 (graded)}\index{daishu!分次 (graded)}\index{qiciyuan@齐次元 (homogeneous element)}
+	令 $I$ 为交换幺半群, 以 $+$ 表二元运算, $0$ 表幺元.
+	\begin{itemize}
+		\item 交换环 $R$ 上的 $I$-\emph{分次模}是配备直和分解 $M = \bigoplus_{i \in I} M_i$ 的模 $M$. 全体 $I$-分次模可作成幺半范畴 $(R\dcate{Mod}_I, \otimes)$: 从 $M$ 到 $N$ 的分次同态意谓满足 $\forall i \; \varphi(M_i) \subset N_i$ 的同态, 张量积 $M \otimes N$ 上诱导自然的分次结构 (回忆命题 \ref{prop:tensor-direct-sum} 断言张量积保直和)
+		\[ (M \otimes N)_k = \bigoplus_{\substack{i,j \in I \\ i+j=k}} M_i \otimes N_j. \]
+		称 $x \in M_i \smallsetminus \{0\}$ 为 $M$ 中次数为 $i$ 的\emph{齐次}元, 也记作 $\deg(x)=i$; 对 $0$ 不定义次数. \emph{分次子模}意谓 $M$ 中满足 $N = \bigoplus_i (N \cap M_i)$ 的子模.
+		\item 交换环 $R$ 上的 $I$-\emph{分次代数}是配备直和分解 $A = \bigoplus_{i \in I} A_i$ 的 $R$-代数, 其乘法满足 $A_i \cdot A_j \subset A_{i+j}$ 且 $1 \in A_0$; 因此 $A_0$ 是子代数. 同样可将 $I$-分次代数作成范畴 $R\dcate{Alg}_I$, 同态 $\varphi: A \to B$ 须同时是 $I$-分次模的同态, 亦即适合于 $\varphi(A_i) \subset B_i$. \emph{分次理想}意谓 $A$ 中形如 $\mathfrak{a} = \bigoplus _i (\mathfrak{a} \cap A_i)$ 的理想; 因而当 $\mathfrak{a} \neq A$ 时 $A/\mathfrak{a} = \bigoplus_i A_i/\mathfrak{a} \cap A_i$ 仍是分次代数.
+	\end{itemize}
+	当 $(I,+) \subset (\Z,+)$ 时, 我们径称这些对象是分次的.
+\end{definition}
+
+\begin{lemma}\label{prop:graded-ideal-submodule}
+	在 $I$-分次代数 (或分次模) 中的双边理想 $\mathfrak{a}$ (或子模) 是分次的当且仅当它能由齐次元生成.
+\end{lemma}
+\begin{proof}
+	以下只处理理想情形. 分次理想按定义当然由齐次元生成. 欲证其逆, 只需说明 $\mathfrak{a}$ 有齐次生成元 $\{a_s : s \in S \}$ 蕴涵 $\mathfrak{a} = \sum_i \mathfrak{a} \cap A_i$. 按生成元的定义, $\mathfrak{a}$ 中元素是形如 $u a_s v$ 的元素的 $R$-线性组合, 其中 $u,v \in A$; 将 $u, v$ 进一步拆成齐次项则可假设这些 $u a_s v$ 都是齐次元. 证毕.
+\end{proof}
+
+任意 $R$-代数 $A$ 可赋予平凡的 $I$-分次结构: 置 $A_0 = A$, 其余 $A_i = \{0\}$. 对 $A = R$ 这是唯一的取法. 所以分次模的定义可以合理地拓展如下, 若分次 $R$-模 $M$ 亦是 $R$-代数 $A$ 作用下的左模, 那么当 $A_i \cdot M_j \subset M_{i+j}$ 对所有 $i,j \in I$ 恒成立时, 称 $M$ 是分次 $A$-模.
+
+更干净的手法是将分次代数视为叠架在分次模上的结构. 这相当于在代数 $A$ 的箭头定义 \ref{def:algebra-mod-diagram} 中要求 $A$ 是 $I$-分次模, 而且乘法 $A \otimes A \to A$ 和幺元 $R \to A$ 都是 $I$-分次模的同态. 且看些初步例子.
+
+\begin{itemize}
+	\item 多项式环 $R[X_0, \ldots, X_n]$ 是 $\Z_{\geq 0}$-分次代数, 其中
+		\[ R[X_0, \ldots, X_n]_i = \bigoplus_{|\bm{a}|=i} R X_0^{a_0}  \cdots X_n^{a_n}, \]
+		因此次数 $i$ 的齐次元恰好是 $R$ 上的 $i$ 次齐次多项式. 此时的分次理想也称为齐次理想, 扣除少部分例外情形, 它们在代数几何学中对应于射影空间 $\mathbb{P}^n$ 里的闭子概形.
+	\item 设 $\Gamma$ 为交换幺半群, 则定义 \ref{def:monoidal-ring} 的幺半群环 $R[\Gamma] = \bigoplus_{\gamma \in \Gamma} R\gamma$ 构成 $\Gamma$-分次代数, 这几乎是同义反复.
+	\item 光滑微分流形 $X$ 上的所有 $\CC$-值微分形式对运算 $(\omega, \eta) \mapsto \omega \wedge \eta$ 构成 $\CC$-代数, 记作 $A(X) = \bigoplus_{k=0}^{\dim X} A^k(M)$, 其中 $A^k(M)$ 表示 $k$ 次微分形式构成的 $\CC$-向量空间, 基本理论可参考 \cite[\S 3.2]{ChCh}. 回忆到 $A^0(X) = C^\infty(X)$ 而 $A^k(X)$ 中任意元素 $\omega$ 在局部坐标 $x_1, \ldots, x_n$ 下可唯一地表作
+	\[ \omega = \sum_{1 \leq i_1 < \cdots < i_k \leq n} f_{i_1, \ldots, i_k} \dd x_{i_1} \wedge \cdots \wedge \dd x_{i_k}, \quad f_{i_1, \ldots, i_k} \in C^\infty(X) \]
+	的形式. 于是 $A(X)$ 构成分次代数, 乘法不交换, 然``虽不中亦不远矣'', 因为几何学中有熟悉的公式
+	\[  \omega \wedge \eta = (-1)^{ab} \eta \wedge \omega, \quad \omega \in A^a(X), \; \eta \in A^b(X). \]
+	代数 $A(X)$ 的另一个关键性质是它具有外微分运算 $d: A(X) \to A(X)$.
+\end{itemize}
+最后一则例子的 $A(X)$ 蕴藏了丰富的代数结构, 它在几何学中也是不可或缺的工具, 主要归功于 Élie Cartan 的工作. 我们由 $A(X)$ 的乘法换位公式抽绎出如下定义.
+
+\begin{definition}\label{def:anti-commutation}\index{daishu!$\epsilon$-交换}
+	给定交换幺半群 $(I, +)$ 以及加法同态 $\epsilon: I \to \Z/2\Z$, 分次代数 $A$ 如满足
+	\[ xy = (-1)^{\epsilon(\deg x) \epsilon(\deg y)} yx, \quad x, y \in A: \;\text{齐次元} \]
+	则称 $A$ 的乘法是 $\epsilon$-交换的.
+\end{definition}
+取 $\epsilon=0$ 则回归到交换分次代数. 最寻常的选取自然是 $I \subset \Z$ 而 $\epsilon: \Z \to \Z/2\Z$ 是商同态的情形, 这时我们常把 $\epsilon$-交换称作\emph{反交换}. 有时我们还会加上性质
+\begin{gather}\label{eqn:strong-anti-commutation}
+	\left[ \epsilon(\deg x) = 1 \in \Z/2\Z \right] \implies x^2 = 0.
+\end{gather}
+当 $2 \in R^\times$ 时, $\epsilon$-交换性蕴涵 $\epsilon(\deg x)=1 \implies x^2 = -x^2 \implies x^2=0$, 条件 \eqref{eqn:strong-anti-commutation} 自动成立. 在微分几何等应用中常取 $R = \CC, \R$, 故无差异.
+
+不难从定义验证 $I$-分次代数 $A$, $B$ 的张量积对 $(A \otimes B)_i = \bigoplus_{j+k=i} A_i \otimes B_j$ 仍然成 $I$-分次代数, 而且交换约束 $c(A,B): A \otimes B \rightiso B \otimes A$ 是分次代数的同构. 不消说, 无穷多个分次代数的张量积也有类似的结果. 对于反交换分次代数的情形, 譬如 $A(X)$, 则须稍加``扭转'' $A \otimes B$ 的乘法以获得期望的性质. 我们希望用一套统一的框架来理解这一机制.
+
+处理此类问题的制高点是引入 $I$-分次模范畴 $R\dcate{Mod}_I$ 的一个辫结构 (定义 \ref{def:braiding}), 亦即自然同构 $c_\epsilon(M, N): M \otimes N \rightiso N \otimes M$ 如下
+\begin{align*}
+	c_\epsilon(M,N): M_i \otimes N_j & \longrightiso N_j \otimes M_i \\
+	x \otimes y & \longmapsto (-1)^{\epsilon(\deg x)\epsilon(\deg y)} y \otimes x, \quad i,j \in I.
+\end{align*}
+这也称为 Koszul 辫结构\index{bianjiegou!Koszul}, 容易验证它满足辫结构定义 \ref{def:braiding} 的所有要求, 更满足对称性
+\begin{gather}\label{eqn:Koszul-braiding-symm}
+	c_\epsilon(A,B) c_\epsilon(B, A) = \identity.
+\end{gather}
+此外, 定义 \ref{def:anti-commutation} 能以幺半范畴的语言改写为
+\[ A:\; \epsilon\text{-交换} \iff \mu_A \circ c_\epsilon(A,A) = \mu_A \]
+在此 $\mu_A: A \otimes A \to A$ 表 $A$ 的乘法.
+
+\begin{definition-theorem}[Koszul 符号律]\label{def:Koszul-sign-alg}
+	取定 $I$, $\epsilon: I \to \Z/2\Z$ 并令 $A$, $B$ 为 $I$-分次代数. 在张量积 $A \otimes B$ 上定义乘法使得对齐次元有
+	\[ (a \otimes b)(a' \otimes b') = (-1)^{\epsilon(\deg b)\epsilon(\deg a')} aa' \otimes bb' , \]
+	则
+	\begin{compactenum}[(i)]
+		\item $A \otimes B$ 对此乘法成为 $I$-分次代数;
+		\item 自然同态 $\iota_A: A \to A \otimes B$ 和 $\iota_B: B \to A \otimes B$ 都是分次代数的同态;
+		\item 若 $A$ 和 $B$ 都是 $\epsilon$-交换的, 则 $A \otimes B$ 亦然;
+		\item Koszul 辫结构 $c_\epsilon(A, B): A \otimes B \rightiso B \otimes A$ 是分次代数的同构.
+	\end{compactenum}
+\end{definition-theorem}
+换言之, 我们在原张量积乘法的每一个分次部分 $(A_i \otimes B_j) \otimes (A_k \otimes B_l) \to A_{i+k} \otimes B_{j+l}$ 以符号 $(-1)^{\epsilon(j)\epsilon(k)}$ 扭转. 证明无非是定义的直接操演, 要点在于理解定义的想法. 假定 $A$, $B$ 皆为 $\epsilon$-交换, 使 $A \otimes B$ 成为 $\epsilon$-交换的至少需要哪些条件呢? 断言 (ii) 应该是个自然的要求, 这就确定了乘法规律 $(a \otimes 1)(a' \otimes 1) = aa' \otimes 1$ 和 $(1 \otimes b)(1 \otimes b') = 1 \otimes bb'$; 一般情形下, 结合律蕴涵
+\[ (a \otimes b)(a' \otimes b') = (a \otimes 1) \left((1 \otimes b)(a' \otimes 1)\right) (1 \otimes b'). \]
+假若 $A \otimes B$ 为 $\epsilon$-交换, 则必有 $(1 \otimes b)(a' \otimes 1) = (-1)^{\epsilon(\deg b)\epsilon(\deg a)} (a' \otimes 1)(1 \otimes b)$. 代回前一步就得到定义中以 $\epsilon$ 扭转的乘法律. 于是在 (ii) 的制约下, Koszul 符号律对于 $\epsilon$-交换 $I$-分次代数不仅自然甚且必然. 这点可以用范畴语言利索地总结.
+
+\begin{proposition}\label{prop:graded-alg-cocomplete}
+	令 $R\dcate{CAlg}^\epsilon_I$ 全体 $\epsilon$-交换 $I$-分次代数构成的范畴, 则张量积 $\otimes$ 配合 Koszul 符号律给出 $R\dcate{CAlg}^\epsilon_I$ 上的余积. 此外 $R\dcate{CAlg}^\epsilon_I$ 是余完备的. 如果 $A$, $B$ 皆满足 \eqref{eqn:strong-anti-commutation}, 则 $A \otimes B$ 亦然.
+\end{proposition}
+习惯简记交换 $I$-分次代数范畴 $R\dcate{CAlg}^0_I$ 为 $R\dcate{CAlg}_I$.
+\begin{proof}
+	前半部是推论 \ref{prop:tensor-alg-cocomplete} 的自然延伸, 以上已实质说明了有限余积的构造, 在此同样可以取滤过极限以处理无穷张量积. 欲证 $R\dcate{CAlg}^\epsilon_I$ 余完备只须对任一对态射 $f,g: A \to B$ 构造余等化子 $B \to \Coker(f,g)$; 留意到 $\{a \in A:f(a)-g(a) \}$ 生成分次理想 $I$, 故 $B/I$ 即所求.
+	
+	今假设 $A$, $B$ 满足 \eqref{eqn:strong-anti-commutation}, 考虑 $A \otimes B$ 的齐次元 $x = \sum_{i=1}^n x_i \otimes y_i$, 记 $p_i := \epsilon(\deg x_i)$, $q_i := \epsilon(\deg y_i)$ 并假设 $\forall i,\; p_i+q_i=1$. 计算
+	\begin{align*}
+		x^2 & = \left( \sum_{i=1}^n x_i \otimes y_i \right)^2 = \sum_{i,j} (-1)^{q_i p_j} x_i x_j \otimes y_i y_j \\
+		& = \left( \sum_{i=j} + \sum_{i \neq j} \right) \cdots
+		= 0 + \sum_{i \neq j} (-1)^{q_i p_j} x_i x_j \otimes y_i y_j.
+	\end{align*}
+	对每个 $1 \leq i,j \leq n$,
+	\begin{align*}
+		(-1)^{q_i p_j} x_i x_j \otimes y_i y_j & = (-1)^{q_i p_j + p_i p_j + q_i q_j} x_j x_i \otimes y_j y_i \\
+		& = (-1)^{p_i q_j + q_i p_j + p_i p_j + q_i q_j} \cdot (-1)^{q_j p_i} x_j x_i \otimes y_j y_i.
+	\end{align*}
+	由于在 $\Z/2\Z$ 中 $q_j p_i + q_i p_j + p_i p_j + q_i q_j = (p_i + q_i)(p_j + q_j) = 1$, 交换 $i \neq j$ 后以上和式的项变号相消, 如愿得到 $x^2=0$.
+\end{proof}
+
+回到几何的源头, 不难看出 Koszul 符号律与 $\omega \otimes \eta \mapsto \omega \wedge \eta$ 几乎将 $A(X) \otimes A(Y)$ 等同于 $A(X \times Y)$, 因而是合理的. 为此仅须取定 $X$ 和 $Y$ 的局部坐标 $x_1, \ldots, x_n$ 和 $y_1, \ldots, y_m$, 其并构成 $X \times Y$ 的局部坐标; 微分形式的乘法要求在 $A(X \times Y)$ 中有
+\[ \left( \dd y_{i_1} \wedge \cdots \wedge \dd y_{i_k} \right) \wedge \left( \dd  x_{j_1} \wedge \cdots \wedge \dd x_{j_l} \right) = (-1)^{kl} \dd x_{i_1} \wedge \cdots \wedge \dd x_{i_l} \wedge \dd y_{i_1} \wedge \cdots \wedge \dd y_{i_k} \]
+这无非是 Koszul 符号律; 之所以``几乎''等同, 是因为 $C^\infty(X) \otimes C^\infty(Y) \neq C^\infty(X \times Y)$, 欲得等式须取拓扑向量空间的完备张量积 $\hat{\otimes}$.
+
+从对称幺半范畴的高度观照. 将分次代数看作叠架在分次模上的结构, Koszul 符号律相当于定义 $A \otimes B$ 上的乘法 $\mu_{A \otimes B}$ 为合成态射 (省去结合约束)
+\[ A \otimes B \otimes A \otimes B \xrightarrow{\identity_A \otimes c_\epsilon(B, A) \otimes \identity_B} A \otimes A \otimes B \otimes B \xrightarrow{\mu_A \otimes \mu_B} A \otimes B; \]
+取 $\epsilon=0$, $c_0(B,A) = c(B, A)$, 便是无扭转的版本. 分次代数 $A$ 的 $\epsilon$-交换性还能刻画为 $A = A^{\epsilon-\text{op}}$, 其中 $\epsilon$-相反代数 $A^{\epsilon-\text{op}}$ 的构造是以 $\mu_A \circ c_\epsilon(A,A)$ 代 $\mu_A$, 读者可以验证 $A^{\epsilon-\text{op}}$ 确实是代数.
+
+综之, 在同一个幺半范畴 $(R\dcate{Mod}_I, \otimes)$ 上考虑不同的对称辫结构, 便在分次代数上导种种出不同版本的交换性与张量积上的乘法. 这般思路在当代数学中并非孤例.
+
+定义--定理 \ref{def:Koszul-sign-alg} 毕竟是一些初等的代数性质, 直接验证既不难也不繁; 不过既然已经踏上制高点, 在对称幺半范畴的框架下进行验证兴许更有趣, 也利于进一步的推广. 兹以性质 (iv) 为例, 需证明的是图表
+\[\begin{tikzcd}[column sep=large, row sep=large]
+	A \otimes B \otimes A \otimes B \arrow[r, "{c_\epsilon(A,B) \otimes c_\epsilon(A,B)}" inner sep=1em] \arrow[d, "{\identity_A \otimes c_\epsilon(B,A) \otimes \identity_B}"'] & B \otimes A \otimes B \otimes A \arrow[d, "{\identity_B \otimes c_\epsilon(A,B) \otimes A}"] \\
+	A \otimes A \otimes B \otimes B \arrow[r, "{c_\epsilon(A \otimes A, B \otimes B)}" inner sep=1em] \arrow[d, "{\mu_A \otimes \mu_B}"'] &  B \otimes B \otimes A \otimes A \arrow[d, "{\mu_B \otimes \mu_A}"] \\
+	A \otimes B \arrow[r, "{c(A,B)}"'] & B \otimes A
+\end{tikzcd}\]
+交换, 其中 $\mu_A$, $\mu_B$ 表代数的乘法, 并在图中省去交换约束. 下块的交换性可归结于 $c_\epsilon(-,-)$ 的函子性. 上块交换性从辫子观点则一目了然 (回忆 \S\ref{sec:braiding}):
+\begin{equation*}\begin{tikzpicture}[baseline=(braid)]
+	\braid[style strands={1}{black}, style strands={2}{black}, style strands={3}{black}, style strands={4}{black},
+	floor command={
+		\draw[dashed] (\floorsx,\floorsy) -- (\floorex,\floorsy);
+	}] (braid)  s_2 | s_1-s_3;
+	\node[above] at (braid-1-s) {$B$};
+	\node[below] at (braid-1-e) {$B$};
+	\node[above] at (braid-2-s) {$B$};
+	\node[below] at (braid-2-e) {$B$};
+	\node[above] at (braid-3-s) {$A$};
+	\node[below] at (braid-3-e) {$A$};
+	\node[above] at (braid-4-s) {$A$};
+	\node[below] at (braid-4-e) {$A$};
+\end{tikzpicture} \; = \;
+\begin{tikzpicture}[baseline=(braid), yscale=0.7]
+	\braid[style strands={1}{black}, style strands={2}{black}, style strands={3}{black}, style strands={4}{black} ] (braid) s_2 s_1-s_3 s_2 s_2^{-1};
+	\node[above] at (braid-1-s) {$B$};
+	\node[below] at (braid-1-e) {$B$};
+	\node[above] at (braid-2-s) {$B$};
+	\node[below] at (braid-2-e) {$B$};
+	\node[above] at (braid-3-s) {$A$};
+	\node[below] at (braid-3-e) {$A$};
+	\node[above] at (braid-4-s) {$A$};
+	\node[below] at (braid-4-e) {$A$};
+\end{tikzpicture} \; \xlongequal{\because\,\eqref{eqn:Koszul-braiding-symm}} \;
+\begin{tikzpicture}[baseline=(braid), yscale=0.7]
+	\braid[style strands={1}{black}, style strands={2}{black}, style strands={3}{black}, style strands={4}{black},
+	floor command={
+		\draw[dashed] (\floorsx,\floorsy) -- (\floorex,\floorsy);
+	}] (braid) s_2 s_1-s_3 s_2 | s_2;
+	\node[above] at (braid-1-s) {$B$};
+	\node[below] at (braid-1-e) {$B$};
+	\node[above] at (braid-2-s) {$B$};
+	\node[below] at (braid-2-e) {$B$};
+	\node[above] at (braid-3-s) {$A$};
+	\node[below] at (braid-3-e) {$A$};
+	\node[above] at (braid-4-s) {$A$};
+	\node[below] at (braid-4-e) {$A$};
+\end{tikzpicture}\end{equation*}
+形式地论证则须先将 $c_\epsilon(A \otimes A, B \otimes B)$ 以 \eqref{eqn:hexagon-axiom-1}, \eqref{eqn:hexagon-axiom-2} 拆解为最右辫子上部的形貌, 然而这也毫无困难.
+
+\begin{remark}
+	函子 $P_{R \to S}$, $\mathcal{F}_{R \to S}$ 在 $I$-分次代数和分次模情形有显而易见的推广, 以及相应的伴随关系. 以基变换 $P_{R \to S}$ 为例, 若赋予 $S$ 平凡的分次 $S_0 = S$, 自然可以拓展 $P_{R \to S} = - \otimes S$ 为函子 $R\dcate{Alg}_I \to S\dcate{Alg}_I$. 对于 $\epsilon$-对称代数的推广也是直截了当的.
+\end{remark}
+
+\section{张量代数}
+取定交换环 $R$. 在 \S\ref{sec:module-tensor-prod} 已经系统地处理了模的张量积, 眼下的交换情形更为简单: 以下记 $\otimes = \otimes_R$, 我们可以考虑多个模的张量积 $M_1 \otimes (M_2 \otimes (\cdots \otimes M_n )\cdots)$, 由于有结合约束, 括号放置顺序在此不是问题, 一劳永逸的办法则是仿照命题 \ref{prop:tensor-assoc} 的证明, 对任意 $R$-模 $A$ 考虑 $R$-模
+\[ \text{Mul}(M_1, \cdots, M_n; A) := \left\{ \text{多重线性映射}\; B: M_1 \times \cdots \times M_n \to A \right\} \]
+其中我们称 $B$ 为多重线性映射, 如果它对每个变元 $x_i \in M_i$ 皆为 $R$-线性的.\index{duochongxianxingyingshe@多重线性映射 (multilinear map)}
+
+我们欲定义的资料为 $R$-模 $M_1 \otimes \cdots \otimes M_n$ 连同多重线性映射 $M_1 \times \cdots \times M_n \to M_1 \otimes \cdots \otimes M_n$, 后者记作 $(x_1, \cdots, x_n) \mapsto x_1 \otimes \cdots \otimes x_n$. 它们由泛性质
+\begin{equation}\label{eqn:Mul-tensor}\begin{aligned}
+	\Hom(M_1 \otimes \cdots \otimes M_n, \bullet) & \stackrel{\sim}{\longrightarrow} \text{Mul}(M_1, \cdots, M_n; \bullet) \\
+	\varphi & \longmapsto [ (x_1, \ldots, x_n) \mapsto \varphi(x_1 \otimes \cdots \otimes x_n) ]
+\end{aligned}\end{equation}
+刻画. 此时仍然有多变元的结合约束
+\[ (M_1 \otimes \cdots \otimes M_n) \otimes (M_{n+1} \otimes \cdots \otimes M_m) \rightiso M_1 \otimes \cdots \otimes M_m \]
+满足合适的函子性质. 定义模 $M$ 的 $n$ 重张量积为
+\begin{align*}
+	T^n(M) & := \underbracket{M \otimes \cdots \otimes M}_{n \text{份}}, \quad n \geq 1, \\
+	T^0(M) & := R.
+\end{align*}
+结合约束导出自然同态 $\mu_{i,j}: T^i M \otimes T^j M \rightiso T^{i+j} M$.
+
+\begin{definition}[张量代数]\index[sym1]{$T(M)$, $T^n(M)$}\index{zhangliangdaishu@张量代数 (tensor algebra)}
+	定义 $R$-模 $M$ 的\emph{张量代数}为 $T(M) := \bigoplus_{n=0}^\infty T^i(M)$, 其乘法和幺元分别由诸 $\mu_{i,j}$ 和 $R = T^0(M) \hookrightarrow T(M)$ 给出. 它带有自然的 $R$-模单同态 $M = T^1(M) \hookrightarrow T(M)$. 同时 $T(M)$ 也是定义 \ref{def:graded-module-alg} 中的分次代数, 其 $k$ 次齐次部分无非是 $T^k(M)$.
+\end{definition}
+乘法的定义如在元素层面展开, 无非是张量积
+\[ (x_1 \otimes \cdots \otimes x_n) \cdot (y_1 \otimes \cdots \otimes y_m) = x_1 \otimes \cdots \otimes x_n \otimes y_1 \otimes \cdots \otimes y_m. \]
+至于所需的结合律等性质, 归根结柢是源于结合约束的函子性. 注意到 $M = T^1(M)$ 生成 $T(M)$. 由于每个 $T^k(\cdot)$ 都是函子, 易证 $T(\cdot)$ 亦然: 若 $M \to N$ 是模的同态, 则存在唯一的代数同态 $T(M) \to T(N)$ 使图表
+$\begin{tikzcd}[row sep=small, column sep=small]
+	M \arrow[r] \arrow[d] & N \arrow[d] \\
+	T(M) \arrow[r] & T(N)
+\end{tikzcd}$
+交换.
+
+下述泛性质表明 $(T(M), M \to T(M))$ 可谓是模 $M$ 上的``自由代数''.
+\begin{theorem}\label{prop:tensor-alg-universal}
+	张量代数满足如下泛性质: 对任意 $R$-代数 $A$ 连同 $R$-模同态 $f: M \to A$, 存在唯一的 $R$-模同态 $\varphi: T(M) \to A$ 使下图交换:
+	\[\begin{tikzcd}[row sep=tiny]
+		& T(M) \arrow[dd, "\exists! \;\varphi"] \\
+		M \arrow[ru] \arrow[rd, "f"'] & \\
+		& A
+	\end{tikzcd}\]
+	换句话说, 函子间有伴随关系 $\Hom_{R\dcate{Alg}}(T(-), -) \simeq \Hom_{R\dcate{Mod}}(-, U(-))$, 此处 $U: R\dcate{Alg} \to R\dcate{Mod}$ 表忘却函子.
+\end{theorem}
+\begin{proof}
+	同态 $\varphi: T(M) \to A$ 由它在每个直和项 $T^n(M)$ 上的限制确定, 根据泛性质, 当 $n \geq 1$ 时后者又由多重线性映射
+	\begin{align*}
+		M \times \cdots \times M & \longrightarrow A \\
+		(x_1, \cdots, x_n) & \longmapsto \varphi(x_1 \otimes \cdots \otimes x_n)
+	\end{align*}
+	所确定. 图表中的代数间同态必须满足 $\varphi(x_1 \otimes \cdots \otimes x_n) = f(x_1) \cdots f(x_n)$, 右边是 $(x_1, \ldots, x_n)$ 的多重线性映射; 由泛性质知这唯一确定了 $\varphi$. 欲证明存在性, 仅须倒转以上论证以构造模同态 $\varphi: T(M) \to A$, 并按部就班地验证它的乘性.
+\end{proof}
+
+既谈到伴随函子, 借机回忆范畴论中的标准手法: 同构 $\Hom_{R\dcate{Alg}}(T(-), -) \simeq \Hom_{R\dcate{Mod}}(-, U(-))$ 将左端的 $\identity_{T(M)}: T(M) \to T(M)$ 映到 $R$-模同态 $M \to UT(M) = T(M)$, 这正是唯一确定了伴随同构的``单位''态射 (定义 \ref{def:adjunction-unit-counit}). 所以伴随诠释一并容纳了 $T(M)$ 和 $M \to T(M)$ 的构造.
+
+\begin{lemma}\label{prop:tensor-alg-basechange}
+	张量代数的构造与基变换相交换: 对环同态 $R \to S$ 存在唯一的分次 $S$-代数同构 $\psi_M: T(M \otimes S) \rightiso T(M) \otimes S$, 使得图表
+	\[\begin{tikzcd}
+		& M \otimes S \arrow[ld] \arrow[rd, "{[M \to T(M)] \otimes S}"] & \\
+		T(M \otimes S) \arrow[rr, "\sim", "\psi_M"'] & & T(M) \otimes S
+	\end{tikzcd}\]
+	在 $S\dcate{Mod}$ 中交换. 于是有函子的同构 $T(- \otimes S) \rightiso T(-) \otimes S$.
+\end{lemma}
+\begin{proof}
+	由于 $M \rightiso T^1(M)$ 生成 $R$-代数 $T(M)$, 同构 $\psi_M$ 的唯一性和分次性都是明白的. 证其存在的手法有多种, 直接在集合元素和映射层面验证兴许最快, 然而我们更希望凸显伴随函子的枢纽角色. 是以考虑基变换函子 $P_{R \to S}: R\dcate{Mod} \xrightarrow{- \otimes S} S\dcate{Mod}$，以及拉回函子 $\mathcal{F}_{R \to S}: S\dcate{Mod} \to R\dcate{Mod}$; 它们对 $R$ 和 $S$-代数的版本分别记为 $P_{R \to S}^a$, $\mathcal{F}^a_{R \to S}$. 推论 \ref{prop:IP-vs-F} 及命题 \ref{prop:IP-vs-F-alg} 给出伴随对 $(P_{R \to S}, \mathcal{F}_{R \to S})$ 和 $(P_{R \to S}^a, \mathcal{F}_{R \to S}^a)$; 此外还有定理 \ref{prop:tensor-alg-universal}的伴随对 $(T, U)$. 为简化符号, 此处略去伴随对所需的同构.
+
+	依命题 \ref{prop:adjunction-composition} 作伴随对的合成, 得出 $(T P_{R \to S}, \mathcal{F}_{R \to S} U)$ 和 $(P_{R \to S}^a T, U \mathcal{F}_{R \to S}^a)$ 也是伴随对. 显然 $\mathcal{F}_{R \to S} U = U \mathcal{F}_{R \to S}^a$, 命题 \ref{prop:adjunction-uniqueness} 断言的唯一性遂给出 $\psi: TP_{R \to S} \rightiso P_{R \to S}^a T$. 考虑单位 (定义 \ref{def:adjunction-unit-counit}) 可得自然的交换图表
+	\[\begin{tikzcd}[row sep=small]
+		{} & M \arrow[ld] \arrow[rd] & \\
+		\mathcal{F}_{R \to S} U T P_{R \to S} (M) \arrow[rr, "\sim", "{\mathcal{F}_{R \to S}U \psi_M}"'] & & \mathcal{F}_{R \to S} U P_{R \to S}^a T(M)
+	\end{tikzcd}\]
+	而且此图也唯一确定了 $\psi_M$ (因为 $U$, $\mathcal{F}_{R \to S}$ 皆忠实). 利用伴随对 $(P_{R \to S}, \mathcal{F}_{R \to S})$ 及自然性可知这等价于
+	\[\begin{tikzcd}[row sep=small]
+		{} & P_{R \to S}(M) \arrow[ld] \arrow[rd] & \\
+		U T P_{R \to S} (M) \arrow[rr, "\sim", "{U \psi_M}"'] & & U P_{R \to S}^a T(M)
+	\end{tikzcd}\]
+	交换. 展开图中诸函子的定义即得断言的交换图表. 由此亦见 $\psi_M$ 保持分次.
+\end{proof}
+
+\begin{corollary}\label{prop:tensor-alg-limit}
+	张量代数的构造 $T(-): R\dcate{Mod} \to R\dcate{Alg}_{\Z}$ 保任意的 $\varinjlim$: 存在分次代数的自然同构 $\varinjlim_i T(M_i) \rightiso T(\varinjlim_i M_i)$. 模的商同态 $M \twoheadrightarrow M/N$ 映至 $T(M) \to T(M)/\lrangle{N} \simeq T(M/N)$, 其中 $\lrangle{N}$ 表示 $N$ 生成的分次理想.
+\end{corollary}
+\begin{proof}
+	因为 $T$ 有右伴随函子 $U$, 保 $\varinjlim$ 是定理 \ref{prop:adjuncion-limit} 的形式结论. 商同态 $M \to M/N$ 可以视同 $R\dcate{Mod}$ 中的余等化子 $M \to \Coker(\iota,0)$, 其中 $\iota: N \hookrightarrow M$. 它被 $T$ 映至 $T(M) \to \Coker(T(\iota), T(0))$; 为了得到自然同构 $\Coker(T(\iota), T(0)) \simeq T(M)/\lrangle{N}$, 仅须回忆 $R\dcate{Alg}_{\Z}$ 中余等化子的构造 (命题 \ref{prop:graded-alg-cocomplete}), 并留意 $T(0): T(N) \to T(M)$ 诱导 $R = T^0(N) \hookrightarrow T^0(M)$ 而在 $T^{>0}(N)$ 上为零.
+\end{proof}
+
+\section{对称代数和外代数}
+沿用上节的符号.
+\begin{definition}[对称代数与外代数]\label{def:Sym-wedge} \index{duichengdaishu@对称代数 (symmetric algebra)} \index{waichengdaishu@外代数 (exterior algebra)} \index[sym1]{Sym(M)@$\Sym(M)$, $\Sym^n(M)$} \index[sym1]{Lambda(M)@$\bigwedge(M)$, $\bigwedge^n(M)$}
+	以齐次生成元定义 $T(M)$ 的分次双边理想
+	\begin{align*}
+		I_{\Sym}(M) & := \lrangle{ x \otimes y - y \otimes x : x,y \in M}, \\
+		I_{\bigwedge}(M) & := \lrangle{x \otimes x : x \in M}.
+	\end{align*}
+	相应的商代数
+	\begin{align*}
+		\Sym(M) & := T(M)/I_{\Sym}(M), \\
+		\bigwedge(M) & := T(M)/I_{\bigwedge}(M)
+	\end{align*}
+	分别称为 $M$ 的\emph{对称代数}和\emph{外代数}.
+\end{definition}
+
+当 $R = \CC$ 而 $M$ 是 Hilbert 空间时, $\Sym(M)$ 是量子物理学中常用的 (Bose 子) Fock 空间, 取 $\bigwedge(M)$ 就得到 (Fermi 子) Fock 空间; 从 $M$ 过渡到其 Fock 空间是所谓二次量子化的一道步骤.
+
+我们先作一些基本的观察.
+\begin{itemize}
+	\item 引理 \ref{prop:graded-ideal-submodule} 确保 $I_{\Sym}(M) = \bigoplus_n I_{\Sym}^n(M)$ 和 $I_{\bigwedge}(M) = \bigoplus_n I_{\bigwedge}^n(M)$ 都是分次理想, 因之 $\Sym(M) = \bigoplus_{n \geq 0} \Sym^n(M)$ 和 $\bigwedge(M) = \bigoplus_{n \geq 0} \bigwedge^n(M)$ 自然地成为分次代数. 由于这些理想由二次齐次元生成, 我们仍有从 $M \to T(M)$ 诱导的单同态 $M \to \Sym(M)$ 和 $M \to \bigwedge(M)$.
+	\item 任意模同态 $M \to N$ 诱导 $I_{\Sym}(M) \to I_{\Sym}(N)$ 和 $I_{\bigwedge}(M) \to I_{\bigwedge}(N)$, 因之 $\Sym(\cdot)$ 和 $\bigwedge(\cdot)$ 皆为函子.
+	\item 对称代数的乘法习惯写作 $(x,y) \mapsto xy$; 当 $x, y \in M$ 时 $xy=yx$, 又由于 $M$ 生成 $\Sym(M)$ 故 $\Sym(M)$ 是交换 $R$-代数. 由此知对称代数可谓是 $T(M)$ 的交换化.
+	\item 外代数的乘法习惯写作 $(x,y) \mapsto x \wedge y$. 注意到对每个 $x, y \in M$, 
+		\[ (x+y) \otimes (x+y) - x \otimes x - y \otimes y = x \otimes y + y \otimes x \in I_{\bigwedge}(M), \]
+		上式蕴涵 $x \wedge y = - y \wedge x$, 这是定义 \ref{def:anti-commutation} 中反交换性对一次齐次元的情形. 由于 $M$ 生成 $\bigwedge(M)$, 对任意齐次元 $x,y$ 皆可导出 $x \wedge y = (-1)^{\deg x \deg y} y \wedge x$. 反之若假设 $2 \in R^\times$, 则反交换性又蕴涵 $x \wedge x = - x \wedge x = 0$ 对任意 $x \in M$ 成立, 故此时外代数可谓是 $T(M)$ 的反交换化.
+	\item 最后我们对 $\bigwedge(M)$ 验证 \eqref{eqn:strong-anti-commutation}. 一次情形是明显的, 而任意奇数次齐次元可表作 $\omega = \sum_{i=1}^k t_i \wedge \eta_i$, 其中 $\deg(t_i)=1$, $\deg(\eta_i) \in 2\Z$, 反交换性蕴涵
+		\begin{align*}
+			\omega \wedge \omega & = \sum_{i,j} t_i \wedge \eta_i \wedge t_j \wedge \eta_j = \sum_{i,j} t_i \wedge t_j \wedge \eta_i \wedge \eta_j \\
+			& = \sum_i (t_i \wedge t_i) \wedge (\eta_i \wedge \eta_i) + \sum_{i < j} (t_i \wedge t_j + t_j \wedge t_i) \wedge \eta_i \wedge \eta_j \\
+			& = 0 + 0 = 0.
+		\end{align*}
+\end{itemize}
+总结部分结果如下.
+\begin{lemma}\label{prop:Sym-wedge-properties}
+	对称代数 $\Sym(M)$ 是交换分次代数; 外代数 $\bigwedge(M)$ 是反交换分次代数并满足性质 \eqref{eqn:strong-anti-commutation}.
+\end{lemma}
+
+\begin{example}\label{eg:Sym-wedge-rank1}
+	设 $M$ 为秩一自由模 $M = Rx$. 则作为分次代数有 $\Sym(M) = R[x] = \bigoplus_{n \geq 0} R x^n$, 而 $\bigwedge(M) = R \oplus Rx$.
+\end{example}
+
+\begin{lemma}
+	对称代数与外代数的构造与基变换交换: 对环同态 $R \to S$, 引理 \ref{prop:tensor-alg-basechange} 中的函子同构 $T(- \otimes S) \rightiso T(-) \otimes S$ 自然地导出
+	\[ \Sym(- \otimes S) \rightiso \Sym(-) \otimes S, \quad \bigwedge(- \otimes S) \rightiso \bigwedge(-) \otimes S, \]
+	而且同构保分次结构.
+\end{lemma}
+\begin{proof}
+	由引理 \ref{prop:tensor-alg-basechange} 配上理想生成元的描述, 立得 $T(- \otimes S) \rightiso T(-) \otimes S$ 导出分次同构 $I_{\Sym}(M \otimes S) \rightiso I_{\Sym}(M) \otimes S$ 和 $I_{\bigwedge}(M \otimes S) \rightiso I_{\bigwedge}(M) \otimes S$. 张量积保商 (命题 \ref{prop:tensor-mod-exact}) 故证毕.
+\end{proof}
+
+一如多元张量积, $M$ 的 $n$ 次对称幂 $\Sym^n(M)$ 和外幂 $\bigwedge^n(M)$ 也由泛性质刻画. 令 $A$ 为任意 $R$-模, $n \geq 1$, 置
+\begin{align*}
+	\text{Sym}(M \times n; A) & := \left\{ B \in \text{Mul}(\underbracket{M, \ldots, M}_{n \text{份}}; A) : B(\ldots, x,y, \ldots) = B(\ldots, y,x, \ldots) \right\}, \\
+	\text{Alt}(M \times n; A) & := \left\{ B \in \text{Mul}(\underbracket{M, \ldots, M}_{n \text{份}}; A) : B(\ldots, x,x, \ldots)=0 \right\}
+\end{align*}
+定义式中 $x,y \in M$ 而且比邻出现的位置是任意的. 我们分别称 $\text{Sym}(M \times n; A)$ 和 $\text{Alt}(M \times n; A)$ 的元素为 $M$ 上取值在 $A$ 中的对称和反对称 $n$ 重线性映射. 为了会通线性代数中相似的概念, 请先注意到对称群 $\mathfrak{S}_n$ 以 $(\sigma B)(x_1, \ldots, x_n) = B(x_{\sigma^{-1}(1)}, \ldots, x_{\sigma^{-1}(n)})$ 左作用于 $\text{Mul}(M, \ldots, M; A)$, 并回忆 $\mathfrak{S}_n$ 由对换 $\tau_i := (i \quad i+1)$ 生成, $1 \leq i < n$ (引理 \ref{prop:S_n-generation}).
+\begin{compactitem}
+	\item 对于 $\text{Sym}(M \times n; A)$, 定义可以改写为 $\forall i, \;\tau_i B = B$, 或者进一步 $\forall \sigma \in \mathfrak{S}_n,\; \sigma B =B$. 这是对称多重线性映射的合理定义.
+	\item 对于 $\text{Alt}(M \times n; A)$, 参照先前推导 $\bigwedge(M)$ 反交换的办法, 依样画葫芦地从
+	\[ B(\ldots, x+y, x+y, \ldots, \ldots) = B(\ldots, x,x, \ldots) = B(\ldots, y,y, \ldots) = 0\]
+	导出 $B(\ldots, x,y, \ldots) = -B(\ldots, y,x, \ldots)$, 亦即 $\tau_i B = -B$; 或者进一步:
+		\begin{gather*}
+			\forall \sigma \in \mathfrak{S}_n,\; \sigma B = \sgn(\sigma)B.
+		\end{gather*}
+		当 $2 \in R^\times$ 时, 取 $x=y$ 还能反推 $B(\ldots, x,x, \ldots)=0$. 综之, $\text{Alt}(M \times n; -)$ 也是反对称多重线性映射的合理定义, 至少在 $2 \in R^\times$ 时毫无争议.
+\end{compactitem}
+当 $n=0$ 时, 定义 $\text{Sym}(M \times 0; A) = \text{Alt}(M \times 0; A) = A$; 注意到 $\Sym^0 = \bigwedge^0 = R$.
+
+\begin{proposition}\label{prop:Symm-Alt-univ}
+	对任意 $M$ 和 $n \geq 1$ 如上, 我们有函子的同构
+	\begin{align*}
+		\Hom_{R\dcate{Mod}}\left( \Sym^n(M), - \right) & \longrightiso \mathrm{Sym}(M \times n; -) \\
+		\varphi & \longmapsto [(x_1, \ldots, x_n) \mapsto \varphi(x_1 \cdots x_n)], \\
+		\Hom_{R\dcate{Mod}}(\bigwedge^n(M), - ) & \longrightiso \mathrm{Alt}(M \times n; -) \\
+		\varphi & \longmapsto [(x_1, \ldots, x_n) \mapsto \varphi(x_1 \wedge \cdots \wedge x_n)].
+	\end{align*}
+	当 $n=0$ 时以上同构按定义依然成立.
+\end{proposition}
+\begin{proof}
+	略去 $n=0$ 的平凡情形. 对于 $\Sym^n(M)$ 情形, 观察到 $I^n_{\Sym}(M)$ 由以下形式的元素生成
+	\[ a(x \otimes y )b- a(y \otimes x)b, \quad x,y \in M, \; a,b \in T(M): \text{齐次元}, \quad \deg(a)+\deg(b)+2=n. \]
+	在多重张量积的泛性质 \eqref{eqn:Mul-tensor} 中, $\varphi: T^n(M) \to A$ 在 $I^n_{\Sym}(M)$ 上为零当且仅当相应的 $B \in \text{Mul}(M, \cdots, M; A)$ 满足
+	\[ B(\ldots, x, y, \ldots) = \varphi(\cdots \otimes x \otimes y \otimes \cdots) = \varphi(\cdots \otimes y \otimes x \otimes \cdots) = B(\ldots, y, x, \ldots). \]
+	由此立见所求同构. 反对称情形可以类似地梳理.
+\end{proof}
+
+引进符号 $R\dcate{CAlg}_\Z$ 表交换 $\Z$-分次 $R$-代数所成范畴, $R\dcate{CAlg}^-_\Z$ 表反交换并满足 \eqref{eqn:strong-anti-commutation} 的 $\Z$ -分次 $R$-代数所成范畴. 我们立即导出以下结果.
+\begin{theorem}\label{prop:Sym-wedge-universal}
+	模同态 $M \to \Sym(M)$ 和 $M \to \bigwedge(M)$ 诱导出函子间的同构
+	\begin{align*}
+		\Hom_{R\dcate{CAlg}_\Z}(\Sym(-),-) & \longrightiso \Hom_{R\dcate{Mod}}(-, U(-)), \\
+		\Hom_{R\dcate{CAlg}^-_\Z}(\bigwedge(-),-) & \longrightiso \Hom_{R\dcate{Mod}}(-, U(-)),
+	\end{align*}
+	其中 $U$ 表示忘却函子 $R\dcate{CAlg}_\Z, R\dcate{CAlg}^-_\Z \to R\dcate{Mod}$.
+\end{theorem}
+\begin{proof}
+	以对称代数的情形为例, 上示同构映 $f: \Sym(M) \to A$ 为合成 $M \hookrightarrow \Sym(M) \xrightarrow{f} A$, 反向则映 $R$-模同态 $\varphi: M \to A$ 为 $f: \Sym(M) \to A$, $f(x_1 \cdots x_n) = \varphi(x_1) \cdots \varphi(x_n)$, 后者良定是命题 \ref{prop:Symm-Alt-univ} 的推论.
+\end{proof}
+
+命题 \ref{prop:graded-alg-cocomplete} 确保 $R\dcate{CAlg}_\Z$ 和 $R\dcate{CAlg}^-_\Z$ 都是余完备范畴. 依靠定理 \ref{prop:Sym-wedge-universal}, 以下断言的证明和推论 \ref{prop:tensor-alg-limit} 全然相同.
+\begin{corollary}\label{prop:Sym-wedge-rightexact}
+	函子 $\Sym: R\dcate{Mod} \to R\dcate{CAlg}_\Z$ 保 $\varinjlim$, 而且模的商同态 $M \to M/N$ 映至 $\Sym(M) \twoheadrightarrow \Sym(M)/\lrangle{N} \simeq \Sym(M/N)$. 函子 $\bigwedge: R\dcate{Mod} \to R\dcate{CAlg}^-_\Z$ 亦同.
+\end{corollary}
+
+直和与张量积分别是 $R\dcate{Mod}$ 和 $R\dcate{CAlg}_\Z$ 或 $R\dcate{CAlg}^-_\Z$ 中的余积. 仔细展开定义就可以得到以下结果.
+\begin{corollary}\label{prop:Sym-wedge-direct-sum}
+	对称代数和外代数的构造化直和为张量积: 对于任一族 $R$-模 $\{M_i\}_{i \in I}$, 置 $M := \bigoplus_{i \in I} M_i$. 存在分次 $R$-代数的自然同构 $\bigotimes_{i \in I} \Sym(M_i) \longrightiso \Sym(M)$ 和 $\bigotimes_{i \in I} \bigwedge(M_i) \longrightiso \bigwedge(M)$, 其中 $\bigotimes_i \bigwedge(M_i)$ 按 Koszul 符号律 (定义--定理 \ref{def:Koszul-sign-alg}) 配备分次 $R$-代数结构. 它们由以下交换图表刻画: 对每个 $j \in I$,
+	\[\begin{tikzcd}[column sep=tiny, row sep=small]
+		\bigotimes_{i \in I} \Sym(M_i) \arrow[rr, "\sim"] & & \Sym(M) \\
+		& \Sym(M_j) \arrow[hookrightarrow, lu] \arrow[ru, "{\Sym(M_j \to M)}"'] &
+	\end{tikzcd}\quad\begin{tikzcd}[column sep=tiny, row sep=small]
+		\bigotimes_{i \in I} \bigwedge(M_i) \arrow[rr, "\sim"] & & \bigwedge(M) \\
+		& \bigwedge(M_j) \arrow[hookrightarrow, lu] \arrow[ru, "{\bigwedge (M_j \to M)}"'] &
+	\end{tikzcd}\]
+\end{corollary}
+
+\begin{corollary}\label{prop:Sym-wedge-free}
+	设 $M = \bigoplus_{x \in X} Rx$ 是以集合 $X$ 为基的自由 $R$-模. 则
+	\begin{compactitem}
+		\item $\Sym(M)$ 作为分次 $R$-代数同构于多项式代数 $R[X]$;
+		\item 赋予 $X$ 任意全序, 则 $\bigwedge(M)$ 作为 $R$-模是以
+		\[ \left\{ x_1 \wedge \cdots \wedge x_k : \; k \geq 0, \; x_1 < \ldots < x_k \in X \right\} \]
+		为基的自由模.
+	\end{compactitem}
+	如果 $R$-模 $N$ 由 $n$ 个元素生成, 那么 $m > n \implies \bigwedge^m N = \{0\}$.
+\end{corollary}
+\begin{proof}
+	关于自由模 $M$ 的断言可由推论 \ref{prop:Sym-wedge-direct-sum} 化约为秩一的情形, 亦即例 \ref{eg:Sym-wedge-rank1}. 设 $R$-模 $N$ 带有满同态 $R^{\oplus n} \twoheadrightarrow N$, 则推论 \ref{prop:Sym-wedge-rightexact} 蕴涵分次同态 $\bigwedge(R^{\oplus n}) \twoheadrightarrow \bigwedge(N)$ 为满, 关于 $\bigwedge^m N$ 的断言因之化约到自由模情形.
+\end{proof}
+
+最后, 我们来看看如何会通微分几何等学科里常见的定义. 命题 \ref{prop:Symm-Alt-univ} 的泛性质表明 $\Sym(M)$ 与 $\bigwedge(M)$ 定为 $T(M)$ 的商实属合理, 然而在一些场合 (如 \cite[\S 2.2]{ChCh}) 它们被定为全体对称张量 $T_{\Sym}(M)$ 和斜称张量 $T_\wedge(M)$, 是 $T(M)$ 的子模而非商模; 我们简要地回顾这些定义. 留意到对称群 $\mathfrak{S}_n$ 在 $T^n(M)$ 上有左作用 $\sigma(x_1 \otimes \cdots \otimes x_m) = x_{\sigma^{-1}(1)} \otimes \cdots \otimes x_{\sigma^{-1}(m)}$, 对于任意群同态 $\chi: \mathfrak{S}_n \to \{\pm 1\}$, 我们定义
+\begin{gather*}
+	T^n_\chi := \{x \in T(M): \forall \sigma \in \mathfrak{S}_n,\; \sigma x = \chi(\sigma)x\}, \\
+	T_\chi(M) := \bigoplus_{n \geq 1} T^n_\chi(M), \\
+	T_{\Sym}(M) := T_1(M), \quad T_\wedge := T_{\sgn}(M).
+\end{gather*}
+将每个 $\sigma$ 看作 $T^n(M)$ 的模自同态. 当 $n! \in R^\times$ 时, 容易看出 $\End_R(T^n(M))$ 中元素
+\[ e_\chi = e^n_\chi := \frac{1}{n!} \sum_{\sigma \in \mathfrak{S}_n} \chi(\sigma)^{-1} \sigma \]
+满足于
+\begin{gather}\label{eqn:e_chi-equivariance}
+	e_\chi|_{T^n_\chi(M)} = \identity, \qquad e_\chi \tau = \chi(\tau) e_\chi = \tau e_\chi, \quad \tau \in \mathfrak{S}_n.
+\end{gather}
+由此导出 $\Image(e_\chi) = T^n_\chi(M)$, 继而 $e_\chi^2 = e_\chi$, 根据 \S\ref{sec:indecomposable-mod} 的理论遂有
+\begin{align*}
+	T^n(M) & = T^n_\chi(M) \oplus \Ker(e_\chi) \\
+	x & = e_\chi(x) + (1 - e_\chi)(x).
+\end{align*}
+以下不妨设 $n \geq 2$. 条件 $n! \in R^\times$ 蕴涵 $2 \in R^\times$, 根据本节伊始的讨论和 \eqref{eqn:e_chi-equivariance},
+\begin{align*}
+	I^n_{\Sym}(M) & = \sum_{\tau \in \mathfrak{S}_n} \Image(\tau - 1) \subset \Ker(e_1), \\
+	I^n_{\bigwedge}(M) & = \sum_{\tau \in \mathfrak{S}_n} \Image(\tau - \sgn(\tau)) \subset \Ker(e_{\sgn});
+\end{align*}
+实际上仅取 $\tau= (i \quad i+1)$ 即可生成; 留意到上式对 $n=1$ 是平凡的. 另一方面, $1 - e_\chi = \frac{1}{n!} \sum_\tau (1 - \chi(\tau)^{-1} \tau)$ 的像即 $\Ker(e_\chi)$ 又包含于 $I^n_{\cdots}(M)$ (取 $\chi = 1, \sigma$, 此时 $\chi=\chi^{-1}$). 于是我们抵达以下结果.
+\begin{theorem}
+	当 $n! \in R^\times$ 时 $\Ker(e_1) = I^n_{\Sym}$, $\Ker(e_{\sgn}) = I^n_{\bigwedge}$, 因而有 $R$-模的同构
+	\begin{gather*}
+		e_1: T^n_{\Sym}(M) \longrightiso \Sym^n(M), \\
+		e_{\sgn}: T^n_\wedge(M) \longrightiso \bigwedge^n(M).
+	\end{gather*}
+\end{theorem}
+
+当 $R \supset \Q$ 时, 对称代数与外代数作为 $R$-模可以嵌入 $T(M)$; 对称 (或反对称) 张量的乘法在齐次元上转译为 $(x,y) \mapsto e^{\deg x + \deg y}_1(x \otimes y)$ (或 $(x, y) \mapsto e^{\deg x + \deg y}_{\sgn}(x \otimes y)$), 容或差一个约定俗成的因子, 参看 \cite[\S 2 (3.1)]{ChCh}. 此时
+\begin{gather*}
+	T^2(M) = \Sym^2(M) \oplus \bigwedge^2(M), \\
+	x \otimes y = x \cdot y + x \wedge y, \quad x,y \in M.
+\end{gather*}
+
+\section{牛刀小试: Grassmann 簇}\label{sec:Grassmannian}
+令 $F$ 为域, $V$ 为有限维非零 $F$-向量空间. 置 $n := \dim_F V$. 本节的目的是研究 $V$ 中的全体 $k$-维向量子空间 $W$ 构成的集合 $\Gras(k, V)$, 此处 $0 \leq k \leq n$. 确切地说, 我们希冀对 $\Gras(k,V)$ 的元素得到方便的参数化, 并赋予合适的几何结构. 这些几何对象称为 \emph{Grassmann 簇}, 它们在许多领域中都是必备工具, 譬如: \index{Grassmann 簇 (Grassmannian)}\index[sym1]{G(k,V)@$\Gras(k,V)$}
+\begin{compactenum}[(a)]
+	\item 研究 $\R^n$ 的 $k$ 维闭子流形 $M$ (如光滑曲面): 各点切空间构成从 $M$ 到 $\Gras(k, \R^n)$ 或其带定向版本的光滑映射, 称为 Gauss 映射, 它蕴藏了子流形几何的丰富信息.
+	\item 同伦论中酉群 $\mathrm{U}(k)$ 的分类空间 $\mathbf{B}\mathrm{U}(k)$ 可以构造为归纳极限 $\varinjlim_{n \geq k}\Gras(k, \CC^n)$.
+\end{compactenum}
+定义 \ref{def:Sym-wedge} 的外代数为处理这些问题提供了有力工具. 我们先端详一些简单的特例.
+\begin{itemize}
+	\item 略去平凡的情形 $k=0,n$.
+	\item 当 $k=1$ 时 $\Gras(1, V)$ 是 $V$ 中全体直线. 于是有双射
+		\begin{align*}
+			(V \smallsetminus \{0\}) \big/ F^\times & \xrightarrow{1:1} \Gras(1, V) \\
+			F^\times \cdot v & \mapsto Fv
+		\end{align*}
+		如此得到的对象称为射影空间 $\PP(V)$. 我们知道 $\PP(V)$ 具有良好的几何结构: 取基以等同 $V$ 和 $F^{n+1}$ 并记 $\PP^n := \PP(F^{n+1})$. 将 $(x_0, \ldots, x_n) \in F^{n+1} \smallsetminus \{0\}$ 张成的直线记为 $(x_0: \cdots :x_n) \in \PP^n$, 那么 $\PP^n = \bigcup_{i=0}^n U_i$, 其中 $U_i := \{(x_0: \cdots :x_n) : x_i \neq 0 \}$. 每一片 $U_i$ 里的元素都可以唯一地表作 $(x_0: \cdots: \underbracket{1}_{i}: \cdots x_n)$, 因而有双射 $\varphi_i: U_i \rightiso F^n$. 进一步, 容易对 $i \neq i'$ 在 $U_i \cap U_{i'}$ 上验证
+		\[ \varphi_{i'} \circ \varphi_i^{-1}\left( (x_j)_{j \neq i} \right) = \left( \frac{x_j}{x_{i'}} \right)_{j \neq i'}. \]
+		当 $F=\R, \CC$ 时, 立见坐标卡 $(U_i, \varphi_i)_{i=0}^n$ 赋予 $\PP^n$ 微分流形或复流形的结构; 对于一般的 $F$, 可以用代数几何的语言说 $\PP^n$ 构成 $F$ 上的代数簇. 它们是几何学的基本对象, 详细讨论可见 \cite[\S 5.3]{Xi18}.
+	\item 向量空间的嵌入 $V \hookrightarrow V'$ 自然地诱导 $\Gras(k, V) \hookrightarrow \Gras(k, V')$; 作为特例, $\PP(V) \hookrightarrow \PP(V')$.
+	\item 给定 $k$ 维子空间 $W$ 相当于在对偶空间 $V^\vee = \Hom_F(V,F)$ 中给定 $n-k$ 维子空间 $W^\perp := \{ \check{v} \in V^\vee : \check{v}|_W = 0 \}$, 故有自然双射
+		\[ \Gras(k, V) \simeq \Gras(n-k, V^\vee). \]
+		特别地, $\Gras(n-1, V)$ 可以等同于射影空间 $\PP(V^\vee)$.
+\end{itemize}
+
+\begin{definition-theorem}[Plücker 嵌入] \index{Plücker 嵌入}
+	给定 $V$, $k$ 如上, 则下式给出良定的单射
+	\begin{align*}
+		\psi: \Gras(k,V) & \longrightarrow \PP( \bigwedge^k V) \\
+		W & \longmapsto F^\times \cdot w_1 \wedge \cdots \wedge w_k = \bigwedge^k W \smallsetminus \{0\}
+	\end{align*}
+	其中 $w_1, \ldots, w_k$ 是 $W$ 的任意一组基.
+\end{definition-theorem}
+\begin{proof}
+	先说明 $\psi$ 良定: 不妨任选子空间 $U$ 使得 $V = U \oplus W$, 推论 \ref{prop:Sym-wedge-direct-sum} 断言对任意 $h$ 皆有线性同构
+	\begin{align*}
+		\bigoplus_{a+b=h} (\bigwedge^a U \otimes \bigwedge^b W) & \longrightiso \bigwedge^h V \\
+		\eta \otimes \xi & \longmapsto \eta \wedge \xi.
+	\end{align*}
+	取 $h=k$, 于是推论 \ref{prop:Sym-wedge-free} 确保 $w_1 \wedge \cdots \wedge w_k$ 是直和项 $(a,b)=(0,k)$ 里的非零元, 张成直线 $\bigwedge^k W$. 命 $F^\times \Lambda := \psi(W)$. 先前的观察 $\wedge: \bigwedge U \otimes \bigwedge W \rightiso \bigwedge V$ 蕴涵
+	\begin{gather}\label{eqn:Plucker-recovery}
+		W = \left\{ v \in V : v \wedge \Lambda = 0 \right\}
+	\end{gather}
+	借此可从 $\psi(W)$ 读出 $W$.
+\end{proof}
+
+凭嵌入 $\psi$ 还不足以彰显 $\Gras(k, V)$ 的几何性质, 我们欲尽可能精确地刻画 $\psi$ 的像. 为此就必须对外代数有更深入的理解. 回忆 $V^\vee$ 是 $V$ 的对偶空间. 记 $\lrangle{\cdot, \cdot}: V^\vee \times V \to F$ 为自然配对.
+\begin{definition-theorem}\label{def:wedge-contraction}\index{suobing@缩并 (contraction)}
+	存在唯一的线性映射 $\iota: V^\vee \to \End_F( \bigwedge V)$ 满足以下性质:
+	\begin{gather*}
+		\iota(\check{v})(v) = \lrangle{\check{v}, v}, \quad v \in V = \bigwedge^1 V, \\
+		\iota(\check{v})(\xi \wedge \eta) = \iota(\check{v})(\xi) \wedge \eta + (-1)^{\deg \xi} \xi \wedge \iota(\check{v})(\eta),
+	\end{gather*}
+	其中 $\xi, \eta \in \bigwedge V$ 是外代数中的齐次元; 因此对每个 $h$ 皆有 $\iota(\check{v})(\bigwedge^{h+1} V) \subset \bigwedge^h(V)$.
+\end{definition-theorem}
+\begin{proof}
+	显然这样的 $\iota$ 是唯一的, 它必满足
+	\[ \iota(\check{v})(v_0 \wedge \cdots \wedge v_h) = \sum_{i=0}^k (-1)^i v_0 \wedge \cdots \wedge \lrangle{\check{v}, v_i} \wedge \cdots \wedge v_h \]
+	其中 $v_0, \ldots, v_h \in V$. 反之, 要验证这确实给出良定的 $\iota(\check{v}) \in \Hom_F( \bigwedge^{h+1} V, \bigwedge^h V)$, 仅须回顾 $\bigwedge V$ 在定义 \ref{def:Sym-wedge} 中的构造. 细节留给有兴趣的读者.
+\end{proof}
+为了具体地了解 $\iota$, 且取定一组基 $v_1, \ldots, v_n$, 并令 $\check{v}_1, \ldots, \check{v}_n$ 为 $V^\vee$ 的对偶基. 因此 $\bigwedge^k V$ 有一组基形如 $\{ v_{i_1} \wedge \cdots \wedge v_{i_k}: 1 \leq i_1 < \cdots < i_l \leq n \}$. 不妨考虑 $\check{v} = \check{v}_1$ 的情形, 以上刻画立刻给出
+\begin{gather}\label{eqn:contraction-concrete}
+	\iota(\check{v}_1)(v_{i_1} \wedge \cdots \wedge v_{i_k}) = \begin{cases}
+		v_{i_2} \wedge \cdots \wedge v_{i_k}, & i_1 = 1 \\
+		0, & i_1 > 1. 
+\end{cases}\end{gather}
+职是之故, $\iota$ 也叫外代数的缩并运算. 迭代施行缩并以对任意 $\check{v}_1, \ldots, \check{v}_r \in V^\vee$ 得到 $\iota(\check{v}_1) \cdots \iota(\check{v}_r) \in \End_F(\bigwedge V)$, 易见这对 $(\check{v}_1, \ldots, \check{v}_r)$ 是多重线性的, 进一步还能证明它诱导出
+\begin{equation}\label{eqn:contraction-general}
+	\bigwedge^r(V^\vee) \to \End_F(\bigwedge V).
+\end{equation}	
+快速推导 \eqref{eqn:contraction-general} 的一种办法是不失一般性设 $\check{v} = \check{v}_1$ 一如 \eqref{eqn:contraction-concrete} 的情形, 由之立见 $\iota(\check{v}) \iota(\check{v})=0$; 再回顾定义 \ref{def:Sym-wedge} 的构造便知此已足够.
+
+转回 Plücker 嵌入. 对任意之 $F^\times \Lambda \in \PP(\bigwedge^k V)$, 我们先为问题 $\psi(W) \stackrel{?}{=} F^\times \Lambda$ 找出一个最优逼近解 $W$.
+\begin{lemma}\label{prop:Plucker-W}
+	设 $1 \leq k \leq n$ 而 $\Lambda \in \bigwedge^k V$ 非零, 定义 $W \subset V$ 为所有 $\{ \iota(\Xi) \Lambda : \Xi \in \Lambda^{k-1}(V^\vee) \}$ 生成的子空间. 则对任意子空间 $W_0 \subset V$ 皆有
+	\[ \Lambda \in \Image\left[ \bigwedge^k W_0 \to \bigwedge^k V \right] \iff W_0 \supset W. \]
+	特别地, 取 $W_0=W$ 可得 $\dim W \geq k$, 而且 $\dim W = k$ 蕴涵 $\psi(W) = F^\times\Lambda$.
+\end{lemma}
+\begin{proof}
+	对给定的 $W_0$ 取 $U$ 使得 $V = U \oplus W_0$, 相应地 $V^\vee =U^\vee \oplus W_0^\vee$. 仍有分解
+	\[ \wedge: \bigoplus_{a+b=k} (\bigwedge^a U \otimes \bigwedge^b W_0) \longrightiso \bigwedge^k V.\]
+	因此 $\Lambda \in \Image[\bigwedge^k W_0 \to \bigwedge^k V]$ 的充要条件是 $\Lambda$ 对 $a > 0$ 的分量皆为零. 无妨取定
+	\[ \underbracket{u_1, \ldots, u_{n-r}}_{U\; \text{的基}}, \underbracket{w_1, \ldots, w_r}_{W_0\; \text{的基}}. \]
+	倘若 $\Lambda$ 对某个 $a > 0$ 有非零分量, 譬如说按基底展开后
+	\[ u_1 \wedge \cdots \wedge u_{i_a} \wedge w_{i_{a+1}} \wedge \cdots \wedge w_{i_k} \]
+	的系数非零, 那么用 $\Xi := \check{u}_2 \wedge \cdots \wedge \check{w}_{i_k}$ (取对偶基) 对 $\Lambda$ 缩并, 从 \eqref{eqn:contraction-concrete} 知结果是 $u_1$ 的非零倍数, 故 $W \not\subset W_0$. 反过来说, 假若 $\Lambda \in \bigwedge^k W_0$, 那么它无论如何缩并都仍在 $\bigwedge^{\leq k} W_0$ 中, 故 $W \subset W_0$. 断言的最后一条性质归因于 $\dim W = k \implies \dim \bigwedge^k W = 1$.
+\end{proof}
+
+\begin{lemma}
+	对非零元 $\Lambda \in \bigwedge^k V$ 定义 $W$ 如上, 并定义 $W' := \{ w \in W: w \wedge \Lambda = 0 \}$, 则
+	\[ F^\times \cdot \Lambda \in \Image(\psi) \iff W'=W; \]
+	当条件成立时 $\psi(W) = F^\times \cdot\Lambda$.
+\end{lemma}
+\begin{proof}
+	假如 $F^\times \cdot \Lambda = \psi(W_0)$, 则 $\dim_F W_0 = k$ 而且引理 \ref{prop:Plucker-W} 给出 $W_0 \supset W$, 配合 $\dim_F W \geq k$ 遂有 $W_0=W$; 由先前的观察 \eqref{eqn:Plucker-recovery} 立见 $W'=W$. 反之假设 $W'=W$, 由于双线性型
+	\[ \wedge: \bigwedge^{\dim W - k} W \otimes \bigwedge^k W \to \bigwedge^{\dim W} W \]
+	非退化 (应用推论 \ref{prop:Sym-wedge-free}) 而 $\Lambda \in \bigwedge^k W \smallsetminus \{0\}$, 故唯一的可能是 $\dim W = k$; 于是引理 \ref{prop:Plucker-W} 蕴涵 $F^\times\Lambda = \psi(W)$.
+\end{proof}
+
+条件 $W'=W$ 等价于 $(\iota(\Xi)\Lambda) \wedge \Lambda = 0$ 对所有 $\Xi \in \bigwedge^{k-1} (V^\vee)$ 皆成立. 我们于是得到 $\Gras(k,V) \hookrightarrow \PP(\bigwedge^k V)$ 的定义方程组如下.
+\begin{theorem}[Plücker 关系式]
+	Plücker 嵌入 $\psi: \Gras(k,V) \hookrightarrow \PP(\bigwedge^k V)$ 的像等于齐次二次函数族
+	\begin{align*}
+		f_\Xi: \bigwedge^k V & \longrightarrow \bigwedge^{k+1} V \\
+		\Lambda & \longmapsto (\iota(\Xi)\Lambda) \wedge \Lambda, \quad \Xi \in \bigwedge^{k-1} (V^\vee)
+	\end{align*}
+	的共同零点.
+\end{theorem}
+齐次条件蕴涵零点集对拉伸不变, 故定义出 $\PP(\bigwedge^k V)$ 的子集; 取基将 $f_\Xi$ 的值按分量展开, 可进一步将 $\Image(\psi)$ 的定义方程组写成一族二次齐次多项式. 用代数几何的语言说, $\psi$ 将 $\Gras(k,V)$ 嵌入为射影代数簇.
+
+以 $k=2$ 的情形为例, 并假设 $2 \in F^\times$, 缩并的性质蕴涵 $(\iota(\Xi) \Lambda) \wedge \Lambda = \frac{1}{2} \iota(\Xi)(\Lambda \wedge \Lambda)$; 以 \eqref{eqn:contraction-concrete} 计算缩并可知 Plücker 关系式化为 $\Lambda \wedge \Lambda = 0$. 进一步假设 $\dim V = 4$, 取定基 $e_1, \ldots, e_4$ 并使用坐标 $\Lambda = \sum_{i < j} \lambda_{ij} e_i \wedge e_j$, 直接计算可得 Plücker 关系式为
+\[ \lambda_{12}\lambda_{34} - \lambda_{13}\lambda_{24} + \lambda_{14}\lambda_{23} = 0. \]
+从几何观点看, 这说明 $\Gras(2, V)$ 嵌入为 $\PP(\bigwedge^2 V) \simeq \PP^5$ 中的二次超曲面, 它们是经典代数几何中饶富兴味的对象.
+
+\section{行列式, 迹, 判别式}\label{sec:trace-norm-disc}
+令 $R$ 为交换环, 今后记 $\otimes := \otimes_R$.
+
+先设 $E$ 是秩 $n$ 自由 $R$-模, $n \in \Z_{\geq 0}$. 推论 \ref{prop:Sym-wedge-free} 确保 $\topwedge(E) := \bigwedge^n(E)$ 是秩一自由 $R$-模, 其自同态必为纯量乘法 $x \mapsto rx$ 的形式 ($r \in R$ 唯一确定), 因而环 $\End_R(\topwedge(E))$ 可以等同于 $R$. \index[sym1]{det(phi)@$\det \varphi$}
+\begin{definition}\label{def:general-determinant} \index{hanglieshi@行列式 (determinant)}
+	设 $E$ 是有限秩自由 $R$-模. 对于 $\varphi \in \End_R(E)$, 从函子性导出的同态记为 $\det(\varphi) \in \End_R(\topwedge(E)) = R$.
+\end{definition}
+一旦取定 $E$ 的基 $x_1, \ldots, x_n$ 并设 $\varphi(x_j) = \sum_{i=1}^n x_i a_{ij}$, 根据命题 \ref{prop:Symm-Alt-univ} 和反交换多重线性映射的性质, 可见
+\begin{multline}
+	(\det\varphi)(x_1 \wedge \cdots \wedge x_n) = \varphi(x_1) \wedge \cdots \wedge \varphi(x_n) = \\
+	\sum_{1 \leq \underbracket{j_1, \ldots, j_n}_{\text{相异}} \leq n} a_{j_1 1} a_{j_2 2} \cdots a_{j_n n} x_{j_1} \wedge \cdots \wedge x_{j_n} \\
+	\left( \text{置}\; \sigma(i) = j_i \right) \qquad = \sum_{\sigma \in \mathfrak{S}_n} \sgn(\sigma) a_{\sigma(1) 1} \cdots a_{\sigma(n) n} x_1 \wedge \cdots \wedge x_n.
+\end{multline}
+定义 $R$ 上矩阵 $A := (a_{ij})_{i,j}$ 的行列式为 $R$ 的元素
+\begin{gather}\label{eqn:matrix-det}
+	\det A := \sum_{\sigma \in \mathfrak{S}_n} \sgn(\sigma) a_{\sigma(1) 1} \cdots a_{\sigma(n) n},
+\end{gather}
+因而 $\det \varphi$ 等同于 $\det A$, 兼容于线性代数中习见的定义. 且看如何从这个视角简洁地推导行列式的基本性质, 适用于任意交换环 $R$.
+
+\begin{theorem}\label{prop:matrix-det}
+	取定自由 $R$-模 $E$ 的基 $x_1, \ldots, x_n$, 并利用 \S\ref{sec:free-modules} 的结果将 $\End_R(E)$ 的元素等同于 $M_n(R)$ 的元素. 对每个 $A \in M_n(R)$ 定义其\emph{伴随矩阵}为
+	\[ A^\vee := (A_{ji})_{\substack{1 \leq i \leq n \\ 1 \leq j \leq n}}, \quad A_{ij} := (-1)^{i+j} M_{ij} \]
+	其中 $M_{ij} \in R$ 是从 $A$ 去掉第 $i$ 个横行及第 $j$ 个竖列所得矩阵的行列式, 又称余子式.
+	\begin{enumerate}[(i)]
+		\item 对 $\varphi, \psi \in \End_R(M)$ 恒有 $\det(\varphi\psi) = \det(\varphi) \det(\psi)$, 而且 $\det(\identity_E) = 1$.
+		\item 矩阵转置 $A \mapsto {}^t A$ 不改变行列式.
+		\item 伴随矩阵满足 $A A^\vee = \det(A) \cdot 1_n = A^\vee A$.
+		\item 自同态 $\varphi \in \End_R(E)$ 可逆当且仅当 $\det \varphi \in R^\times$, 此时相应的矩阵 $A$ 满足 $A^{-1} = (\det A)^{-1} A^\vee$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	(i) 源自 $\bigwedge^n(\cdot)$ 的函子性. (ii) 则是 \eqref{eqn:matrix-det} 与 $\sgn(\sigma) = \sgn(\sigma^{-1})$ 的直接推论. 重点在于 (iii). 由于转置颠倒乘法顺序, 基于 (ii) 和容易的等式 $({}^t A)^\vee = {}^t(A^\vee)$, 仅须证明 $A^\vee A = \det(A) \cdot 1_n$ 即足.
+
+	设 $A = (a_{ij})_{i,j}$ 对应于 $\varphi \in M_n(R)$. 在 $\bigwedge^n E$ 中展开
+	\[ \det\varphi(x_1 \wedge \cdots \wedge x_n) = \sum_{i=1}^n x_i a_{i1} \wedge \left[ \varphi(x_2) \wedge \cdots \wedge \varphi(x_n) \right]. \]
+	注意到 $x_i \wedge \cdots \wedge x_i = 0$, 故右式的 $[\cdots]$ 展开后含 $x_i$ 的部分无所贡献, 其计算化为求
+	\[ R^{\oplus (n-1)} \xhookrightarrow{\text{分量 $1$ 为零}} \underbracket{R^{\oplus n}}_{= E} \xrightarrow{\varphi} R^{\oplus n} \xrightarrow{\text{舍去分量 $i$ }} R^{\oplus (n-1)} \]
+	的行列式, 亦即 $M_{i1}$. 于是
+	\[ \det\varphi(x_1 \wedge \cdots \wedge x_n) = \sum_{i=1}^n a_{i1} x_i \wedge \left( M_{i1}  x_1 \wedge \cdots \widehat{x_i} \cdots \wedge x_n \right) \]
+	其中 $\widehat{x_i}$ 代表移除该项. 让 $x_i$ 归位后得到 $\sum_i (-1)^{i+1} M_{i1} a_{i1} x_1 \wedge \cdots \wedge x_n$. 这就说明 $A^\vee A$ 的 $(1,1)$ 项等于 $\det A$. 同理可证 $A^\vee A$ 的每个对角元都是 $\det A$.
+
+	接着证明 $A^\vee A$ 的第 $(i,j)$ 项 $ \sum_k (-1)^{i+k} M_{ki} a_{kj}$ 在 $i \neq j$ 时为零. 观察到它与 $A$ 的第 $i$ 个竖列无关, 因此不妨设 $A$ 的第 $i,j$ 列相同, 即 $a_{ki}=a_{kj}$, 那么上式也等于 $A^\vee A$ 的第 $(i,i)$ 项即 $\det A$. 然而对应 $A$ 之自同态 $\varphi$ 的像落在一个由 $n-1$ 个元素生成的子模 $E' \subset E$ 中. 于是有分解
+	$\begin{tikzcd}[column sep=small] \bigwedge^n E \arrow[r] \arrow[rr, bend right="15", "\bigwedge^n \varphi" description] & \bigwedge^n E' \arrow[r] & \bigwedge^n E \end{tikzcd}$,
+	推论 \ref{prop:Sym-wedge-free} 蕴涵中项为零, 故 $\det\varphi = 0$.
+
+	最后证 (iv): 若 $\varphi$ 可逆, 则 (i) 蕴涵 $\det\varphi \in R^\times$; 若 $\det\varphi \in R^\times$, 则 (iii) 具体给出对应矩阵 $A$ 之逆.
+\end{proof}
+
+对任何 $R$-模 $E$, 令 $E^\vee := \Hom_R(E, R)$, 则有良定的 $R$-模同态
+\begin{equation}\label{eqn:End-free-otimes}\begin{tikzcd}[row sep=tiny]
+	R & \arrow[l] E^\vee \otimes E \arrow[r] & \End_R(E) \\
+	f(x) & f \otimes x \arrow[mapsto, r] \arrow[mapsto, l] & \left[ v \mapsto f(v) x \right].
+\end{tikzcd}\end{equation}
+
+设 $E$ 为自由模, 且 $n := \rank_R(E)$ 有限. 引理 \ref{prop:Hom-matrix} 及其上关于矩阵的讨论表明此时 $E^\vee$ 也是秩 $n$ 自由模, 而在 \eqref{eqn:End-free-otimes} 中 $E^\vee \otimes E \rightiso \End_R(E)$. 实际上, 一旦取定 $E$ 的基 $x_1, \ldots, x_n$, 并且定义
+\[ \check{x}_i: a_1 x_1 + \cdots + a_n x_n \longmapsto a_i, \quad 1 \leq i \leq n \]
+则 $\{\check{x}_1, \ldots, \check{x}_n\}$ 为 $E^\vee$ 的基 (称为对偶基), 因而导出三向对应:
+\[\begin{tikzcd}[row sep=small, column sep=tiny]
+	\sum_{i,j} a_{ij} \check{x}_j \otimes x_i \arrow[phantom, d, sloped, "\in" description] & & \varphi: x_j \mapsto \sum_i x_i a_{ij} \arrow[phantom, d, sloped, "\in" description] \\
+	E^\vee \otimes E \arrow[leftrightarrow, rr]  & & \End_R(E) \\
+	& M_n(R) \arrow[leftrightarrow,lu] \arrow[leftrightarrow, ru] & \\
+	& A = (a_{i,j})_{i,j} \arrow[phantom, u, sloped, "\in" description] &
+\end{tikzcd} \]
+
+类似于向量空间的情形, 无须选基也能对 $\varphi \in \End_R(M)$ 定义下述对象:
+\begin{itemize}
+	\item 行列式 $\det(\varphi) \in R$: 业已于定义 \ref{def:general-determinant} 探讨;
+	\item 迹 $\Tr(\varphi) \in R$: 它无非是 $\varphi$ 在 \eqref{eqn:End-free-otimes} 下按模同态 $\End_R(M) \rightiso E^\vee \otimes E \to R$ 得到的像; 从矩阵观点看就是寻常的 $\Tr(A) = \sum_{i=1}^n a_{ii}$. \index[sym1]{Tr@$\Tr$}\index{ji-trace@迹 (trace)}
+	\item 特征多项式 $\mathrm{char}(\varphi, X) := \det(X \cdot \identity - \varphi) \in R[X]$, 以 $X$ 为变元; 这里将 $\varphi$ 等同于 $\End_{R[X]}(M \otimes_R R[X])$ 中相应的元素.
+\end{itemize}
+需要突出 $E$ 或 $R$ 的地位时, 就写作 $\det_R(\varphi|E)$, $\Tr_R(\varphi|E)$, $\mathrm{char}_R(\varphi|E)$. 对任意 $\varphi, \psi \in \End_R(E)$, 我们有
+\begin{align*}
+	\det(\varphi\psi) & = \det(\varphi)\det(\psi), \quad \det(\identity_E)=1, \quad \det(0)=0 \\
+	\det(r\varphi) &= r^{\rank_R(E)} \det(\varphi), \quad r \in R, \\
+	\Tr(r\varphi + s\psi) & = r\cdot\Tr(\varphi) + s\cdot\Tr(\varphi), \quad r,s \in R, \\
+	\Tr(1) & = \rank_R(E). 
+\end{align*}
+
+以下考虑一个 $R$-代数 $A$, 并假设 $A$ 是有限秩 $n$ 的自由 $R$-模.
+\begin{definition}\label{def:norm-trace} \index{fanshu@范数 (norm)} \index[sym1]{Tr}\index[sym1]{Nm@$\Nm$}
+	对如上的 $A$ 和 $a \in A$, 定义 $R$-模自同态 $m_a \in \End_R(A)$ 为左乘 $x \mapsto ax$, 并定义\emph{迹} $\Tr_{A|R}(a)$, \emph{范数} $\Nm_{A|R}(a)$ 和\emph{特征多项式} $\mathrm{char}_{A|R}(a, X)$ 为
+	\begin{align*}
+		\Tr_{A|R}(a) & := \Tr(m_a), \\
+		\Nm_{A|R}(a) & := \det(m_a), \\
+		\mathrm{char}_{A|R}(a, X) & := \mathrm{char}(m_a, X) = \det_{R[X]}\left( m_{X-a} \mid A[X] \right) \\
+		& = \Nm_{A[X]|R[X]}(X-a). \quad (\because\; A[X] \simeq A \otimes_R R[X])
+	\end{align*}
+\end{definition}
+由于 $a \mapsto m_a$ 是代数同态 $A \to \End_R(A)$, 行列式 (或迹) 是从 $A$ 到 $R$ 的乘法幺半群 (或加法群) 的同态. 本节的重点是建立行列式与迹的传递性.
+
+\begin{lemma}\label{prop:free-transitivity}
+	设 $A$ 为交换 $R$-代数, $E$ 为自由 $A$-模. 若 $A$ 视为 $R$-模为自由模, 则 $E$ 视为 $R$-模也是自由的. 取定 $E$ 在 $A$ 上的基 $(e_i)_{i \in I}$ 和 $A$ 在 $R$ 上的基 $(a_j)_{j \in J}$, 则 $(a_j e_i)_{(i,j) \in I \times J}$ 构成 $E$ 在 $R$ 上的基; 因而 $\rank_R(E) = \rank_R(A) \rank_A(E)$.
+\end{lemma}
+\begin{proof}
+	每个 $e \in E$ 都能唯一表成 $A$-线性组合 $\sum_i u_i e_i$, 而每个 $u_i$ 又能唯一表成 $R$-线性组合 $\sum_j r_{ij} a_j$, 因此 $(a_j e_i)_{i,j}$ 确实构成 $R$-模 $E$ 的基: 每个 $e$ 都有唯一表法 $e = \sum_{i,j} r_{ij} a_j e_i$.
+\end{proof}
+
+\begin{theorem}\label{prop:norm-trace-transitivity}
+	设 $A$ 为交换 $R$-代数, 同时是有限秩自由 $R$-模, 而 $E$ 为一个有限秩自由 $A$-模. 将给定的 $\varphi \in \End_A(E)$ 看作 $\End_R(E)$ 的元素, 则
+	\begin{gather*}
+		\Tr_R(\varphi) = \Tr_{A|R}(\Tr_A(\varphi)), \quad \Nm_R(\varphi) = \Nm_{A|R}(\det_A(\varphi)), \\
+		\mathrm{char}(\varphi, X) = \Nm_{A[X]|R[X]}(\mathrm{char}_A(\varphi, X)).
+	\end{gather*}
+\end{theorem}
+\begin{proof}
+	取定 $E$ 的 $A$-基 $e_1, \ldots, e_n$ 和 $A$ 的 $R$-基 $a_1, \ldots,  a_m$. 先将 $\varphi$ 透过 $\varphi(e_i) = \sum_{k=1}^n c_{ik} e_k$ 等同于矩阵 $(c_{ik})_{1 \leq i,k \leq n} \in M_n(A)$. 那么
+	\[ \varphi(a_j e_i) = a_j \varphi(e_i) = \sum_{k=1}^n a_j c_{ik} e_k. \]
+	而 $a_j c_{ik} = m_{c_{ik}}(a_j)$ 可进一步按 $R$-基 $a_1, \ldots, a_m$ 展开; 当 $j$ 变动, 其系数无非是对应到 $m_{c_{ik}} \in \End_R(A)$ 的 $m$-阶方阵. 如果将 $\varphi$ 透过 $R$-基 $\{ a_j e_i \}_{i,j}$ 以矩阵表示, 结果可以视为 $R$-上由 $m \times m$-分块构成的 $nm$-阶方阵, 第 $(i,k)$ 个分块正是 $m_{c_{ik}}$ 对应的方阵. 既然 $A$ 交换, 这 $n^2$ 个分块对乘法对乘法两两交换. 关于迹和范数的等式遂化约到线性代数的引理 \ref{prop:det-blocks}, 至于 $\mathrm{char}(\varphi, X)$ 则可化约为范数情形.
+\end{proof}
+
+\begin{corollary}\label{prop:norm-trace-transitivity-2}
+	设 $A$-代数 $B$ 同时也是有限秩自由 $A$-模, 那么任意 $b \in B$ 皆满足
+	\begin{gather*}
+		\Tr_{B|R}(b) = \Tr_{A|R}(\Tr_{B|A}(b)), \quad \Nm_{B|R}(b) = \Nm_{A|R}(\Nm_{B|A}(b)), \\
+		\mathrm{char}_{B|R}(b,X) = \Nm_{A[X]|R[X]}(\mathrm{char}_{B|A}(b,X)).
+	\end{gather*}
+\end{corollary}
+\begin{proof}
+	在定理 \ref{prop:norm-trace-transitivity} 中以 $B$ 代 $E$ 即可.
+\end{proof}
+
+\begin{definition}\label{def:discriminant}
+	设 $A$ 为 $R$-代数, 作为 $R$-模有基 $x_1, \ldots, x_n$, 定义相应的判别式为
+	\[ d(x_1, \ldots, x_n) := \det_R \left( \Tr_{A|R}(x_i x_j) \right)_{1 \leq i,j \leq n} \quad \in R. \]
+\end{definition}
+对称 $R$-双线性型 $(x,y) \mapsto \Tr_{A|R}(xy)$ 称为 $A$ 的\emph{迹型式}. 不同的基 $x_i$, $y_j$ 由 $T = (t_{ij})_{i,j} \in \{M \in M_n(R): \det(M) \in R^\times \}$ 透过 $y_i = \sum_j t_{ij} x_j$ 联系. 易见 \index{ji-trace!迹型式 (trace form)}
+\[ d(y_1, \ldots, y_n) = \det(T)^2 d(x_1, \ldots, x_n) \]
+因而 $d_A := d(x_1, \ldots, x_n) \mod R^{\times 2}\; \in R/R^{\times 2}$ 仅和代数 $A$ 有关, 称作 $A$ 的\emph{判别式}; 特别地, $d_A$ 在 $R$ 中生成的主理想良定, 称为判别式理想. 迹型式和由此派生的判别式都是代数 $A$ 的有用不变量. \index{panbieshi}
+
+现在来补全定理 \ref{prop:norm-trace-transitivity} 的证明.
+\begin{lemma}\label{prop:det-blocks}
+	设为交换环 $R$ 上的 $nk$-阶方阵 $X$ 用 $k \times k$-分块表示为
+	\[ X = \begin{pmatrix}
+		a_{11} & \cdots & a_{1n} \\
+		\vdots & \ddots & \vdots \\
+		a_{n1} & \cdots & a_{nn}
+	\end{pmatrix}, \quad a_{ij} \in M_k(R) \]
+	其中每个 $a_{ij}$ 同属于 $M_k(R)$ 的某个交换子代数 $A$. 如视 $X$ 为 $M_n(A)$ 的元素, 得到的迹与行列式分别记为 $\Tr_A(X)$ 和 $\det_A(X)$, 以下也看作 $M_k(R)$ 的元素; 另记 $R$ 上矩阵代数的迹和行列式为 $\Tr_R$ 和 $\det_R$, 则
+	\begin{align*}
+		\Tr_R(X) & = \Tr_R( \Tr_A(X)), \\
+		\det_R(X) & = \det_R(\det_A(X)).
+	\end{align*}
+\end{lemma}
+\begin{proof}[{Bourbaki {\cite[III.112]{Bou-Alg1}}}]
+	迹的情形甚明显, 以下用经典的矩阵打洞技巧处理行列式情形. 首先 $n=1$ 的情形是自明的, 以下设 $n \geq 2$. 为 $R$ 添上形式变元 $Z$ (不妨看作对 $X$ 的微扰), 表 $X+Z$ 为 $A[Z]$ 上的 $n \times n$ 方阵 $(\nu_{ij})_{i,j}$. 因为 $A$ 交换, 可在 $M_n(A[Z])$ 中取 $X+Z$ 的伴随矩阵 $(X+Z)^\vee = (\check{\nu}_{ij})_{1 \leq i,j \leq n}$. 这样的目的是得到 $A[Z]$ 上的矩阵等式:
+	\begin{gather*} U := \begin{pmatrix}
+		\check{\nu}_{11} & 0 & \cdots & 0 \\
+		\check{\nu}_{12} & 1 & \cdots & 0 \\
+		\vdots & 0 & 1 & \cdots \\
+		\check{\nu}_{1n} & 0 & \cdots & 1
+	\end{pmatrix}, \quad Q := \begin{pmatrix}
+		\nu_{22} & \cdots & \nu_{2n} \\
+		\vdots & \ddots & \\
+		\nu_{n2} & \cdots & \nu_{nn}
+	\end{pmatrix}\end{gather*}
+	满足
+	\begin{gather*}
+	(X+Z) U  = \begin{pmatrix}
+		\det_{A[Z]}(X+Z) & \nu_{12} & \cdots & \nu_{1n} \\
+		0 & \nu_{22} & \cdots & \nu_{2n} \\
+		\vdots & \vdots & \ddots & \\
+		0 & \nu_{n2} & \cdots & \nu_{nn}
+	\end{pmatrix} = \begin{pmatrix}
+		\det_{A[Z]}(X+Z) & \ast \\
+		0 & Q
+	\end{pmatrix}; \end{gather*}
+	视之为 $R[Z]$ 上的分块矩阵, 则分块矩阵的乘法说明上式仍成立. 行列式的运算规律旋即给出
+	\begin{gather*}
+		\det_{R[Z]}(X+Z) \cdot \det_{R[Z]}(U) = \det_{R[Z]}\left( \det_{A[Z]}(X+Z)\right) \cdot \det_{R[Z]}(Q), \\
+		\det_{R[Z]}(U) = \det_{R[Z]}(\check{\nu}_{11})
+	\end{gather*}
+	递归地假设 $\det_{R[Z]}(Q) = \det_{R[Z]}\left(\det_{A[Z]}(Q)\right)$, 而 $A[Z]$ 上的伴随矩阵的定义表明 $\det_{A[Z]}(Q) = \check{\nu}_{11}$. 如能在以上第一条等式两边消去 $\det_{R[Z]}(\check{\nu}_{11})$, 则
+	\[ \det_{R[Z]}(X+Z) = \det_{R[Z]}\left( \det_{A[Z]}(X+Z)\right), \]
+	代入 $Z=0$ 即得所求 $\det_R(X) = \det_R(\det_A(X))$. 然而按 $\nu_{ij}$ 的定义, $\det_{R[Z]}(\check{\nu}_{11}) = \det_{R[Z]}(Q)$ 是 $Z$ 的 $(n-1)k$ 次首一多项式, 故确实可以消去. 明所欲证.
+\end{proof}
+
+% % %
+\begin{Exercises}
+	\item 设 $M$ 为交换环 $R$ 上的模, 定义 $R$-模 $D(M) := R \oplus M$ 并赋予乘法 $(r,m) (r', m') = (rr', rm' +r'm)$. 证明 $D(M)$ 成为 $R$-代数.
+	\item 以显式给出 $\CC$-代数的同构 $\CC \dotimes{\R} \CC \rightiso \CC \oplus \CC$.
+	\item 验证 \eqref{eqn:quadratic-integer} 定义的 $\mathfrak{o}_D$ 恰是 $\Q(\sqrt{D})$ 中的代数整数集.
+	\item 设 $R$ 为交换整环, 令 $K = \text{Frac}(R)$ 为其分式域. 元素 $x \in K$ 称为殆整的, 如果存在非零元 $u \in R$ 使得对所有 $n \geq 1$ 都有 $ux^n \in R$; 显然 $R$ 的元素皆殆整. 证明
+		\begin{compactitem}
+			\item $K$ 中所有殆整元构成一个子环;
+			\item 若 $x \in K$ 在 $R$ 上整, 则 $x$ 是殆整的; 
+			\item 当 $R$ 是 Noether 环时 (定义 \ref{def:ACC-DCC-mod}), 殆整元都是整元. \begin{hint} 此时 $R[x]$ 是 $u^{-1} R$ 的子模.\end{hint}
+		\end{compactitem}
+	\item 本题所论的代数可以是非结合代数, 这相当于在定义 \ref{def:algebra-mod-diagram} 中省去乘法结合律, 但仍要求存在幺元. 取定域 $F$ 并考虑有限维 $F$-代数 $A$. 定义结合子
+		\[ (x,y,z) := (xy)z - x(yz), \quad x,y,z \in A. \]
+		若 $(x,x,y)=0=(x,y,y)$ 恒成立, 则称 $A$ 是\emph{交错代数}. 若 $\pi \in \End_F(A)$ 满足 $\pi(xy)=\pi(y)\pi(x)$, $\pi(1_A)=1_A$ 和 $\pi^2 = \identity_A$, 则称之为\emph{对合}.
+		\begin{enumerate}[(i)]
+			\item 证明结合子对每个变元都是线性的; 当 $A$ 为交错代数时, 证明 $(x,y,z) = -(y,x,z)$ 和 $(x,y,z) = -(x,z,y)$.
+			\item 设对合 $x \mapsto \bar{x}$ 满足 $t(x) := x+\bar{x} \in F \cdot 1_A$ 和 $n(x) := \bar{x}x = x\bar{x} \in F \cdot 1_A$, 则任意 $x \in A$ 都满足二次方程 $x^2 - t(x)x + n(x) 1_A = 0$.
+			\item 设 $A$ 交错并考虑对合如上, 证明 $(xy)\bar{y} = n(y)x$, $\bar{x}(xy) = n(x)y$ 以及 $n(xy)=n(x)n(y)$.
+			\begin{hint} 对于最后一条, 将 $n(xy)$ 改写为 $((xy)\bar{y})\bar{x} - (xy, \bar{y}, \bar{x}) = n(x)n(y) - (\bar{x}, xy, \bar{y})$, 问题归结为证 $(\bar{x}, xy, \bar{y}) = 0$. \end{hint}
+			\item 设 $A$ 为 $F$-代数, $n: A \to F$ 是满足 $n(xy)=n(x)n(y)$ 之二次映射, 这意谓 $n$ 满足 $n(tx)=t^2 n(x)$ ($t \in F$) 而 $B(x,y) := n(x+y)-n(x)-n(y)$ 是对称双线性型. 证明
+				\begin{align*}
+					B(xy,xy') = n(x)B(y,y') = B(yx,y'x), \\
+					B(xy', x'y) + B(xy, x'y') = B(x,x')B(y,y');
+				\end{align*}
+				在上一小题的假设下, 证明 $B(xy,z) = B(y,\bar{x}z) = B(x, z\bar{y})$. \begin{hint} 此时 $t(x) = B(1,x)$ 而 $\bar{x} = t(x) 1_A - x$, 对 $y$ 亦然.\end{hint}
+		\end{enumerate}
+	\item 本题仍容许非结合代数. 设 $A$ 为域 $F$ 上的有限维代数, 并给定对合 $\pi: A \to A$ 满足于
+		\[ x + \pi(x) \in F \cdot 1_A, \quad x\pi(x) = \pi(x) x \in F \cdot 1_A \]
+		置 $t(x), n(x)$ 如上题, 并假设 $B_n(x,y) := n(x+y) - n(x) - n(y)$ 非退化:
+		\[ B_n(x,-) = 0 \iff x = 0 \iff B_n(-,x)=0, \quad x \in A; \]
+		定义 \emph{Cayley--Dickson 代数} $\text{CD}(A, \lambda) := A \oplus vA$, 其中 $v$ 仅是符号, 乘法定为
+		\[ (a + vb) \cdot (a' + vb') = aa' + \lambda b' \pi(b) + v \left( \pi(a)b' + a'b \right). \]
+		定义 $N(a+vb) = n(a) - \lambda n(b)$, $\Pi(a+vb) = \pi(a) - vb$.
+		\begin{enumerate}[(i)]
+			\item 证明 $\text{CD}(A, \lambda)$ 是 $F$-代数, 它以 $1 := 1_A + v \cdot 0$ 为幺元, 包含 $A$ 作为子代数.
+			\item 证明 $\Pi$ 是 $\text{CD}(A, \lambda)$ 的对合, 并且对每个 $x \in \text{CD}(A, \lambda)$ 皆有
+				\begin{gather*}
+					T(x) := x + \Pi(x) \in F \cdot 1, \quad N(x) = x\Pi(x) = \Pi(x) x \in F \cdot 1;
+				\end{gather*}
+			\item 我们有
+				\begin{align*}
+					\text{CD}(A, \lambda) \text{ 交错} & \iff A \text { 结合 }, \\
+					\text{CD}(A, \lambda) \text{ 结合 } & \iff A \text { 交换 }, \\
+					\text{CD}(A, \lambda) \text{ 交换 } & \iff A=F.
+				\end{align*}
+				\begin{hint} 对于第一个 $\implies$, 从 $N((a+vb)(c+vd)) = N(a+vb)N(c+vd)$ (上题结果) 和 $N(v)=-\lambda$ 推出 $B_n(ac, d\pi(b)) = B_n(\pi(a)d, cb) = B_n(cb, \pi(a)d)$, 进而得到 $(ac)b = a(cb)$. 对于第二个 $\implies$, 观察到 $v(ba) = (va)b$. \end{hint}
+			\item 从 $A=F=\R$ 出发, 取 $\lambda=-1$ 可以逐步得到 $\CC$, $\mathbb{H}$ 和一个 $8$ 维非结合交错代数 $\mathbb{O}$, 而且每个 $x \in \mathbb{O} \smallsetminus \{0\}$ 都有乘法逆元.
+		\end{enumerate}
+		代数 $\mathbb{O}$ 习称为八元数代数. 其性质, 作用与简史详见 \cite{Baez02}. \index{bayuanshu}
+	\item 对交换环 $R$ 及其理想 $I, J$, 证明 $R/I \dotimes{R} R/J \simeq R/(I+J)$.
+	\item 对任意域 $\Bbbk$ 建立自然同构
+		\[ \Bbbk[ X_1^{\pm 1}, \ldots, X_n^{\pm 1}]^{\mathfrak{S}_n} \simeq \Bbbk[e_1, \ldots, e_{n-1}] \dotimes{\Bbbk} \Bbbk[e_n^{\pm 1}] \]
+		其中 $e_1, \ldots, e_n$ 是定义 \ref{def:elementary-symm-poly} 中的初等对称多项式.
+	\item 仍设 $R$ 为交换环. 证明若 $M \simeq R/I_1 \oplus \cdots \oplus R/I_n$, 其中 $I_1 \subset \cdots \subset I_n$ 为理想, 则
+		\[ \text{ann}\left( \bigwedge^a M \right) = I_a, \quad a=1, \ldots, n. \]
+		以此简化定理 \ref{prop:elementary-divisor} 中唯一性的证明, 并将之推广到任何交换环.
+	\item 对于域 $F$ 上的有限维向量空间 $V$, 定义 $F[V]$ 为 $V$ 上的多项式代数: 确切地说, 取定基 $v_1, \ldots, v_n \in V$, 则 $F[V]$ 是以对偶基 $\check{v}_1, \ldots, \check{v}_n \in V^\vee$ 为变元的多项式代数; 内禀视角下则有 $F[V] = \Sym(V^\vee)$. 任一 $P \in F[V]$ 可在给定的点 $v \in V$ 上求值, 记为 $P_v \in F$. 以下设 $|F|$ 无穷, $A$ 是有限维 $F$-代数.
+		\begin{compactenum}[(i)]
+			\item 引入变元 $\lambda$ 并定义 $\mathcal{P} := \left\{ P(\lambda) \in F[A][\lambda] : P \text{ 首一}, \; \forall a \in A, \; P_a(a)=0 \right\}$; 证明存在唯一的 $P_A(\lambda) \in \mathcal{P}$ 使 $\deg_\lambda P_A(\lambda)$ 极小.
+			\begin{hint}
+				为证 $\mathcal{P}$ 非空, 考虑 $P_a(\lambda) := \det(\lambda \cdot \identity_A - L_a)$, 其中 $L_a: A \to A$ 是左乘作用, 符号 $a$ 表 $A$ 中``一般''的元素; $P_a(\lambda)$ 的系数落在 $F[A]$ 中.
+			\end{hint}
+			\item 证明若 $Q(\lambda) \in F[A][\lambda]$ 满足 $\forall a \; Q_a(a)=0$, 则 $P_A(\lambda)$ 整除 $Q(\lambda)$. 职是之故, $P_A(\lambda)$ 称为 $A$ 的\emph{泛极小多项式}.
+			\item 任给域扩张 $E \supset F$, 得到 $E$-代数 $B := A_E$. 证明 $P_A(\lambda) = P_B(\lambda)$. 由此将 $P_A(\lambda)$ 的定义延拓到 $F$ 有限的情形.
+			\item 对 $A = M_n(F)$ 及 $A = \mathbb{H}$ (此时 $F=\R$) 确定 $P_A(\lambda)$.
+		\end{compactenum}
+		以上也适用于有限维非结合含幺代数, 前提是每个 $a \in A$ 皆生成一个结合代数; 这涵摄了交错代数的情形.
+	\item 设 $M$ 是交换环 $R$ 上的投射模, 证明对每个 $n \geq 0$, 模 $T^n M$, $\Sym^n M$ 和 $\bigwedge^n M$ 都是投射的. \begin{hint}可利用命题 \ref{prop:proj-mod-characterization}.\end{hint}
+	\item 试证 Cartan 引理如次: 设 $V$ 为域 $F$ 上的有限维向量空间, $v_1, \ldots, v_m \in V$ 线性无关. 证明若 $w_1, \ldots, w_m \in V$ 满足于 $\sum_{i=1}^m v_i \wedge w_i = 0$, 则存在一族 $\left( a_{ij} \in F \right)_{1 \leq i,j \leq m}$ 使得 $w_i = \sum_{i=1}^m a_{ij} v_j$, 而且 $a_{ij} = a_{ji}$.
+	\item 承上, 设 $\xi \in \bigwedge^k V$, 证明存在 $\xi_1, \ldots, \xi_m \in \bigwedge^{k-1} V$ 使得 $\xi = \sum_{i=1}^m v_i \wedge \xi_i$ 的充要条件是 $v_1 \wedge \cdots \wedge v_m \wedge \xi = 0$.
+	\item 证明定义--定理 \ref{def:wedge-contraction} 的缩并运算对任意 $m \geq 0$ 诱导出典范同构 $\bigwedge^m(V^\vee) \rightiso (\bigwedge^m V)^\vee$.
+\end{Exercises}

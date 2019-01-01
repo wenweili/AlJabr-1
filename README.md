@@ -15,10 +15,9 @@ We only need the standard packages and fonts, such as
 Make sure that the relevant packages/programs are all installed. The author made the compilation using TeX Live 2018 in Linux.
 
 ## Clone the files
-We assume that a directory `~/AlJabr-1` has been created for the whole compilation process.
-
+As a preparation for the compilation process, we will clone the files into `~/AlJabr-1` in our home directory. In command line, type
 ```
-cd ~/AlJabr-1
+cd ~
 git clone https://github.com/wenweili/AlJabr-1
 ```
 
@@ -37,9 +36,9 @@ under bash, or more simply
 make
 ```
 
-This will take several minutes. The resulting PDF should appear as **Al-jabr-1.pdf** in the same directory.
+Have a cup of coffee since this will take several minutes. The resulting PDF file should appear as **Al-jabr-1.pdf** in the same directory.
 
-To clean up everything except the PDF file, type
+To clean up everything in our directory except the PDF file, type
 ```
 make clean
 ```
@@ -51,7 +50,7 @@ latexmk -pdf -pdflatex="xelatex -shell-escape -interaction=nonstopmode %O %S" Te
 ```
 to compile the template.
 
-The fonts and other apppearances can be customized through several config files; please read the source files carefully for further details. The Template-AJbook.tex file follows the original configurations of the book.
+The fonts and other apppearances are customizable through several config files; please read the source files carefully for further details. The Template-AJbook.tex file follows the original configurations of the book.
 
 # Feedback
 In case of problems of compilation, please kindly report to the author. Make sure that all the system requirements above are met, and provide detailed error messages. Other suggestions are also welcome.

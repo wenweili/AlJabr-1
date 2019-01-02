@@ -128,7 +128,7 @@
 \titleformat{name=\subsection} % 各子节标题, 采取 runin 形式较美观
 	[runin]
 	{\filleft\normalfont\sffamily\bfseries\CJKfamily{sectionfont}}
-	{\thesubsection}	% Label
+	{\Large\thesubsection}	% Label
 	{3mm}	% Sep
 	{#1}	% Before-code
 	[]		% After-code
@@ -140,6 +140,27 @@
 	{0mm}	% Sep
 	{#1}	% Before-code
 	[]		% After-code
+\titlespacing*{name=\subsection}	% 设置间隔
+	{0pt}{*1}{1em}    % {left}{before-sep}{after-sep}
+
+\titleformat{name=\subsubsection} % 次子节标题, 采取 runin 形式较美观
+	[runin]
+	{\filleft\normalfont\sffamily\bfseries\CJKfamily{sectionfont}}
+	{\thesubsubsection}	% Label
+	{3mm}	% Sep
+	{#1}	% Before-code
+	[]		% After-code
+	
+\titleformat{name=\subsubsection, numberless}
+	[runin]
+	{\filleft\normalfont\sffamily\bfseries\CJKfamily{sectionfont}}
+	{}	% Label
+	{0mm}	% Sep
+	{#1}	% Before-code
+	[]		% After-code
+
+\titlespacing*{name=\subsubsection}	% 设置间隔
+	{0pt}{*1}{1em}    % {left}{before-sep}{after-sep}
 
 \renewcommand{\thepart}{\CJKnumber{\arabic{part}}}	% 部分的标题编号汉化
 \titleformat{name=\part}[display]	% 各部分标题

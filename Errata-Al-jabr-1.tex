@@ -1,0 +1,93 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8
+
+% LaTeX source for the errata of the book ``代数学方法'' in Chinese
+% Copyright 2018  李文威 (Wen-Wei Li).
+% Permission is granted to copy, distribute and/or modify this
+% document under the terms of the Creative Commons
+% Attribution 4.0 International (CC BY 4.0)
+% http://creativecommons.org/licenses/by/4.0/
+
+% 《代数学方法》卷一勘误表 / 李文威
+% 使用自定义的文档类 AJerrata.cls. 自动载入 xeCJK.
+
+\documentclass{AJerrata}
+
+\usepackage{unicode-math}
+
+\usepackage[unicode, colorlinks, psdextra, bookmarksnumbered,
+	pdfpagelabels=true,
+	pdfauthor={李文威 (Wen-Wei Li)},
+	pdftitle={代数学方法卷一勘误},
+	pdfkeywords={}
+]{hyperref}
+
+\setmainfont[
+	BoldFont={TeX Gyre Termes Bold},
+	ItalicFont={TeX Gyre Termes Italic},
+	BoldItalicFont={TeX Gyre Termes Bold Italic},
+	PunctuationSpace=2
+]{TeX Gyre Termes}
+
+\setsansfont[
+	BoldFont=FiraSans-Bold.otf,
+	ItalicFont=FiraSans-Italic.otf
+]{FiraSans-Regular.otf}
+
+\setCJKmainfont[
+	BoldFont=Noto Serif CJK SC Bold
+]{Noto Serif CJK SC}
+
+\setCJKsansfont[
+	BoldFont=Noto Sans CJK SC Bold
+]{Noto Sans CJK SC}
+
+\setmathfont[
+	Extension = .otf,
+	math-style= TeX,
+]{texgyretermes-math}
+
+\usepackage{mathrsfs}
+\usepackage{stmaryrd} \SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n}	% 避免警告 (stmryd 不含粗体故)
+% \usepackage{array}
+% \usepackage{tikz-cd}  % 使用 TikZ 绘图
+\usetikzlibrary{positioning, patterns, calc, matrix, shapes.arrows, shapes.symbols}
+
+\usepackage{myarrows}				% 使用自定义的可伸缩箭头
+\usepackage{mycommand}				% 引入自定义的惯用的命令
+
+
+\title{\bfseries 代数学方法（第一卷）勘误表}
+\author{李文威}
+\date{\today}
+
+\begin{document}
+	\maketitle
+	以下页码等信息参照高等教育出版社 2019 年 1 月出版之《代数学方法》第一卷, ISBN: 978-7-04-050725-6. 这些错误将在新版一并改正.
+
+	\begin{Errata}
+		\item[第 54 页最后] \Corr 图表微调成
+		\begin{center}\begin{tikzpicture}[bend angle=70, auto, fct/.style={circle, draw=gray!40, fill=gray!10}]
+			\node[fct] (G1) {$G$}; \node[fct] (F1) [right=of G1] {$F$} edge[bend right] node[swap] {$\eta$} (G1);
+			\node[fct] (G2) [above right=of F1] {$G$}; \node[fct] (F2) [right=of G2] {$F$} edge[bend left] node {$\eta^{-1}$} (G2);
+			\node[fct] (F3) [right=of F2] {$F$}; \node[fct] (G3) [right=of F3] {$G$} edge[bend left] node {$\varepsilon$} (F3);
+			\node[fct] (F4) [below right=of G3] {$F$}; \node[fct] (G4) [right=of F4] {$G$} edge[bend right] node[swap] {$\varepsilon^{-1}$} (F4);
+		\end{tikzpicture}\end{center}
+		兴许更易懂. \Thx{感谢熊锐提供意见.}
+
+        \item[第 94 页, 习题 5 倒数第 2 行.]
+        \Orig Yang--Baxter 方程.
+        \Corr 杨--Baxter 方程.
+        
+   		\item[第 205 页, 第 7 行.]
+        \Orig $M$ 作为 $R/\mathrm{ann}(M)$-模自动是无挠的.
+        \Corr $M$ 作为 $R/\mathrm{ann}(M)$-模的零化子自动是 $\{0\}$.
+        \Thx{感谢戴懿韡指正.}
+        
+        \item[第 315 页, 倒数第 2 行.]
+        \Orig $\deg f(X^p) = pf(X)$
+        \Corr $\deg f(X^p) = p \deg f(X)$
+        \Thx{感谢杨历指正.}
+	\end{Errata}
+	
+\end{document}

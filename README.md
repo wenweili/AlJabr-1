@@ -16,7 +16,7 @@ We only need the standard packages and fonts, such as
 - Standard fonts included in TeX Live.
 - The [Noto Sans CJK](https://github.com/googlei18n/noto-cjk) fonts, which should be installed system-wide.
 
-Make sure that all the relevant packages/programs are installed. For reference, the author made the compilation using TeX Live 2018 in Linux.
+Make sure that all the relevant packages/programs are installed. For reference, the author made the compilation under Linux, using TeX Live 2018 with most packages installed.
 
 ## Clone the files
 As a preparation for the compilation process, we will clone the files into `~/AlJabr-1` in our home directory. In command line, type

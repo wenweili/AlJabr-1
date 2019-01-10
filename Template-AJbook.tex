@@ -28,6 +28,7 @@
 %	colors = false,
 %	coverpage = coverpage.tex,
 %	coverpage = coverpage.pdf,
+%   geometry = b5,    % 版面设置, 目前仅容许 a4, b5, 默认 b5, 其它字串则不作自动设置.
 	fontsetup = font-setup-open.tex,
 	titlesetup = titles-setup.tex
 ]{AJbook}
@@ -51,7 +52,7 @@
 % 设置 PDF 文件信息
 \hypersetup{
 	pdfauthor = {李文威 (Wen-Wei Li)},
-	pdftitle = {模板},
+	pdftitle = {AJbook 文档类模板},
 	pdfkeywords = {Template},
 	CJKbookmarks = true}
 
@@ -167,6 +168,38 @@
 	\begin{remark}
 		诸生有言及气运如何，外边人事如何者。曰：“\emph{此都是怨天尤人的心术}。但自家修为，成得个片段，若见用，则百姓受些福；假使不用，与乡党朋友论些学术，化得几人，都是事业，正所谓畅於四肢，发於事业也，何必有官做，然后有事业。” 
 	\end{remark}
+
+	\section{字体和大小}
+	自带的设定档中定义了中文排版常用的几种字体命令, 可以手动切换. 如表 \ref{table:ziti}.
+	\begin{table}[h!]
+		\begin{tabular}{ll}
+			\texttt{\textbackslash heiti} & {\heiti 黑体} \\
+			\texttt{\textbackslash songti} & {\songti 宋体} \\
+			\texttt{\textbackslash kaishu} & {\kaishu 楷体} \\
+			\texttt{\textbackslash fangsong} & {\fangsong 仿宋}
+		\end{tabular}
+		\caption{几种字体命令} \label{table:ziti}
+	\end{table}
+
+	\emph{注意}: \LaTeX 的精神是尽量让作者专注于内容, 外观则留给模板. 频繁地手动切换字体不是个好主意.
+	
+	字体大小由标准命令控制, 如表 \ref{table:ziti-size} 所示.
+
+	\begin{table}[h!]
+		\begin{tabular}{ll}
+			\texttt{\textbackslash tiny} & {\tiny 极高明而道中庸} \\
+			\texttt{\textbackslash scriptsize} & {\scriptsize 极高明而道中庸} \\
+			\texttt{\textbackslash footnotesize} & {\footnotesize 极高明而道中庸} \\
+			\texttt{\textbackslash small} & {\small 极高明而道中庸} \\
+			\texttt{\textbackslash normalsize} & {\normalsize 极高明而道中庸} \\
+			\texttt{\textbackslash large} & {\large 极高明而道中庸} \\
+			\texttt{\textbackslash Large} & {\Large 极高明而道中庸} \\
+			\texttt{\textbackslash LARGE} & {\LARGE 极高明而道中庸} \\
+			\texttt{\textbackslash huge} & {\huge 极高明而道中庸} \\
+			\texttt{\textbackslash Huge} & {\Huge 极高明而道中庸}
+		\end{tabular}
+		\caption{字体大小效果} \label{table:ziti-size}
+	\end{table}
 
 	\section{图片}
 	

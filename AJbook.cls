@@ -30,6 +30,7 @@
 \DeclareStringOption[]{coverpage}	% 封面档档名, 默认为空
 \DeclareStringOption{fontsetup}	% 字体设定档档名
 \DeclareStringOption{titlesetup}	% 章节标题设定档档名
+\DeclareStringOption[b5]{geometry}	% 版面 (默认 b5)
 
 \PassOptionsToPackage{dvipsnames}{xcolor}	% 让 xcolor 带 dvipsnames 选项; tikz 随后会载入之.
 
@@ -320,6 +321,7 @@
 	
 	% 设置页面尺寸
 	\RequirePackage{geometry}
+	\IfStrEq{\@AJ@geometry}{b5}{% 载入 b5 版面设置
 	\geometry{
 		paper=b5paper,
 		headheight=5ex,
@@ -329,7 +331,20 @@
 		twoside,
 		% bindingoffset=18pt,
 		asymmetric	% 单双数页不分
-	}
+	}}{}
+
+	\IfStrEq{\@AJ@geometry}{a4}{% 载入 a4 版面设置
+	\geometry{
+		paper=a4paper,
+		top=3cm,
+		inner=2.54cm,
+		outer=2.54cm,
+		bottom=3cm,
+		headheight=6ex,
+		headsep=6ex,
+		twoside,
+		asymmetric
+	}}{}
 
 	% 设置天眉所需
 	\RequirePackage{fancyhdr}

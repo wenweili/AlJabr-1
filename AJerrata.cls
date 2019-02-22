@@ -99,7 +99,7 @@
 
 \newcommand{\Orig}{\OriginalBox{原文}}	% ``原文''命令
 \newcommand{\Corr}{\CorrectionBox{更正}}	% ``更正''命令
-\newcommand{\Thx}[1]{\hspace{1em}\hfill\textsf{\small #1}}	% ``感谢''命令
+\newcommand{\Thx}[1]{\hspace{1em}\hfill\textsf{\footnotesize #1}}	% ``感谢''命令
 
 \AtEndPreamble{
 	% 设置页面尺寸

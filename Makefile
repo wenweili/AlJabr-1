@@ -1,5 +1,6 @@
 MAINFILE=Al-jabr-1
 TEMPLATE=Template-AJbook
+ERRATA=Errata-Al-jabr-1
 LATEXMK=latexmk
 
 default:
@@ -13,6 +14,10 @@ nosync:
 template:
 	# Generating $(TEMPLATE).pdf
 	$(LATEXMK) -pdf -pdflatex="xelatex -shell-escape -interaction=nonstopmode %O %S" $(TEMPLATE)
+
+errata:
+	# Generating $(ERRATA).pdf
+	$(LATEXMK) -pdf -pdflatex="xelatex -shell-escape -interaction=nonstopmode %O %S" $(ERRATA)
 
 clean:
 	# Cleaning...

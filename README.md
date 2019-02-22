@@ -65,6 +65,10 @@ The errata is produced from **Errata-Al-jabr-1.tex**, which is based on the real
 ```
 xelatex Errata-Al-jabr-1
 ```
+or
+```
+make errata
+```
 in the same directory.
 
 # Feedback

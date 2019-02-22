@@ -42,6 +42,12 @@
 	BoldFont=Noto Sans CJK SC Bold
 ]{Noto Sans CJK SC}
 
+\setCJKfamilyfont{emfont}[
+	BoldFont=FandolHei-Regular.otf
+]{FandolHei-Regular.otf}	% 强调用的字体
+
+\renewcommand{\em}{\bfseries\CJKfamily{emfont}} % 强调
+
 \setmathfont[
 	Extension = .otf,
 	math-style= TeX,
@@ -66,6 +72,36 @@
 	以下页码等信息参照高等教育出版社 2019 年 1 月出版之《代数学方法》第一卷, ISBN: 978-7-04-050725-6. 这些错误将在新版一并改正.
 
 	\begin{Errata}
+		\item[第 12 页, 倒数第 8 行]
+		\Orig 也可以由稍后的无穷公理保证.
+		\Corr 也可以划入稍后的无穷公理.
+		\Thx{感谢王东瀚指正.}
+		
+		\item[第 16 页, 定义 1.2.8]
+		\Orig 若传递集 $\alpha$ 对于 $\in$ 构成良序集, 则称 $\alpha$ 为\emph{序数}.
+		\Corr 若传递集 $\alpha$ 对于 $x < y \stackrel{\text{定义}}{\iff} x \in y$ 成为良序集, 则称 $\alpha$ 为\emph{序数}.
+		\Thx{感谢王东瀚指正.}
+		
+		\item[第 16 页, 倒数第 5 行]
+		\Orig 于是有 $\gamma \in \gamma$, 这同偏序的反称性矛盾.
+		\Corr 于是有 $\gamma \in \gamma$, 亦即在偏序集 $(\alpha, \leq)$ 中 $\gamma < \gamma$, 这同 $<$ 的涵义 ($\leq$ 但 $\neq$) 矛盾.
+		\Thx{感谢王东瀚指正.}
+		
+		\item[第 23 页, 第 5 行]
+		\Orig 由于 $\sigma$ 无穷...
+		\Corr 由于 $\aleph_\sigma$ 无穷...
+		\Thx{感谢王东瀚指正.}
+		
+		\item[第 42 页, 倒数第 2 行]
+		\Orig ...同构. $Z(\cdots) \simeq $...
+		\Corr ...同构 $Z(\cdots) \simeq$...
+		\Thx{感谢王东瀚指正.}
+		
+		\item[第 49 页, 倒数第 9 行]
+		\Orig 由此得到伴随对 $(D^{\mathrm{op}}, D, \varphi)$.
+		\Corr 由此得到伴随对 $(D^{\mathrm{op}}, D, \varphi^{-1})$.
+		\Thx{感谢王东瀚指正.}
+		
 		\item[第 54 页最后] \Corr 图表微调成
 		\begin{center}\begin{tikzpicture}[bend angle=70, auto, fct/.style={circle, draw=gray!40, fill=gray!10}]
 			\node[fct] (G1) {$G$}; \node[fct] (F1) [right=of G1] {$F$} edge[bend right] node[swap] {$\eta$} (G1);
@@ -83,6 +119,10 @@
         \Orig $M$ 作为 $R/\mathrm{ann}(M)$-模自动是无挠的.
         \Corr $M$ 作为 $R/\mathrm{ann}(M)$-模的零化子自动是 $\{0\}$.
         \Thx{感谢戴懿韡指正.}
+        
+        \item[第 247 頁, 第 6 行]
+        \Orig 其长度记为...
+        \Corr 其长度定为...
         
         \item[第 315 页, 倒数第 2 行.]
         \Orig $\deg f(X^p) = pf(X)$

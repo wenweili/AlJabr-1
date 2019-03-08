@@ -63,6 +63,18 @@
 % 增加表格高度
 \renewcommand*\arraystretch{1.5}
 
+% 自订公式的编号 (非必要)
+\numberwithin{equation}{section}
+\renewcommand{\theequation}{\thesection--\arabic{equation}}
+
+% 自订 figure 的编号 (非必要)
+%\numberwithin{figure}{section}
+%\renewcommand{\thefigure}{\thechapter--\arabic{figure}}
+
+% 自订 table 的编号 (非必要)
+%\numberwithin{table}{section}
+%\renewcommand{\thetable}{\thechapter--\arabic{table}}
+
 \begin{document}
 	\frontmatter	% 制作封面和目录.
 	% 注意: 为了简化, 本模板不含封面. 请通过文档类的参数进行设置.
@@ -108,6 +120,7 @@
 		\begin{equation}\label{eqn:zeta-2}
 			\sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}.
 		\end{equation}
+		当然, 公式的编号方式可以自订.
 	\end{theorem}
 
 	文中可以穿插练习及其提示.

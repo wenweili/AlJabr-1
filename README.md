@@ -25,6 +25,8 @@ cd ~
 git clone https://github.com/wenweili/AlJabr-1
 ```
 
+All the source files are encoded in UTF-8, which is the de facto standard for storing multilingual texts. If you encounter problems in opening the source files under Windows, try to re-configure your editor or convert the encoding manually.
+
 ## Compile the TeX source
 
 Move to the directory

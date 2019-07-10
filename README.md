@@ -13,7 +13,7 @@ The recipes below can be tweaked to work under Windows, but this is not recommen
 
 We only need the standard packages and fonts, such as
 - [TeX Live](https://tug.org/texlive), including the programs latexmk, xindy and biber.
-- Standard fonts included in TeX Live.
+- Standard fonts included in TeX Live, in particular the Fandol fonts.
 - The [Noto Sans CJK](https://github.com/googlei18n/noto-cjk) fonts, which should be installed system-wide.
 
 Make sure that all the relevant packages/programs are installed. For reference, the author made the compilation under Linux, using TeX Live 2018 with most packages installed.

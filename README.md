@@ -1,6 +1,6 @@
 This is the LaTeX source for the textbook **Methods of Algebra** (in Chinese: 代数学方法), volume 1.
 
-The book has been published by Higher Education Press (Beijing), ISBN 978-7-04-050725-6. The PDF version and the errata are available on the author's web page. The contents in this book are somewhat "fronzen", and the spotted mistakes will be corrected in the next edition.
+The book has been published by Higher Education Press (Beijing), ISBN 978-7-04-050725-6. The PDF version and the errata are available on the author's web page. The contents in this book are somewhat "frozen", and the spotted mistakes will be corrected in the next edition.
 
 It is hoped that these files will be of some help to those professors, students as well as amateurs who wish to write serious Chinese books in Mathematics or Physics without too much TeXnical trouble.
 
@@ -13,10 +13,10 @@ The recipes below can be tweaked to work under Windows, but this is not recommen
 
 We only need the standard packages and fonts, such as
 - [TeX Live](https://tug.org/texlive), including the programs latexmk, xindy and biber.
-- Standard fonts included in TeX Live, in particular the Fandol fonts.
-- The [Noto Sans CJK](https://github.com/googlei18n/noto-cjk) fonts, which should be installed system-wide.
+- Standard fonts included in TeX Live, in particular the Fandol fonts. For some strange reason I used and installed the TeX Gyre Heros fonts in the system. In case of error messages related to these fonts, please look for the OTF files (inside the directories in your computer which store TeX-related fonts) whose names start with **texgyreheros**, and install them manually in your system.
+- The [Noto Sans CJK](https://github.com/googlei18n/noto-cjk) fonts, which should also be installed system-wide.
 
-Make sure that all the relevant packages/programs are installed. For reference, the author made the compilation under Linux, using TeX Live 2018 with most packages installed.
+Make sure that all the relevant packages/programs are installed. For reference, the author made the compilation using Arch-based Linux distributions with TeX Live 2018; the packages **biber** and **texlive-science** are required.
 
 ## Clone the files
 As a preparation for the compilation process, we will clone the files into `~/AlJabr-1` in our home directory. In command line, type

@@ -201,6 +201,19 @@
         将所有 $\chi(\cdots) = 1$ 改成 $\chi(\cdots) = 0$, 以确保与之前的惯例一致.
         \Thx{感谢杨历指正.}
         
+        \item[第 395--396 页, 引理 10.5.3 的证明]
+        从第 395 页倒数第 3 行起 (即证明第二段), 修改如下:
+
+		置 $f_k = \sum_{h \geq 0} c_{k,h} t^h$. 注意到 $\lim_{k \to \infty} \|f_k\| = 0$, 这确保 $c_h := \sum_{k \geq 0} c_{k,h}$ 存在. 我们断言 $f := \sum_{h \geq 0} c_h t^h \in K\lrangle{t}$ 并给出 $\sum_{k=0}^\infty f_k$.
+        
+        对任意 $\epsilon > 0$, 取 $M$ 充分大使得 $k \geq M \implies \|f_k\| < \epsilon$, 再取 $N$ 使得当 $0 \leq k < M$ 而 $h \geq N$ 时 $|c_{k,h}| < \epsilon$. 于是
+        \[ h \geq N \implies \left( \forall k \geq 0, \; |c_{k,h}| \leq \epsilon \right) \implies |c_h| \leq \epsilon, \]
+        故 $f := \sum_{h \geq 0} c_h t^h \in K\lrangle{t}$. 其次, 在 $K\lrangle{t}$ 中有等式
+        \[ f - \sum_{k=0}^M f_k = \sum_{h \geq 0} \left( c_h - \sum_{k=0}^M c_{k,h} \right) t^h = \sum_{h \geq 0} \underbracket{ \left( \sum_{k > M} c_{k,h} \right)}_{|\cdot| \leq \epsilon} t^h , \]
+        从而 $f = \sum_{k=0}^\infty f_k$
+        
+        \Thx{感谢高煦指正.}
+        
         \item[第 417 页, 最后一行] 它被刻画为对...
 	\end{Errata}
 	

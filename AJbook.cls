@@ -26,6 +26,7 @@
 % ----------------------
 \DeclareBoolOption[false]{draftmark}	% 是否打上未定稿标记
 \DeclareBoolOption[true]{colors}	% 是否让链接带颜色
+\DeclareBoolOption[true]{CJKthechapter}	% 是否让天眉的各章编号使用中文数字
 \DeclareBoolOption[false]{traditional}	% 是否使用繁体中文
 \DeclareStringOption[]{coverpage}	% 封面档档名, 默认为空
 \DeclareStringOption{fontsetup}	% 字体设定档档名
@@ -259,7 +260,7 @@
 % 习题提示 (定义为环境, 穿插文中)
 \newenvironment{hint}{%
 	\ifvmode % 用 \ifvmode 测试: 如果提示另起新段, 则不加空白.
-		\unskip
+		\ignorespaces	% 消除横向空白, 优于 \unskip
 	\else
 		\quad	% 否则加入空白.
 	\fi
@@ -356,9 +357,15 @@
 	
 	% 设置天眉
 	\pagestyle{fancy}
-	\renewcommand{\chaptermark}[1]{\markboth{
+	\if@AJ@CJKthechapter
+		\renewcommand{\chaptermark}[1]{\markboth{
 			第\CJKnumber{\thechapter}章\quad #1
-		}{}}
+			}{}}
+	\else
+		\renewcommand{\chaptermark}[1]{\markboth{
+			第 \thechapter 章\quad #1
+			}{}}
+	\fi
 	\renewcommand{\sectionmark}[1]{\markright{\S\arabic{chapter}.\arabic{section} \quad #1}}
 	\fancyhf{} % 先清空
 	\fancyhead[EC]{\CJKfamily{hei2}\footnotesize{\leftmark}\vspace{1mm}}

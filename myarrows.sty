@@ -12,72 +12,72 @@
 % 以下用 tikz 定义可伸缩箭头, 不用 amsmath 和 extarrows 的版本以免 unicode-math 产生问题. 代码借自 Antal Spector-Zabusky
 % 重定义 \xrightarrow[below]{above}
 \makeatletter
-\newbox\xrat@below
-\newbox\xrat@above
+\newbox\xratbelow
+\newbox\xratabove
 \renewcommand{\xrightarrow}[2][]{%
-	\setbox\xrat@below=\hbox{\ensuremath{\scriptstyle #1}}%
-	\setbox\xrat@above=\hbox{\ensuremath{\scriptstyle #2}}%
-	\pgfmathsetlengthmacro{\xrat@len}{max(\wd\xrat@below, \wd\xrat@above) + .6em}%
+	\setbox\xratbelow=\hbox{\ensuremath{\scriptstyle #1}}%
+	\setbox\xratabove=\hbox{\ensuremath{\scriptstyle #2}}%
+	\pgfmathsetlengthmacro{\xratlen}{max(\wd\xratbelow, \wd\xratabove) + .6em}%
 	\mathrel{\tikz [->, baseline=-.75ex]
-		\draw (0,0) -- node[below=-2pt] {\box\xrat@below}
-		node[above] {\box\xrat@above}
-		(\xrat@len,0) ;}}
+		\draw (0,0) -- node[below=-2pt] {\box\xratbelow}
+		node[above] {\box\xratabove}
+		(\xratlen,0) ;}}
 % 重定义 \xlefttarrow[below]{above}
 \renewcommand{\xleftarrow}[2][]{%
-	\setbox\xrat@below=\hbox{\ensuremath{\scriptstyle #1}}%
-	\setbox\xrat@above=\hbox{\ensuremath{\scriptstyle #2}}%
-	\pgfmathsetlengthmacro{\xrat@len}{max(\wd\xrat@below, \wd\xrat@above) + .6em}%
+	\setbox\xratbelow=\hbox{\ensuremath{\scriptstyle #1}}%
+	\setbox\xratabove=\hbox{\ensuremath{\scriptstyle #2}}%
+	\pgfmathsetlengthmacro{\xratlen}{max(\wd\xratbelow, \wd\xratabove) + .6em}%
 	\mathrel{\tikz [<-, baseline=-.75ex]
-		\draw (0,0) -- node[below] {\box\xrat@below}
-		node[above] {\box\xrat@above}
-		(\xrat@len,0) ;}}
+		\draw (0,0) -- node[below] {\box\xratbelow}
+		node[above] {\box\xratabove}
+		(\xratlen,0) ;}}
 % 重定义 \xleftrightarrow[below]{above}
 \renewcommand{\xleftrightarrow}[2][]{%
-	\setbox\xrat@below=\hbox{\ensuremath{\scriptstyle #1}}%
-	\setbox\xrat@above=\hbox{\ensuremath{\scriptstyle #2}}%
-	\pgfmathsetlengthmacro{\xrat@len}{max(\wd\xrat@below, \wd\xrat@above) + .6em}%
+	\setbox\xratbelow=\hbox{\ensuremath{\scriptstyle #1}}%
+	\setbox\xratabove=\hbox{\ensuremath{\scriptstyle #2}}%
+	\pgfmathsetlengthmacro{\xratlen}{max(\wd\xratbelow, \wd\xratabove) + .6em}%
 	\mathrel{\tikz [<->, baseline=-.75ex]
-		\draw (0,0) -- node[below] {\box\xrat@below}
-		node[above] {\box\xrat@above}
-		(\xrat@len,0) ;}}
+		\draw (0,0) -- node[below] {\box\xratbelow}
+		node[above] {\box\xratabove}
+		(\xratlen,0) ;}}
 % 重定义 \xhookrightarrow[below]{above}, 使用 tikz-cd 的 hookrightarrow
 \renewcommand{\xhookrightarrow}[2][]{%
-	\setbox\xrat@below=\hbox{\ensuremath{\scriptstyle #1}}%
-	\setbox\xrat@above=\hbox{\ensuremath{\scriptstyle #2}}%
-	\pgfmathsetlengthmacro{\xrat@len}{max(\wd\xrat@below, \wd\xrat@above) + .6em}%
+	\setbox\xratbelow=\hbox{\ensuremath{\scriptstyle #1}}%
+	\setbox\xratabove=\hbox{\ensuremath{\scriptstyle #2}}%
+	\pgfmathsetlengthmacro{\xratlen}{max(\wd\xratbelow, \wd\xratabove) + .6em}%
 	\mathrel{\tikz [baseline=-.75ex]
-		\draw (0,0) edge[commutative diagrams/hookrightarrow] node[below] {\box\xrat@below}
-		node[above] {\box\xrat@above}
-		(\xrat@len,0) ;}}
+		\draw (0,0) edge[commutative diagrams/hookrightarrow] node[below] {\box\xratbelow}
+		node[above] {\box\xratabove}
+		(\xratlen,0) ;}}
 % 重定义 \xhooklefttarrow[below]{above}, 使用 tikz-cd 的 hookleftarrow
 \renewcommand{\xhookleftarrow}[2][]{%
-	\setbox\xrat@below=\hbox{\ensuremath{\scriptstyle #1}}%
-	\setbox\xrat@above=\hbox{\ensuremath{\scriptstyle #2}}%
-	\pgfmathsetlengthmacro{\xrat@len}{max(\wd\xrat@below, \wd\xrat@above) + .6em}%
+	\setbox\xratbelow=\hbox{\ensuremath{\scriptstyle #1}}%
+	\setbox\xratabove=\hbox{\ensuremath{\scriptstyle #2}}%
+	\pgfmathsetlengthmacro{\xratlen}{max(\wd\xratbelow, \wd\xratabove) + .6em}%
 	\mathrel{\tikz [baseline=-.75ex]
-		\draw (0,0) edge[commutative diagrams/hookleftarrow] node[below] {\box\xrat@below}
-		node[above] {\box\xrat@above}
-		(\xrat@len,0) ;}}
+		\draw (0,0) edge[commutative diagrams/hookleftarrow] node[below] {\box\xratbelow}
+		node[above] {\box\xratabove}
+		(\xratlen,0) ;}}
 
 % 重定义 \xmapsto[below]{above}, 使用 tikz-cd 的 mapsto
 \renewcommand{\xmapsto}[2][]{%
-	\setbox\xrat@below=\hbox{\ensuremath{\scriptstyle #1}}%
-	\setbox\xrat@above=\hbox{\ensuremath{\scriptstyle #2}}%
-	\pgfmathsetlengthmacro{\xrat@len}{max(\wd\xrat@below, \wd\xrat@above) + .6em}%
+	\setbox\xratbelow=\hbox{\ensuremath{\scriptstyle #1}}%
+	\setbox\xratabove=\hbox{\ensuremath{\scriptstyle #2}}%
+	\pgfmathsetlengthmacro{\xratlen}{max(\wd\xratbelow, \wd\xratabove) + .6em}%
 	\mathrel{\tikz [baseline=-.75ex]
-		\draw (0,0) edge[commutative diagrams/mapsto] node[below] {\box\xrat@below}
-		node[above] {\box\xrat@above}
-		(\xrat@len,0) ;}}
+		\draw (0,0) edge[commutative diagrams/mapsto] node[below] {\box\xratbelow}
+		node[above] {\box\xratabove}
+		(\xratlen,0) ;}}
 
 % 定义 \xlongequal[below]{above}, 使用 tikz-cd 的等号
 \newcommand{\xlongequal}[2][]{%
-	\setbox\xrat@below=\hbox{\ensuremath{\scriptstyle #1}}%
-	\setbox\xrat@above=\hbox{\ensuremath{\scriptstyle #2}}%
-	\pgfmathsetlengthmacro{\xrat@len}{max(\wd\xrat@below, \wd\xrat@above) + .6em}%
+	\setbox\xratbelow=\hbox{\ensuremath{\scriptstyle #1}}%
+	\setbox\xratabove=\hbox{\ensuremath{\scriptstyle #2}}%
+	\pgfmathsetlengthmacro{\xratlen}{max(\wd\xratbelow, \wd\xratabove) + .6em}%
 	\mathrel{\tikz [baseline=-.75ex]
-		\draw (0,0) edge[commutative diagrams/equal] node[below] {\box\xrat@below}
-		node[above] {\box\xrat@above}
-		(\xrat@len,0) ;}}
+		\draw (0,0) edge[commutative diagrams/equal] node[below] {\box\xratbelow}
+		node[above] {\box\xratabove}
+		(\xratlen,0) ;}}
 \makeatother
 
 \endinput

@@ -19,7 +19,7 @@ We only need the standard packages and fonts, such as
 Make sure that all the relevant packages/programs are installed. For reference, the author made the compilation using Arch-based Linux distributions with TeX Live 2018 and/or 2020; the packages **biber** and **texlive-science** are required.
 
 ## Clone the files
-As a preparation for the compilation process, we will clone the files into `~/AlJabr-1` in our home directory. In command line, type
+Assume that [Git](https://git-scm.com/) has been installed on your computer. As a preparation for the compilation process, we will clone the files into `~/AlJabr-1` in our home directory. In command line, type
 ```
 cd ~
 git clone https://github.com/wenweili/AlJabr-1

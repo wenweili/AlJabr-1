@@ -16,10 +16,10 @@ We only need the standard packages and fonts, such as
 - Standard fonts included in TeX Live, in particular the Fandol fonts. For some strange reason I used and installed the TeX Gyre Heros fonts in the system. In case of error messages related to these fonts, please look for the OTF files (inside the directories in your computer which store TeX-related fonts) whose names start with **texgyreheros**, and install them manually in your system.
 - The **Noto Sans CJK SC** fonts from [Noto CJK](https://github.com/googlei18n/noto-cjk), which should also be installed system-wide.
 
-Make sure that all the relevant packages/programs are installed. For reference, the author made the compilation using Arch-based Linux distributions with TeX Live 2018; the packages **biber** and **texlive-science** are required.
+Make sure that all the relevant packages/programs are installed. For reference, the author made the compilation using Arch-based Linux distributions with TeX Live 2018 and/or 2020; the packages **biber** and **texlive-science** are required.
 
 ## Clone the files
-As a preparation for the compilation process, we will clone the files into `~/AlJabr-1` in our home directory. In command line, type
+Assume that [Git](https://git-scm.com/) has been installed on your computer. As a preparation for the compilation process, we will clone the files into `~/AlJabr-1` in our home directory. In command line, type
 ```
 cd ~
 git clone https://github.com/wenweili/AlJabr-1

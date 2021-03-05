@@ -32,12 +32,7 @@
 % 载入 paralist 以制作列表
 \RequirePackage{paralist}
 
-\RequirePackage{setspace}	% 设定适于中文排版的行距
-
 \RequirePackage[iso, english]{isodate}  % 使 \today 印出 yyyy-mm-dd
-
-\onehalfspacing	% 行距
-%\raggedbottom	% 减小页面空白
 
 \setlength{\parindent}{2em}	% 设置适合于汉语排版的段落缩进
 
@@ -45,7 +40,7 @@
 \XeTeXlinebreaklocale "zh"
 \XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
 
-\setlength{\parskip}{5pt}	% 增大段落间距
+\RequirePackage{zhlineskip}	% 设置适合中文排版的间距
 
 % 排版``原文''方块
 \newtcbox{\OriginalBox}{

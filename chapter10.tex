@@ -639,12 +639,12 @@ Archimedes 绝对值的典型例子是 $K=\R, \CC$ 连同标准的绝对值 $|\c
 \begin{proof}
 	只须证每个 Cauchy 序列 $(a_k)_{k=1}^\infty$ 皆收敛. 置 $a_0 := 0$ 和 $f_k := a_{k+1}-a_k$, 问题化约为证无穷级数 $\sum_{k=0}^\infty f_k$ 在 $K\lrangle{t}$ 中收敛于某个 $f$.
 	
-	注意到 $\lim_{k \to \infty} \|f_k\| = 0$. 置 $f_k = \sum_{h \geq 0} c_{k,h} t^h$, 则 $K\lrangle{t}$ 的定义蕴涵对每个 $k$ 皆有 $\lim_{h \to \infty} c_{k,h} = 0$. 因为 $K$ 完备, 命题 \ref{prop:ultrametric-series} 确保 $c_k := \sum_{h \geq 0} c_{k,h}$ 存在. 我们断言 $f := \sum_{k \geq 0} c_k t^k \in K\lrangle{t}$ 并给出 $\sum_{k=0}^\infty f_k$.
+	置 $f_k = \sum_{h \geq 0} c_{k,h} t^h$. 注意到 $\lim_{k \to \infty} \|f_k\| = 0$, 这确保 $c_h := \sum_{k \geq 0} c_{k,h}$ 存在. 我们断言 $f := \sum_{h \geq 0} c_h t^h \in K\lrangle{t}$ 并给出 $\sum_{k=0}^\infty f_k$.
 	
-	对任意 $\epsilon > 0$, 取 $N$ 使得 $k \geq N \implies \|f_k\| < \epsilon$, 于是
-	\[ k \geq N \implies |c_k| \leq \sup_{h \geq 0} |c_{k,h}| = \|f_k\| \leq \epsilon, \]
-	故 $f := \sum_{k \geq 0} c_k t^k \in K\lrangle{t}$. 其次, 在 $K\lrangle{t}$ 中有等式
-	\[ f - \sum_{k=0}^N f_k = \sum_{h \geq 0} \left( c_k - \sum_{k=0}^N c_{k,h} \right) t^h = \sum_{h \geq 0} \underbracket{ \left( \sum_{k > N} c_{k,h} \right)}_{|\cdot| \leq \epsilon} t^h \]
+	对任意 $\epsilon > 0$, 取 $M$ 充分大使得 $k \geq M \implies \|f_k\| < \epsilon$, 再取 $N$ 使得当 $0 \leq k < M$ 而 $h \geq N$ 时 $|c_{k,h}| < \epsilon$. 于是
+	\[ h \geq N \implies \left( \forall k \geq 0, \; |c_{k,h}| \leq \epsilon \right) \implies |c_h| \leq \epsilon, \]
+	故 $f := \sum_{h \geq 0} c_h t^h \in K\lrangle{t}$. 其次, 在 $K\lrangle{t}$ 中有等式
+	\[ f - \sum_{k=0}^M f_k = \sum_{h \geq 0} \left( c_h - \sum_{k=0}^M c_{k,h} \right) t^h = \sum_{h \geq 0} \underbracket{ \left( \sum_{k > M} c_{k,h} \right)}_{|\cdot| \leq \epsilon} t^h , \]
 	从而 $f = \sum_{k=0}^\infty f_k$.
 \end{proof}
 
@@ -675,7 +675,7 @@ Archimedes 绝对值的典型例子是 $K=\R, \CC$ 连同标准的绝对值 $|\c
 			w_{x,-}: K\lrangle{t} & \longrightarrow \Gamma \sqcup\{\infty\} \\
 			f = \sum_{n \geq 0} c_n (t-x)^n & \longmapsto \inf\left\{ v(c_n) - n \log r + n\alpha : n=0,1,2, \ldots \right\}.
 		\end{align*}
-		不妨想象它对应到 $B(x, re^{-\alpha})$, 其半径小于但无穷接近 $r$. 可以证明 $w_{x.-}$ 只和开圆盘 $\{y: |y-x| < r\}$ 有关. 当 $r \notin |K|$ 时, $w_{x,-}$ 等价于 III 的 $w_{B(x,r)} = -\log|\cdot|_{B(x,r)}$; 而当 $r \in |K|$ 时 $w_{x,-}$ 与上述几种赋值皆不等价.
+		不妨想象它对应到 $B(x, re^{-\alpha})$, 其半径小于但无穷接近 $r$. 可以证明 $w_{x,-}$ 只和开圆盘 $\{y: |y-x| < r\}$ 有关. 当 $r \notin |K|$ 时, $w_{x,-}$ 等价于 III 的 $w_{B(x,r)} = -\log|\cdot|_{B(x,r)}$; 而当 $r \in |K|$ 时 $w_{x,-}$ 与上述几种赋值皆不等价.
 		
 		同理, 对于 $0 < r \leq 1$ 的情形引进负无穷小 $-\alpha$, 则得赋值 $w_{x,+}$; 它只和 $B(x,r)$ 有关.
 \end{enumerate}
@@ -712,7 +712,7 @@ Archimedes 绝对值的典型例子是 $K=\R, \CC$ 连同标准的绝对值 $|\c
 	设 $K^\circ$ 为整环, $K := \mathrm{Frac}(K^\circ)$ 为其分式域. 若对任意 $x \in K^\times$ 皆有 $x \in K^\circ$ 或 $x^{-1} \in K^\circ$, 则存在赋值 $v: K \to \Gamma$ 使得 $K^\circ$ 是相应的赋值环, 而且 $v$ 在等价 (定义 \ref{def:valuation-equiv}) 意义下唯一.
 \end{proposition}
 \begin{proof}
-	唯一性已经在定义 \ref{def:valuation-equiv} 之前讨论过了. 以下构造 $v$. 取 $\Gamma := K^\times/K^{\circ\times}$ (乘法群), 定义序结构 $x K^{\circ\times} \leq y K^{\circ\times} \iff x^{-1}y \in K^\circ$. 容易由条件看出 $(\Gamma, \leq)$ 是全序交换群, 而 $v: K^\times \to \Gamma$ 是商同态. 要点在于检验 \eqref{eqn:valuation-ineq}. 令 $x,y \in K^\times$, $\alpha := xy^{-1}$, 不妨假设 $x+y \neq 0$, 我们有
+	唯一性已经在定义 \ref{def:valuation-equiv} 之前讨论过了. 以下构造 $v$. 取 $\Gamma := K^\times/K^{\circ\times}$ (乘法群), 定义序结构 $x K^{\circ\times} \leq y K^{\circ\times} \iff x^{-1}y \in K^\circ$. 容易由条件看出 $(\Gamma, \leq)$ 是全序交换群. 取 $v: K^\times \to \Gamma$ 为商同态. 要点在于检验 \eqref{eqn:valuation-ineq}. 令 $x,y \in K^\times$, $\alpha := xy^{-1}$, 不妨假设 $x+y \neq 0$, 我们有
 	\[ v(x+y) < v(y) \iff \frac{x+y}{y} = \alpha + 1 \notin K^\circ \iff \alpha \notin K^\circ. \]
 	同理, $v(x+y) < v(x) \iff \alpha^{-1} \notin K^\circ$. 这两者不能同时成立.
 \end{proof}
@@ -776,7 +776,7 @@ Archimedes 绝对值的典型例子是 $K=\R, \CC$ 连同标准的绝对值 $|\c
 \end{proof}
 
 \begin{proposition}\label{prop:e-f-tower}
-	设 $L|M|K$ 为域扩张的塔, $w \mid v \mid u$ 为其上赋值的延拓, 则 $e(w \mid u) = e(w \mid u)e(u \mid  v)$, $f(w \mid u) = f(w \mid u)f(u \mid  v)$.
+	设 $L|M|K$ 为域扩张的塔, $w \mid v \mid u$ 为其上赋值的延拓, 则 $e(w \mid u) = e(w \mid v)e(v \mid  u)$, $f(w \mid u) = f(w \mid v)f(v \mid u)$.
 \end{proposition}
 \begin{proof}
 	缘由是域扩张的次数和群的指数都具有塔性质 (命题 \ref{prop:Lagrange}, \ref{prop:field-tower-degree}).
@@ -958,7 +958,7 @@ Archimedes 绝对值的典型例子是 $K=\R, \CC$ 连同标准的绝对值 $|\c
 	设 $v$ 是 $K$ 的离散赋值, 则对任何有限扩张 $L|K$ 皆有
 	\[ \sum_{w \mid v} e(w \mid v) f(w \mid v) = \sum_{w \mid v} [L_w : K_v] \leq [L:K]; \]
 	当 $L|K$ 可分时等式成立. 若 $L|K$ 为有限 Galois 扩张, 则 $e(w \mid v)$, $f(w \mid v)$ 和 $w$ 无关, 此时对任意 $w \mid v$ 皆有
-	\[ [L:K] = e(w \mid v) f(w \mid v) \cdot |\Stab_{\Gal(L|K)}(w)|. \]
+	\[ [L:K] = e(w \mid v) f(w \mid v) \cdot \frac{|\Gal(L|K)|}{|\Stab_{\Gal(L|K)}(w)|}. \]
 \end{corollary}
 \begin{proof}
 	分而治之. 定理 \ref{prop:fundamental-eq-complete} 和命题 \ref{prop:ef-completion} 给出
@@ -971,7 +971,7 @@ Archimedes 绝对值的典型例子是 $K=\R, \CC$ 连同标准的绝对值 $|\c
 		& \leq \sum_{u \mid v} [L:M] [M_u:K_v] \leq [L:M][M:K] = [L:K].
 	\end{align*}
 
-	对于 Galois 扩张的情形, 应用定理 \ref{prop:valuation-ext-embedding} 给予的对称性, 此时 $|\Stab_{\Gal(L|K)}(w)|$ 无非是延拓 $w \mid v$ 的个数.
+	对于 Galois 扩张的情形, 应用定理 \ref{prop:valuation-ext-embedding} 给予的对称性, 此时 $\frac{|\Gal(L|K)|}{|\Stab_{\Gal(L|K)}(w)|}$ 无非是延拓 $w \mid v$ 的个数.
 \end{proof}
 
 \section{完备域中求根}
@@ -1233,7 +1233,7 @@ K.\ Hensel 的引理是分析学思想应用于代数学与数论的范例. 它�
 于是在引理的条件下立见 $\Image(w)$ 为 $\prod_{i \geq 0} R$ 的子环.
 
 \begin{theorem}\label{prop:Witt-ring}\index{Witt 环}
-	在 $\WittV(R)$ 上存在唯一的交换环结构使得 $w: \WittV(R) \to \prod_{n \geq 0} R$ 对所有 $R$ 都是环同态, 并使 $(0,0, \ldots)$ 为零元, $(1,0,\ldots)$ 为幺元. 进一步,
+	在所有 $\WittV(R)$ 上存在唯一的一族交换环结构, 使得 $w: \WittV(R) \to \prod_{n \geq 0} R$ 为环同态, $(0, 0, \ldots)$ 为零元, $(1, 0, \ldots)$ 为幺元, 而且:
 	\begin{itemize}
 		\item 对每个环同态 $\phi: R \to S$ 下图皆交换
 		\[\begin{tikzcd}
@@ -1242,16 +1242,16 @@ K.\ Hensel 的引理是分析学思想应用于代数学与数论的范例. 它�
 		\end{tikzcd}\]
 		\item 存在唯一确定的多项式族 $S_n \in \Z[X_0, \ldots, Y_0, \ldots]$, $P_n \in \Z[X_0, \ldots, Y_0, \ldots]$ 和 $M_n \in \Z[X_0, \ldots, X_n]$ 使得 $\WittV(R)$ 的环结构由
 		\begin{align*}
-		(x_n)_{n \geq 0} + (y_n)_{n \geq 0} & = (S_n(x_0, \ldots, x_n, y_0, \ldots, y_n))_{n \geq 0}, \\
-		(x_n)_{n \geq 0} \cdot (y_n)_{n \geq 0} & = (P_n(x_0, \ldots, x_n, y_0, \ldots, y_n))_{n \geq 0}, \\
-		-(x_n)_{n \geq 0} & = (M_n(x_0, \ldots, x_n))_{n \geq 0}
+			(x_n)_{n \geq 0} + (y_n)_{n \geq 0} & = (S_n(x_0, \ldots, x_n, y_0, \ldots, y_n))_{n \geq 0}, \\
+			(x_n)_{n \geq 0} \cdot (y_n)_{n \geq 0} & = (P_n(x_0, \ldots, x_n, y_0, \ldots, y_n))_{n \geq 0}, \\
+			-(x_n)_{n \geq 0} & = (M_n(x_0, \ldots, x_n))_{n \geq 0}
 		\end{align*}
-		所确定.
+		所确定, 这些多项式与 $R$ 无关.
 	\end{itemize}
 	因此 $\WittV(\cdot)$ 给出从交换环范畴 $\cate{CRing}$ 到自身的函子.
 \end{theorem}
 \begin{proof}
-	给定 $(x_i)_i, (y_i)_i \in \WittV(R)$, 为了定义其间自然的 (即对 $R$ 具函子性) 群运算, 我们先取 $x_i := X_i$, $y_i := Y_i$ 为自由变元, 而 $R := \Z[X_0, \ldots, Y_0, \ldots]$. 根据多项式环的泛性质, 存在自同态 $\phi_p: R \to R$ 使得
+	给定 $(x_i)_i, (y_i)_i \in \WittV(R)$, 为了定义其间自然的 (即对 $R$ 具函子性) 环运算, 我们先取 $x_i := X_i$, $y_i := Y_i$ 为自由变元, 而 $R := \Z[X_0, \ldots, Y_0, \ldots]$. 根据多项式环的泛性质, 存在自同态 $\phi_p: R \to R$ 使得
 	\[ \phi_p(X_n) = X_n^p, \quad \phi_p(Y_n) = Y_n^p, \]
 	配合 Fermat 小定理 (注记 \ref{rem:Fermat-little}) 可知 $\forall r \; \phi_p(r) = r^p \pmod{pR}$. 引理 \ref{prop:Dwork-Witt} 确保环 $\prod_{n \geq 0} R$ 的元素
 	\[ w(x) + w(y), \quad w(x)w(y), \quad -w(x) \]
@@ -1284,7 +1284,7 @@ Witt 环上还有如下几种简单然而极重要的运算.
 			\WittV(R) \arrow[r, "w"'] & \prod_{n \geq 0} R & (0, py_0, py_1, \ldots) \arrow[phantom, l, "\ni" description]
 		\end{tikzcd}\]
 		显然 $V^w$ 是加法群的同态; 当 $R$ 为 $p$-无挠时 $w$ 为单同态, 故 $V$ 亦满足加性; 对于一般的 $R$ 可按定理 \ref{prop:Witt-ring} 的证明处理.
-	\item Frobenius 同态 $F: \WittV(R) \to \WittV(R)$. 它被刻画对 $R$ 具函子性并使下图交换的一族同态
+	\item Frobenius 同态 $F: \WittV(R) \to \WittV(R)$. 它被刻画为对 $R$ 具函子性并使下图交换的一族同态
 		\[\begin{tikzcd}
 			\WittV(R) \arrow[r, "w"] \arrow[d, "F"'] & \prod_{n \geq 0} R \arrow[d, "{F^w}"] & (y_i)_{i \geq 0} \arrow[phantom, l, "\ni" description] \arrow[mapsto, d] \\
 			\WittV(R) \arrow[r, "w"'] & \prod_{n \geq 0} R & (y_1, y_2, \ldots) \arrow[phantom, l, "\ni" description]

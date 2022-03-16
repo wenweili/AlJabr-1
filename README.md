@@ -1,6 +1,8 @@
-This is the LaTeX source for the textbook **Methods of Algebra** (in Chinese: 代数学方法), volume 1.
+This is the LaTeX source for the textbook **Methods of Algebra** (in Chinese: 代数学方法), Volume 1, revised version (March 2022).
 
-The book has been published by Higher Education Press (Beijing), ISBN 978-7-04-050725-6. The PDF version and the errata are available on the author's web page. The contents in this book are somewhat "frozen", and the spotted mistakes will be corrected in the next edition.
+The book is originally published in 2019 by Higher Education Press (Beijing), ISBN 978-7-04-050725-6. The revised version will be published soon.
+
+The PDF version and the errata are available on the author's web page. The contents in this revised version are "frozen": the spotted mistakes will be corrected in the next revision/edition.
 
 It is hoped that these files will be of some help to those professors, students as well as amateurs who wish to write serious Chinese books in Mathematics or Physics without too much TeXnical trouble.
 
@@ -74,6 +76,8 @@ or
 make errata
 ```
 in the same directory.
+
+The errata to the previous editions are named as **Errata-Al-jabr-1-v0.tex**, and so forth.
 
 # Feedback
 In case of problems of compilation, please kindly report to the author. Make sure that all the system requirements above are met, and provide detailed error messages. Other suggestions are also welcome.

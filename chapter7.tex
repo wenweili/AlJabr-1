@@ -163,7 +163,7 @@
 \end{definition}
 譬如当 $R=\Z$, $A \subset \CC$ 时, $x \in A$ 整当且仅当它是整系数首一多项式的根, 亦即 $x$ 是代数整数.
 
-任意环 $S$ 上的一个左模 $N$ 称为是忠实的, 如果 $\text{ann}(M) = \{0\}$; 换言之 $s \in S$ 满足于 $sN=\{0\}$ 当且仅当 $s=0$. 右模亦同. 代数 $A$ 透过左乘成为忠实 $R[x]$-模, 事实上 $A$ 的任何包含 $1$ 的子模皆是忠实的.
+任意环 $S$ 上的一个左模 $N$ 称为是忠实的, 如果 $\text{ann}(N) = \{0\}$; 换言之 $s \in S$ 满足于 $sN=\{0\}$ 当且仅当 $s=0$. 右模亦同. 代数 $A$ 透过左乘成为忠实 $R[x]$-模, 事实上 $A$ 的任何包含 $1$ 的子模皆是忠实的.
 
 \begin{theorem}\label{prop:integrality-finiteness}
 	对任意 $x \in A$, 以下陈述等价:
@@ -351,7 +351,7 @@
 \end{remark}
 
 \begin{remark}\label{rem:algebra-otimes-zero}
-	非零 $R$-代数的张量积可以是零代数. 例如取 $a, b \in \Z_{>1}$ 互素, 则存在整数 $u,v$ 使得 $1 = ua+vb$, 因而 $\Z/a\Z \dotimes{\Z} \Z/b\Z = 0$. 然而当 $A$, $B$ 都是非零自由 $R$-模时, 推论 \ref{prop:module-tensor-free} 确保 $A \dotimes{R} B$ 自由且秩为 $A$, $B$ 的秩之和, 因而非零. 当 $R$ 是域时, 以上假设总是成立. 这套论证可以直接推广到稍后要讨论的无穷张量积 (定义--定理 \ref{def:inf-tensor-product}).
+	非零 $R$-代数的张量积可以是零代数. 例如取 $a, b \in \Z_{>1}$ 互素, 则存在整数 $u,v$ 使得 $1 = ua+vb$, 因而 $\Z/a\Z \dotimes{\Z} \Z/b\Z = 0$. 然而当 $A$, $B$ 都是非零自由 $R$-模时, 推论 \ref{prop:module-tensor-free} 确保 $A \dotimes{R} B$ 自由且秩为 $A$, $B$ 的秩之积, 因而非零. 当 $R$ 是域时, 以上假设总是成立. 这套论证可以直接推广到稍后要讨论的无穷张量积 (定义--定理 \ref{def:inf-tensor-product}).
 \end{remark}
 
 \begin{example}
@@ -362,7 +362,7 @@
 	\end{align}
 	两者并用可得
 	\begin{gather}\label{eqn:matrix-tensor-3}
-		M_n(A) \otimes M_n(B) \simeq A \otimes M_n(R) \otimes M_m(R) \otimes \simeq M_{nm}(A \otimes B).
+		M_n(A) \otimes M_m(B) \simeq A \otimes M_n(R) \otimes M_m(R) \otimes B \simeq M_{nm}(A \otimes B).
 	\end{gather}
 	先处理 \eqref{eqn:matrix-tensor-1}, 此映射无非是 $(a_{ij})_{i,j} \otimes b \mapsto (a_{ij} \otimes b)_{i,j}$. 命题 \ref{prop:tensor-direct-sum}, 例 \ref{eg:matrix-algebra-1} 及其后的讨论表明 $M_n(A) \otimes B$ 是自由左 $A \otimes B$-模
 	\[ M_n(A) \otimes B = \bigoplus_{i,j} (A \otimes B) (E_{ij} \otimes 1), \]
@@ -479,7 +479,7 @@
 		\[ R[X_0, \ldots, X_n]_i = \bigoplus_{|\bm{a}|=i} R X_0^{a_0}  \cdots X_n^{a_n}, \]
 		因此次数 $i$ 的齐次元恰好是 $R$ 上的 $i$ 次齐次多项式. 此时的分次理想也称为齐次理想, 扣除少部分例外情形, 它们在代数几何学中对应于射影空间 $\mathbb{P}^n$ 里的闭子概形.
 	\item 设 $\Gamma$ 为交换幺半群, 则定义 \ref{def:monoidal-ring} 的幺半群环 $R[\Gamma] = \bigoplus_{\gamma \in \Gamma} R\gamma$ 构成 $\Gamma$-分次代数, 这几乎是同义反复.
-	\item 光滑微分流形 $X$ 上的所有 $\CC$-值微分形式对运算 $(\omega, \eta) \mapsto \omega \wedge \eta$ 构成 $\CC$-代数, 记作 $A(X) = \bigoplus_{k=0}^{\dim X} A^k(M)$, 其中 $A^k(M)$ 表示 $k$ 次微分形式构成的 $\CC$-向量空间, 基本理论可参考 \cite[\S 3.2]{ChCh}. 回忆到 $A^0(X) = C^\infty(X)$ 而 $A^k(X)$ 中任意元素 $\omega$ 在局部坐标 $x_1, \ldots, x_n$ 下可唯一地表作
+	\item 光滑微分流形 $X$ 上的所有 $\CC$-值微分形式对运算 $(\omega, \eta) \mapsto \omega \wedge \eta$ 构成 $\CC$-代数, 记作 $A(X) = \bigoplus_{k=0}^{\dim X} A^k(X)$, 其中 $A^k(X)$ 表示 $k$ 次微分形式构成的 $\CC$-向量空间, 基本理论可参考 \cite[\S 3.2]{ChCh}. 回忆到 $A^0(X) = C^\infty(X)$ 而 $A^k(X)$ 中任意元素 $\omega$ 在局部坐标 $x_1, \ldots, x_n$ 下可唯一地表作
 	\[ \omega = \sum_{1 \leq i_1 < \cdots < i_k \leq n} f_{i_1, \ldots, i_k} \dd x_{i_1} \wedge \cdots \wedge \dd x_{i_k}, \quad f_{i_1, \ldots, i_k} \in C^\infty(X) \]
 	的形式. 于是 $A(X)$ 构成分次代数, 乘法不交换, 然``虽不中亦不远矣'', 因为几何学中有熟悉的公式
 	\[  \omega \wedge \eta = (-1)^{ab} \eta \wedge \omega, \quad \omega \in A^a(X), \; \eta \in A^b(X). \]
@@ -631,7 +631,7 @@
 结合约束导出自然同态 $\mu_{i,j}: T^i M \otimes T^j M \rightiso T^{i+j} M$.
 
 \begin{definition}[张量代数]\index[sym1]{$T(M)$, $T^n(M)$}\index{zhangliangdaishu@张量代数 (tensor algebra)}
-	定义 $R$-模 $M$ 的\emph{张量代数}为 $T(M) := \bigoplus_{n=0}^\infty T^i(M)$, 其乘法和幺元分别由诸 $\mu_{i,j}$ 和 $R = T^0(M) \hookrightarrow T(M)$ 给出. 它带有自然的 $R$-模单同态 $M = T^1(M) \hookrightarrow T(M)$. 同时 $T(M)$ 也是定义 \ref{def:graded-module-alg} 中的分次代数, 其 $k$ 次齐次部分无非是 $T^k(M)$.
+	定义 $R$-模 $M$ 的\emph{张量代数}为 $T(M) := \bigoplus_{n=0}^\infty T^n(M)$, 其乘法和幺元分别由诸 $\mu_{i,j}$ 和 $R = T^0(M) \hookrightarrow T(M)$ 给出. 它带有自然的 $R$-模单同态 $M = T^1(M) \hookrightarrow T(M)$. 同时 $T(M)$ 也是定义 \ref{def:graded-module-alg} 中的分次代数, 其 $k$ 次齐次部分无非是 $T^k(M)$.
 \end{definition}
 乘法的定义如在元素层面展开, 无非是张量积
 \[ (x_1 \otimes \cdots \otimes x_n) \cdot (y_1 \otimes \cdots \otimes y_m) = x_1 \otimes \cdots \otimes x_n \otimes y_1 \otimes \cdots \otimes y_m. \]
@@ -644,7 +644,7 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 
 下述泛性质表明 $(T(M), M \to T(M))$ 可谓是模 $M$ 上的``自由代数''.
 \begin{theorem}\label{prop:tensor-alg-universal}
-	张量代数满足如下泛性质: 对任意 $R$-代数 $A$ 连同 $R$-模同态 $f: M \to A$, 存在唯一的 $R$-模同态 $\varphi: T(M) \to A$ 使下图交换:
+	张量代数满足如下泛性质: 对任意 $R$-代数 $A$ 连同 $R$-模同态 $f: M \to A$, 存在唯一的 $R$-代数同态 $\varphi: T(M) \to A$ 使下图交换:
 	\[\begin{tikzcd}[row sep=tiny]
 		& T(M) \arrow[dd, "\exists! \;\varphi"] \\
 		M \arrow[ru] \arrow[rd, "f"'] & \\
@@ -788,10 +788,10 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 		\Hom_{R\dcate{CAlg}_\Z}(\Sym(-),-) & \longrightiso \Hom_{R\dcate{Mod}}(-, U(-)), \\
 		\Hom_{R\dcate{CAlg}^-_\Z}(\bigwedge(-),-) & \longrightiso \Hom_{R\dcate{Mod}}(-, U(-)),
 	\end{align*}
-	其中 $U$ 表示忘却函子 $R\dcate{CAlg}_\Z, R\dcate{CAlg}^-_\Z \to R\dcate{Mod}$.
+	其中 $U$ 表示映 $A$ 为 $A_1$ 的函子 $R\dcate{CAlg}_\Z, R\dcate{CAlg}^-_\Z \to R\dcate{Mod}$.
 \end{theorem}
 \begin{proof}
-	以对称代数的情形为例, 上示同构映 $f: \Sym(M) \to A$ 为合成 $M \hookrightarrow \Sym(M) \xrightarrow{f} A$, 反向则映 $R$-模同态 $\varphi: M \to A$ 为 $f: \Sym(M) \to A$, $f(x_1 \cdots x_n) = \varphi(x_1) \cdots \varphi(x_n)$, 后者良定是命题 \ref{prop:Symm-Alt-univ} 的推论.
+	以对称代数的情形为例, 上示同构映 $f: \Sym(M) \to A$ 为合成 $M \hookrightarrow \Sym(M) \xrightarrow{f} A$, 反向则映 $R$-模同态 $\varphi: M \to A_1$ 为 $f: \Sym(M) \to A$, $f(x_1 \cdots x_n) = \varphi(x_1) \cdots \varphi(x_n)$, 后者良定是命题 \ref{prop:Symm-Alt-univ} 的推论.
 \end{proof}
 
 命题 \ref{prop:graded-alg-cocomplete} 确保 $R\dcate{CAlg}_\Z$ 和 $R\dcate{CAlg}^-_\Z$ 都是余完备范畴. 依靠定理 \ref{prop:Sym-wedge-universal}, 以下断言的证明和推论 \ref{prop:tensor-alg-limit} 全然相同.
@@ -827,7 +827,7 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 
 最后, 我们来看看如何会通微分几何等学科里常见的定义. 命题 \ref{prop:Symm-Alt-univ} 的泛性质表明 $\Sym(M)$ 与 $\bigwedge(M)$ 定为 $T(M)$ 的商实属合理, 然而在一些场合 (如 \cite[\S 2.2]{ChCh}) 它们被定为全体对称张量 $T_{\Sym}(M)$ 和斜称张量 $T_\wedge(M)$, 是 $T(M)$ 的子模而非商模; 我们简要地回顾这些定义. 留意到对称群 $\mathfrak{S}_n$ 在 $T^n(M)$ 上有左作用 $\sigma(x_1 \otimes \cdots \otimes x_m) = x_{\sigma^{-1}(1)} \otimes \cdots \otimes x_{\sigma^{-1}(m)}$, 对于任意群同态 $\chi: \mathfrak{S}_n \to \{\pm 1\}$, 我们定义
 \begin{gather*}
-	T^n_\chi := \{x \in T(M): \forall \sigma \in \mathfrak{S}_n,\; \sigma x = \chi(\sigma)x\}, \\
+	T^n_\chi := \{x \in T^n(M): \forall \sigma \in \mathfrak{S}_n,\; \sigma x = \chi(\sigma)x\}, \\
 	T_\chi(M) := \bigoplus_{n \geq 1} T^n_\chi(M), \\
 	T_{\Sym}(M) := T_1(M), \quad T_\wedge := T_{\sgn}(M).
 \end{gather*}
@@ -847,12 +847,12 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 	I^n_{\Sym}(M) & = \sum_{\tau \in \mathfrak{S}_n} \Image(\tau - 1) \subset \Ker(e_1), \\
 	I^n_{\bigwedge}(M) & = \sum_{\tau \in \mathfrak{S}_n} \Image(\tau - \sgn(\tau)) \subset \Ker(e_{\sgn});
 \end{align*}
-实际上仅取 $\tau= (i \quad i+1)$ 即可生成; 留意到上式对 $n=1$ 是平凡的. 另一方面, $1 - e_\chi = \frac{1}{n!} \sum_\tau (1 - \chi(\tau)^{-1} \tau)$ 的像即 $\Ker(e_\chi)$ 又包含于 $I^n_{\cdots}(M)$ (取 $\chi = 1, \sigma$, 此时 $\chi=\chi^{-1}$). 于是我们抵达以下结果.
+实际上仅取 $\tau= (i \quad i+1)$ 即可生成; 留意到上式对 $n=1$ 是平凡的. 另一方面, $1 - e_\chi = \frac{1}{n!} \sum_\tau (1 - \chi(\tau)^{-1} \tau)$ 的像即 $\Ker(e_\chi)$ 又包含于 $I^n_{\cdots}(M)$ (取 $\chi = 1, \sgn$, 此时 $\chi=\chi^{-1}$). 于是我们抵达以下结果.
 \begin{theorem}
-	当 $n! \in R^\times$ 时 $\Ker(e_1) = I^n_{\Sym}$, $\Ker(e_{\sgn}) = I^n_{\bigwedge}$, 因而有 $R$-模的同构
+	当 $n! \in R^\times$ 时 $\Ker(e_1) = I^n_{\Sym}$, $\Ker(e_{\sgn}) = I^n_{\bigwedge}$, 因而恒等诱导 $R$-模的同构
 	\begin{gather*}
-		e_1: T^n_{\Sym}(M) \longrightiso \Sym^n(M), \\
-		e_{\sgn}: T^n_\wedge(M) \longrightiso \bigwedge^n(M).
+		T^n_{\Sym}(M) \longrightiso \Sym^n(M), \\
+		T^n_\wedge(M) \longrightiso \bigwedge^n(M).
 	\end{gather*}
 \end{theorem}
 
@@ -944,8 +944,8 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 	因此 $\Lambda \in \Image[\bigwedge^k W_0 \to \bigwedge^k V]$ 的充要条件是 $\Lambda$ 对 $a > 0$ 的分量皆为零. 无妨取定
 	\[ \underbracket{u_1, \ldots, u_{n-r}}_{U\; \text{的基}}, \underbracket{w_1, \ldots, w_r}_{W_0\; \text{的基}}. \]
 	倘若 $\Lambda$ 对某个 $a > 0$ 有非零分量, 譬如说按基底展开后
-	\[ u_1 \wedge \cdots \wedge u_{i_a} \wedge w_{i_{a+1}} \wedge \cdots \wedge w_{i_k} \]
-	的系数非零, 那么用 $\Xi := \check{u}_2 \wedge \cdots \wedge \check{w}_{i_k}$ (取对偶基) 对 $\Lambda$ 缩并, 从 \eqref{eqn:contraction-concrete} 知结果是 $u_1$ 的非零倍数, 故 $W \not\subset W_0$. 反过来说, 假若 $\Lambda \in \bigwedge^k W_0$, 那么它无论如何缩并都仍在 $\bigwedge^{\leq k} W_0$ 中, 故 $W \subset W_0$. 断言的最后一条性质归因于 $\dim W = k \implies \dim \bigwedge^k W = 1$.
+	\[ u_{i_1} \wedge \cdots \wedge u_{i_a} \wedge w_{i_{a+1}} \wedge \cdots \wedge w_{i_k} \]
+	的系数非零, 那么用 $\Xi := \check{u}_{i_2} \wedge \cdots \wedge \check{w}_{i_k}$ (取对偶基) 对 $\Lambda$ 缩并, 从 \eqref{eqn:contraction-concrete} 知结果是 $u_{i_1}$ 的非零倍数, 故 $W \not\subset W_0$. 反过来说, 假若 $\Lambda \in \bigwedge^k W_0$, 那么它无论如何缩并都仍在 $\bigwedge^{\leq k} W_0$ 中, 故 $W \subset W_0$. 断言的最后一条性质归因于 $\dim W = k \implies \dim \bigwedge^k W = 1$.
 \end{proof}
 
 \begin{lemma}
@@ -1038,11 +1038,11 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 	& A = (a_{i,j})_{i,j} \arrow[phantom, u, sloped, "\in" description] &
 \end{tikzcd} \]
 
-类似于向量空间的情形, 无须选基也能对 $\varphi \in \End_R(M)$ 定义下述对象:
+类似于向量空间的情形, 无须选基也能对 $\varphi \in \End_R(E)$ 定义下述对象:
 \begin{itemize}
 	\item 行列式 $\det(\varphi) \in R$: 业已于定义 \ref{def:general-determinant} 探讨;
-	\item 迹 $\Tr(\varphi) \in R$: 它无非是 $\varphi$ 在 \eqref{eqn:End-free-otimes} 下按模同态 $\End_R(M) \rightiso E^\vee \otimes E \to R$ 得到的像; 从矩阵观点看就是寻常的 $\Tr(A) = \sum_{i=1}^n a_{ii}$. \index[sym1]{Tr@$\Tr$}\index{ji-trace@迹 (trace)}
-	\item 特征多项式 $\mathrm{char}(\varphi, X) := \det(X \cdot \identity - \varphi) \in R[X]$, 以 $X$ 为变元; 这里将 $\varphi$ 等同于 $\End_{R[X]}(M \otimes_R R[X])$ 中相应的元素.
+	\item 迹 $\Tr(\varphi) \in R$: 它无非是 $\varphi$ 在 \eqref{eqn:End-free-otimes} 下按模同态 $\End_R(E) \rightiso E^\vee \otimes E \to R$ 得到的像; 从矩阵观点看就是寻常的 $\Tr(A) = \sum_{i=1}^n a_{ii}$. \index[sym1]{Tr@$\Tr$}\index{ji-trace@迹 (trace)}
+	\item 特征多项式 $\mathrm{char}(\varphi, X) := \det(X \cdot \identity - \varphi) \in R[X]$, 以 $X$ 为变元; 这里将 $\varphi$ 等同于 $\End_{R[X]}(E \otimes_R R[X])$ 中相应的元素.
 \end{itemize}
 需要突出 $E$ 或 $R$ 的地位时, 就写作 $\det_R(\varphi|E)$, $\Tr_R(\varphi|E)$, $\mathrm{char}_R(\varphi|E)$. 对任意 $\varphi, \psi \in \End_R(E)$, 我们有
 \begin{align*}

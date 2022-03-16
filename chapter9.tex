@@ -210,7 +210,7 @@ Galois 理论的原初目的是研究多项式方程的解, 方法是考察根�
 	\item 由于 $\Gal(E|K)$ 是正规子群 (引理 \ref{prop:invariant-field-transport}), 定义也可以用 $\Gal(E|K)\sigma$ 改述.
 	\item 邻域基须对有限交封闭, 这点由 $\Gal(E|K) \cap \Gal(E|K') = \Gal(E|KK')$ 确保, 因为引理 \ref{prop:Galois-properties} 断言 $KK'|F$ 依然是有限 Galois 扩张.
 	\item 对于任何有限子扩张 $L|F$, 总可取 $L$ 在 $E$ 中的正规闭包 $L' \supset L$ (定义 \ref{def:normal-closure}, $L'|F$ 仍有限), 那么 $\Gal(E|L') \subset \Gal(E|L)$, 因此邻域基也可以取作 $\sigma \Gal(E|L)$ 之形, 其中 $L|F$ 取遍有限子扩张.
-	\item 由 Krull 拓扑的定义易见取逆映射是连续的: 这将邻域 $\sigma \Gal(E|K)$ 映至 $\Gal(E|K)\sigma^{-1} = \sigma^{-1}\Gal(E|K)$; 类似地, 乘法映 $\sigma \Gal(E|K) \times \tau \Gal(E|K)$ 为 $\sigma\tau \Gal(E|K)$, 因此也连续. 于是 $\Gal(E|K)$ 确实是拓扑群.
+	\item 由 Krull 拓扑的定义易见取逆映射是连续的: 这将邻域 $\sigma \Gal(E|K)$ 映至 $\Gal(E|K)\sigma^{-1} = \sigma^{-1}\Gal(E|K)$; 类似地, 乘法映 $\sigma \Gal(E|K) \times \tau \Gal(E|K)$ 为 $\sigma\tau \Gal(E|K)$, 因此也连续. 于是 $\Gal(E|F)$ 确实是拓扑群.
 \end{itemize}
 
 \begin{lemma}\label{prop:infinite-Galois-profinite}
@@ -298,7 +298,7 @@ Galois 理论的原初目的是研究多项式方程的解, 方法是考察根�
 \begin{proof}
 	引理 \ref{prop:Galois-properties} 蕴涵 $LM|M$ 也是 Galois 扩张. 如果 $\sigma \in \Gal(LM|M)$, 则因为 $LM$ 的元素总能表成 $\frac{x_1 y_1 + \cdots + x_n y_n}{u_1 v_1 + \cdots + u_m v_m}$, 其中 $x_i, u_j \in L$, $y_i, v_j \in M$, 因此 $\sigma|_L = \identity_L$ 蕴涵 $\sigma = \identity_{LM}$. 所示同态是单射.
 
-	兹断言限制同态 $\Gal(LM|M) \to \Gal(L|L \cap M)$ 连续. 为此只须考虑 $1$ 的邻域. 若 $K|L \cap M$ 是 $L|L \cap M$ 的有限子扩张, 那么 $KM|M$ 亦有限, 而且故开子集 $\Gal(LM|KM) \subset \Gal(LM|M)$ 映入给定的开子集 $\Gal(K|L \cap M) \subset \Gal(L|L \cap M)$.
+	兹断言限制同态 $\Gal(LM|M) \to \Gal(L|L \cap M)$ 连续. 为此只须考虑 $1$ 的邻域. 若 $K|L \cap M$ 是 $L|L \cap M$ 的有限子扩张, 那么 $KM|M$ 亦有限, 而且开子集 $\Gal(LM|KM) \subset \Gal(LM|M)$ 映入给定的开子集 $\Gal(L|K) \subset \Gal(L|L \cap M)$.
 
 	于是限制同态映紧群 $\Gal(LM|M)$ 为闭子群 $H \subset \Gal(L|F)$. 下面证明 $L^H = L \cap M$. 显然 $L \cap M \subset L^H$. 今假设 $x \in L^H$, 它作为 $LM$ 的元素被 $\Gal(LM|M)$ 固定, 定理 \ref{prop:infinite-Galois-corr} 于是给出 $x \in M$. 综上, $H = \Gal(L|L \cap M)$. 最后, $\Gal(LM|M) \to \Gal(L|L \cap M)$ 是拓扑空间的连续双射, 由前述的拓扑常识可知它必为同胚.
 \end{proof}
@@ -450,10 +450,10 @@ Galois 理论的原初目的是研究多项式方程的解, 方法是考察根�
 这是一个 $\F_q$ 的代数扩域, 它实际更是 $\F_q$ 的代数闭包, 因为每个 $\F_q$ 的每个有限扩张都同构于某个 $\F_{q^m}$, 因而能嵌入 $\overline{\F_q}$. 赋绝对 Galois 群 $\Gamma_{\F_q} := \Gal(\overline{\F_q}|\F_q)$ 以 Krull 拓扑 (定义 \ref{def:Krull-topology}).
 
 \begin{proposition}
-	在拓扑群的意义下, 绝对 Galois 群 $\Gamma_{\F_q} = \Gal(\overline{\F_q}|\F_q)$ 同构于 $\hat{\Z} := \varprojlim_{m \geq 1} \Z/n\Z$, 右式按 $m \mid m' \implies \Z/m'\Z \twoheadrightarrow \Z/m\Z$ 定义极限.
+	在拓扑群的意义下, 绝对 Galois 群 $\Gamma_{\F_q} = \Gal(\overline{\F_q}|\F_q)$ 同构于 $\hat{\Z} := \varprojlim_{m \geq 1} \Z/m\Z$, 右式按 $m \mid m' \implies \Z/m'\Z \twoheadrightarrow \Z/m\Z$ 定义极限.
 \end{proposition}
 \begin{proof}
-	先前讨论给出 $\hat{\Z} \simeq \varinjlim_{n \geq 1} \Z/n!\Z$ (右式极限按 $1 \leq 2 \leq \cdots$ 定义). 只消再以引理 \ref{prop:infinite-Galois-profinite} 描述 $\Gamma_{\F_q}$.
+	先前讨论给出 $\hat{\Z} \simeq \varprojlim_{n \geq 1} \Z/n!\Z$ (右式极限按 $1 \leq 2 \leq \cdots$ 定义). 只消再以引理 \ref{prop:infinite-Galois-profinite} 描述 $\Gamma_{\F_q}$.
 \end{proof}
 
 事实上 $\hat{\Z}$ 正是例 \ref{eg:Prüfer} 描绘的 Prüfer 环的加法群, 它也同构于 $\prod_{\ell: \text{素数}} \Z_\ell$, 其中 $\Z_{\ell}$ 表 $\ell$-进整数环. 抽象地看 $\hat{\Z}$ 是一个颇大的群, 作为集合不可数; 然而它在适当观点下又和 $\Z$ 相距不远. 为了解释这点, 注意到 $\hat{\Z}$ 有一个特别的元素 $(1 \bmod n\Z)_{n \geq 1}$, 它在 \eqref{eqn:finite-Galois-transition} 下对应到 $\overline{\F_q}$ 的 Frobenius 自同构 $\Frob_q: x \mapsto x^q$. 易见 $(1 \bmod n\Z)_{n \geq 1}$ 是无挠元, 因而 $\lrangle{\Frob_q} \simeq \Z$.
@@ -493,7 +493,7 @@ Galois 理论的原初目的是研究多项式方程的解, 方法是考察根�
 对于分圆多项式, 我们在定理 \ref{prop:Wedderburn-little-thm} 的证明中曾有惊鸿一瞥. 现在要建立较完整的理论.
 
 \begin{definition}\index{danweigen@单位根 (root of unity)}
-	取定代数闭包 $\overline{F}|F$ 和 $n \in \Z_{\geq 1}$. 元素 $\zeta \in \overline{F}^\times$ 如满足 $\zeta^n = 1$ 则称为 $n$ 次\emph{单位根}, 如 $\zeta^d = 1 \iff d \mid n$ 则称 $\zeta$ 为 $n$ 次\emph{本原单位根}.\index{danweigen!本原 (primitive)}
+	取定代数闭包 $\overline{F}|F$ 和 $n \in \Z_{\geq 1}$. 元素 $\zeta \in \overline{F}^\times$ 如满足 $\zeta^n = 1$ 则称为 $n$ 次\emph{单位根}, 如 $\zeta^d = 1 \iff n \mid d$ 则称 $\zeta$ 为 $n$ 次\emph{本原单位根}.\index{danweigen!本原 (primitive)}
 \end{definition}
 
 \begin{proposition}
@@ -550,7 +550,7 @@ Galois 理论的原初目的是研究多项式方程的解, 方法是考察根�
 \begin{proof}
 	取定断言中的 $\zeta_n$, 极小多项式记为 $P$, 则 $P \mid \Phi_n$. 如能证明每个 $n$ 次本原单位根 $\zeta$ 都是 $P$ 的根, 则 $\deg P = \varphi(n) = \deg \Phi_n$, 从而 $\Phi_n = P$ 不可约. 为此仅须证明对 $\zeta$ 如上及满足 $p \nmid n$ 的素数 $p$, 皆有 $P(\zeta)=0 \implies P(\zeta^p)=0$ 即足; 因为从 $\zeta_n$ 出发, 能从这套手续穷尽 $\mu_n(\CC)$ 的每个生成元.
 	
-	注意到 $\Phi_n(\zeta^p)=0$, 并且有分解 $\Phi_n = PQ$, 而 Gauss 引理即刻给出 $P,Q \in \Z[X]$ 且是首一的. 若 $P(\zeta)=0$ 而 $P(\zeta^p) \neq 0$, 则势必有 $Q(\zeta^p)=0$, 此时 $P(X), Q(X^p)$ 有公共根 $\zeta$, 再次应用 Gauss 引理可知它们在 $\Z[X]$ 中有次数 $\geq 1$ 之首一公因子. 考虑多项式的 $\bmod \; p$ 约化 $P,Q \mapsto \bar{P},\bar{Q} \in \F_p[X]$. 任何 $\bar{x} \in \F_p$ 皆满足 $\bar{x}^p = \bar{x}$, 因之有 $\overline{Q(X^p)} = \bar{Q}(X^p) = \bar{Q}(X)^p$; 从此导出 $\bar{P}$, $\bar{Q}$ 在 $\F_p[X]$ 中有公因子. 然而 $\bar{P}\bar{Q} = \overline{X^n-1}$, 而 $p \mid n \implies (X^n-1)' = nX^{n-1} \in \F_p[X]$ 非零, 从引理 \ref{prop:separable-polynomial-gen} 易见 $X^n-1$ 在 $\F_p[X]$ 中无重根, 矛盾.
+	注意到 $\Phi_n(\zeta^p)=0$, 并且有分解 $\Phi_n = PQ$, 而 Gauss 引理即刻给出 $P,Q \in \Z[X]$ 且是首一的. 若 $P(\zeta)=0$ 而 $P(\zeta^p) \neq 0$, 则势必有 $Q(\zeta^p)=0$, 此时 $P(X), Q(X^p)$ 有公共根 $\zeta$, 再次应用 Gauss 引理可知它们在 $\Z[X]$ 中有次数 $\geq 1$ 之首一公因子. 考虑多项式的 $\bmod \; p$ 约化 $P,Q \mapsto \bar{P},\bar{Q} \in \F_p[X]$. 任何 $\bar{x} \in \F_p$ 皆满足 $\bar{x}^p = \bar{x}$, 因之有 $\overline{Q(X^p)} = \bar{Q}(X^p) = \bar{Q}(X)^p$; 从此导出 $\bar{P}$, $\bar{Q}$ 在 $\F_p[X]$ 中有公因子. 然而 $\bar{P}\bar{Q} = \overline{X^n-1}$, 而 $p \nmid n \implies (X^n-1)' = nX^{n-1} \in \F_p[X]$ 非零, 从引理 \ref{prop:separable-polynomial-gen} 易见 $X^n-1$ 在 $\F_p[X]$ 中无重根, 矛盾.
 \end{proof}
 
 \begin{theorem}\label{prop:cyclotomic-Galois}
@@ -694,7 +694,7 @@ Galois 理论的原初目的是研究多项式方程的解, 方法是考察根�
 	A^H & := \{a \in A: \forall \sigma \in H, \; \sigma(a)=a \}, \\
 	A_E & := A^{\Gamma_E} = \text{$E$ 或 $E^\times$, 按 $A$ 的选取而定.}
 \end{align*}
-因此 $\Gamma_F$ 在 $A_E$ 上的作用透过 $\Gamma_F/\Gamma_E = \Gal(E|F)$ 分解, 而且
+因此 $\Gamma_F$ 在 $A_E$ 上的作用透过 $\Gamma_F/\Gamma_E$ 分解, 而且
 \begin{equation}\label{eqn:Kummer-smoothness}
 	A = \bigcup_{E|F: \text{有限}} A_E.
 \end{equation}
@@ -711,7 +711,7 @@ Galois 理论的原初目的是研究多项式方程的解, 方法是考察根�
 			\mathcal{N}_{L|E}: A_L & \longrightarrow A_E \\
 			a & \longmapsto \sum_{\sigma \in \Gamma_E/\Gamma_L} \sigma(a).
 		\end{align*}
-	\item 因为这里具体将 $A$ 选作 $F^\text{sep}$ 的子集, 对于任意子集 $S \subset A$ 都可以谈论它在 $F$ 上生成的子扩张 $F(S)|S$.
+	\item 因为这里具体将 $A$ 选作 $F^\text{sep}$ 的子集, 对于任意子集 $S \subset A$ 都可以谈论它在 $F$ 上生成的子扩张 $F(S)|F$.
 \end{itemize}
 
 \begin{definition}[Tate 上同调] \index{Tate 上同调 (Tate cohomology)}\index[sym1]{H-1@$\hat{\Hm}^{-1}$}
@@ -771,7 +771,7 @@ Galois 理论的原初目的是研究多项式方程的解, 方法是考察根�
 	\item $\wp((\sigma-1)(\alpha)) = (\sigma-1) \wp(\alpha) = (\sigma-1)(a) = 0$ 蕴涵 $\chi_a(\sigma) \in \mu_\wp$;
 	\item $\mu_\wp \subset A_F$ 蕴涵 $\chi_a(\sigma)$ 无关 $\alpha$ 的选取;
 	\item 由 $\sigma\tau-1 = \sigma(\tau-1) + (\sigma-1)$ 知 $\chi_a: \Gamma_F \to \mu_\wp$ 为群同态;
-	\item 用 \eqref{eqn:Kummer-smoothness} 取有限 Galois 扩张 $E|F$ 使得 $\alpha \in A_E$, 则 $\chi_a$ 透过 $\Gamma_E$ 分解;
+	\item 用 \eqref{eqn:Kummer-smoothness} 取有限 Galois 扩张 $E|F$ 使得 $\alpha \in A_E$, 则 $\chi_a$ 透过 $\Gal(E|F)$ 分解;
 	\item 易证 $\chi_{a+b}(\sigma) = \chi_a(\sigma) + \chi_b(\sigma)$, 因此 $\chi$ 是群同态.
 \end{compactitem}
 今后也引入记法 $\chi(a, \sigma) = \chi_a(\sigma)$, 它对两个变元 $a, \sigma$ 皆有加性. 最后, $\chi_a = 0 \iff \alpha \in A_F \iff a \in \wp(A_F)$.
@@ -791,7 +791,7 @@ Galois 理论的原初目的是研究多项式方程的解, 方法是考察根�
 	
 	选定 $\Gal(E|F)$ 的生成元 $\tau$, 命 $\eta := f(\tau)$, 于是 $\mathcal{N}_{E|F}(\eta) = [E:F]f(\tau) = 0$. 引理 \ref{prop:H-minus-1-cyclic} 和 \eqref{eqn:Kummer-vanishing} 断言的 $\hat{\Hm}^{-1}(E|F, A_E) = 0$ 遂保证
 	\[ \exists \alpha \in A_E, \; \eta = \left(\tau - 1 \right)(\alpha). \]
-	进一步，从 $(\tau-1) \wp(\alpha) = \wp((\tau-1)(\alpha)) = \wp(\eta) = 0$ 导出 $a := \wp(\alpha) \in A_E$. 于是乎 $\chi_a(\tau) = \eta = f(\tau)$, 如愿导出 $\chi_a = f$.
+	进一步，从 $(\tau-1) \wp(\alpha) = \wp((\tau-1)(\alpha)) = \wp(\eta) = 0$ 导出 $a := \wp(\alpha) \in A_F$. 于是乎 $\chi_a(\tau) = \eta = f(\tau)$, 如愿导出 $\chi_a = f$.
 \end{proof}
 
 \begin{theorem}\label{prop:abstract-Kummer}
@@ -805,12 +805,13 @@ Galois 理论的原初目的是研究多项式方程的解, 方法是考察根�
 	\begin{equation}\label{eqn:Kummer-isomorphism}
 		\Delta/\wp(A_F) \rightiso \Hom_{\mathrm{c}}(\Gal(E|F), \mu_\wp), \quad \Gal(E|F) \xrightarrow[\text{同胚}]{\sim} \Hom\left( \Delta/\wp(A_F), \mu_\wp \right).
 	\end{equation}
+	证明部分将解释如何定义 $\Hom$ 的拓扑.
 \end{theorem}
 \begin{proof}
 	从先前定义的 $\chi(a, \sigma) = \chi_a(\sigma)$ 构造一对映射
 	\begin{equation}\label{eqn:abstract-Kummer-aux} \begin{tikzcd}[row sep=tiny]
 		\left\{ \text{子群}\; \Delta: \wp(A_F) \subset \Delta \subset A_F \right\} \arrow[r, yshift=0.5ex] & \left\{ \Gamma \stackrel{\text{闭}}{\lhd} \Gamma_F: \; \Gamma_F/\Gamma \;\text{交换并且有指数}\; n  \right\} \arrow[l, yshift=-0.5ex] \\
-		& \xlongequal[\bar{\Gamma} = \Gamma_F/\Gamma]{\text{Galois 对应}} \left\{ \bar{\Gamma} \subset \Gal(F_n|F) : \text{闭子群} \right\} \\
+		& \xleftrightarrow{1:1} \left\{ \bar{\Gamma} \subset \Gal(F_n|F) : \text{闭子群} \right\} \\
 		\Delta \arrow[mapsto]{r} & \Gamma := \left\{\gamma \in \Gamma_F: \chi(\Delta, \gamma) \stackrel{\text{恒等}}{=} 1 \right\}  \\
 		\Delta := \left\{a \in A_F: \chi(a, \Gamma) \stackrel{\text{恒等}}{=} 1 \right\} & \Gamma \arrow[mapsto]{l}.
 	\end{tikzcd}\end{equation}
@@ -904,7 +905,7 @@ Galois 理论的原初目的是研究多项式方程的解, 方法是考察根�
 	有限可分扩张 $E|F$ 有根式解当且仅当它是可解扩张.
 \end{theorem}
 \begin{proof}
-	先证明有根式解 $\implies$ 可解. 设 $F = E_0 \subset \cdots \subset E_k$ 如定义 \ref{def:radical-ext}, $E_k \supset  E$ 而 $E_{i+1} = E_i(\alpha_{i+1})$. 取 $m$ 为所有情形 (i) 中出现的 $n$ 之最小公倍数, $\text{char}(F) \nmid m$. 取 $m$ 次本原单位根 $\zeta \in F^\text{sep}$ 并定义 $E'_i := E_i(\zeta)$. 扩张 $E'_k|F$ 的正规闭包是一个 Galois 扩张 $L|F$. 记 $\Gal(L|F) = \{ \eta_1, \eta_2, \ldots, \eta_{[E:F]} \}$, 那么 $L|F$ 是所有 $\eta_i(E'_k)$ 之复合, 故由下述元素生成
+	先证明有根式解 $\implies$ 可解. 设 $F = E_0 \subset \cdots \subset E_k$ 如定义 \ref{def:radical-ext}, $E_k \supset  E$ 而 $E_{i+1} = E_i(\alpha_{i+1})$. 取 $m$ 为所有情形 (i) 中出现的 $n$ 之最小公倍数, $\text{char}(F) \nmid m$. 取 $m$ 次本原单位根 $\zeta \in F^\text{sep}$ 并定义 $E'_i := E_i(\zeta)$. 扩张 $E'_k|F$ 的正规闭包是一个 Galois 扩张 $L|F$. 记 $\Gal(L|F) = \{ \eta_1, \eta_2, \ldots, \eta_{[L:F]} \}$, 那么 $L|F$ 是所有 $\eta_i(E'_k)$ 之复合, 故由下述元素生成
 	\begin{gather*}
 		\zeta, \eta_1(\alpha_1), \eta_2(\alpha_1), \ldots, \eta_1(\alpha_2), \eta_2(\alpha_2), \ldots, \eta_1(\alpha_3), \eta_2(\alpha_3), \ldots
 	\end{gather*}
@@ -986,7 +987,7 @@ Galois 理论的原初目的是研究多项式方程的解, 方法是考察根�
 以下需要平面几何学的基础常识. 为了替作图问题建立一套代数模型, 首务是澄清尺规作图的几何意义. 给定平面的一个子集 $\mathcal{S}$, 由之可以构作
 \begin{compactitem}
 	\item 过任两点 $A, B \in \mathcal{S}$ 的直线;
-	\item 以点 $x \in S$ 为圆心, 以某线段 $\overline{AB}$ 之长 ($A,B \in \mathcal{S}$) 为半径的圆.
+	\item 以点 $x \in \mathcal{S}$ 为圆心, 以某线段 $\overline{AB}$ 之长 ($A,B \in \mathcal{S}$) 为半径的圆.
 \end{compactitem}
 利用这般构作的线和圆, 定义 $\mathcal{S}'$ 为 $\mathcal{S}$ 与如下点集之并:
 \begin{compactitem}
@@ -1032,7 +1033,7 @@ Galois 理论的原初目的是研究多项式方程的解, 方法是考察根�
 \[ z \in \text{Con}(\mathcal{S}) \iff \Re(z), \Im(z) \in \text{Con}(\mathcal{S}). \]
 
 \begin{theorem}\label{prop:characterization-constructible}
-	给定子集 $\{0,1\} \subset \mathcal{S} \subset \CC$, 生成的子域记为 $\Q(\mathcal{S})$, 则复数 $z$ 满足 $z \in \mathrm{Con}(\mathcal{S})$ 当且仅当存在域扩张的塔
+	给定子集 $\{0, 1\} \subset \mathcal{S} \subset \CC$, 基于上述讨论不妨假定 $\mathcal{S}$ 对复共轭封闭, 它生成的子域记为 $\Q(\mathcal{S})$, 则复数 $z$ 满足 $z \in \mathrm{Con}(\mathcal{S})$ 当且仅当存在域扩张的塔
 	\[ \Q(\mathcal{S}) = F_0 \subset F_1 \subset \cdots \subset F_n \subset \CC \]
 	其中 $z \in F_n$, 而且对每个 $0 \leq i < n$ 皆有 $[F_{i+1} : F_i] = 2$. 特别地, $z$ 在 $\Q(\mathcal{S})$ 上代数.
 \end{theorem}
@@ -1106,7 +1107,7 @@ I.\ M.\ Isaacs \cite{Is85} 发现一个有趣的相关结果: 设不可约多项
 	\begin{hint}
 		定义函子 $\Theta: \Gamma_F\dcate{Set}^\text{op} \to F\dcate{EtAlg}$ 如下. 给定 $X$, 取 $\Theta(X)$ 为 $(F^\text{sep})^X$ 的 $\Gamma_F$-不动子代数. 等变映射 $f: Y \to X$ 自然地诱导 $f^*: (F^\text{sep})^X \to (F^\text{sep})^Y$, 进而导出 $\Theta(f)$. 拟逆函子可取为 $\Hom_{F\dcate{EtAlg}}(-, F^\text{sep})$.
 	\end{hint}
-	\item 设 $\F_q \subset F$. 仿照引理 \ref{prop:pins-polynomial} 的思路, 证明 $X^q - X - a \in F[X]$ 不可约当且仅当 $a \notin \left\{b^q -b : b \in F\right\}$; 证明此时 $F[X]/(X^q-X-a)$ 是 $F$ 的正规扩张.
+	\item 设 $p$ 是素数, $\F_p \subset F$. 参照引理 \ref{prop:pins-polynomial} 的思路, 证明 $X^p - X - a \in F[X]$ 不可约当且仅当 $a \notin \left\{b^p -b : b \in F\right\}$; 证明此时 $F[X]/(X^p-X-a)$ 是 $F$ 的正规扩张.
 	\item 设 $F$ 为特征 $p$ 的有限域, $n \geq 1$ 而 $f_1, \ldots, f_m \in F[X_1, \ldots, X_n]$. 假设它们的全次数满足
 		\[ \deg f_1 + \cdots + \deg f_m < n. \]
 		\begin{compactenum}[(i)]
@@ -1187,7 +1188,7 @@ I.\ M.\ Isaacs \cite{Is85} 发现一个有趣的相关结果: 设不可约多项
 	\item 假设有序域 $F$ 满足条件
 		\begin{inparaenum}[(a)]
 			\item $P = F^{\times\; 2}$ (因此序由 $F$ 的域结构完全确定);
-			\item 任意奇数次 $P \in F[X]$ 在 $F$ 中有根.
+			\item 任意奇数次 $Q \in F[X]$ 在 $F$ 中有根.
 		\end{inparaenum}
 		依序证明
 		\begin{compactenum}[(i)]
@@ -1196,7 +1197,7 @@ I.\ M.\ Isaacs \cite{Is85} 发现一个有趣的相关结果: 设不可约多项
 			\item 应用引理 \ref{prop:alg-closed-decomp} 导出 $F(\sqrt{-1})$ 是代数闭域.
 		\end{compactenum}
 		\begin{hint}
-			设 $P \in F[X]$ 为不可约多项式, 令 $L|F$ 为 $P \cdot (X^2+1)$ 的分裂域, $G := \Gal(L|F)$. 任何 Sylow $2$-子群 $H \subset G$ 皆给出奇数次扩张 $L^H | F$, 故 $G$ 是 $2$-群. 若子群 $\Gal\left( L|F(\sqrt{-1})\right)$ 非平凡, 则命题 \ref{prop:p-group-nilpotent} 和 Galois 对应将给出 $F(\sqrt{-1})$ 在 $L$ 中的 $2$ 次扩张, 矛盾; 若 $m=1$ 则必有 $L=F(\sqrt{-1})$.
+			设 $Q \in F[X]$ 为不可约多项式, 令 $L|F$ 为 $Q \cdot (X^2+1)$ 的分裂域, $G := \Gal(L|F)$. 任何 Sylow $2$-子群 $H \subset G$ 皆给出奇数次扩张 $L^H | F$, 故 $G$ 是 $2$-群. 若子群 $\Gal\left( L|F(\sqrt{-1})\right)$ 非平凡, 则命题 \ref{prop:p-group-nilpotent} 和 Galois 对应将给出 $F(\sqrt{-1})$ 在 $L$ 中的 $2$ 次扩张, 矛盾; 若 $m=1$ 则必有 $L=F(\sqrt{-1})$.
 		\end{hint}
 
 		显然 $F=\R$ 满足条件 (a) 和 (b), 而 $\CC = \R(\sqrt{-1})$, 于是此题给出代数基本定理的又一证明, 习见的其它证明则更依赖于复变函数论等分析学工具. 此处并不是要尽量剥离非代数的成分, 用分析少者胜, 而在于这些条件确实有助于洞悉代数基本定理的底蕴, 并推至更广的情形. 满足条件 (a), (b) 的域 $F$ 称为\emph{实闭域}, 见 \cite[第 9 章]{Feng17}; Artin 和 Schreier 奠定了实闭域的一般理论, 见 \cite[Chapter XI]{Lang02}. 或许更值得一书的是: 实闭域可谓是模型论中 $o$-极小结构的先声, 后者在几何学中有出色应用. \index{moxinglun}

@@ -159,7 +159,7 @@
 商模满足与商群, 商环等类似的一些形式性质, 简要勾勒如次. 证明与群的情形类似, 而且由于不必考虑交换性, 其手法更为简单.
 
 \begin{proposition}\label{prop:1st-homomorphism-module}
-	商模 $M \twoheadrightarrow M/N$ 满足以下泛性质: 对任意模同态 $\varphi: M \to M'$, 若 $N \subset \Ker(\phi)$, 则存在唯一的同态 $\bar{\varphi}: M/N \to M'$ 使得图表
+	商模 $M \twoheadrightarrow M/N$ 满足以下泛性质: 对任意模同态 $\varphi: M \to M'$, 若 $N \subset \Ker(\varphi)$, 则存在唯一的同态 $\bar{\varphi}: M/N \to M'$ 使得图表
 	\[ \begin{tikzcd}
 		M \arrow[rd, "\varphi"'] \arrow[r] & M/N \arrow[d, "{\exists! \; \bar{\varphi}}"]\\
 		& M'
@@ -223,7 +223,7 @@
 		\[ M[\mathfrak{a}] := \left\{ m \in M: \forall a \in \mathfrak{a}, \; am=0 \right\}. \]
 	\end{itemize}
 \end{definition}
-这些术语将在 \S\ref{sec:PID-module} 用到. 请读者验证 $M$ 作为 $R/\text{ann}(M)$-模自动是无挠的. % FIXME: 作为 $R/\text{ann}(M)$-模的零化子自动是 $\{0\}$.
+这些术语将在 \S\ref{sec:PID-module} 用到. 请读者验证 $M$ 作为 $R/\mathrm{ann}(M)$-模的零化子自动是 $\{0\}$.
 
 本节的后续目标是以下定理. \index[sym1]{R-Mod@$R\dcate{Mod}$}
 \begin{theorem}\label{prop:module-cat-completeness}
@@ -662,7 +662,7 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 
 \begin{remark}[双模的平衡积]\label{rem:bimodule-balanced}
 	对于双模 ${}_Q M_R$, ${}_R N_S$, 同样可定义附加 $(Q, S)$-双模结构的平衡积 $B: M \times N \to A$, 其中我们要求 $A$ 是 $(Q, S)$-双模, 并对 $B$ 加上额外条件
-	\[ B(rx, ys) = r B(x, y)s, \quad r \in R, \; s \in S. \]
+	\[ B(qx, ys) = q B(x, y)s, \quad q \in Q, \; s \in S. \]
 	不难验证 $M \times N \to M \dotimes{R} N$ 便是这样的平衡积, 并且满足与定义 \ref{def:tensor-product} 类似的泛性质. 取 $Q = S = \Z$ 便回到原先情形.
 
 	引理 \ref{prop:functoriality-tensor} 断言的函子性也有直截了当的推广, 我们得到函子
@@ -716,7 +716,7 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 \end{proposition}
 \begin{proof}
 	为了简化论述, 取 $Q = T = \Z$. 注意到对任意交换群 $(A, +)$, 在范畴 $\cate{Ab}$ 中有
-	\[ \Hom\left( (M \dotimes{R} M') \dotimes{S} M'', A \right) = \text{Bil}\left( (M \dotimes{R} M') \times M''; A \right). \]
+	\[ \Hom\left( (M \dotimes{R} M') \dotimes{S} M'', A \right) = \text{Bil}\left( (M \dotimes{R} M'), M''; A \right). \]
 	我们断言右项典范同构于``三元平衡积''所成的群, 亦即满足下述条件的映射 $D: M \times M' \times M'' \to A$:
 	\begin{compactenum}[(i)]
 		\item $D(x+x', y, z) = D(x, y, z) + D(x', y, z)$;
@@ -724,16 +724,16 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 		\item $D(xr, y, sz) = D(x, rys, z)$, 其中 $r \in R$, $s \in S$.
 	\end{compactenum}
 
-	诚然, 给定如此的 $D$, 对每个固定的变元 $z \in Z$, 映射 $D(\cdot, \cdot, z)$ 属于 $\text{Bil}(M \times M'; A)$, 故存在同态 $B(\cdot, z): M \dotimes{R} M'' \to A$ 使得 $D(x,y,z) = B(x \otimes y, z)$. 现在变动 $z$. 从 $D$ 的性质与 $M \dotimes{R} M'$ 的右 $S$-模结构可知
+	诚然, 给定如此的 $D$, 对每个固定的变元 $z \in M''$, 映射 $D(\cdot, \cdot, z)$ 属于 $\text{Bil}(M, M'; A)$, 故存在同态 $B(\cdot, z): M \dotimes{R} M' \to A$ 使得 $D(x,y,z) = B(x \otimes y, z)$. 现在变动 $z$. 从 $D$ 的性质与 $M \dotimes{R} M'$ 的右 $S$-模结构可知
 	\begin{align*}
 		B(x \otimes y, z + z') &= B(x \otimes y, z) + B(x \otimes y, z'), \\
 		B(x \otimes y, sz) &= B(x \otimes ys, z) = B((x \otimes y)s, z), \quad s \in S.
 	\end{align*}
-	进而 $B \in \text{Bil}\left( (M \dotimes{R} M') \times M''; A \right)$, 相应的同态 $\varphi: (M \dotimes{R} M') \dotimes{S} M'' \to A$ 由等式
+	进而 $B \in \text{Bil}\left( (M \dotimes{R} M'), M''; A \right)$, 相应的同态 $\varphi: (M \dotimes{R} M') \dotimes{S} M'' \to A$ 由等式
 	\[ \varphi((x \otimes y) \otimes z) = D(x, y, z). \]
 	刻画. 以上每一步都可以倒转, 因而得到双射 $B \leftrightarrow D$. 同理,
 	\begin{align*}
-		\Hom\left( M \dotimes{R} (M' \dotimes{S} M''), A \right) & = \text{Bil}\left( M \times (M' \dotimes{S} M''); A \right)\\
+		\Hom\left( M \dotimes{R} (M' \dotimes{S} M''), A \right) & = \text{Bil}\left( M, (M' \dotimes{S} M''); A \right)\\
 		& = \left\{ D: M \times M' \times M'' \to A, \; \text{三元平衡积} \right\},
 	\end{align*}
 	而且若首项里的同态 $\psi$ 对应末项的 $D$, 那么 $\psi(x \otimes (y \otimes z)) = D(x,y,z)$. 由于 $A$ 可任取, 从定理 \ref{prop:Yoneda-lemma} 遂得 $M \dotimes{R} (M' \dotimes{S} M'') \rightiso (M \dotimes{R} M') \dotimes{S} M''$ 使得 $(x \otimes y) \otimes z \mapsto x \otimes (y \otimes z)$. 此同构对 $M, M', M''$ 的函子性是自明的.
@@ -1012,14 +1012,14 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 	\right\}. \]
 	赋 $\mathcal{P}$ 以偏序
 	\[ (Y, Y', b) \leq (Y_1, Y'_1, b_1) \iff (Y \subset Y_1) \wedge (Y' \subset Y'_1) \wedge (b_1|_{Y'} = b). \]
-	显然 $\mathcal{P}$ 非空 (它包含 $Y=Y'=\emptyset$), 且其中每个链都有上界: 取链中诸 $Y' \subset Y$ 的并 $\mathcal{Y}' \subset \mathcal{Y}$ 并将诸函数 $b$ 粘合为 $\mathcal{Y}' \to B$, 便给出 $M_{\mathcal{Y}}$ 的基. Zorn 引理 (定理 \ref{prop:Zorn}) 确保 $(\mathcal{P}, \leq)$ 有极大元, 我们仅须证明其中的极大元 $(Y,Y',b)$ 必满足 $Y=X$, 此时 $\rank_R(M) = |Y'| \leq |X| = \rank_R(E)$.
+	显然 $\mathcal{P}$ 非空 (它包含 $Y=Y'=\emptyset$), 且其中每个链都有上界: 取链中诸 $Y' \subset Y$ 的并 $\mathcal{Y}' \subset \mathcal{Y}$ 并将诸函数 $b$ 粘合为 $\mathcal{Y}' \to M$, 便给出 $M_{\mathcal{Y}}$ 的基. Zorn 引理 (定理 \ref{prop:Zorn}) 确保 $(\mathcal{P}, \leq)$ 有极大元, 我们仅须证明其中的极大元 $(Y,Y',b)$ 必满足 $Y=X$, 此时 $\rank_R(M) = |Y'| \leq |X| = \rank_R(E)$.
 
 	假设 $(Y,Y',b) \in \mathcal{P}$, $Y \neq X$. 对于 $x \in X \smallsetminus Y$, 定义理想
 	\[ \mathfrak{a} := \left\{a \in R : \left( ax + \sum_{y \in Y} Ry \right) \cap M \neq \emptyset \right\}. \]
 	\begin{enumerate}
 		\item 若 $\mathfrak{a}=\{0\}$ 则 $M_{Y \sqcup \{x\}} = M_Y$, 此时取 $Y_1 = Y \sqcup \{x\}$, $Y'_1 = Y'$ 和 $b_1 = b$ 就得到 $\mathcal{P}$ 中严格大于 $(Y,Y',b)$ 的元素.
 		\item 若 $\mathfrak{a} \neq \{0\}$, 取非零元 $a \in R$ 使得 $\mathfrak{a} = (a)$, 并且取 $m_x \in M$ 使得
-			\[ m_x \in ax + \sum_{y \in R} Ry. \]
+			\[ m_x \in ax + \sum_{y \in Y} Ry. \]
 			任意 $M_{Y \sqcup \{x\}}$ 中的元素 $m'$ 如在 $E$ 中以 $Y \sqcup \{x\}$ 展开, 则 $x$ 的系数必属于 $(a)$, 因而存在 $r \in R$ 使得 $m' - rm_x \in M_Y$. 由此可知
 			\[ M_{Y \sqcup \{x\}} = Rm_x \oplus M_Y, \]
 		从而可以取 $Y_1 := Y \sqcup \{x\}$, $Y'_1 := Y' \sqcup \{x\}$, $b_1: Y_1 \to M$ 满足 $b|_{Y'}=b$, $b(x) = m_x$, 它们给出 $\mathcal{P}$ 中严格大于 $(Y,Y',b)$ 的元素.
@@ -1060,14 +1060,14 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 	设 $E$ 为秩 $n$ 的自由 $R$-模 ($n \in \Z_{\geq 0}$), $M$ 为其子模, 则存在 $E$ 的基 $\{e_1, \ldots, e_n\}$ 及理想族 $\mathfrak{d}_i = (d_i)$, $i=1, \ldots, n$, 满足于
 	\begin{itemize}
 		\item $\mathfrak{d}_1 \supset \cdots \supset \mathfrak{d}_n$;
-		\item 定义 $0 \leq k \leq n$ 使得 $\mathfrak{o}_i \neq (0) \iff i \leq k$, 则元素
+		\item 定义 $0 \leq k \leq n$ 使得 $\mathfrak{d}_i \neq (0) \iff i \leq k$, 则元素
 			\[ d_i e_i, \quad 1 \leq i \leq k \]
 		构成 $M$ 的基.
 	\end{itemize}
 	如此的理想链 $\mathfrak{d}_1 \supset \mathfrak{d}_2 \supset \cdots \supset \mathfrak{d}_n$ 由模 $E$ 和 $M$ 完全确定, 其中的真理想由 $E/M$ 的同构类完全确定.
 \end{theorem}
 \begin{proof}
-	先证明这样一组基的存在性. 对任意 $\lambda \in \Hom_R(E, R)$, 像集 $\lambda(M)$ 是 $R$ 的理想. 理想族 $\{ \lambda(M): \lambda \in \Hom_R(E, R) \}$ 中总是存在相对于包含关系 $\subset$ 的极大元, 否则可以从中萃取处理想的无穷升链 $\mathfrak{a}_1 \subsetneq \mathfrak{a}_2 \subsetneq \cdots$, 与引理 \ref{prop:ACC-PID} 矛盾. 取一极大元 $\lambda_1(M) = \lrangle{d_1} =: \mathfrak{d}_1$. 若 $d_1 = 0$ 则 $M=\{0\}$; 此时可取任意基 $e_1, \ldots, e_n$.
+	先证明这样一组基的存在性. 对任意 $\lambda \in \Hom_R(E, R)$, 像集 $\lambda(M)$ 是 $R$ 的理想. 理想族 $\{ \lambda(M): \lambda \in \Hom_R(E, R) \}$ 中总是存在相对于包含关系 $\subset$ 的极大元, 否则可以从中萃取理想的无穷升链 $\mathfrak{a}_1 \subsetneq \mathfrak{a}_2 \subsetneq \cdots$, 与引理 \ref{prop:ACC-PID} 矛盾. 取一极大元 $\lambda_1(M) = \lrangle{d_1} =: \mathfrak{d}_1$. 若 $d_1 = 0$ 则 $M=\{0\}$; 此时可取任意基 $e_1, \ldots, e_n$.
 
 	若 $d_1 \neq 0$, 取 $x_1 \in M$, $x_1 \neq 0$ 使得 $\lambda_1(x_1) = d_1$. 我们断言对任意 $\lambda \in \Hom_R(E, R)$ 都有 $\lambda(x_1) \in (d_1)$, 这相当于说理想 $(b) := (\lambda(x_1)) + (d_1)$ 满足 $(b)=(d_1)$. 设若不然, 则 $(b) \supsetneq (d_1)$ 故存在 $u, v \in R$ 使得
 	\[ b = u\lambda(x_1) + v\lambda_1(x_1) = (u\lambda + v\lambda_1)(x_1) \notin (d_1), \]
@@ -1085,7 +1085,7 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 	\begin{gather*}
 		(E/M)_\text{tor} \simeq \bigoplus_{\substack{1 \leq i \leq k \\ \mathfrak{d}_i \neq R}} R/\mathfrak{d}_i, \quad (E/M)_\text{tf} \simeq R^{\oplus (n-k)}.
 	\end{gather*}
-	因为 $R$ 是整环, 根据注记 \ref{rem:IBN} 从 $(E/M)_\text{tf}$ 可读出 $n-k$. 如能从 $N := (E/M)_\text{tor}$ 读出剩下的资料 $\mathfrak{o}_i \neq R$, 则 $|\{i: \mathfrak{d}_i = R \}|$ 也可以从 $\rank_R(M)$ 来确定. 是故下面转向 $N := \bigoplus_{i=1}^k R/\mathfrak{d}_i$ 的研究. 为简化符号, 不妨假设 $\mathfrak{o}_1 \neq R$.
+	因为 $R$ 是整环, 根据注记 \ref{rem:IBN} 从 $(E/M)_\text{tf}$ 可读出 $n-k$. 如能从 $N := (E/M)_\text{tor}$ 读出剩下的资料 $\mathfrak{d}_i \neq R$, 则 $|\{i: \mathfrak{d}_i = R \}|$ 也可以从 $\rank_R(M)$ 来确定. 是故下面转向 $N := \bigoplus_{i=1}^k R/\mathfrak{d}_i$ 的研究. 为简化符号, 不妨假设 $\mathfrak{d}_1 \neq R$.
 
 	引理 \ref{prop:PID-primary-decomp} 表 $N$ 为 $\bigoplus_p N[p^\infty]$, 此分解只和模 $N$ 本身的结构相关. 对于每个选定的不可约元 $p$, 易知 $(R/\mathfrak{d}_i)[p^\infty] = R/(p^{n_i})$, 这里 $n_i$ 是 $p$ 在 $d_i$ 的不可约分解中的次数 (参看引理 \ref{prop:PID-primary-decomp} 的证明). 问题遂化约到 $d_i = p^{n_i}$ 的情形, $p$ 是选定的不可约元而 $1 \leq n_1 \leq n_2 \leq \cdots \leq n_h$.
 	
@@ -1225,7 +1225,7 @@ $\begin{tikzcd}
 \begin{definition}
 	对任意两复形 $M_\bullet$, $N_\bullet$, 假定标号方式相同, 其间的态射是一族同态 $\phi = (\phi_i: M_i \to N_i)_i$, 使得下图对每个 $i$ 交换
 	\[ \begin{tikzcd}
-	M_i \arrow[r, "d_i"] \arrow[d, "f_i"'] & M_{i-1} \arrow[d, "f_{i-1}"] \\
+	M_i \arrow[r, "d_i"] \arrow[d, "{\phi_i}"'] & M_{i-1} \arrow[d, "{\phi_{i-1}}"] \\
 	N_i \arrow[r, "d_i"'] & N_{i-1}.
 	\end{tikzcd}\]
 	因此复形间有同构的概念, 并且可以将给定端点(或无界)的 $R$-模复形作成一个范畴. 态射 $\phi$ 在同调层次上诱导显然的同态 $\Hm_i(\phi): \Hm_i(M_\bullet) \to \Hm_i(N_\bullet)$.
@@ -1233,7 +1233,7 @@ $\begin{tikzcd}
 同调构成了一族从复形范畴到 $\cate{Ab}$ 的加性函子 $(\Hm_i)_{a<i<b}$. 此外, 可以逐项地构造一族复形 $(M_{\bullet,i})_{i \in I}$ 的
 \begin{compactitem}
 	\item 积 $\prod_i M_{\bullet,i}$,
-	\item 直和 $\prod_i M_{\bullet,i}$, 或者更一般地说
+	\item 直和 $\bigoplus_i M_{\bullet,i}$, 或者更一般地说
 	\item 极限 $\varprojlim_i M_{\bullet,i}$ 或 $\varinjlim_i M_{\bullet,i}$;
 \end{compactitem}
 对于极限情形, 须假定 $I$ 是小范畴并对 $I$ 中每个态射 $i \to j$ 给定所谓的转移同态 $M_{\bullet,j} \to M_{\bullet,i}$ ($\varprojlim$ 情形) 或 $M_{\bullet,i} \to M_{\bullet,j}$ ($\varinjlim$ 情形), 使之与 $I$ 中态射的合成兼容; 在此同态当然都是指复形的同态. 函子性表明 $\forall i, \; g_i f_i = 0 \implies (\prod_i g_i) (\prod_i f_i)=0$ 等等, 是故这些构造依然给出复形.
@@ -1262,7 +1262,7 @@ $\begin{tikzcd}
 	设 $0 \to M' \xrightarrow{f} M \xrightarrow{g} M'' \to 0$ 为范畴 $R\dcate{Mod}$ 中的短正合列, 以下陈述等价.
 	\begin{enumerate}[(i)]
 		\item 存在 $s: M'' \to M$ 使得 $gs = \identity_{M''}$.
-		\item 存在 $r: M' \to M$ 使得 $rf = \identity_{M'}$.
+		\item 存在 $r: M \to M'$ 使得 $rf = \identity_{M'}$.
 		\item 存在图表 $\begin{tikzcd} M' \arrow[yshift=-0.7ex, r, "f"'] & M \arrow[yshift=0.7ex, l, "r"'] \arrow[yshift=-0.7ex, r, "g"'] & M'' \arrow[yshift=0.7ex, l, "s"'] \end{tikzcd}$ 使 $M$ 成为双积 $M' \oplus M''$.
 		\item 映射 $g_*: \Hom(X, M) \to \Hom(X, M'')$ 对每个 $R$-模 $X$ 皆满.
 		\item 映射 $f^*: \Hom(M, X) \to \Hom(M', X)$ 对每个 $R$-模 $X$ 皆满.
@@ -1271,11 +1271,11 @@ $\begin{tikzcd}
 \end{proposition}
 回忆到 $g_*(\varphi) = g\varphi$, $f^*(\psi) = \psi f$. 基于拓扑学的考量, 给定 $f: M' \to M$ 和 $g: M \to M''$, 当 $gs = \identity$ 时称 $s$ 为 $g$ 的一个\emph{截面}, 当 $rf = \identity$ 时称 $r$ 为$f$ 的一个\emph{收缩}. 截面和收缩的存在性分别蕴涵 $g$ 单, $f$ 满.
 \begin{proof}
-	先证 (i) $\implies$ (iii). 若 $gs = \identity_{M''}$, 由 $g( \identity_M - sg) = g - gsg = 0$ 故存在 $r: M \to M'$ 及分解 $(\identity_M - sg) = fr $. 右合成 $f$ 得到 $frf = f-sgf = f$, 由于 $f$ 满, $rf=\identity_{M'}$. 综上可得双积的定义性质
+	先证 (i) $\implies$ (iii). 若 $gs = \identity_{M''}$, 由 $g( \identity_M - sg) = g - gsg = 0$ 故存在 $r: M \to M'$ 及分解 $(\identity_M - sg) = fr $. 右合成 $f$ 得到 $frf = f-sgf = f$, 由于 $f$ 单, $rf=\identity_{M'}$. 综上可得双积的定义性质
 	\[ rf = \identity_{M'}, \quad gs = \identity_{M''}, \quad fr + sg  = \identity_M. \]
 	同理, 从 $rf = \identity_{M'}$ 出发可得 $s: M'' \to M$ 使 $(\identity_M - fr) = sg$, 依此证明 (ii) $\implies$ (iii). 而 (iii) $\implies$ (i), (ii) 是自明的.
 	
-	由 $g_* s_* = (gs)_*$ 和 $f^* r^* = (rf)^*$ 可知 (i) $\implies$ (iv), (ii) $\implies$ (v). 另一方面, 在 (iv) 中取 $X = M''$ 便得出 $s \in \Hom_R(M'', M)$ 使得 $g_*(s) = gs = \identity_{M''}$, 故 (v) $\implies$ (i); 同理, 取 $X = M'$ 可知 (v) $\implies$ (ii).
+	由 $g_* s_* = (gs)_*$ 和 $f^* r^* = (rf)^*$ 可知 (i) $\implies$ (iv), (ii) $\implies$ (v). 另一方面, 在 (iv) 中取 $X = M''$ 便得出 $s \in \Hom_R(M'', M)$ 使得 $g_*(s) = gs = \identity_{M''}$, 故 (iv) $\implies$ (i); 同理, 取 $X = M'$ 可知 (v) $\implies$ (ii).
 \end{proof}
 
 下面介绍研究正合列的一个基本工具, 俗称\emph{蛇形引理}. 考虑交换图表如下
@@ -1296,7 +1296,7 @@ $\begin{tikzcd}
 \begin{compactenum}[(i)]
 	\item 对于给定的 $x'' \in \Ker''$, 由 $X \to X'' \to 0$ 的正合性可取 $x \in X$ 使得 $x \mapsto x''$.
 	\item 令 $y \in Y$ 为 $x$ 在 $X \to Y$ 下的像, 由图表交换可知 $y \in \Ker[Y \to Y'']$.
-	\item 由于 $Y' \to Y \to Y$ 正合, 存在唯一的 $y' \in Y'$ 使得 $y' \mapsto y$, 命 $y' \mapsto \bar{y}' \in \Coker'$.
+	\item 由于 $Y' \to Y \to Y''$ 正合, 存在唯一的 $y' \in Y'$ 使得 $y' \mapsto y$, 命 $y' \mapsto \bar{y}' \in \Coker'$.
 \end{compactenum}
 利用图表的交换性与正合性, 可知第一步取的 $x$ 至多只差个 $X' \to X$ 的像, 从而第二步的 $y$ 至多只差个 $X' \to Y' \hookrightarrow Y$ 的像, 从而 $\bar{y}'$ 无关于 $x$ 的选取. 于是连接同态 $\delta(x'') = \bar{y}'$ 是良定的.
 
@@ -1399,7 +1399,7 @@ $\begin{tikzcd}
 	以下设 $P, I$ 为左 $R$-模, 右模的情形类似:
 	\begin{enumerate}
 		\item 若函子 $\Hom(P, -): R\dcate{Mod} \to \cate{Ab}$ 正合, 则称 $P$ 是\emph{投射模};
-		\item 若函子 $\Hom(-, I): R\dcate{Mod}^\text{op} \to \cate{Ab}$ 正合, 则称 $I$ 是\emph{内射模}.
+		\item 若函子 $\Hom(-, I): R\dcate{Mod}^\text{op} \to \cate{Ab}$ 正合, 亦即它保持短正合列, 则称 $I$ 是\emph{内射模}.
 	\end{enumerate}
 \end{definition}
 
@@ -1546,7 +1546,7 @@ $\begin{tikzcd}
 \end{definition}
 上述条件 $i \geq k \implies M_i = M_k$ 习称为链的稳定性. 左(右) Noether/Artin 环要求的无非是左(右)理想的升链/降链条件, 对交换环不必分左右. 下面是几个基本例子.
 \begin{itemize}
-	\item 易见 $\Z$ 是 Noether 环 然非 Artin 环; 事实上根据下面的引理 \ref{prop:fg-noetherian}, 主理想环 (定义 \ref{def:PID}) 都是交换 Noether 环.
+	\item 易见 $\Z$ 是 Noether 环 然非 Artin 环; 事实上根据引理 \ref{prop:ACC-PID}, 主理想环 (定义 \ref{def:PID}) 都是交换 Noether 环.
 	\item 任意除环都是左右 Noether 和 Artin 环. 除环上的向量空间是 Noether 或 Artin 模当且仅当其维数有限.
 	\item 交换环的局部化 $R \leadsto R[S^{-1}]$ 保持 Noether 和 Artin 性质 (命题 \ref{prop:localization-ideals}), 这里 $S \subset R$ 是任意不含零的乘性子集.
 \end{itemize}
@@ -1592,9 +1592,9 @@ $\begin{tikzcd}
 	不难看出 $M$ 是 Noether (或 Artin) 模当且仅当任一 $M$ 的子模族 $\mathcal{S} \neq \emptyset$ 相对于 $\subset$ 都有极大(或极小)元. 此性质显然蕴涵链条件 (给定链 $(M_i)_{i=1}^\infty$, 考虑 $\mathcal{S} = \{M_i : i \geq 1 \}$), 反过来说, 如果子模族 $\mathcal{S}$ 没有极大 (或极小) 元, 则从中可萃取一条升链 (或降链) 使得 $M_i \neq M_{i+1}$, $i=1,2, \ldots$.
 \end{remark}
 
-下述定理给出了一套系统地构造交换 Noether 模的方法, 在代数几何学中尤其重要.
+下述定理给出了一套系统地构造交换 Noether 环的方法, 在代数几何学中尤其重要.
 \begin{theorem}[Hilbert 基定理]\index{Hilbert 基定理 (Hilbert's Basis Theorem)}
-	令 $R$ 为 Noether 环, 则对任意 $n \geq 1$ 多项式环 $R[X_1, \ldots, X_n]$ 也是 Noether 环.
+	令 $R$ 为交换 Noether 环, 则对任意 $n \geq 1$ 多项式环 $R[X_1, \ldots, X_n]$ 也是 Noether 环.
 \end{theorem}
 特别地, 系数在域上的有限元多项式环之商皆为 Noether 环.
 \begin{proof}
@@ -1608,7 +1608,7 @@ $\begin{tikzcd}
 		\item 在前述条件下 $\deg f_{k+1}$ 取最小可能的值.
 	\end{inparaenum}
 	置 $\alpha_i := \text{in}(f_i)$. 由 $R$ 的升链条件, 理想 $\lrangle{\alpha_1, \ldots}$ 有一族生成元 $\alpha_1, \ldots, \alpha_m$. 倘若上述构造可以走到第 $m+1$ 步, 则有
-	\[ \text{in}(f_{m+1}) = \sum_{i=1}^m u_i f_i, \quad u_1, \ldots, u_m \in R. \]
+	\[ \text{in}(f_{m+1}) = \sum_{i=1}^m u_i \alpha_i, \quad u_1, \ldots, u_m \in R. \]
 	根据前 $m$ 步的选取, 对 $i = 1, \ldots, m$ 皆有 $d_i := \deg f_{m+1} - \deg f_i \geq 0$. 显见
 	\[ f_{m+1} - \sum_{i=1}^m u_i f_i X^{d_i} \quad \in \mathfrak{a} \smallsetminus \lrangle{f_1, \ldots, f_m} \]
 	的次数严格小于 $\deg f_{m+1}$, 此与 $f_{m+1}$ 的选取矛盾.
@@ -1616,7 +1616,7 @@ $\begin{tikzcd}
 
 对于定义 \ref{def:formal-series} 里的形式幂级数环也有对应的结论.
 \begin{theorem}
-	令 $R$ 为 Noether 环, 则对任意 $n \geq 1$ 环 $R\llbracket X_1, \ldots, X_n \rrbracket$ 也是 Noether 环.
+	令 $R$ 为交换 Noether 环, 则对任意 $n \geq 1$ 环 $R\llbracket X_1, \ldots, X_n \rrbracket$ 也是 Noether 环.
 \end{theorem}
 \begin{proof}
 	由 $R \llbracket X_1, \ldots, X_{n+1}\rrbracket \simeq R \llbracket X_1, \ldots, X_n \rrbracket \llbracket X_{n+1}\rrbracket$ 化约到环 $R \llbracket X \rrbracket$ 的情形. 以下的证明理路与 $R[X]$ 的情形类似, 差异在于要考虑最低次项:
@@ -1632,7 +1632,7 @@ $\begin{tikzcd}
 \begin{definition}\index{hechenglie}
 	设 $(I, \leq)$ 为全序集, 模 $M$ 的以 $I$ 为指标集的\emph{滤过}是指一族子模
 	\[ M_i \subset M\; (i \in I), \qquad i \leq j \implies M_j \subset M_i. \]
-	今考虑 $I = \{0, \ldots, n\}$, 形如 $M = M_0 \supset M_1 \supset \cdots \supset M_n = \{0\}$ 的滤过, 诸商模 $M_i/M_{i+1}$ 称为其子商. 若每个子商都是单模, 则称此滤过为其\emph{合成列}. 其长度记为 $n+1$.
+	今考虑 $I = \{0, \ldots, n\}$, 形如 $M = M_0 \supset M_1 \supset \cdots \supset M_n = \{0\}$ 的滤过, 诸商模 $M_i/M_{i+1}$ 称为其子商. 若每个子商都是单模, 则称此滤过为其\emph{合成列}. 其长度定为 $n$.
 \end{definition}
 一如群的情形, 对形式如上的滤过可以透过插项来加细
 \[ (\cdots \supset M_i \supset M_{i+1} \supset \cdots) \leadsto (\cdots \supset M_i \supset N \supset M_{i+1} \supset \cdots). \]
@@ -1753,7 +1753,7 @@ $\begin{tikzcd}
 		\Ker(u) \subset \Ker(u^2) \subset \cdots, \\
 		\Image(u) \supset \Image(u^2) \supset \cdots
 	\end{gather*}
-	分别终止于 $\Ker(u^\infty)$ 和 $\Image(u^\infty)$, 不难看出它们是 $u$-不变的. 主要任务是证明直和分解 $M = \Ker(u^\infty) \oplus \Image(u^\infty)$. 取 $n \gg 0$ 使得 $\Ker(u^\infty) = \Ker(u^n)$, $\Image(u^\infty) = \Ker(u^n)$. 若 $x \in \Image(u^\infty)$, $x = u^n(y_n)$ 满足 $u^n(x)=0$, 则 $y_n \in \Ker(u^{2n})=\Ker(u^n)$, 故 $x=0$. 于是 $\Ker(u^\infty) \cap \Image(u^\infty) = \{0\}$. 
+	分别终止于 $\Ker(u^\infty)$ 和 $\Image(u^\infty)$, 不难看出它们是 $u$-不变的. 主要任务是证明直和分解 $M = \Ker(u^\infty) \oplus \Image(u^\infty)$. 取 $n \gg 0$ 使得 $\Ker(u^\infty) = \Ker(u^n)$, $\Image(u^\infty) = \Image(u^n)$. 若 $x \in \Image(u^\infty)$, $x = u^n(y_n)$ 满足 $u^n(x)=0$, 则 $y_n \in \Ker(u^{2n})=\Ker(u^n)$, 故 $x=0$. 于是 $\Ker(u^\infty) \cap \Image(u^\infty) = \{0\}$. 
 	
 	另一方面, 任意 $x \in M$ 可表作
 	\[ x = (\underbracket{x - u^n(y)}_{\in \Ker(u^n)}) + \underbracket{u^n(y)}_{\in \Image(u^n)}, \qquad y \in M, \; u^n(x) = u^{2n}(y), \]
@@ -1762,16 +1762,16 @@ $\begin{tikzcd}
 	容易看出 $u|\Ker(u^\infty)$ 幂零而 $u|\Image(u^\infty)$ 是满射. 从 $\Ker(u) \cap \Image(u^\infty) \subset \Ker(u^\infty) \cap \Image(u^\infty) = \{0\}$ 可知 $u|\Image(u^\infty)$ 亦为单射. 证毕.
 \end{proof}
 
-\section{不可分模}\label{sec:indecomposable-mod}
-深入不可分模之前, 我们先考虑一个稍广的概念. 请回忆加性范畴的定义 \ref{def:additive-cat}.
+\section{不可分解模}\label{sec:indecomposable-mod}
+深入不可分解模之前, 我们先考虑一个稍广的概念. 请回忆加性范畴的定义 \ref{def:additive-cat}.
 
-\begin{definition}\index{duixiang!不可分 (indecomposable)}
-	加性范畴 $\mathcal{C}$ 中的非零对象 $M$ 称为\emph{不可分}的, 如果它仅有唯一一种双积表达式 $M = X \oplus Y$ (见定义 \ref{def:biproduct} 及其符号, 在此不论顺序), 由 $\iota_1 = p_1: M \xrightarrow{\identity} M$ 和零态射 $\begin{tikzcd} 0 \arrow[yshift=0.6ex, r, "\iota_2"] & M \arrow[yshift=-0.6ex, l, "p_2"] \end{tikzcd}$ 给出, 亦即平凡双积: $X=M$, $Y=0$.
+\begin{definition}\index{duixiang!不可分解 (indecomposable)}
+	加性范畴 $\mathcal{C}$ 中的非零对象 $M$ 称为\emph{不可分解}的, 如果它仅有唯一一种双积表达式 $M = X \oplus Y$ (见定义 \ref{def:biproduct} 及其符号, 在此不论顺序), 由 $\iota_1 = p_1: M \xrightarrow{\identity} M$ 和零态射 $\begin{tikzcd} 0 \arrow[yshift=0.6ex, r, "\iota_2"] & M \arrow[yshift=-0.6ex, l, "p_2"] \end{tikzcd}$ 给出, 亦即平凡双积: $X=M$, $Y=0$.
 \end{definition}
 
-取定环 $R$, 定义施于加性范畴 $R\dcate{Mod}$ 便得到\emph{不可分模}的概念. 它通常弱于单性. \index{mo!不可分 (indecomposable)}
+取定环 $R$, 定义施于加性范畴 $R\dcate{Mod}$ 便得到\emph{不可分解模}的概念. 它通常弱于单性. \index{mo!不可分解 (indecomposable)}
 \begin{example}
-	设 $R$ 为主理想环, $\mathfrak{p}$ 为其中的非零素理想, $n \geq 1$, 则 $R$-模 $R/\mathfrak{p}^n$ 不可分, 然而在 $n \geq 2$ 时非单.
+	设 $R$ 为主理想环, $\mathfrak{p}$ 为其中的非零素理想, $n \geq 1$, 则 $R$-模 $R/\mathfrak{p}^n$ 不可分解, 然而在 $n \geq 2$ 时非单.
 \end{example}
 
 加性范畴中的自同态集带有环结构. 环中元素 $a$ 如满足 $a^2=a$ 则称为\emph{幂等元}. 如存在 $m > 1$ 使得 $a^m=0$ 则称为\emph{幂零元}. 本节还需要进一步的概念.\index{miling@幂零 (nilpotent)} \index{mideng@幂等 (idempotent)}
@@ -1780,7 +1780,7 @@ $\begin{tikzcd}
 \end{definition}
 当 $S$ 交换时, 这相当于要求 $S$ 有唯一的极大理想 $\mathfrak{m} := S \smallsetminus S^\times$, 这是局部交换环的寻常定义.
 
-我们先考察加性范畴 $\mathcal{C}$ 中非零对象的有限直和分解 $M = \bigoplus_{i=1}^n M_i$. 根据双积定义 \ref{def:biproduct} 的 $n$ 元情形, 对每个 $1 \leq 1 \leq n$ 都有投影态射
+我们先考察加性范畴 $\mathcal{C}$ 中非零对象的有限直和分解 $M = \bigoplus_{i=1}^n M_i$. 根据双积定义 \ref{def:biproduct} 的 $n$ 元情形, 对每个 $1 \leq i \leq n$ 都有投影态射
 \begin{align*}
 	p_i: M & \twoheadrightarrow M_i \\
 	\sum_{j=1}^n m_j & \mapsto m_i, \quad \forall j, \; m_j \in M_j,
@@ -1809,7 +1809,7 @@ $\begin{tikzcd}
 		\left\{ \text{直和分解} M = \bigoplus_{i=1}^n M_i, \; M_i \subset M \right\} \arrow[leftrightarrow, d, "1:1"] \\
 		\left\{ \End_R(M)\; \text{中的幂等元系}\; (e_i)_{i=1}^n : \text{满足性质 \textbf{E.1} --- \textbf{E.3}} \right\},
 	\end{tikzcd}\]
-	直和分解项的重排对应于 $e_1, \ldots, e_n$ 上的重排. 模 $M$ 不可分当且仅当在环 $\End_R(M)$ 中有  $e^2 = e \implies (e=0 \vee e=1)$.
+	直和分解项的重排对应于 $e_1, \ldots, e_n$ 上的重排. 模 $M$ 不可分解当且仅当在环 $\End_R(M)$ 中有  $e^2 = e \implies (e=0 \vee e=1)$.
 \end{proposition}
 \begin{proof}
 	易见上述的双向映射 (直和分解 $\leftrightarrow$ 幂等元系) 是互逆的, 而且显然保持重排作用. 当 $n=2$ 时, 由上述讨论可知直和分解 $M = X \oplus Y$ 一一对应于幂等元 $e \in \End_R(M)$, 平凡分解对应于 $e = 0,1$.
@@ -1823,8 +1823,8 @@ $\begin{tikzcd}
 \begin{lemma}\label{prop:indecomposable-mod-local}
 	设 $\mathcal{C}$ 为加性范畴, $M$ 为 $\mathcal{C}$ 中的非零对象.
 	\begin{enumerate}
-		\item 若 $\End_R(M)$ 是局部环, 则 $M$ 不可分.
-		\item 当 $\mathcal{C} = R\dcate{Mod}$, 模 $M$ 不可分且长度有限时, 任意元素 $u \in \End_R(M)$ 或者幂零, 或者可逆, 而且 $\End_R(M)$ 是局部环.
+		\item 若 $\End_R(M)$ 是局部环, 则 $M$ 不可分解.
+		\item 当 $\mathcal{C} = R\dcate{Mod}$, 模 $M$ 不可分解且长度有限时, 任意元素 $u \in \End_R(M)$ 或者幂零, 或者可逆, 而且 $\End_R(M)$ 是局部环.
 	\end{enumerate}
 \end{lemma}
 \begin{proof}
@@ -1841,18 +1841,18 @@ $\begin{tikzcd}
 \end{proof}
 
 \begin{lemma}\label{prop:indecomposable-lemma}
-	设 $M$, $N$ 为 $R\dcate{Mod}$ (或任一伪 Abel 范畴, 如上述) 的非零对象, $N$ 不可分. 若 $u \in \Hom_R(M,N)$, $v \in \Hom(N,M)$ 满足 $vu \in \End(M)$ 可逆, 则 $u$ 和 $v$ 皆为同构.
+	设 $M$, $N$ 为 $R\dcate{Mod}$ (或任一伪 Abel 范畴, 如上述) 的非零对象, $N$ 不可分解. 若 $u \in \Hom_R(M,N)$, $v \in \Hom(N,M)$ 满足 $vu \in \End(M)$ 可逆, 则 $u$ 和 $v$ 皆为同构.
 \end{lemma}
 \begin{proof}
 	置 $e := u(vu)^{-1}v \in \End_R(N)$, 于是乎
 	\[ e^2 = u(vu)^{-1}vu(vu)^{-1}v = u(vu)^{-1}v = e. \]
-	由 $(vu)^{-1}veu = (vu)^{-1}vu(vu)^{-1}vu = 1$ 和 $M$ 非零可知 $e \neq 0$, 又因为 $N$ 不可分, 必有 $e=1$. 于是从 $e$ 的定义看出 $u$ 有右逆, 同时 $u$ 也有左逆 $(vu)^{-1}v: N \to M$, 故 $u$ 为同构. 从而 $v = (vu)u^{-1}$ 亦为同构.
+	由 $(vu)^{-1}veu = (vu)^{-1}vu(vu)^{-1}vu = 1$ 和 $M$ 非零可知 $e \neq 0$, 又因为 $N$ 不可分解, 必有 $e=1$. 于是从 $e$ 的定义看出 $u$ 有右逆, 同时 $u$ 也有左逆 $(vu)^{-1}v: N \to M$, 故 $u$ 为同构. 从而 $v = (vu)u^{-1}$ 亦为同构.
 \end{proof}
 
 \begin{theorem}\label{prop:KRS-uniqueness}
 	假设在 $R\dcate{Mod}$ (或任一伪 Abel 范畴) 中有同构
 	\[ \bigoplus_{i=1}^r M_i \simeq \bigoplus_{j=1}^s N_j \]
-	其中每个 $M_i$, $N_j$ 都不可分 (容许重复), $\End(M_i)$, $\End(N_j)$ 皆是定义 \ref{def:noncommutative-local-ring} 意义下的局部环, 则 $r=s$ 而且 $(M_i)_{i=1}^r$, $(N_j)_{j=1}^s$ 精确到重排是逐项同构的, 亦即
+	其中每个 $M_i$, $N_j$ 都不可分解 (容许重复), $\End(M_i)$, $\End(N_j)$ 皆是定义 \ref{def:noncommutative-local-ring} 意义下的局部环, 则 $r=s$ 而且 $(M_i)_{i=1}^r$, $(N_j)_{j=1}^s$ 精确到重排是逐项同构的, 亦即
 	\[\exists \sigma \in \mathfrak{S}_r, \; \forall 1 \leq i \leq r, \; M_i \simeq N_{\sigma(i)}. \]
 \end{theorem}
 \begin{proof}
@@ -1876,10 +1876,10 @@ $\begin{tikzcd}
 \end{proof}
 
 \begin{corollary}[Krull--Remak--Schmidt]\index{Krull--Remak--Schmidt 定理}
-	任意长度有限的非零 $R$-模 $M$ 都能分解为不可分模的直和 $M = \bigoplus_{i=1}^n M_i$, 而且 $M_1, \ldots, M_n$ 在同构和重排的意义下唯一.
+	任意长度有限的非零 $R$-模 $M$ 都能分解为不可分解模的直和 $M = \bigoplus_{i=1}^n M_i$, 而且 $M_1, \ldots, M_n$ 在同构和重排的意义下唯一.
 \end{corollary}
 \begin{proof}
-	唯一性源自引理 \ref{prop:indecomposable-mod-local} 和定理 \ref{prop:KRS-uniqueness}. 至于存在性, 设有非平凡分解 $M = X \oplus Y$, 则 $\ell(X), \ell(Y) < \ell(M)$; 若 $X$, $Y$ 中任一者可分, 续行如是操作, 分解必在 $\ell(M)$ 步内停止.
+	唯一性源自引理 \ref{prop:indecomposable-mod-local} 和定理 \ref{prop:KRS-uniqueness}. 至于存在性, 设有非平凡分解 $M = X \oplus Y$, 则 $\ell(X), \ell(Y) < \ell(M)$; 若 $X$, $Y$ 中任一者可分, 续行如是操作, 分解必在 $\ell(M)$ 步内停止. 以上的 $\ell$ 表示模的长度.
 \end{proof}
 
 推论 \ref{prop:finite-abelian-structure} 中有限交换群的结构定理如按注记 \ref{rem:primary-elementary-divisor} 的办法细分, 可视为 Krull--Remak--Schmidt 定理的一个简单特例.
@@ -1887,7 +1887,7 @@ $\begin{tikzcd}
 \begin{Exercises}
 	\item 对于小范畴 $I$ 以及函子 $\alpha: I \to R\dcate{Mod}$, 在对象层面记作 $i \mapsto M_i$, 证明 $\varinjlim_i M_i := \varinjlim \alpha$ 有直接的构造如下:
 	\[ \varinjlim_i M_i := \left( \bigoplus_{i \in \Obj(I)} M_i \right) \bigg/N \]
-	其中子模 $N = \lrangle{ \alpha(f)(x_i) - x_j : i \xrightarrow{f} j, \;  x_i \in M_i, x_j \in M_j }$.
+	其中子模 $N = \lrangle{ \alpha(f)(x_i) - x_i : i \xrightarrow{f} j, \;  x_i \in M_i }$.
 	\item 任取环 $A$ 和右 $A$-模 $V = A^{\oplus I}$, 其中 $I$ 为无穷集. 证明环 $R := \End(V_A)$ 满足 $(R_R)^{\oplus 2} \simeq R_R$, 因此 $R$ 不满足右不变基数性质. \begin{hint} 选取同构 $V \rightiso V \oplus V$ 并应用函子 $\Hom_A(V, -)$.\end{hint}
 	\item 回忆范畴中心的概念 (定义 \ref{def:cat-center}), 对任意环 $R$ 证明 $\cated{Mod}R$ 的中心等同于环的中心 $Z_R$. \begin{hint} 先观察到 $R$ 视为右 $R$-模其自同态环等同于 $R$.\end{hint}
 	\item 完整证明注记 \ref{rem:bimodule-balanced} 的断言.

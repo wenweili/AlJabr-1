@@ -34,7 +34,7 @@
 \begin{enumerate}[\bfseries {A}.1]
 	\item \emph{外延公理}: 若两集合有相同元素, 则两者相等.
 
-		空集 $\emptyset$ 的形式定义是 $\{u \in X: u \neq u\}$, 其中 $X$ 是任意集合. 外延公理一个近乎无聊的应用是证明 $\emptyset$ 无关 $X$ 的选取, 前提是集合确实存在, 这点既可以独立成另一条``存在公理'', 也可以由稍后的无穷公理保证.
+		空集 $\emptyset$ 的形式定义是 $\{u \in X: u \neq u\}$, 其中 $X$ 是任意集合. 外延公理一个近乎无聊的应用是证明 $\emptyset$ 无关 $X$ 的选取, 前提是集合确实存在, 这点既可以独立成另一条``存在公理'', 也可以划入稍后的无穷公理.
 	\item \emph{配对公理}: 对任意 $x,y$, 存在集合 $\{x,y\}$, 其元素恰好是 $x$ 与 $y$.
 	
 		有序对 $(x,y)$ 的概念可用配对公理来实作: 我们能定义 $(x,y) := \{\{x\}, \{x,y\} \}$, 由此定义积集 $X \times Y := \{(x,y) : x \in X,\; y \in Y \}$; 准此要领可定义有限多个集合的积 $X \times Y \times \cdots$. 集合间的映射 $f: X \to Y$ 等同于它的图形 $\Gamma_f \subset X \times Y$: 对每个 $x \in X$, 交集 $\Gamma_f \cap (\{x\} \times Y)$ 是独点集, 记作 $\{f(x)\}$.
@@ -146,7 +146,7 @@
 
 序数的原初想法是良序集的序型; 假如循此进路, 则必须视之为类而非集合, 那么谈论序数全体 $\textbf{On}$ 便相当于操作``类的类'', 显然有些棘手. 幸亏我们能从每个良序型中挑出一个标准的良序集, 从而得到更精确的描述, 为此需要 von Neumann 的如下定义.
 \begin{definition}\label{def:ordinal}\index{xushu@序数 (ordinal)}
-	如果一个集合 $\alpha$ 的每个元素都是 $\alpha$ 的子集 (换言之, $\alpha \subset P(\alpha)$), 则称 $\alpha$ 为\emph{传递}的. 若传递集 $\alpha$ 对于 $\in$ 构成良序集, 则称 $\alpha$ 为\emph{序数}.
+	如果一个集合 $\alpha$ 的每个元素都是 $\alpha$ 的子集 (换言之, $\alpha \subset P(\alpha)$), 则称 $\alpha$ 为\emph{传递}的. 若传递集 $\alpha$ 对于 $x < y \stackrel{\text{定义}}{\iff} x \in y$ 成为良序集, 则称 $\alpha$ 为\emph{序数}.
 \end{definition}
 
 显然 $\emptyset$ 是序数. 若 $\alpha$ 是序数, 则 $\alpha \sqcup \{\alpha\}$ 亦然. 序数的完整理论可参阅 \cite[\S 2]{Je03} 或 \cite[第四章]{HY14}, 以下仅摘录部分重要性质. 关于序数与良序型的联系请见命题 \ref{prop:ordinal-ordertype}.
@@ -164,7 +164,7 @@
 
 	对于 (ii), 以 $<$ 表示 $\in$ 并令 $\gamma$ 为 $(\beta \smallsetminus \alpha, <)$ 的极小元. 我们断言 $\alpha = \{x \in \beta : x < \gamma \}$, 而后者无非是 $\gamma$. 包含关系 $\supset$ 是显然的. 对于 $\subset$, 给定 $y \in \alpha \subset \beta$, 首先排除 $\gamma = y$; 其次, 由 $\alpha$ 的传递性有 $y \subset \alpha$, 依此排除 $\gamma < y$, 故 $y < \gamma$.
 
-	对于 (iii), 显见 $\gamma := \alpha \cap \beta$ 也是序数. 我们断言 $\gamma = \alpha$ 或 $\gamma = \beta$ 必居其一, 否则由上述结果可得 $\gamma \in \alpha$, $\gamma \in \beta$, 于是有 $\gamma \in \gamma$, 这同偏序的反称性矛盾.
+	对于 (iii), 显见 $\gamma := \alpha \cap \beta$ 也是序数. 我们断言 $\gamma = \alpha$ 或 $\gamma = \beta$ 必居其一, 否则由上述结果可得 $\gamma \in \alpha$, $\gamma \in \beta$, 于是有 $\gamma \in \gamma$, 亦即在偏序集 $(\alpha, \leq)$ 中 $\gamma < \gamma$, 这同 $<$ 的涵义 ($\leq$ 但 $\neq$) 矛盾.
 \end{proof}
 
 从引理立得以下直接推论.
@@ -240,7 +240,7 @@
 \begin{proof}
 	第一步, 若 $\theta$-列 $a, a'$ 皆满足所示性质, 我们断言 $\alpha < \theta$ 蕴涵 $a(\alpha) = a'(\alpha)$, 如是则 $a=a'$: 这对 $\alpha=0$ 已知; 设若这对所有 $\beta < \alpha$ 成立, 那么 $a|_\alpha = a'|_\alpha$ 故 $a(\alpha) = a'(\alpha)$; 应用定理 \ref{prop:transfinite-induction} 遂得以上断言.
 	
-	第二步是 $\theta$-列 $a$ 的存在性. 当 $\theta=0$ 时为显然. 今设 $\theta > 0$, 并且对任意 $\xi < \theta$, 所求 $\xi$-列 $a[\xi]$ 皆存在, 则由替换公理模式知 $a[\xi]$ 确实是集合间的映射; 由第一步可将诸 $a[\xi]$ 拼接为定义在 $\theta$ 上的函数 $a$ 使得 $a|_\xi = a[\xi]$, 而性质 $\alpha < \theta \implies a(\alpha) = G(a|_\alpha)$ 是容易的.
+	第二步是 $\theta$-列 $a$ 的存在性. 当 $\theta=0$ 时为显然. 今设 $\theta > 0$, 并且对任意 $\xi < \theta$, 所求 $\xi$-列 $a[\xi]$ 皆存在, 则由替换公理模式知 $a[\xi]$ 确实是集合间的映射; 由第一步可将诸 $a[\xi]$ 拼接为定义在 $\theta$ 上的函数 $a$ 使得 $a|_\xi = a[\xi]$, 而且使性质 $\alpha < \theta \implies a(\alpha) = G(a|_\alpha)$ 成立, 这是容易的.
 	
 	最后, 由于 $\textbf{On}$ 无极大元, 根据前两步可以唯一地定义 $a: \textbf{On} \to \textbf{V}$.
 \end{proof}
@@ -282,7 +282,7 @@
 	设 $P$ 为非空偏序集, 而且 $P$ 中每个链都有上界, 则 $P$ 含有极大元.
 \end{theorem}
 \begin{proof}
-	类似于前一个证明. 假定 $P$ 不含极大元. 任取 $a_0 \in P$, 并用超穷递归对每个序数 $\alpha$ 定义 $a_\alpha \in P$, 使得 $\alpha < \beta \Rightarrow a_\alpha < a_\beta$, 其方法如次: 设对每个 $\beta < \alpha$ 都定义了 $a_\beta$ 如上, 则 $(a_\beta)_{\beta < \alpha}$ 在 $P$ 中成一链. 若 $\alpha$ 是极限序数, 则此链必有上界 $a_\alpha \notin C_\alpha$; 若 $\alpha = \gamma + 1$ 是后继序数, 因 $P$ 无极大元故存在 $a_\alpha \in P$ 使得 $a_\alpha > a_\gamma$. 真类 $\textbf{On}$ 据此可以嵌入 $P$, 仿照命题 \ref{prop:ordinal-ordertype} 的论证导出 $\textbf{On}$ 亦是集合, 矛盾.
+	类似于前一个证明. 假定 $P$ 不含极大元. 任取 $a_0 \in P$, 并用超穷递归对每个序数 $\alpha$ 定义 $a_\alpha \in P$, 使得 $\alpha < \beta \Rightarrow a_\alpha < a_\beta$, 其方法如次: 设对每个 $\beta < \alpha$ 都定义了 $a_\beta$ 如上, 则 $(a_\beta)_{\beta < \alpha}$ 在 $P$ 中成一链. 若 $\alpha$ 是极限序数, 则此链必有上界 $a_\alpha \notin \{ a_\beta \}_{\beta < \alpha}$; 若 $\alpha = \gamma + 1$ 是后继序数, 因 $P$ 无极大元故存在 $a_\alpha \in P$ 使得 $a_\alpha > a_\gamma$. 真类 $\textbf{On}$ 据此可以嵌入 $P$, 仿照命题 \ref{prop:ordinal-ordertype} 的论证导出 $\textbf{On}$ 亦是集合, 矛盾.
 \end{proof}
 已知选择公理, 良序定理和 Zorn 引理相互等价, 任择一者连同 \textbf{A.1} -- \textbf{A.8} 皆给出 ZFC. 本书以选择公理为出发点.
 
@@ -406,7 +406,7 @@
 	\end{tikzpicture}\end{center}
 	令序数 $\gamma$ 表 $(\aleph_\alpha \times \aleph_\alpha, \prec)$ 之序型, 并取同构 $f: \gamma \rightiso (\aleph_\alpha \times \aleph_\alpha, \prec)$. 基数的性质给出
 	\[ \gamma \geq |\gamma| = |\aleph_\alpha \times \aleph_\alpha| \geq \aleph_\alpha; \]
-	而 $\alpha$ 的选取蕴涵 $\gamma \neq \aleph_\alpha$, 故 $\gamma > \aleph_\alpha$. 既然 $\aleph_\alpha$ 是 $\gamma$ 的真前段, 限制 $f$ 就得到从 $\aleph_\alpha$ 至 $(\aleph_\alpha \times \aleph_\alpha, \prec)$ 的某个真前段的同构. 根据 $\prec$ 的定义, 存在序数 $\sigma < \aleph_\alpha$ 使得 $f(\aleph_\alpha) \subset \sigma \times \sigma$. 由于 $\alpha$ 无穷, $\sigma$ 亦然.
+	而 $\alpha$ 的选取蕴涵 $\gamma \neq \aleph_\alpha$, 故 $\gamma > \aleph_\alpha$. 既然 $\aleph_\alpha$ 是 $\gamma$ 的真前段, 限制 $f$ 就得到从 $\aleph_\alpha$ 至 $(\aleph_\alpha \times \aleph_\alpha, \prec)$ 的某个真前段的同构. 根据 $\prec$ 的定义, 存在序数 $\sigma < \aleph_\alpha$ 使得 $f(\aleph_\alpha) \subset \sigma \times \sigma$. 由于 $\aleph_\alpha$ 无穷, $\sigma$ 亦然.
 	
 	根据基数定义, 存在 $\beta < \alpha$ 使得 $|\sigma| = \aleph_\beta$. 关于 $\alpha$ 的极小性假设蕴涵 $\aleph_\beta \cdot \aleph_\beta = \aleph_\beta$. 但这么一来
 	\[ \aleph_\alpha = |f(\aleph_\alpha)| \leq |\sigma| \cdot |\sigma| = \aleph_\beta \cdot \aleph_\beta = \aleph_\beta \]
@@ -524,7 +524,7 @@
 	\item 证明任意序数 $\gamma > 0$ 皆有唯一的 Cantor 标准形
 		\[ \gamma= \omega^{\alpha_1} k_1 + \cdots + \omega^{\alpha_n} k_n, \]
 		其中 $n \in \Z_{\geq 1}$, $\gamma \geq \alpha_1 > \cdots > \alpha_n$ 皆为序数, 而 $k_1, \ldots, k_n \in \Z_{\geq 1}$. \begin{hint}对 $\gamma$ 作超穷递归: 取最大的 $\alpha$ 使得 $\gamma \geq \omega^\alpha $, 再用带余除法表 $\gamma = \omega^\alpha k + \rho$, 这里的 $k$ 必为有限序数. 用超穷归纳法可证唯一性.\end{hint}
-	\item 证明 $f(a,b) = 2^a(2b+1)-1$ 是从 $\Z_{\geq 1} \times \Z_{\geq 1}$ 到 $\Z_{\geq 1}$ 的双射.
+	\item 证明 $f(a,b) = 2^a(2b+1)-1$ 是从 $\Z_{\geq 0} \times \Z_{\geq 0}$ 到 $\Z_{\geq 0}$ 的双射.
 	\item 以下结果称作 König 引理: 设 $\kappa_i, \lambda_i$ 为两族以 $i \in I$ 为下标的基数, 且对每个 $i \in I$ 皆有 $\kappa_i < \lambda_i$. 证明
 		\[ \sum_{i \in I} \kappa_i < \prod_{i \in I} \lambda_i. \]
 		导出 Cantor 定理 $\kappa \leq 2^\kappa$ 作为特例.

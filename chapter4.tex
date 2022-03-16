@@ -167,7 +167,7 @@
 	当 $E$ 是独点集 $\{x\}$ 时, 使用简写 $Z_G(x)$ 和 $N_G(x)$.
 \end{definition}
 
-易见 $Z_G(E)$ 和 $N_G(E)$ 都是子群, 而且 $Z_G(E) \lhd N_G(E)$, 它们仅与 $E$ 生成的子群 $\lrangle{E}$ 有关. 若 $H$ 是子群则 $H \lhd N_G(H)$. 取 $E=G$ 即有
+易见 $Z_G(E)$ 和 $N_G(E)$ 都是子群, 而且 $Z_G(E) \lhd N_G(E)$, 前者仅与 $E$ 生成的子群 $\lrangle{E}$ 有关. 若 $H$ 是子群则 $H \lhd N_G(H)$. 取 $E=G$ 即有
 \[ Z_G(G) = Z_G \lhd G = N_G(G). \]
 
 \begin{remark}\label{rem:HN}
@@ -606,7 +606,7 @@
 	\begin{compactitem}
 		\item 忠实的, 如果相应的 $G \to \mathfrak{S}_X$ 是单射, 这相当于 $\bigcap_{x \in X} \Stab_G(x) = \{1\}$;
 		\item 自由的或单的, 如果对任意 $x \in X$ 都有 $\Stab_G(x) = \{1\}$;
-		\item 传递的, 如果 $X$ 仅有一个轨道, 这相当于要求对所有 $x, y \in X$ 皆存在 $g \in G$ 使得 $gx=y$;
+		\item 传递的, 如果 $X$ 仅有一个轨道, 这相当于要求 $X$ 非空, 并且对所有 $x, y \in X$ 皆存在 $g \in G$ 使得 $gx=y$;
 		\item 推而广之, 若对每个 $1 \leq m \leq n$, 群 $G$ 在 $\{ (x_1, \ldots, x_m) \in X^m: \text{相异元} \}$ 上的作用皆传递, 则称 $G$ 在 $X$ 上的作用为 $n$-传递的.
 	\end{compactitem}
 
@@ -646,13 +646,13 @@
 	\[ \Isom(G_1, G_2) := \{ \text{ 同构 } \; \varphi: G_1 \to G_2 \}. \]
 	当 $\Isom(G_1, G_2)$ 非空时, 其上有 $\Aut(G_2)$ 的左作用 $(g, \varphi) \mapsto g \circ \varphi$, 其中 $g \in \Aut(G_2)$. 这使得 $\Isom(G_1, G_2)$ 成为 $\Aut(G_2)$-挠子. 虽然这里只考虑群同构, 类似构造实则可以在任意范畴中进行, 请参见 \S\ref{sec:cat-and-morphism}.
 
-	我们当然不必自限于左作用, $\Aut(G_1)$ 也借映射合成右作用于 $\Isom(G_1, G_2)$, 两侧的作用满足 $(g \circ \varphi) \circ g' = g \circ (\varphi \circ g')$, 故可并作 $\Aut(G_1) \times \Aut(G_2)^\text{op}$-作用, 无论左看右看 $\Isom(G_1, G_2)$ 都是挠子. 这样的结构称为双挠子.
+	我们当然不必自限于左作用, $\Aut(G_1)$ 也借映射合成右作用于 $\Isom(G_1, G_2)$, 两侧的作用满足 $(g \circ \varphi) \circ g' = g \circ (\varphi \circ g')$, 故可并作 $\Aut(G_1)^{\text{op}} \times \Aut(G_2)$-作用, 无论左看右看 $\Isom(G_1, G_2)$ 都是挠子. 这样的结构称为双挠子.
 \end{example}
 
 挠子原来的定义稍显曲折, 然而它另有简捷的刻画如下, 在范畴论的框架中将会格外方便; 可参看 \S\ref{sec:group-in-cat}.
 
 \begin{lemma}\label{prop:torsor-criterion}
-	设 $X$ 为 $G$-集, 则 $X$ 为挠子当且仅当映射
+	设 $X$ 为非空 $G$-集, 则 $X$ 为挠子当且仅当映射
 	\begin{align*}
 		\Phi: G \times X & \longrightarrow X \times X \\
 		(g, x) &  \longmapsto (x, gx)
@@ -696,7 +696,7 @@
 \end{corollary}
 \begin{proof}
 	已知 $Z_G$ 非平凡, 显然 $Z_G \subset N_G(H)$. 若 $Z_G \not\subset H$, 则 $H \subsetneq Z_G H \subset N_G(H)$. 因此不妨假设 $Z_G \subset H$. 现在对 $|G|$ 递归论证: 定义 $\bar{G} := G/Z_G$, $\bar{H} := H/Z_G$, 可假设
-	\[ \bar{H} \subseteq N_{\bar{G}}(\bar{H}). \]
+	\[ \bar{H} \subsetneq N_{\bar{G}}(\bar{H}). \]
 	容易看出 $N_G(H)/Z_G = N_{\bar{G}}(\bar{H})$. 应用命题 \ref{prop:2nd-homomorphism} 即得 $H \subsetneq N_G(H)$.
 \end{proof}
 
@@ -1065,7 +1065,7 @@
 	以下定义 $U := U_1$. 于是乎 $U_r \lhd U$ 和 $[U_r, U] \subset U_{r+1}$. 这说明 $(U_r)_{1 \leq r \leq n}$ 是 $U$ 的中心列, 从而 $U$ 是幂零群. 我们有满的群同态 $\Phi$
 	\begin{align*}
 		B := \left\{ x \in \GL(\mathcal{V}): \forall i, \; x (\mathcal{V}_i) \subset \mathcal{V}_i \right\} & \stackrel{\Phi}{\twoheadrightarrow} \bigoplus_{i=0}^{n-1} \GL\left( \mathcal{V}_i/\mathcal{V}_{i+1} \right) \simeq (\Bbbk^\times)^n, \\
-		x & \mapsto \left( x \big|_{\mathcal{V}_i/\mathcal{V}_{i+1}} \right)_{i=0}^n ,
+		x & \mapsto \left( x \big|_{\mathcal{V}_i/\mathcal{V}_{i+1}} \right)_{i=0}^{n-1} ,
 	\end{align*}
 	其中因为 $x$ 保持每个 $\mathcal{V}_i$, 可取 $x$ 在每个子商 $\mathcal{V}_i/\mathcal{V}_{i+1}$ 上的诱导自同构. 显然 $\Ker(\Phi) = U$, 所以 $U \lhd B$ 而且 $B/U \simeq \Image(\Phi)$ 交换. 若取定 $\mathcal{V}$ 的基 $e_1, \ldots, e_n$ 使得
 	\[ \mathcal{V}_i = \bigoplus_{1 \leq j \leq n-i} \Bbbk e_j \]
@@ -1243,7 +1243,7 @@
 	\end{align*}
 	它映 $[1]$ (取 $n=0$) 为 $1$. 先前关于既约表达式的推导蕴涵 $\Phi$ 为满, 以下仅需说明 $\Phi$ 为单.
 
-	我们欲借 $\Phi$ 在 $\Sigma$ 中模拟 $M$ 的左乘作用. 先取定 $i \in I$. 定义幺半群作用 $\alpha_i: M_i \times \Sigma \to \Sigma$ 如下. 任意 $\xi \in M_i$ 有唯一写法 $\xi = f_i(a'') x$ (此处 $a'' \in A$, $x \in H_{i_j}$); 对于 $\sigma = [a; x_1, \ldots, x_n] \in \Sigma$, 仿前段方法定义 $(a', x')$ 使得 $x f_i(a) = f_i(a')x'$. 置
+	我们欲借 $\Phi$ 在 $\Sigma$ 中模拟 $M$ 的左乘作用. 先取定 $i \in I$. 定义幺半群作用 $\alpha_i: M_i \times \Sigma \to \Sigma$ 如下. 任意 $\xi \in M_i$ 有唯一写法 $\xi = f_i(a'') x$ (此处 $a'' \in A$, $x \in H_i$); 对于 $\sigma = [a; x_1, \ldots, x_n] \in \Sigma$, 仿前段方法定义 $(a', x')$ 使得 $x f_i(a) = f_i(a')x'$. 置
 	\[ \alpha_i(\xi, \sigma) :=
 		\begin{cases}
 			[a'' a'; x'x_1, \ldots, x_n], & i_1 = i, \\
@@ -1438,7 +1438,7 @@
 	\[ (\sigma f)(x_1, \ldots, x_n) = f(x_{\sigma^{-1}(1)}, \ldots, x_{\sigma^{-1}(n)}), \]
 	此作用对函数的逐点加法显然为线性: $\sigma(f \pm g) = \sigma f \pm \sigma g$, 其中 $k \in \Z$. 今考虑函数
 	\[ \Delta(x_1, \ldots, x_n) = \prod_{1 \leq i < j \leq n} (x_j - x_i). \]
-	对于 $\sigma \in \mathfrak{S}_n$, 显见存在 $\sgn(\sigma) = \pm 1$ 使得 $\sigma \Delta = \sgn(\sigma)\Delta$. 因为 $\Delta$ 不恒为零 (代入 $x_i = i$ 可知), $\sgn(\sigma)$ 是唯一确定的, 因而 $\sgn: \mathfrak{S}_n \to \{\pm1 \}$ 是群同态. 容易验证对每个 $1 \leq i < n$ 皆有 $\tau_i \Delta = -\Delta$. 对换之间两两共轭, 故对所有对换 $\tau \in \mathfrak{S}_n$ 皆有 $\sgn(\tau)=-1$. 由
+	对于 $\sigma \in \mathfrak{S}_n$, 显见存在 $\sgn(\sigma) \in \{\pm 1\}$ 使得 $\sigma \Delta = \sgn(\sigma)\Delta$. 因为 $\Delta$ 不恒为零 (代入 $x_i = i$ 可知), $\sgn(\sigma)$ 是唯一确定的, 因而 $\sgn: \mathfrak{S}_n \to \{\pm1 \}$ 是群同态. 容易验证对每个 $1 \leq i < n$ 皆有 $\tau_i \Delta = -\Delta$. 对换之间两两共轭, 故对所有对换 $\tau \in \mathfrak{S}_n$ 皆有 $\sgn(\tau)=-1$. 由
 	\[(a_1 \cdots a_m) = (a_1 a_m) (a_1 \cdots a_{m-1}) = \cdots = (a_1 a_m) (a_1 a_{m-1}) \cdots (a_1 a_2) \]
 	可见 $\sgn((a_1 \cdots a_m)) = (-1)^{m+1}$. 唯一性导自命题 \ref{prop:cyclic-decomposition}. 
 \end{proof}
@@ -1565,7 +1565,7 @@
 \[ \tau_i := (i \quad i+1) \in \mathfrak{S}_n, \quad 1 \leq i < n. \]
 引理 \ref{prop:S_n-generation} 断言它们生成 $\mathfrak{S}_n$. 如改从 $\mathcal{B}_n$ 的展示 \eqref{eqn:braid-presentation} 切入, 我们可以先在 $\mathfrak{S}_n$ 中验证关系式
 \begin{gather*}
-	|i-j| \geq 1 \implies \tau_i \tau_j = \tau_j \tau_i, \\
+	|i-j| > 1 \implies \tau_i \tau_j = \tau_j \tau_i, \\
 	\tau_i^2 = 1, \quad 1 \leq i < n, \\
 	\tau_i \tau_{i+1} \tau_i = \tau_{i+1} \tau_i \tau_{i+1} = (i \quad i+2), \quad 1 \leq i < n-1.
 \end{gather*}
@@ -1574,10 +1574,10 @@
 为避免歧义, 另立符号 $\tilde{\tau}_i$ 代入以上三族关系式, 联立后能够化作等价形式
 \begin{equation}\label{eqn:S_n-presentation}\begin{gathered}
 	\tilde{\tau}_i^2 = 1, \quad 1 \leq i < n \\
-	|i-j| \geq 1 \implies (\tilde{\tau}_i \tilde{\tau}_j)^2 = 1, \\
+	|i-j| > 1 \implies (\tilde{\tau}_i \tilde{\tau}_j)^2 = 1, \\
 	(\tilde{\tau}_i \tilde{\tau}_{i+1})^3 = 1, \quad 1 \leq i < n-1.
 \end{gathered}\end{equation}
-定义 $\mathfrak{S}'_n := \lrangle{\tilde{\tau}_1, \ldots, \tilde{\tau}_n \big| \text{满足于}\; \eqref{eqn:S_n-presentation} }$, 另外约定 $\mathfrak{S}'_n := \{1\}$. 因之有群同态 $\mathcal{B}_n \twoheadrightarrow \mathfrak{S}'_n \twoheadrightarrow \mathfrak{S}_n$, 满足 $\sigma_i \mapsto \tilde{\tau}_i \mapsto \tau_i$. 从 $\mathcal{B}_n$ 过渡到 $\mathfrak{S}'_n$ 相当于忽视缠绕
+定义 $\mathfrak{S}'_n := \lrangle{\tilde{\tau}_1, \ldots, \tilde{\tau}_n \big| \text{满足于}\; \eqref{eqn:S_n-presentation} }$, 另外约定 $\mathfrak{S}'_1 := \{1\}$. 因之有群同态 $\mathcal{B}_n \twoheadrightarrow \mathfrak{S}'_n \twoheadrightarrow \mathfrak{S}_n$, 满足 $\sigma_i \mapsto \tilde{\tau}_i \mapsto \tau_i$. 从 $\mathcal{B}_n$ 过渡到 $\mathfrak{S}'_n$ 相当于忽视缠绕
 \begin{tikzpicture}[baseline=(braid), yscale=0.5, xscale=0.7]
 	\braid[style strands={1}, style strands={2}] (braid) s_1 s_1;
 \end{tikzpicture}.
@@ -1827,7 +1827,8 @@
 \begin{proof}
 	这是定理 \ref{prop:Yoneda-lemma} 的直接推论.
 \end{proof}
-群函子的实例之一是 \S\ref{sec:Witt-vector} 将介绍的 Witt 加法群函子 $\mathbf{W}: \cate{CRing} \to \cate{Ab}$, 这里 $\cate{CRing}$ 表交换群范畴.
+
+群函子的实例之一是 \S\ref{sec:Witt-vector} 将介绍的 Witt 加法群函子 $\mathbf{W}: \cate{CRing} \to \cate{Ab}$, 这里 $\cate{CRing}$ 表交换环范畴.
 
 \begin{remark}
 	同理, $\mathcal{C}^\wedge$ 中可以考虑群函子的作用: 给定群函子 $G$ 和任意 $E \in \Obj(\mathcal{C}^\wedge)$, 所谓的作用无非是对每个 $S$ 给定真正的群作用

@@ -1,0 +1,648 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8
+
+% LaTeX source for the errata of the book ``代数学方法'' in Chinese
+% Copyright 2022  李文威 (Wen-Wei Li).
+% Permission is granted to copy, distribute and/or modify this
+% document under the terms of the Creative Commons
+% Attribution 4.0 International (CC BY 4.0)
+% http://creativecommons.org/licenses/by/4.0/
+
+% 《代数学方法》卷一勘误表 / 李文威
+% 使用自定义的文档类 AJerrata.cls. 自动载入 xeCJK.
+
+\documentclass{AJerrata}
+
+\usepackage{unicode-math}
+
+\usepackage[unicode, colorlinks, psdextra, bookmarksnumbered,
+	pdfpagelabels=true,
+	pdfauthor={李文威 (Wen-Wei Li)},
+	pdftitle={代数学方法卷一勘误},
+	pdfkeywords={}
+]{hyperref}
+
+\setmainfont[
+	BoldFont={texgyretermes-bold.otf},
+	ItalicFont={texgyretermes-italic.otf},
+	BoldItalicFont={texgyretermes-bolditalic.otf},
+	PunctuationSpace=2
+]{texgyretermes-regular.otf}
+
+\setsansfont[
+	BoldFont=FiraSans-Bold.otf,
+	ItalicFont=FiraSans-Italic.otf
+]{FiraSans-Regular.otf}
+
+\setCJKmainfont[
+	BoldFont=Noto Serif CJK SC Bold
+]{Noto Serif CJK SC}
+
+\setCJKsansfont[
+	BoldFont=Noto Sans CJK SC Bold
+]{Noto Sans CJK SC}
+
+\setCJKfamilyfont{emfont}[
+	BoldFont=FandolHei-Regular.otf
+]{FandolHei-Regular.otf}	% 强调用的字体
+
+\renewcommand{\em}{\bfseries\CJKfamily{emfont}} % 强调
+
+\setmathfont[
+	Extension = .otf,
+	math-style= TeX,
+]{texgyretermes-math}
+
+\usepackage{mathrsfs}
+\usepackage{stmaryrd} \SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n}	% 避免警告 (stmryd 不含粗体故)
+% \usepackage{array}
+% \usepackage{tikz-cd}  % 使用 TikZ 绘图
+\usetikzlibrary{positioning, patterns, calc, matrix, shapes.arrows, shapes.symbols}
+
+\usepackage{myarrows}				% 使用自定义的可伸缩箭头
+\usepackage{mycommand}				% 引入自定义的惯用的命令
+
+
+\title{\bfseries 代数学方法（第一卷）勘误表 \\ 跨度: 2019---2022 }
+\author{李文威}
+\date{\today}
+
+\begin{document}
+	\maketitle
+	以下页码等信息参照高等教育出版社 2019 年 1 月出版之《代数学方法》第一卷, ISBN: 978-7-04-050725-6. 这些错误已在修订版改正 (2022 年 3 月网络发布, 纸本待出).
+
+	\begin{Errata}
+		\item[第 12 页, 倒数第 8 行]
+		\Orig 也可以由稍后的无穷公理保证.
+		\Corr 也可以划入稍后的无穷公理.
+		\Thx{感谢王东瀚指正.}
+		
+		\item[第 16 页, 定义 1.2.8]
+		\Orig 若传递集 $\alpha$ 对于 $\in$ 构成良序集
+		\Corr 若传递集 $\alpha$ 对于 $x < y \stackrel{\text{定义}}{\iff} x \in y$ 成为良序集
+		\Thx{感谢王东瀚指正.}
+		
+		\item[第 16 页, 倒数第 5 行]
+		\Orig 于是有 $\gamma \in \gamma$, 这同偏序的反称性矛盾.
+		\Corr 于是有 $\gamma \in \gamma$, 亦即在偏序集 $(\alpha, \leq)$ 中 $\gamma < \gamma$, 这同 $<$ 的涵义 ($\leq$ 但 $\neq$) 矛盾.
+		\Thx{感谢王东瀚指正.}
+		
+		\item[第 18 页, 倒数第 10 行]
+		\Orig 而性质 ... 是容易的.
+		\Corr 而且使性质 ... 成立, 这是容易的.
+		
+        \item[第 19 页, 倒数第 5 行]
+        \Orig $a_\alpha \notin C_\alpha$
+        \Corr $a_\alpha \notin \{ a_\beta \}_{\beta < \alpha}$
+        \Thx{感谢胡旻杰指正}
+
+		\item[第 23 页, 第 5 行]
+		\Orig 由于 $\alpha$ 无穷...
+		\Corr 由于 $\aleph_\alpha$ 无穷...
+		\Thx{感谢王东瀚指正.}
+
+		\item[第 26 页, 第一章习题 5]
+		将题目中的三个 $\Z_{\geq 1}$ 全改成 $\Z_{\geq 0}$.
+
+        \item[第 35 页, 倒数第 4 行]
+        \Orig $X \in \mathrm{Ob}(\mathcal{C})$
+        \Corr $X \in \mathrm{Ob}(\mathcal{C}')$
+        \Thx{感谢尹梓僮指正.}
+
+        \item[第 38 页, 第 12 行 (命题 2.2.10 证明)]
+        将两个箭头的方向调换.
+        \Thx{感谢尹梓僮指正.}
+
+		\item[第 38 页, 第 14 行]
+		\Orig{由此导出对象和自然变换的同构概念, 其逆若存在则唯一.}
+		\Corr{其逆若存在则唯一, 依此定义何谓对象间或函子间的同构.}
+		\Thx{感谢王猷指正.}
+		
+		\item[第 42 页, 倒数第 2 行]
+		\Orig ...同构. $Z(\cdots) \simeq $...
+		\Corr ...同构 $Z(\cdots) \simeq$...
+		\Thx{感谢王东瀚指正.}
+		
+        \item[第 47 页, 第 4 行]
+        \Orig $A \in \mathcal{C}^\wedge$
+        \Corr $A \in \mathrm{Ob}(\mathcal{C}^\wedge)$
+
+		\item[第 49 页, 倒数第 9 行]
+		\Orig 由此得到伴随对 $(D^{\mathrm{op}}, D, \varphi)$.
+		\Corr 由此得到伴随对 $(D^{\mathrm{op}}, D, \varphi^{-1})$.
+		\Thx{感谢王东瀚指正.}
+
+        \item[第 50 页, 第 3 行]
+        \Orig $\eta_X$
+        \Corr $\eta$
+        \Thx{感谢蒋之骏指正}
+		
+		\item[第 54 页最后] \Corr 图表微调成
+		\begin{center}\begin{tikzpicture}[bend angle=70, auto, fct/.style={circle, draw=gray!40, fill=gray!10}]
+			\node[fct] (G1) {$G$}; \node[fct] (F1) [right=of G1] {$F$} edge[bend right] node[swap] {$\eta$} (G1);
+			\node[fct] (G2) [above right=of F1] {$G$}; \node[fct] (F2) [right=of G2] {$F$} edge[bend left] node {$\eta^{-1}$} (G2);
+			\node[fct] (F3) [right=of F2] {$F$}; \node[fct] (G3) [right=of F3] {$G$} edge[bend left] node {$\varepsilon$} (F3);
+			\node[fct] (F4) [below right=of G3] {$F$}; \node[fct] (G4) [right=of F4] {$G$} edge[bend right] node[swap] {$\varepsilon^{-1}$} (F4);
+		\end{tikzpicture}\end{center}
+		兴许更易懂. \Thx{感谢熊锐提供意见.}
+
+		\item[第 56 页, 倒数第 13 行]
+		\Orig $\epsilon' (FG \epsilon')(F\eta G)$
+		\Corr $\epsilon' (FG \epsilon'')(F\eta G)$ \quad (严格来说, 这行里的所有 $\epsilon$ 都应该改作 $\varepsilon$.)
+		\Thx{感谢张好风指正}
+
+		\item[第 61 页, 第 2--3 行]
+		\Orig $\varprojlim (\alpha(S))$, $\varinjlim (\beta(S))$
+		\Corr $\varinjlim (\alpha(S))$, $\varprojlim (\beta(S))$
+		\Thx{感谢巩峻成指正}
+
+		\item[第 66 页, 第 1 行]
+		余完备当且仅当它有所有``余''等化子和小余积.
+		\Thx{感谢巩峻成指正}
+		
+		\item[第 67 页, 第 7 行]
+		\Orig $f(x)h(y)$
+		\Corr $f(x)g(y)$
+		\Thx{感谢巩峻成指正}
+
+		\item[第 77 页, 倒数第 8 和倒数第 6 行]
+		将 $\xi_F: F(\cdot) \times F(\cdot)$ 改成 $\xi_F: F(\cdot) \otimes F(\cdot)$. 将 $\eta_F: F(\cdot \otimes \cdot) \to F(\cdot)$ 改成 $\eta_F: F(\cdot \otimes \cdot) \to F(\cdot) \otimes F(\cdot)$.
+		\Thx{感谢巩峻成指正}
+
+		\item[第 91 页, 倒数第 6 行]
+		``对于 $2$-范畴''后加上逗号.
+		\Thx{感谢巩峻成指正}
+
+        \item[第 94 页, 习题 5 倒数第 2 行]
+        \Orig Yang--Baxter 方程.
+        \Corr 杨--Baxter 方程.
+        
+       	\item[第 102 页, 第 6 行]
+        \Orig 它们仅与...
+        \Corr 前者仅与...
+        \Thx{感谢巩峻成指正}
+        
+        \item[第 113 页倒数第 3 行, 第 115 页 引理 4.4.12]
+        \Orig 这相当于要求对所有...
+        \newline
+        \Corr 这相当于要求 $X$ 非空, 并且对所有...
+        
+        \Orig 设 $X$ 为 $G$-集
+        \Corr 设 $X$ 为非空 $G$-集
+        \Thx{感谢郑维喆指正}
+        
+        \item[第 114 页, 倒数第 1 行]
+        \Orig $\Aut(G_1) \times \Aut(G_2)^{\mathrm{op}}$
+        \Corr $\Aut(G_1)^{\mathrm{op}} \times \Aut(G_2)$
+        \Thx{感谢巩峻成指正}
+        
+        \item[第 116 页, 第 5 行]
+        \Orig $\bar{H} \subseteq N_{\bar{G}}(\bar{H})$
+        \Corr $\bar{H} \subsetneq N_{\bar{G}}(\bar{H})$
+
+		\item[第 126 页, 第 6 行]
+		\Orig $\left( \cdots \right)_{i=0}^n$
+		\Corr $\left( \cdots \right)_{i=0}^{n-1}$
+		
+		\item[第 131 页, 倒数第 1 行]
+		\Orig $H_{i_j}$
+		\Corr $H_i$
+		\Thx{感谢巩峻成指正}
+
+		\item[第 137 页, 倒数第 12 行]
+		\Orig $\sgn(\sigma) = \pm 1$
+		\Corr $\sgn(\sigma) \in \{\pm 1\}$
+		\Thx{感谢巩峻成指正}
+
+		\item[第 141 页, 第 2 和第 9 行]
+		\Orig $|i - j| \geq 1$
+		\Corr $|i - j| > 1$
+		\Thx{感谢巩峻成指正}
+
+        \item[第 141 页, 第 11 行]
+        \Orig 另外约定 $\mathfrak{S}'_n = \{1\}$
+        \Corr 另外约定 $\mathfrak{S}'_1 = \{1\}$
+
+		\item[第 149 页, 第 3 行]
+		$\mathsf{CRing}$ 表交换环范畴. 另外此行应缩进.
+		
+		\item[第 156 页, 第 2, 3 行]
+		\Orig $a \in R$
+		\Corr $a \in I$
+		\Thx{感谢阳恩林指正}
+		
+		\item[第 156 页, 第 4 行]
+		\Orig $Ir = rI = I$
+		\Corr $IR = I = RI$
+		\Thx{感谢巩峻成指正}
+
+		\item[第 158 页, 最后一行]
+		\Orig $\forall s \in S$
+		\Corr $\forall s \in R$
+		\Thx{感谢雷嘉乐指正}
+		
+		\item[第 165 页, 5.3.11 之上两行]
+		\Orig $\exists s \in R$
+		\Corr $\exists s \in S$
+		
+		\item[第 174 页, 第 15 行]
+		\Orig 赋予每个 $R/\mathfrak{a}_i$...
+		\Corr 赋予每个 $R_i := R/\mathfrak{a}_i$...
+		\Thx{感谢巩峻成指正}
+
+		\item[第 187 页, 定理 5.7.9 证明]
+		\Orig $\Z[-1]$ (多处)
+		\Corr $\Z[\sqrt{-1}]$
+
+		\item[第 188 页, 倒数第 5 行]
+		\Orig $\in R[X]$
+		\Corr $\in K[X]$
+		\Thx{感谢巩峻成指正}
+		
+		\item[第 189 页, 第 17 行]
+		\Orig $g \in R \cap K[X]^\times$
+		\Corr $g \in R[X] \cap K[X]^\times$
+		\Thx{感谢巩峻成指正}
+		
+		\item[第 190 页, 第 7 行]
+		\Orig $f = \sum_{i=1}^n$
+		\Corr $f = \sum_{i=0}^n$
+		\Thx{感谢巩峻成指正}
+		
+		\item[第 190 页, 倒数第 2 行的公式]
+		改成:
+		\[ \bar{b}_k X^k + \text{高次项}, \quad \bar{b}_k \neq 0, \]
+		\Thx{感谢巩峻成指正}
+
+		\item[第 191 页, 第 12 行]
+		将 $(b_1, \ldots, b_m)$ 改成 $(b_1, \ldots, b_n)$, 并且将之后的``留意到...''一句删除.
+		\Thx{感谢巩峻成指正}
+		
+		\item[第 191 页, 第 15 和 16 行]
+		\Orig $m_{\lambda_1, \ldots, \lambda_n}$
+		\Corr $m_{\lambda_1, \ldots, \lambda_r}$
+		
+		\Orig $(\lambda_1, \ldots, \lambda_r)$ 的所有不同排列.
+		\Corr $(\lambda_1, \ldots, \lambda_r, 0, \ldots, 0)$ 的所有不同排列 ($n$ 个分量).
+		\Thx{感谢巩峻成指正}
+		
+		\item[第 192 页, 第 1 段最后 1 行]
+		\Orig 使 $m_\lambda$ 落在 $\Lambda_n$ 中的充要条件是 $\lambda_1$ (即 Young 图的宽度) 不超过 $n$.
+		\Corr 如果分拆的长度 $r$ (即 Young 图的高度) 超过给定的 $n$, 相应的 $m_\lambda \in \Lambda_n$ 规定为 $0$.
+		\Thx{感谢巩峻成指正}
+		
+		\item[第 192 页, 定义 5.8.1 第二项]
+		\Orig $\mu_i = \mu_k$
+		\Corr $\mu_i = \lambda_i$
+		\Thx{感谢巩峻成指正}
+		
+		\item[第 193 页, 第 2 行和第 5 行]
+		\Orig $X_{i_1} \cdots X_{i_n}$.
+		\Corr $X_{i_1} \cdots X_{i_k}$.
+		
+		\Orig $\prod_{i=1}^n (Y - X_i)$,
+		\Corr $\prod_{i=1}^n (Y + X_i)$
+		\Thx{感谢巩峻成指正}
+				
+		\item[第 194 页, 例 5.8.6 的第 3 行]
+		\Orig $\sum_{i=0}^n c_i Y^{n-i}$
+		\Corr $\sum_{i=0}^n (-1)^i c_i Y^{n-i}$
+		\Thx{感谢巩峻成指正}
+		
+		\item[第 196 页, 习题 16]
+		\Orig $\Z[-1]$
+		\Corr $\Z[\sqrt{-1}]$
+		
+		\item[第 203 页, 第 17 行]
+		\Orig $\Ker(\phi)$
+		\Corr $\Ker(\varphi)$
+		\Thx{感谢胡龙龙指正}
+
+   		\item[第 205 页, 第 7 行]
+		\Orig $M$ 作为 $R/\mathrm{ann}(M)$-模自动是无挠的.
+		\Corr $M$ 作为 $R/\mathrm{ann}(M)$-模的零化子自动是 $\{0\}$.
+		\Thx{感谢戴懿韡指正.}
+
+        \item[第 218 页, 第 13 行]
+        \Orig $B(rx, ys) = rB(x,y)s, \quad r \in R, \; s \in S$.
+        \newline
+        \Corr $B(qx, ys) = qB(x,y)s, \quad q \in Q, \; s \in S$.
+        \Thx{感谢冯敏立指正.}
+
+        \item[第 220 页]
+        本页出现的 $\mathrm{Bil}(\bullet \times \bullet; \bullet)$ 都应该改成 $\mathrm{Bil}(\bullet, \bullet; \bullet)$, 以和 216 页的符号保持一致.
+        
+        \item[第 220 页, 第 9 行]
+        \Orig $z \in Z$
+        \Corr $z \in M''$
+        
+        \item[第 220 页, 第 10 行]
+        \Orig $B(\cdot, z): M \dotimes{R} M''$
+        \Corr $B(\cdot, z): M \dotimes{R} M'$
+        \Thx{感谢巩峻成指正}
+        
+        \item[第 228 页, 倒数第 12 行]
+        \Orig 粘合为 $\mathcal{Y}' \to B$
+        \Corr 粘合为 $\mathcal{Y}' \to M$
+        \Thx{感谢巩峻成指正}
+       
+        \item[第 228 页, 倒数第 4 行]
+        \Orig $\sum_{y \in R}$
+        \Corr $\sum_{y \in Y}$
+        
+        \item[第 230 页, 第 13 行]
+        \Orig 萃取处
+        \Corr 萃取
+        
+		\item[第 230 页, 第 6 行; 第 231 页, 第 9---10 行]
+		\Orig $\mathfrak{o}_i$
+		\Corr $\mathfrak{d}_i$
+		\Thx{感谢郑维喆指正}
+        
+        \item[第 235 页底部]
+        图表中的垂直箭头 $f_i$, $f_{i-1}$ 应改为 $\phi_i$, $\phi_{i-1}$.
+        
+        \item[第 236 页, 第 6 行]
+        \Orig 直和 $\prod_i$
+        \Corr 直和 $\bigoplus_i$
+        \Thx{感谢巩峻成指正}
+        
+        \item[第 237 页, 第 2 行]
+        \Orig 存在 $r: M' \to M$
+        \Corr 存在 $r: M \to M'$
+        \Thx{感谢雷嘉乐指正}
+        
+        \item[第 237 页, 命题 6.8.5 证明第二行]
+        \Orig 由于 $f$ 满
+        \Corr 由于 $f$ 单
+        \Thx{感谢巩峻成指正}
+        
+        \item[第 237 页, 命题 6.8.5 证明最后两行]
+        \Orig 故 $(v) \implies (i)$;
+        \Corr 故 $(iv) \implies (i)$;
+        
+        \item[第 238 页, 第 8 行]
+        \Orig $Y' \to Y \to Y$ 正合
+        \Corr $Y' \to Y \to Y''$ 正合
+        
+       \item[第 240 页, 定义 6.9.3 第二条]
+       \Orig ... 正合, 则称 $I$ 是内射模.
+       \Corr ... 正合, 亦即它保持短正合列, 则称 $I$ 是内射模.
+       \Thx{感谢张好风指正}
+        
+   		\item[第 244 页, 倒数第 10 行]
+        \Orig 下面的引理 6.10.4
+        \Corr 引理 5.7.4
+        \Thx{感谢郑维喆指正}
+        
+   		\item[第 246 页, 第 2 行和定理 6.10.6, 6.10.7]
+		``交换 Noether 模''应改为``交换 Noether 环''. 两个定理的陈述中应该要求 $R$ 是交换 Noether 环.
+		\Thx{感谢郑维喆指正}
+        
+        \item[第 246 頁, 第 16 行]
+        \Orig $u_i f_i$
+        \Corr $u_i \alpha_i$
+        \Thx{感谢陆睿远指正.}
+        
+        \item[第 247 頁, 第 6---7 行]
+        \Orig 其长度记为 $n+1$.
+        \Corr 其长度定为 $n$.
+
+		\item[第 251 页, 第 6 行]
+		\Orig $\Image(u^\infty) = \Ker(u^n)$
+		\Corr $\Image(u^\infty) = \Image(u^n)$
+		\Thx{感谢巩峻成指正}
+
+  		\item[第 251 页起, 第 6.12 节]
+		术语``不可分模''似作``不可分解模''更佳, 以免歧义. (第 4 页倒数第 3 行和索引里的条目也应当同步修改)
+		\Thx{感谢郑维喆指正}
+
+        \item[第 252 頁, 第 2 行]
+        \Orig $1 \leq 1 \leq n$.
+        \Corr $1 \leq i \leq n$.
+        \Thx{感谢傅煌指正.}
+        
+        \item[第 255 页, 推论 6.12.9 的证明]
+        在证明最后补上一句 ``以上的 $\ell$ 表示模的长度.''
+        \Thx{感谢苑之宇指正.}
+
+		\item[第 255 页, 第 1 题]
+		\Orig
+		\[ N = \lrangle{ \alpha(f)(x_i) - x_j : i \xrightarrow{f} j, \;  x_i \in M_i, x_j \in M_j } \]
+		\Corr
+		\[ N = \lrangle{ \alpha(f)(x_i) - x_i : i \xrightarrow{f} j, \; x_i \in M_i } \]
+		\Thx{感谢郑维喆指正}
+        
+        \item[第 264 頁, 第 14 行]
+        \Orig 如果 $\mathrm{ann}(M) = \{0\}$
+        \Corr 如果 $\mathrm{ann}(N) = \{0\}$
+        
+        \item[第 270 页, 注记 7.3.6]
+        \Orig 秩为 $A, B$ 的秩之和
+        \Corr 秩为 $A, B$ 的秩之积
+        \Thx{感谢汤一鸣指正}
+
+		\item[第 270 页, (7.6) 式]
+		前两项改为 $M_n(A) \otimes M_m(B) \simeq A \otimes M_n(R) \otimes M_m(R) \otimes B$, 后续不变.
+		\Thx{感谢巩峻成指正}
+
+        \item[第 274 页, 倒数第 2 行]
+        将两处 $A^k(M)$ 改成 $A^k(X)$.
+        
+        \item[第 279 页, 第 12 行]
+        \Orig $T^i(M)$
+        \Corr $T^n(M)$
+        \Thx{感谢巩峻成指正}
+        
+        \item[第 279 页, 定理 7.5.2 陈述]
+        \Orig 唯一的 $R$-模同态 ...
+        \Corr 唯一的 $R$-代数同态 ...
+        \Thx{感谢巩峻成指正}
+        
+		\item[第 284 頁, 定理 7.6.6]
+		将定理陈述中的 $U$ 由``忘却函子''改成``映 $A$ 为 $A_1$ 的函子'', 其余不变. 相应地, 证明第二行的 $\varphi: M \to A$ 应改成 $\varphi: M \to A_1$.
+		\Thx{感谢郑维喆指正}
+		
+		\item[第 285 頁, 倒数第 5 行]
+		$T_\chi^n(M) := \left\{ x \in T^n(M) : \forall \sigma \in \mathfrak{S}_n, \; \sigma x = \chi(\sigma) x \right\}$
+		\Thx{感谢郑维喆指正}
+
+		\item[第 286 頁, 第 10 行]
+		\Orig $\chi = 1, \sigma$
+		\Corr $\chi = 1, \sgn$
+		
+		\item[第 286 頁, 定理 7.6.10]
+		原``因而有 $R$-模的同构''改为``因而恒等诱导 $R$-模的同构''. 以下两行公式开头的 $e_1:$ 和 $e_{\sgn}: $ 皆删去.
+		\Thx{感谢郑维喆指正}
+		
+		\item[第 289 页最后一行]
+		\Orig $u_1 \wedge \cdots$
+		\Corr $u_{i_1} \wedge \cdots$
+		
+		\item[第 290 页第一行]
+		\Orig $\Xi := \check{u}_2 \wedge \cdots$ ... 是 $u_1$ 的...
+		\Corr $\Xi := \check{u}_{i_2} \wedge \cdots$ ... 是 $u_{i_1}$ 的...
+		\Thx{感谢巩峻成指正}
+		
+		\item[第 293 页第 8, 10, 13 行]
+		将 $M$ 都改成 $E$, 共三处.
+		\Thx{感谢巩峻成指正}
+		
+		\item[第 304 页倒数第 6 行]
+		\Orig $\leq \infty$
+		\Corr $< \infty$
+		\Thx{感谢巩峻成指正}
+        
+        \item[第 311 页, 命题 8.3.2 证明第 4 行]
+        \Corr 分别取......和 $\overline{F}' | E'$.
+        
+  		\item[第 313 頁, 命题 8.3.9 (iii)]
+  		``交''改为``非空交''. 相应地, 证明第四行的``一族正规子扩张''后面加上``且 $I$ 非空''.
+        \Thx{感谢郑维喆指正}
+        
+   		\item[第 315 頁, 定理 8.4.3 (iv)]
+        \Orig $\sum_{k \geq 0}^n$
+        \Corr $\sum_{k=0}^n$
+        \Thx{感谢郑维喆指正}
+
+        \item[第 315 页, 倒数第 2 行]
+        \Orig $\deg f(X^p) = pf(X)$
+        \Corr $\deg f(X^p) = p \deg f(X)$
+        \Thx{感谢杨历指正.}
+        
+        \item[第 317 页, 倒数第 13 行]
+        (出现两次)\;
+        \Orig $\prod_{i=1}^n \cdots$
+        \Corr $\prod_{m=1}^n \cdots$
+        
+        \item[第 325 页, 第 10 行 (定义--定理 8.7.3 证明)]
+        \Orig $a^{-p^m}$
+        \Corr $a^{p^{-m}}$
+        
+        \item[第 326 页第 4 行]
+        \Orig 既然纯不可分扩张是特出的
+        \Corr 既然纯不可分扩张对复合封闭
+        \Thx{感谢巩峻成指正}
+        
+        \item[第 340 页最后一行]
+        \Orig 于是 $\Gal(E|K)$ 确实是拓扑群
+        \Corr 于是 $\Gal(E|F)$ 确实是拓扑群
+        \Thx{感谢巩峻成指正}
+        
+        \item[第 343 页, 倒数第 6, 7 行]
+        倒数第 6 行的 $\Gal(K | L \cap M) \subset \cdots$ 改成 $\Gal(L|K) \subset \cdots$, 另外倒数第 7 行最后的``故''字删去.
+        \Thx{感谢张好风指正}
+        
+   		\item[第 348 页, 命题 9.3.6 陈述和证明]
+        \Orig $\varprojlim_m \Z/n\Z$
+        \Corr $\varprojlim_m \Z/m\Z$
+        \newline
+        \Orig $\varinjlim_{n \geq 1} \Z/n!\Z$
+        \Corr $\varprojlim_{n \geq 1} \Z/n!\Z$
+        \Thx{感谢郑维喆和巩峻成指正}
+        
+        \item[第 350 页, 第 8 行]
+        \Orig $\iff d \mid n$
+        \Corr $\iff n \mid d$
+        \Thx{感谢巩峻成指正}
+        
+   		\item[第 352 页, 第 7 行]
+        \Orig $p \mid n$
+        \Corr $p \nmid n$
+        \Thx{感谢郑维喆指正}
+        
+        \item[第 357 页, 第 4 行]
+        删除 ``$= \Gal(E|F)$''.
+        \Thx{感谢巩峻成指正}
+        
+        \item[第 357 页, 倒数第 8 行]
+        \Orig $F(S)|S$
+        \Corr $F(S)|F$
+        \Thx{感谢张好风指正}
+        
+        \item[第 359 页, 第 5 行]
+        \Orig 透过 $\Gamma_E$ 分解
+        \Corr 透过 $\Gal(E|F)$ 分解
+        \Thx{感谢巩峻成指正}
+        
+        \item[第 359 页, 倒数第 2 行]
+        \Orig $\in A_E$
+        \Corr $\in A_F$
+        \Thx{感谢杨历指正}
+        
+        \item[第 360 页, 定理 9.6.8 陈述]
+        在 (9.10) 之后补上一句 (不缩进): ``证明部分将解释如何定义 $\Hom$ 的拓扑.'' 
+        \Thx{感谢张好风指正}
+        
+        \item[第 360 页, 定理 9.6.8 证明]
+        将证明第三行等号下方的 $\bar{\Gamma} = \Gamma_F/\Gamma$ 和上方的文字删除, 等号改成 $\xleftrightarrow{1:1}$.
+        \Thx{感谢杨历和巩峻成指正}
+        
+   		\item[第 363 页, 倒数第 4 行]
+        \Orig $\eta_{[E:F]}$
+        \Corr $\eta_{[L:F]}$
+        \Thx{感谢郑维喆指正}
+		
+		\item[第 366 页, 倒数第 4 行]
+		\Orig $x \in S$
+		\Corr $x \in \mathcal{S}$
+		\Thx{感谢郑维喆指正}
+        
+        \item[第 368 页, 定理 9.8.2 的表述第一句]
+        \Orig 给定子集 $\{0, 1\} \subset \mathcal{S} \subset \CC$, 生成的...
+        \Corr 给定子集 $\{0, 1\} \subset \mathcal{S} \subset \CC$, 基于上述讨论不妨假定 $\mathcal{S}$ 对复共轭封闭, 它生成的...
+        \Thx{感谢郑维喆指正}
+        
+        \item[第 370 页, 习题 2]
+		将本题的所有 $q$ 代换成 $p$, 将``仿照...''改为``参照'', 开头加上``设 $p$ 是素数, ...''
+		\Thx{感谢郑维喆指正}
+        
+   		\item[第 372 页, 第 20 题]
+        条件 (b) 部分的 $P \in F[X]$ 改成 $Q \in F[X]$, 以免符号冲突. 相应地, 提示第一段的 $P$ 都改成 $Q$.
+        \Thx{感谢郑维喆指正}
+        
+        \item[第 395--396 页, 引理 10.5.3 的证明]
+        从第 395 页倒数第 3 行起 (即证明第二段), 修改如下:
+
+		置 $f_k = \sum_{h \geq 0} c_{k,h} t^h$. 注意到 $\lim_{k \to \infty} \|f_k\| = 0$, 这确保 $c_h := \sum_{k \geq 0} c_{k,h}$ 存在. 我们断言 $f := \sum_{h \geq 0} c_h t^h \in K\lrangle{t}$ 并给出 $\sum_{k=0}^\infty f_k$.
+        
+        对任意 $\epsilon > 0$, 取 $M$ 充分大使得 $k \geq M \implies \|f_k\| < \epsilon$, 再取 $N$ 使得当 $0 \leq k < M$ 而 $h \geq N$ 时 $|c_{k,h}| < \epsilon$. 于是
+        \[ h \geq N \implies \left( \forall k \geq 0, \; |c_{k,h}| \leq \epsilon \right) \implies |c_h| \leq \epsilon, \]
+        故 $f := \sum_{h \geq 0} c_h t^h \in K\lrangle{t}$. 其次, 在 $K\lrangle{t}$ 中有等式
+        \[ f - \sum_{k=0}^M f_k = \sum_{h \geq 0} \left( c_h - \sum_{k=0}^M c_{k,h} \right) t^h = \sum_{h \geq 0} \underbracket{ \left( \sum_{k > M} c_{k,h} \right)}_{|\cdot| \leq \epsilon} t^h , \]
+        从而 $f = \sum_{k=0}^\infty f_k$.
+        
+        \Thx{感谢高煦指正.}
+
+        \item[第 397 页, 条目 V 下第 6 行]
+        \Orig $w_{x.-}$
+        \Corr $w_{x,-}$
+
+        \item[第 398 页, 倒数第 12 行]
+        \Orig \; , 而 $v: K^\times \to \Gamma$ 是商同态.
+        \Corr \; . 取 $v: K^\times \to \Gamma$ 为商同态.
+        
+        \item[第 400 页, 倒数第 5--6 行]
+		改为: $e(w \mid u) = e(w \mid v) e(v \mid u)$, $f(w \mid u) = f(w \mid v) f(v \mid u)$.
+		\Thx{感谢巩峻成指正}
+
+		\item[第 406 页, 倒数第 3 行]
+		\Orig $|\Stab_{\Gal(L|K)}(w)|$
+		\Corr $\frac{|\Gal(L|K)|}{|\Stab_{\Gal(L|K)}(w)|}$
+		\Thx{感谢巩峻成指正}
+		
+		\item[第 407 页, 第 8 行]
+		\Orig $|\Stab_{\Gal(L|K)}(w)|$
+		\Corr $\frac{|\Gal(L|K)|}{|\Stab_{\Gal(L|K)}(w)|}$
+		\Thx{感谢巩峻成指正}
+
+        \item[第 416 页, 定理 10.9.7]
+        将陈述的第一段修改为: ``在所有 $\WittV(R)$ 上存在唯一的一族交换环结构, 使得 $w: \WittV(R) \to \prod_{n \geq 0} R$ 为环同态, $(0, 0, \ldots)$ 为零元, $(1, 0, \ldots)$ 为幺元, 而且: '' (换行, 开始表列)
+        
+        对于表列第二项 (``存在唯一确定的多项式族...所确定''), 最后补上``...所确定, 这些多项式与 $R$ 无关.''
+        
+        证明第一段的``群运算''改为``环运算''.
+
+        \item[第 417 页, 最后一行] 它被刻画为对...
+	\end{Errata}
+\end{document}

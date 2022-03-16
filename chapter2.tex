@@ -269,7 +269,7 @@
 
 接着介绍自然变换的几种操作, 包括纵, 横两种合成.\index{ziranbianhuan!合成}
 \begin{itemize}
-	\item 考虑 $\mathcal{C}'$ 到 $\mathcal{C}$ 的三个函子间的态射 $\theta: F \to  G$,  $\psi: G \to H$. 纵合成 $\psi \circ \theta$ 的定义是 $\{ \psi_X \circ \theta_X : X \in \Obj(\mathcal{C}) \}$, 图解作
+	\item 考虑 $\mathcal{C}'$ 到 $\mathcal{C}$ 的三个函子间的态射 $\theta: F \to  G$,  $\psi: G \to H$. 纵合成 $\psi \circ \theta$ 的定义是 $\{ \psi_X \circ \theta_X : X \in \Obj(\mathcal{C}') \}$, 图解:
 	\[\begin{tikzcd}
 		\mathcal{C}'
 			\arrow[bend left=70, rr, "F", ""' name=U]
@@ -392,11 +392,11 @@
 	若 $G, G'$ 是函子 $F: \mathcal{C}_1 \to \mathcal{C}_2$ 的拟逆, 则存在函子的同构 $G \simeq G'$.
 \end{proposition}
 \begin{proof}
-	自然变换的横合成给出 $G \xrightarrow[\sim]{\psi' \circ \identity_G} (G'F)G = G'(FG) \xleftarrow[\sim]{\identity_{G'} \circ \theta} G'$.
+	自然变换的横合成给出 $G \xleftarrow[\sim]{\psi' \circ \identity_G} (G'F)G = G'(FG) \xrightarrow[\sim]{\identity_{G'} \circ \theta} G'$.
 \end{proof}
 
 \begin{remark}\label{rem:strict-or-not}
-	我们业已对对象间的态射和函子间的态射 (自然变换) 定义了逆的概念, 由此导出对象和自然变换的同构概念, 其逆若存在则唯一. 对于函子亦可定义逆的概念, 逆函子若存在则唯一; 相较之下, 拟逆函子之间则可以差一个同构. 实践表明范畴的同构概念不甚实用, 等价的概念则处处出现. 这体现了范畴论的一条经验准则: 在函子层次, 同构 (如之前的 $\theta: FG \rightiso \identity$) 几乎总是比严格相等 (如之前的 $FG = \identity$) 来得管用. 然而同构也不是任意的, 所需的条件一般称为融贯性: 以等价为例, 读者兴许已经在先前论证中感到拟逆的概念有些松散, 定理 \ref{prop:adjoint-equivalence} 将给出称为\emph{伴随等价}的一种细化. \index{bansuidengjia@伴随等价 (adjoint equivalence)}
+	我们业已对对象间的态射和函子间的态射 (自然变换) 定义了逆的概念, 其逆若存在则唯一, 依此定义何谓对象间或函子间的同构. 对于函子亦可定义逆的概念, 逆函子若存在则唯一; 相较之下, 拟逆函子之间则可以差一个同构. 实践表明范畴的同构概念不甚实用, 等价的概念则处处出现. 这体现了范畴论的一条经验准则: 在函子层次, 同构 (如之前的 $\theta: FG \rightiso \identity$) 几乎总是比严格相等 (如之前的 $FG = \identity$) 来得管用. 然而同构也不是任意的, 所需的条件一般称为融贯性: 以等价为例, 读者兴许已经在先前论证中感到拟逆的概念有些松散, 定理 \ref{prop:adjoint-equivalence} 将给出称为\emph{伴随等价}的一种细化. \index{bansuidengjia@伴随等价 (adjoint equivalence)}
 \end{remark}
 
 称一个全子范畴 $\mathcal{C}' \subset \mathcal{C}$ 是 $\mathcal{C}$ 的一副\emph{骨架}, 如果对 $\mathcal{C}$ 的每个对象 $X$ 都存在同构 $X \rightiso Y \in \Obj(\mathcal{C}')$, 而且此 $Y \in \Obj(\mathcal{C}')$ 是唯一的. 自为骨架的范畴称为\emph{骨架范畴}.\index{fanchou!骨架 (skeleton)}
@@ -557,7 +557,7 @@
 \end{proof}
 
 \begin{proposition}
-	范畴等价 $F: \mathcal{C}_1 \to \mathcal{C}_2$ 诱导中心的同构. $Z(\mathcal{C}_1) \simeq Z(\mathcal{C}_2)$.
+	范畴等价 $F: \mathcal{C}_1 \to \mathcal{C}_2$ 诱导中心的同构 $Z(\mathcal{C}_1) \simeq Z(\mathcal{C}_2)$.
 \end{proposition}
 证明是容易的, 留作练习.
 
@@ -698,7 +698,7 @@
 \end{array}\]
 
 \begin{theorem}[米田信夫]\label{prop:Yoneda-lemma}\index{mitianyinli@米田引理 (Yoneda's Lemma)}
-	对于 $S \in \Obj(\mathcal{C})$ 和 $A \in \mathcal{C}^\wedge$, 映射
+	对于 $S \in \Obj(\mathcal{C})$ 和 $A \in \Obj(\mathcal{C}^\wedge)$, 映射
 	\begin{equation}\label{eqn:Yoneda-map}\begin{aligned}
 		\Hom_{\mathcal{C}^\wedge}(h_{\mathcal{C}}(S), A) & \longrightarrow A(S) \\
 		\left[ \Hom_{\mathcal{C}}(\cdot, S) \xrightarrow{\phi} A(\cdot) \right] & \longmapsto \phi_S(\identity_S)
@@ -783,7 +783,7 @@ D.\ Kan 在 1958 年首先阐释了伴随对的概念. 伴随性在范畴论及�
 	\end{align*}
 	其中 $V, W$ 是 $\Bbbk$-向量空间.  实际上, 两边都自然地同构于双线性型 $B: V \times W \to \Bbbk$ 构成的空间: 仅需将 $f \in \Hom_\Bbbk(V,  W^\vee)$ 映到 $B: (v, w) \mapsto f(v)(w)$; 交换 $V, W$ 的角色就得到 $\Hom_\Bbbk(W, V^\vee)$ 情形. 这些同构重写为
 	\[ \varphi_{VW} : \Hom_{\cate{Vect}(\Bbbk)}(V, DW) \rightiso \Hom_{\cate{Vect}(\Bbbk)^\text{op}}(D^\text{op}V, W) \]
-	并且对变元 $V,W$ 满足函子性, 由此得到伴随对 $(D^\text{op}, D, \varphi)$.
+	并且对变元 $V,W$ 满足函子性, 由此得到伴随对 $(D^\text{op}, D, \varphi^{-1})$.
 \end{example}
 
 注意到 $D$ 限制在 $\cate{Vect}_f(\Bbbk)$ 上给出范畴等价 $\cate{Vect}(\Bbbk)_f^\text{op} \to \cate{Vect}_f(\Bbbk)$, 见例 \ref{eg:vectf-duality}. 其证明关键是考虑态射 $\identity_{\cate{Vect}(\Bbbk)} \to DD^\text{op}$, 它仅当限制在 $\cate{Vect}_f(\Bbbk)$ 上才是同构. 对于一般的伴随对 $(F, G, \varphi)$, 类似的态射仍扮演关键角色.
@@ -799,7 +799,7 @@ D.\ Kan 在 1958 年首先阐释了伴随对的概念. 伴随性在范畴论及�
 	同理, 反转箭头即可定义态射 $\varepsilon = (\varepsilon_X)_X: FG \to \identity_{\mathcal{C}_2}$. 我们称 $\eta$ 是 $(F, G, \varphi)$ 的\emph{单位}, 而 $\varepsilon$ 是\emph{余单位}.
 \end{definition}
 
-须验证 $\eta_X$ 确为自然变换. 诚然, 对于 $\mathcal{C}_1$ 中的态射 $h: X' \to X$, 由 $\varphi$ 的自然性知
+须验证 $\eta$ 确为自然变换. 诚然, 对于 $\mathcal{C}_1$ 中的态射 $h: X' \to X$, 由 $\varphi$ 的自然性知
 \[ \begin{tikzcd}
 	\identity_{FX} \arrow[phantom, r, description, "\in"] \arrow[mapsto, d] & \Hom(FX, FX) \arrow[r, "\varphi"] \arrow[d, "(Fh)^*"'] & \Hom(X, GFX) \arrow[d, "h^*"] & \arrow[phantom, l, description, "\ni"] \eta_X \arrow[mapsto, d] \\
 	Fh \arrow[phantom, r, description, "\in"] & \Hom(FX', FX) \arrow[r, "\varphi"] & \Hom(X', GFX) & \arrow[phantom, l, description, "\ni"] \varphi(Fh) \\
@@ -1007,10 +1007,10 @@ $\begin{tikzcd}
 	\end{tikzpicture} \]
 	引理 \ref{prop:naturaltrans-associativity} 相当于说图表合成时可以先纵后横, 或先横后纵. 我们按惯例不标注恒等函子. 于是 $\eta, \varepsilon$ 及其逆图解如下.
 	\begin{center}\begin{tikzpicture}[bend angle=70, auto, fct/.style={circle, draw=gray!40, fill=gray!10}]
-		\node[fct] (G1) {$G$}; \node[fct] (F1) [right=of G1] {$F$} edge[bend right] node {$\eta$} (G1);
-		\node[fct] (G2) [right=of F1] {$G$}; \node[fct] (F2) [right=of G2] {$F$} edge[bend left] node[swap] {$\eta^{-1}$} (G2);
-		\node[fct] (F3) [right=of F2] {$F$}; \node[fct] (G3) [right=of F3] {$G$} edge[bend left] node[swap] {$\varepsilon$} (F3);
-		\node[fct] (F4) [right=of G3] {$F$}; \node[fct] (G4) [right=of F4] {$G$} edge[bend right] node {$\varepsilon^{-1}$} (F4);
+		\node[fct] (G1) {$G$}; \node[fct] (F1) [right=of G1] {$F$} edge[bend right] node[swap] {$\eta$} (G1);
+		\node[fct] (G2) [above right=of F1] {$G$}; \node[fct] (F2) [right=of G2] {$F$} edge[bend left] node {$\eta^{-1}$} (G2);
+		\node[fct] (F3) [right=of F2] {$F$}; \node[fct] (G3) [right=of F3] {$G$} edge[bend left] node {$\varepsilon$} (F3);
+		\node[fct] (F4) [below right=of G3] {$F$}; \node[fct] (G4) [right=of F4] {$G$} edge[bend right] node[swap] {$\varepsilon^{-1}$} (F4);
 	\end{tikzpicture}\end{center}
 	对于函子的恒等自同构, 相应的边不予命名. 兹断言 $\varepsilon': FG \to \identity$ 有两种表法如下:
 	\begin{equation}\label{eqn:adj-equiv-two-expression} \begin{tikzpicture}[baseline=(X), scale=0.8, bend angle=45, auto, fct/.style={circle, draw=gray!40, fill=gray!10}, scale=1.5]
@@ -1103,7 +1103,7 @@ $\begin{tikzcd}
 		\node[fct] (F1) [right=of G] {$F$}; \node[fct] (G1) [right=of F1] {$G$} edge[bend left] node[swap] {$\varepsilon''$} (F1);
 		\coordinate (X) at (F);
 	\end{tikzpicture}.\]
-	此外易见 $(\varepsilon'F \cdot F\eta)G = \varepsilon' FG \cdot F\eta G$ 和 $F(G\varepsilon'' \cdot \eta G) = FG\varepsilon'' \cdot F\eta G$; 应用 \eqref{eqn:adj-zigzag-1} 和 \eqref{eqn:adj-zigzag-2} 可知这两者都等于 $\identity_{FG}$; 综之 $\varepsilon'' = \varepsilon'' \cdot (\varepsilon' FG) (F\eta G) = \epsilon' (FG\varepsilon')(F\eta G) = \epsilon'$. 唯一性得证.
+	此外易见 $(\varepsilon'F \cdot F\eta)G = \varepsilon' FG \cdot F\eta G$ 和 $F(G\varepsilon'' \cdot \eta G) = FG\varepsilon'' \cdot F\eta G$; 应用 \eqref{eqn:adj-zigzag-1} 和 \eqref{eqn:adj-zigzag-2} 可知这两者都等于 $\identity_{FG}$; 综之 $\varepsilon'' = \varepsilon'' \cdot (\varepsilon' FG) (F\eta G) = \varepsilon' (FG\varepsilon'')(F\eta G) = \varepsilon'$. 唯一性得证.
 \end{proof}
 
 范畴论中还有许多类似的可视化技巧, 读者不妨参阅 P.\ Selinger 在 \cite[Chapter 4]{Co11} 撰写的综述. 在 \S\ref{sec:braiding} 还会碰上类似的手法.
@@ -1275,8 +1275,8 @@ $\begin{tikzcd}
 	\[ \Yprojlim \beta: S \longmapsto \varprojlim \left( \beta(S) \right) \]
 	等资料给出. 类似性质对取值在 $\mathcal{C}^\vee$ 的情形同样成立, 我们在符号上将这些极限不予区分地记作
 	\begin{align*}
-		\Yinjlim \alpha: S & \longmapsto \varprojlim \left( \alpha(S) \right), \quad \alpha: I \to \mathcal{C}^\wedge \;\text{或}\; \mathcal{C}^\vee, \\
-		\Yprojlim \beta: S & \longmapsto \varinjlim \left( \beta(S) \right), \quad \beta: I^\text{op} \to \mathcal{C}^\wedge \;\text{或}\; \mathcal{C}^\vee.
+		\Yinjlim \alpha: S & \longmapsto \varinjlim \left( \alpha(S) \right), \quad \alpha: I \to \mathcal{C}^\wedge \;\text{或}\; \mathcal{C}^\vee, \\
+		\Yprojlim \beta: S & \longmapsto \varprojlim \left( \beta(S) \right), \quad \beta: I^\text{op} \to \mathcal{C}^\wedge \;\text{或}\; \mathcal{C}^\vee.
 	\end{align*}
 \end{proposition}
 \begin{proof}
@@ -1451,7 +1451,7 @@ $\begin{tikzcd}
 
 简洁起见, 今后把以小集合 $I$ (视为离散范畴) 为指标的积称为小积, 类似地定义小余积. 以下结果是定理 \ref{prop:limit-buildingblocks} 的直接推论.
 \begin{corollary}\label{prop:completeness-criterion}
-	范畴 $\mathcal{C}$ 完备当且仅当它有所有等化子和小积, 余完备当且仅当它有所有等化子和小余积.
+	范畴 $\mathcal{C}$ 完备当且仅当它有所有等化子和小积, 余完备当且仅当它有所有余等化子和小余积.
 
 	范畴 $\mathcal{C}$ 具有所有的有限 $\varprojlim$ 当且仅当它有终对象, 所有 $\Ker(f,g)$ 和所有 $X \times Y$; 它具有所有的有限 $\varinjlim$ 当且仅当它有始对象, 所有 $\Coker(f,g)$ 和所有 $X \sqcup Y$.
 \end{corollary}
@@ -1504,7 +1504,7 @@ $\begin{tikzcd}
 			\item 一族群 $(G_i)_{i \in I}$ 的积是群的直积 $\prod_{i \in I} G_i$ (定义 \ref{def:monoid-times}), 连同其投影同态 $p_j: \prod_i G_i \to G_j$ ($j \in I$);
 			\item 一族群 $(G_i)_{i \in I}$ 的余积是群的自由积 $\circledast_{i \in I} G_i$ (定义 \ref{def:free-product}), 连同包含同态 $\iota_j: G_j \to {\circledast}_{i \in I} G_i$;
 			\item 对于群同态 $f,g: G \to H$, 定义 $\Ker(f,g) := \{x \in G: f(x)=g(x) \} \hookrightarrow G$ 与 $H \twoheadrightarrow \Coker(f,g) :=H/N$, 其中 $N$ 是由子集
-				\[ \{f(x)h(y) : x,y \in G, \; xy=1\} \]
+				\[ \{f(x)g(y) : x,y \in G, \; xy=1\} \]
 				生成的正规子群.
 		\end{compactitem}
 	\item 范畴 $\cate{Ab}$: 依旧用推论 \ref{prop:completeness-criterion} 证之.

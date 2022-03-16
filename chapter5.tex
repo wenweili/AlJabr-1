@@ -83,10 +83,10 @@
 \[ (r \sim r') \wedge (s \sim s') \implies (rs \sim r's'). \]
 由环的公理易知 $rs - r's' = r(s-s') + (r-r')s'$. 因此我们的条件化归为: $\forall r \in R$, 有 $rI \subset I$, $Ir \subset I$; 这里
 \begin{align*}
-	rI & := \{ra : a \in R\} \subset R, \\
-	Ir & := \{ar : a \in R\} \subset R,
+	rI & := \{ra : a \in I\} \subset R, \\
+	Ir & := \{ar : a \in I\} \subset R,
 \end{align*}
-两者皆为 $R$ 的加法子群. 事实上由 $R$ 含幺元可知以上条件等价于 $Ir = rI = I$. 于是我们提炼出以下定义.
+两者皆为 $R$ 的加法子群. 事实上由 $R$ 含幺元可知以上条件等价于 $IR = I = RI$. 于是我们提炼出以下定义.
 
 \begin{definition}\label{def:ideals}\index{lixiang@理想 (ideal)}
 	设 $R$ 为环, $I \subset R$ 为加法子群.
@@ -175,7 +175,7 @@
 设 $R$ 为环, 以下皆假设 $R$ 非零. 对任意 $x \in R$, 定义其\emph{中心化子}
 \[ Z_R(x) := \left\{ r \in R : rx=xr \right\}; \]
 环 $R$ 的\emph{中心} 定为\index{zhongxin}\index[sym1]{$Z_R$}
-\[ Z_R := \left\{r \in R : \forall s \in S, rs=sr \right\} = \bigcap_{x \in R} Z_R(x). \]
+\[ Z_R := \left\{r \in R : \forall s \in R, rs=sr \right\} = \bigcap_{x \in R} Z_R(x). \]
 这些都是 $R$ 的子环, 而且 $Z_R$ 是交换环.
 
 既然 $R$ 对乘法构成幺半群, 故可定义其中元素的左逆与右逆. 设 $r \in R$ 非零, 若 $r$ 可逆, 其逆记为 $r^{-1}$; 全体可逆元构成的乘法群记为 $R^\times$. 若存在 $r' \neq 0$ 使得 $rr'=0$ 则称 $r$ 为\emph{左零因子}; 条件改作 $r'r=0$ 则称\emph{右零因子}. 为 $R$ 中左或右零因子的元素统称为\emph{零因子}. 元素 $r \in R \smallsetminus \{0\}$ 非左零因子当且仅当 $r$ 的左乘满足消去律, 这是由于 $ra=rb \iff r(a-b)=0$; 右零因子的情形类似.\index{lingyinzi@零因子 (zero divisor)}
@@ -403,7 +403,7 @@
 \end{proof}
 
 原环 $R$ 的部分信息可能在局部化过程中丢失. 由 \eqref{eqn:localization-zero} 可知
-\[ \Ker \left[ R \to R[S^{-1}] \right] = \left\{r \in R : \exists s \in R, \; sr=0 \right\}. \]
+\[ \Ker \left[ R \to R[S^{-1}] \right] = \left\{r \in R : \exists s \in S, \; sr=0 \right\}. \]
 我们希望取尽可能大的 $S$ 使得 $R[S^{-1}]$ 是 $R$ 的扩环. 前述讨论自然引向以下结果.
 \begin{lemma}
 	设 $S \subset R$ 为乘性子集, $0 \notin S$. 则局部化态射 $R \to R[S^{-1}]$ 是单射当且仅当 $S$ 不含零因子. 另一方面, $R \smallsetminus \{0\}$ 中的所有非零因子构成 $R$ 的乘性子集, 相应的局部化记为
@@ -669,7 +669,7 @@ Möbius 反演公式是组合学与数论中的基本工具. 之所以专辟一�
 
 令 $\mathfrak{A}_j$ 表 $\varprojlim_i R/\mathfrak{a}_i \to R/\mathfrak{a}_j$ 的核, 即
 \[ \mathfrak{A}_j = \left\{ (r_i)_{i \in I} \in \varprojlim_i R/\mathfrak{a}_i : \; i \leq j \implies r_i=0 \right\}. \]
-兹引进\emph{拓扑环}的概念: \index{tuopuhuan@拓扑环, 拓扑域, 拓扑模} 这意谓一个环兼有拓扑空间结构, 而环的加法, 取负和乘法皆连续; 特别地, 拓扑环对加法构成拓扑交换群. 现在赋予每个 $R/\mathfrak{a}_i$ 离散拓扑, 则 $\varprojlim_{i \in I} R/\mathfrak{a}_i$ 无非是对加法群 $R$ 及 $\{\mathfrak{a}_i\}_{i \in I}$ 作定义 \ref{def:group-completion} 的完备化. 因而 $(\varprojlim_i R_i, +)$ 成为完备 Hausdorff 拓扑群, 理想族 $\{\mathfrak{A}_i\}_{i \in I}$ 给出 $0$ 处的邻域基. 进一步, $\varprojlim_i R_i$ 成拓扑环: 乘法连续性是下述性质的直接推论
+兹引进\emph{拓扑环}的概念: \index{tuopuhuan@拓扑环, 拓扑域, 拓扑模} 这意谓一个环兼有拓扑空间结构, 而环的加法, 取负和乘法皆连续; 特别地, 拓扑环对加法构成拓扑交换群. 现在赋予每个 $R_i := R/\mathfrak{a}_i$ 离散拓扑, 则 $\varprojlim_{i \in I} R/\mathfrak{a}_i$ 无非是对加法群 $R$ 及 $\{\mathfrak{a}_i\}_{i \in I}$ 作定义 \ref{def:group-completion} 的完备化. 因而 $(\varprojlim_i R_i, +)$ 成为完备 Hausdorff 拓扑群, 理想族 $\{\mathfrak{A}_i\}_{i \in I}$ 给出 $0$ 处的邻域基. 进一步, $\varprojlim_i R_i$ 成拓扑环: 乘法连续性是下述性质的直接推论
 \[ (j,k \geq i) \implies \mathfrak{A}_j \cdot \mathfrak{A}_k \subset \mathfrak{A}_i. \]
 若每个 $R/\mathfrak{a}_i$ 皆为有限环, 则从引理 \ref{prop:completion-compactness} 知 $\varprojlim_i R/\mathfrak{a}_i$ 是紧的.
 
@@ -1064,7 +1064,7 @@ Möbius 反演公式是组合学与数论中的基本工具. 之所以专辟一�
 	素数 $p$ 能写成 $x^2 + y^2$ 的形式 ($x,y \in \Z$) 当且仅当 $p=2$ 或 $p \equiv 1 \pmod 4$; 解 $(x,y)$ 在至多差一个重排和符号的意义下唯一.
 \end{theorem}
 \begin{proof}
-	这是不可约元分类的一个简单结论. 任何不可约元 $\mathfrak{p} \in \Z[-1]$ 都整除 $N(\mathfrak{p}) := \mathfrak{p}\bar{\mathfrak{p}} \in \Z$, 因而整除某个素数 $p \in \Z$, 该素数唯一: 若 $\mathfrak{p}$ 整除另一素数 $p'$, 那么从 $p\Z + p'\Z = \Z$ 推出 $\mathfrak{p} \mid 1$, 矛盾. 不可约元的分类化约到以下问题: 对于每个素数 $p$, 研究它在 $\Z[-1]$ 中的不可约分解.
+	这是不可约元分类的一个简单结论. 任何不可约元 $\mathfrak{p} \in \Z[\sqrt{-1}]$ 都整除 $N(\mathfrak{p}) := \mathfrak{p}\bar{\mathfrak{p}} \in \Z$, 因而整除某个素数 $p \in \Z$, 该素数唯一: 若 $\mathfrak{p}$ 整除另一素数 $p'$, 那么从 $p\Z + p'\Z = \Z$ 推出 $\mathfrak{p} \mid 1$, 矛盾. 不可约元的分类化约到以下问题: 对于每个素数 $p$, 研究它在 $\Z[\sqrt{-1}]$ 中的不可约分解.
 	
 	照例以 $\mathring{\xi}$ 表示 $\xi$ (非零元) $\bmod\; \Z[\sqrt{-1}]^\times$ 的类, 任何非零整数 $a$ 在 $\Z[\sqrt{-1}]$ 中可以作唯一分解
 	\[ \mathring{a} = \prod_{\mathring{\mathfrak{p}}} \mathring{\mathfrak{p}}^{n(\mathfrak{p})}, \quad \mathfrak{p} \in \Z[\sqrt{-1}]: \text{相异不可约元}, \]
@@ -1073,7 +1073,7 @@ Möbius 反演公式是组合学与数论中的基本工具. 之所以专辟一�
 		\item $\mathring{\mathfrak{p}} \neq \mathring{\bar{\mathfrak{p}}}$, 此时 $\bar{a}=a$ 和唯一分解性蕴涵 $n(\mathfrak{p}) = n(\bar{\mathfrak{p}})$;
 		\item $\bar{\mathfrak{p}} = \mathfrak{p}$, 其中 $u \in \Z[\sqrt{-1}]^\times = \{\pm 1, \pm\sqrt{-1}\}$, 直接计算表明精确到 $\Z[\sqrt{-1}]^\times$, 唯二可能是 $\mathfrak{p} \in \Z$ 或 $\mathfrak{p} = 1 \pm \sqrt{-1}$.
 	\end{compactitem}
-	对分解的两边取 $N$ 得 $a^2 = \prod_{\mathring{\mathfrak{p}}} N(\mathfrak{p})^{n(\mathfrak{p})}$. 今取 $a=p$ 为素数, 由 $N(\mathfrak{p}) \in \Z_{> 1}$ 知不可约分解中至多只有两个不可约元, 特别地, 对任意 $\mathfrak{q} \in \Z[-1]$, 等式 $p = \mathfrak{q}\bar{\mathfrak{q}}$ 蕴涵 $\mathfrak{q}$ 不可约. 特例: $2 = N(1 + \sqrt{-1})$ 蕴涵 $1 \pm \sqrt{-1}$ 不可约.
+	对分解的两边取 $N$ 得 $a^2 = \prod_{\mathring{\mathfrak{p}}} N(\mathfrak{p})^{n(\mathfrak{p})}$. 今取 $a=p$ 为素数, 由 $N(\mathfrak{p}) \in \Z_{> 1}$ 知不可约分解中至多只有两个不可约元, 特别地, 对任意 $\mathfrak{q} \in \Z[\sqrt{-1}]$, 等式 $p = \mathfrak{q}\bar{\mathfrak{q}}$ 蕴涵 $\mathfrak{q}$ 不可约. 特例: $2 = N(1 + \sqrt{-1})$ 蕴涵 $1 \pm \sqrt{-1}$ 不可约.
 
 	于是 $p$ 的分解有三种互斥的情形:
 	\begin{compactdesc}
@@ -1081,7 +1081,7 @@ Möbius 反演公式是组合学与数论中的基本工具. 之所以专辟一�
 		\item[分歧] $\mathring{p} = \mathring{\mathfrak{p}}^2$ 可约, $\mathring{\bar{\mathfrak{p}}} = \mathring{\mathfrak{p}}$; 因为 $p$ 是素数, 不可能有 $\mathfrak{p} \in \Z$, 故可以设 $\mathfrak{p} = 1 \pm \sqrt{-1}$ 而 $p = N(\mathfrak{p}) = 2$.
 		\item[惯性] $\mathring{p} = \mathring{\mathfrak{p}}$ 不可约, 适当用 $\Z[\sqrt{-1}]^\times$ 调整 $\mathfrak{p}$ 后可设 $\mathfrak{p} \in \Z$.
 	\end{compactdesc}
-	令 $\mathfrak{p} = x + \sqrt{-1}y \in \Z[-1]$, 那么 $N(\mathfrak{p}) = x^2 + y^2$. 综上, 平方和问题 $p = x^2 + y^2$ 有解当且仅当 $p = N(\mathfrak{p})$, 此式成立时 $\mathfrak{p}$ 不可约, 正好对应到 $p$ 分裂或分歧的情形. 此时从唯一分解性 (精确到 $\pm 1, \pm\sqrt{-1}$ 和 $\mathfrak{p} \leftrightarrow \bar{\mathfrak{p}}$) 直接推出解 $(x,y)$ 的唯一性 (精确到符号和重排). 欲证的断言归结到以下性质: 素数 $p$
+	令 $\mathfrak{p} = x + \sqrt{-1}y \in \Z[\sqrt{-1}]$, 那么 $N(\mathfrak{p}) = x^2 + y^2$. 综上, 平方和问题 $p = x^2 + y^2$ 有解当且仅当 $p = N(\mathfrak{p})$, 此式成立时 $\mathfrak{p}$ 不可约, 正好对应到 $p$ 分裂或分歧的情形. 此时从唯一分解性 (精确到 $\pm 1, \pm\sqrt{-1}$ 和 $\mathfrak{p} \leftrightarrow \bar{\mathfrak{p}}$) 直接推出解 $(x,y)$ 的唯一性 (精确到符号和重排). 欲证的断言归结到以下性质: 素数 $p$
 	\[ \text{分歧} \iff p=2, \quad \text{分裂} \iff p \equiv 1 \pmod{4}, \quad \text{惯性} \iff p \equiv 3 \pmod{4}. \]
 	分歧情形 $p=2$ 已经处理. 此外容易验证 $x^2 + y^2 \equiv 0,1,2 \pmod{4}$, 因此 $p \equiv 3 \pmod{4}$ 导致 $p$ 是惯性素数. 以下设 $p \equiv 1 \pmod{4}$. 初等数论告诉我们 $(\Z/p\Z)^\times$ 是 $p-1$ 阶循环群; 事实上任何有限域的乘法群皆循环 (本章习题). 任取 $(\Z/p\Z)^\times$ 的生成元 $g \bmod p$, 数论中称 $g$ 为 $\bmod\; p$ 的原根, 那么 $g^{\frac{p-1}{2}} \equiv -1 \pmod p$, 故整数 $t := g^{\frac{p-1}{4}}$ 满足同余式 $t^2 + 1 \equiv 0 \pmod p$. 因而在 $\Z[\sqrt{-1}]$ 中 $p  \mid  (t + \sqrt{-1})(t - \sqrt{-1})$. 显然 $p \nmid (t \pm \sqrt{-1})$, 于是 $p$ 在 $\Z[\sqrt{-1}]$ 中可约, 从 $p \neq 2$ 遂知 $p$ 分裂.
 \end{proof}
@@ -1104,7 +1104,7 @@ Möbius 反演公式是组合学与数论中的基本工具. 之所以专辟一�
 显然 $v_p(ab) = v_p(a) + v_p(b)$, 借此可将 $v_p$ 延拓为群同态 $\text{Frac}(R)^\times \to \Z$. 约定 $v_p(0) := \infty$, 则 $v_p(ab) = v_p(a)+v_p(b)$ 在 $\text{Frac}(R)$ 中恒成立. 不难看出 $(\forall a \; v_p(a) = 0) \iff a \in R^\times$.
 
 \begin{definition} %\index{rongdu@容度 (content)}
-	设 $R$ 为唯一分解环, $K := \mathrm{Frac}(R)$ 而 $p \in R$ 为不可约元. 对任意非零多项式 $f(X) = \sum_{i=0}^n a_i X^i \in R[X]$ 定义
+	设 $R$ 为唯一分解环, $K := \mathrm{Frac}(R)$ 而 $p \in R$ 为不可约元. 对任意非零多项式 $f(X) = \sum_{i=0}^n a_i X^i \in K[X]$ 定义
 	\[ v_p(f) :=  \min\{ v_p(a_i) : i = 0, \ldots, n\}. \] 
 	继而定义$K^\times/R^\times$ 的元素
 	\[ c_p(f) := \mathring{p}^{v_p(f)}, \quad c(f) := \prod_{\mathring{p}: v_p(f) \neq 0} c_p(f), \] 
@@ -1136,7 +1136,7 @@ Möbius 反演公式是组合学与数论中的基本工具. 之所以专辟一�
 	置 $K := \text{Frac}(R)$. 由例 \ref{eg:polynomial-PID} 知 $K[X]$ 是唯一分解环.
 	\begin{inparaenum}[(a)]
 		\item 注意到 $R[X]^\times = R^\times$. 易见 $R$ 的不可约元在 $R[X]$ 中仍不可约.
-		\item 今考察 $K[X]$ 中满足 $c(f)=1$ 的不可约元 $f$. 假设 $f = gh$, 其中 $g, h \in R[X]$, 则不失一般性可设 $g \in R \cap K[X]^\times$, 而 $c(f)=1$ 蕴涵 $g \in R^\times$.
+		\item 今考察 $K[X]$ 中满足 $c(f)=1$ 的不可约元 $f$. 假设 $f = gh$, 其中 $g, h \in R[X]$, 则不失一般性可设 $g \in R[X] \cap K[X]^\times$, 而 $c(f)=1$ 蕴涵 $g \in R^\times$.
 	\end{inparaenum}
 	综之, 这两类元素都是 $R[X]$ 的不可约元. 任意非零的 $f \in R[X]$ 在 $K[X]$ 中能分解为
 	\[ f = a p_1 \cdots p_n \]
@@ -1160,7 +1160,7 @@ Möbius 反演公式是组合学与数论中的基本工具. 之所以专辟一�
 \end{example}
 
 \begin{theorem}[Eisenstein 判准]\label{prop:Eisenstein-criterion}\index{Eisenstein 判准}
-	设 $R$ 是唯一分解环, $K := \mathrm{Frac}(R)$ 而 $p$ 是其中的不可约元. 若 $f = \sum_{i=1}^n a_i X^i \in R[X]$ 满足
+	设 $R$ 是唯一分解环, $K := \mathrm{Frac}(R)$ 而 $p$ 是其中的不可约元. 若 $f = \sum_{i=0}^n a_i X^i \in R[X]$ 满足
 	\begin{compactitem}
 		\item 存在指标 $k \leq n$ 使得 $0 \leq i < k \implies p \mid a_i$,
 		\item $p \nmid a_k$,
@@ -1177,7 +1177,7 @@ Möbius 反演公式是组合学与数论中的基本工具. 之所以专辟一�
 	考虑 $f$ 在环 $(R/\lrangle{p})[X]$ 中的像, 可得等式
 	\[ (a \bmod p) \cdot \prod_{i=1}^m (p_i \bmod p) = \bar{a}_k X^k + \text{高次项}, \quad \bar{a}_k \neq 0. \]
 	由于 $R/\lrangle{p}$ 是整环, $a \cdot \prod_{i > 1} p_i$ 在 $\bmod p$ 之后常数项非零, 因而 $p_1 \bmod p$ 形如
-	\[ \bar{b}_h X^h + \text{高次项}, \quad \bar{b}_h \neq 0, \quad h \geq k, \]
+	\[ \bar{b}_k X^k + \text{高次项}, \quad \bar{b}_k \neq 0, \]
 	于是 $\deg p_1 \geq k$, 明所欲证.
 \end{proof}
 
@@ -1190,11 +1190,11 @@ Möbius 反演公式是组合学与数论中的基本工具. 之所以专辟一�
 \[ \sigma(f + g) = \sigma(f) + \sigma(g), \quad \sigma(fg) = \sigma(f) \sigma(g), \quad \sigma(1)=1 \]
 因此 $\Lambda_n$ 是 $R[X_1, \ldots, X_n]$ 的子环, 称为 $R$ 上的 $n$ 元对称多项式环, 其元素称为 $n$ 元\emph{对称多项式}. 对域 $F$ 上的有理函数环也有相应的版本 $F(X_1, \ldots, X_n)^{\mathfrak{S}_n}$.\index{duichengduoxiangshi@对称多项式 (symmetric polynomial)}
 
-将 $f \in R[X_1, \ldots, X_n]$ 用 \S\ref{sec:polynomial-ring} 的多重指标符号展成 $\sum_{\bm{a}} c_{\bm{a}} \bm{X}^{\bm{a}}$, 那么对称性等价于: 若下标 $\bm{a} = (a_1, \ldots, a_n)$ 和 $\bm{b} = (b_1, \ldots, b_m)$ 差一个重排, 则 $c_{\bm{a}} = c_{\bm{b}}$. 留意到 $m \leq n \implies \Lambda_m \subset \Lambda_n$.
+将 $f \in R[X_1, \ldots, X_n]$ 用 \S\ref{sec:polynomial-ring} 的多重指标符号展成 $\sum_{\bm{a}} c_{\bm{a}} \bm{X}^{\bm{a}}$, 那么对称性等价于: 若下标 $\bm{a} = (a_1, \ldots, a_n)$ 和 $\bm{b} = (b_1, \ldots, b_n)$ 差一个重排, 则 $c_{\bm{a}} = c_{\bm{b}}$.
 
 考虑一族正整数 $\lambda_1, \ldots, \lambda_r$, 其中 $1 \leq r \leq n$, 不计顺序, 容许重复. 置
-\[ m_{\lambda_1, \ldots, \lambda_n} := \sum_{\bm{a}} \bm{X}^{\bm{a}}, \]
-其指标 $\bm{a}$ 取遍 $(\lambda_1, \ldots, \lambda_r)$ 的所有不同排列. 为了得到唯一性, 今后总排定 $\lambda_1, \ldots, \lambda_r$ 的顺序, 记为
+\[ m_{\lambda_1, \ldots, \lambda_r} := \sum_{\bm{a}} \bm{X}^{\bm{a}}, \]
+其指标 $\bm{a}$ 取遍 $(\lambda_1, \ldots, \lambda_r, 0, \ldots, 0)$ 的所有不同排列 ($n$ 个分量). 为了得到唯一性, 今后总排定 $\lambda_1, \ldots, \lambda_r$ 的顺序, 记为
 \begin{align*}
 	\lambda & := (\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_r), \quad \lambda_i \in \Z, \; 1 \leq \lambda_i \leq n, \\
 	m_\lambda & := m_{\lambda_1, \ldots, \lambda_r}.
@@ -1205,7 +1205,7 @@ Möbius 反演公式是组合学与数论中的基本工具. 之所以专辟一�
 \ytableausetup{mathmode}\begin{equation*}
 	(3 \geq 2 \geq 1 \geq 1): \ydiagram{3,2,1,1} \qquad (5 \geq 4 \geq 1): \ydiagram{5,4,1}
 \end{equation*}
-等等. 容易看出如是图表与分拆 $\lambda = (\lambda_1 \geq \cdots \geq \lambda_r)$ 有一一对应. 使 $m_\lambda$ 落在 $\Lambda_n$ 中的充要条件是 $\lambda_1$ (即 Young 图的宽度) 不超过 $n$.
+等等. 容易看出如是图表与分拆 $\lambda = (\lambda_1 \geq \cdots \geq \lambda_r)$ 有一一对应. 如果分拆的长度 $r$ (即 Young 图的高度) 超过给定的 $n$, 相应的 $m_\lambda \in \Lambda_n$ 规定为 $0$.
 
 处理 Young 图的一般性质时宜抛开宽度限制. 此时 Young 图具备明显的``共轭''操作: 将对应于 $\lambda = (\lambda_1 \geq \cdots)$ 的 Young 图对轴 $\diagdown$ 作镜射, 所得图形依然是 Young 图; 假它在第 $i$ 个横行有 $\bar{\lambda}_i$ 个方格, 相应的资料记为 $\bar{\lambda} = (\bar{\lambda}_1 \geq \cdots)$, 称 $\bar{\lambda}$ 为 $\lambda$ 的\emph{共轭}. 显然 $\overline{\overline{\lambda}} = \lambda$. 一例如下:
 \ytableausetup{mathmode}
@@ -1219,7 +1219,7 @@ Möbius 反演公式是组合学与数论中的基本工具. 之所以专辟一�
 				\mu_1 + \cdots + \mu_k \leq \lambda_1 + \cdots + \lambda_k,
 			\end{gather}
 		\item[字典序] 记 $\mu \prec \lambda$, 如果存在 $k \geq 1$ 使得
-			\[0 \leq i < k \implies \mu_i = \mu_k, \quad \mu_k < \lambda_k. \]
+			\[0 \leq i < k \implies \mu_i = \lambda_i, \quad \mu_k < \lambda_k. \]
 	\end{compactdesc}
 	当 $k$ 超过 $\lambda$ (或 $\mu$) 的行数时, 约定 $\lambda_k=0$ (或 $\mu_k=0$).
 \end{definition}
@@ -1234,12 +1234,12 @@ Möbius 反演公式是组合学与数论中的基本工具. 之所以专辟一�
 尽管 $\Lambda_n$ 中元素能唯一地表作诸 $m_\lambda$ 的 $R$-线性组合, 但这组基对乘法的性质并不明朗, 实用上还有些累赘. 为此我们引进如下经典对象.
 \begin{definition}[初等对称多项式]\label{def:elementary-symm-poly}\index{duichengduoxiangshi!初等 (elementary)}
 	对于 $1 \leq k \leq n$, 定义
-	\[ e_k := \sum_{1 \leq i_1 < \cdots < i_k \leq n} X_{i_1} \cdots X_{i_n}. \]
+	\[ e_k := \sum_{1 \leq i_1 < \cdots < i_k \leq n} X_{i_1} \cdots X_{i_k}. \]
 	易见这是 $\Lambda_n$ 中的元素, 称为第 $k$ 个 $n$ 元\emph{初等对称多项式}.
 \end{definition}
 令 $e_0 := 1$, 于是等价的刻画是
 \begin{gather*}
-	\sum_{i=0}^n e_i Y^{n-i} = \prod_{i=1}^n (Y - X_i), \quad \text{或者} \\
+	\sum_{i=0}^n e_i Y^{n-i} = \prod_{i=1}^n (Y + X_i), \quad \text{或者} \\
 	E(Y) := \sum_{i=0}^n e_i Y^i = \prod_{i=1}^n (1 + X_i Y)
 \end{gather*}
 其中 $Y$ 是额外引入的变元. 对每个分拆 $\lambda = (\lambda_1 \geq \cdots \geq \lambda_r)$ 定义
@@ -1284,7 +1284,7 @@ Möbius 反演公式是组合学与数论中的基本工具. 之所以专辟一�
 \end{proof}
 
 \begin{example}[判别式]\label{eg:polynomial-discriminant} \index{panbieshi@判别式 (discriminant)}
-	显然 $\displaystyle\prod_{1 \leq i < j \leq n} (X_i - X_j)^2$ 属于 $\Z[X_1, \ldots, X_n]^{\mathfrak{S}_n}$, 故可记为 $\delta \in \Z[e_1, \ldots, e_n]$. 令 $F$ 为域, $x_1, \ldots, x_n \in F$. 考虑以 $Y$ 为变元的首一多项式 $P = \sum_{i=0}^n c_i Y^{n-i} = \prod_{i=1}^n (Y - x_i)$, 则其系数由 $c_i = e_i(X_1 = x_1, \ldots, X_n = x_n)$ 确定. 因此
+	显然 $\displaystyle\prod_{1 \leq i < j \leq n} (X_i - X_j)^2$ 属于 $\Z[X_1, \ldots, X_n]^{\mathfrak{S}_n}$, 故可记为 $\delta \in \Z[e_1, \ldots, e_n]$. 令 $F$ 为域, $x_1, \ldots, x_n \in F$. 考虑以 $Y$ 为变元的首一多项式 $P = \sum_{i=0}^n (-1)^i c_i Y^{n-i} = \prod_{i=1}^n (Y - x_i)$, 则其系数由 $c_i = e_i(X_1 = x_1, \ldots, X_n = x_n)$ 确定. 因此
 	\[ P\; \text{有重根} \iff \prod_{i < j} (x_i - x_j)^2 = 0 \iff \delta(e_1 = c_1, \ldots, e_n = c_n) = 0. \]
 	这提供了检验重根的一种算法.
 \end{example}
@@ -1356,7 +1356,7 @@ Möbius 反演公式是组合学与数论中的基本工具. 之所以专辟一�
 		\[ \sum_{i=1}^n X_i \cdot \frac{\partial f}{\partial X_i} = m f. \]
 		试着在 $R=\R$ 时给出微分几何的解释. \begin{hint} 当 $R=\R$ 时对伸缩作用 $\R^\times \times \R^n \ni (t,v) \mapsto tv \in \R^n$ 求导. \end{hint}
 	\item 延伸定理 \ref{prop:sum-squares} 的论证来刻画不定方程 $n = x^2 + y^2$ 对哪些整数 $n$ 有解, 并描述解的个数.
-	\item 令 $\omega := \frac{-1 + \sqrt{-3}}{2}$. 验证 $\Z[\omega] = \Z \oplus \Z\omega$ 是 $\CC$ 的子环, 对共轭封闭. 对付 $\Z[-1]$ 的技术可以沿用, 此时仍有范数映射 $N(z) = z\bar{z}$.
+	\item 令 $\omega := \frac{-1 + \sqrt{-3}}{2}$. 验证 $\Z[\omega] = \Z \oplus \Z\omega$ 是 $\CC$ 的子环, 对共轭封闭. 对付 $\Z[\sqrt{-1}]$ 的技术可以沿用, 此时仍有范数映射 $N(z) = z\bar{z}$.
 		\begin{compactenum}[(i)]
 			\item 证明 $\Z[\omega]$ 是 Euclid 环并确定 $\Z[\omega]^\times$;
 			\item 修改定理 \ref{prop:sum-squares} 的论证来分类 $\Z[\omega]$ 中的不可约元, 精确到 $\Z[\omega]^\times$; \begin{hint} 当 $p=3$ 时分歧, $p \equiv 1 \pmod 3$ 时分裂, $p \equiv 2 \pmod 3$ 时惯性. \end{hint}

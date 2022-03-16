@@ -102,7 +102,7 @@
 	\begin{align*}
 		[F(y_1, \ldots, y_n):F] & = \prod_{m=1}^n \left[ F(y_1, \ldots, y_m): F(y_1, \ldots, y_{m-1}) \right] \\
 		& = \prod_{m=1}^n \left[ F(y_1, \ldots, y_{m-1})(y_m): F(y_1, \ldots, y_{m-1}) \right] \\
-		& \leq \prod_{m=1}^n [F(y_m):F] \leq \infty,
+		& \leq \prod_{m=1}^n [F(y_m):F] < \infty,
 	\end{align*}
 	因而 $E|F$ 是有限扩张. 对 $m$ 递归可知
 	\begin{equation*}\begin{aligned}
@@ -333,7 +333,7 @@
 \begin{proof}
 	首先证明存在性. 取代数闭包 $\overline{F}|F$. 每个 $P \in \mathcal{P}$ 都在 $\overline{F}$ 上分解为 $P = c_P \prod_{j=1}^{n_P}(X - \alpha_{P,j})$. 取由所有根生成的子扩张 $E = F\left( \alpha_{P,j} : P \in \mathcal{P},\; 1 \leq j \leq n_i \right)$ 即所求. 若要在 $\overline{F}|F$ 的子扩张中寻求 $\mathcal{P}$ 的分裂域, 这显然是唯一选择.
 
-	现证唯一性. 设 $E|F$, $E'|F$ 为 $\mathcal{P}$ 的分裂域, 分别取代数闭包 $\overline{F}|E$ 和 $\overline{F}'|E‘$, 以下不妨视 $E \subset \overline{F}$, $E' \subset \overline{F}'$. 由定义可知 $\overline{F}|F$ 和 $\overline{F}'|F$ 也是代数闭包, 因此定理 \ref{prop:alg-closure} 给出 $F$-同构 $u: \overline{F} \rightiso \overline{F}'$. 既然 $E|F$ 由 $\mathcal{P}$ 中所有多项式在 $\overline{F}$ 中的根生成, 同样性质透过 $u$ 照搬到 $u(E) \subset \overline{F}'$, 于是 $u(E)|F$ 等同于 $E'|F$, 所求的 $F$-同构无非是 $u|_E$.
+	现证唯一性. 设 $E|F$, $E'|F$ 为 $\mathcal{P}$ 的分裂域, 分别取代数闭包 $\overline{F}|E$ 和 $\overline{F}'|E'$, 以下不妨视 $E \subset \overline{F}$, $E' \subset \overline{F}'$. 由定义可知 $\overline{F}|F$ 和 $\overline{F}'|F$ 也是代数闭包, 因此定理 \ref{prop:alg-closure} 给出 $F$-同构 $u: \overline{F} \rightiso \overline{F}'$. 既然 $E|F$ 由 $\mathcal{P}$ 中所有多项式在 $\overline{F}$ 中的根生成, 同样性质透过 $u$ 照搬到 $u(E) \subset \overline{F}'$, 于是 $u(E)|F$ 等同于 $E'|F$, 所求的 $F$-同构无非是 $u|_E$.
 
 	至于次数, 假设 $\deg P = n \geq 1$, 多项式 $P$ 在分裂域 $E$ 中的根记为 $\alpha_1, \ldots, \alpha_n$. 当 $n=1$ 时显然 $E=F$, 当 $n>1$ 时记 $F_1 := F(\alpha_1)$, 由于 $[F_1:F] \leq \deg P = n$ 而 $E$ 是 $P/(X-\alpha_1)$ 在 $F_1$ 上的分裂域, 可用命题 \ref{prop:field-tower-degree} 递归地推出 $[E:F] = [E:F_1][F_1:F] \leq (n-1)! n = n!$.
 \end{proof}
@@ -419,13 +419,13 @@
 	\begin{enumerate}[(i)]
 		\item 扩张 $L|F$ 正规 $\implies$ 对任意中间域 $E$, 扩张 $L|E$ 正规.
 		\item 设 $L|F$, $M|F$ 为 $\Omega|F$ 的子扩张, 则 $L|F$ 正规 $\implies$ $LM|M$ 正规.
-		\item 在给定扩张 $\Omega|F$ 中, 任一族正规子扩张之复合与交依然正规.
+		\item 在给定扩张 $\Omega|F$ 中, 任一族正规子扩张之复合与非空交依然正规.
 	\end{enumerate}
 \end{proposition}
 \begin{proof}
 	设 $L|F$, $M|F$ 皆是 $\Omega|F$ 的子扩张, 若 $L|F$ 是 $\mathcal{P} \subset F[X]$ 的分裂域, 则 $LM|M$ 是 $\mathcal{P} \subset M[X]$ 的分裂域, 故为正规扩张. 这就证明了 (ii); 取特例 $\Omega=L$ 而 $M=E \subset L$ 就得到 (i).
 	
-	设 $\{L_i|F\}_{i \in I}$ 是 $\Omega|F$ 的一族正规子扩张, 其交 $\bigcap_i L_i|F$ 与复合 $\bigvee_i L_i | F$ 仍是代数扩张 (命题 \ref{prop:alg-ext-dist}). 取定包含 $\bigvee_i L_i$ 的代数闭包 $\overline{F}$, 它同时也是 $\bigcap_i L_i$, 每个 $L_i$ 以及 $F$ 的代数闭包, 而复合 $\bigvee_i L_i$ 可视作 $\overline{F}|F$ 中的复合. 我们先证 $\bigvee_i L_i|F$ 正规: 对任意 $\iota \in \Hom_F\left(\bigvee_i L_i , \overline{F}\right)$, 正规性蕴涵
+	设 $\{L_i|F\}_{i \in I}$ 是 $\Omega|F$ 的一族正规子扩张, 且 $I$ 非空, 其交 $\bigcap_i L_i|F$ 与复合 $\bigvee_i L_i | F$ 仍是代数扩张 (命题 \ref{prop:alg-ext-dist}). 取定包含 $\bigvee_i L_i$ 的代数闭包 $\overline{F}$, 它同时也是 $\bigcap_i L_i$, 每个 $L_i$ 以及 $F$ 的代数闭包, 而复合 $\bigvee_i L_i$ 可视作 $\overline{F}|F$ 中的复合. 我们先证 $\bigvee_i L_i|F$ 正规: 对任意 $\iota \in \Hom_F\left(\bigvee_i L_i , \overline{F}\right)$, 正规性蕴涵
 	\begin{gather*}
 		\iota\left( \bigvee_{i \in I} L_i \right) = \bigvee_{i \in I} \iota(L_i) = \bigvee_{i \in I} L_i.
 	\end{gather*}
@@ -475,7 +475,7 @@
 		\item $P$ 在代数闭包 $\overline{F}$ 上有重根,
 		\item $P$ 在其分裂域上有重根,
 		\item $P'=0$,
-		\item $\mathrm{char}(F)=p > 0$, 而且 $P$ 形如 $\sum_{k \geq 0}^n a_k X^{pk}$.
+		\item $\mathrm{char}(F)=p > 0$, 而且 $P$ 形如 $\sum_{k=0}^n a_k X^{pk}$.
 	\end{enumerate}
 \end{theorem}
 \begin{proof}
@@ -499,7 +499,7 @@
 	F[X] & \longrightarrow F[X] \\
 	f(X) & \longmapsto f(X^p)
 \end{align*}
-是 $F$-代数的同态, 并且 $\deg f(X^p) = p f(X)$. 于是 $P$ 不可约确保 $P_1$ 亦不可约. 如果 $P'_1 = 0$ 则续行如是操作, 得到 $P_1(X) = P_2(X^p)$ 而 $P_2$ 仍不可约. 基于次数考量, 迭代必在有限步内停止, 并给出 % FIXME: $\deg f(X^p) = p \deg f(X)$
+是 $F$-代数的同态, 并且 $\deg f(X^p) = p \deg f(X)$. 于是 $P$ 不可约确保 $P_1$ 亦不可约. 如果 $P'_1 = 0$ 则续行如是操作, 得到 $P_1(X) = P_2(X^p)$ 而 $P_2$ 仍不可约. 基于次数考量, 迭代必在有限步内停止, 并给出
 \begin{gather}\label{eqn:P-to-P-flat}
 	P(X) = P^\flat\left( X^{p^m} \right), \quad P^\flat \in F[X]:\; \text{不可约}, \; (P^\flat)' \neq 0.
 \end{gather}
@@ -555,7 +555,7 @@
 	
 	性质 (iii) 是 $[L:F]$ 和 $[L:F]_s$ 的相应性质的直接结论.
 
-	从上述论证看出: 若 $E$ 的每个生成元 $x_m$ 在 $F$ 上皆可分, 那么在 $F_{m-1}$ 上当然也可分, 于是 $[E:F] = \prod_{i=1}^n [F_m : F_{m-1}] = \prod_{i=1}^n [F_m : F_{m-1}]_s = [E:F]_s$. 若假设 $[E:F]=[E:F]_s$, 则对任意 $x \in E$ 皆有 $[F(x):F]_i \mid [E:F]_i = 1$, 引理 \ref{prop:field-sdegree-F(x)} 遂确保 $x$ 可分. 至此证出 (iv). 最后 (v) 是引理 \ref{prop:field-sdegree-F(x)} 的直接结论.
+	从上述论证看出: 若 $E$ 的每个生成元 $x_m$ 在 $F$ 上皆可分, 那么在 $F_{m-1}$ 上当然也可分, 于是 $[E:F] = \prod_{m=1}^n [F_m : F_{m-1}] = \prod_{m=1}^n [F_m : F_{m-1}]_s = [E:F]_s$. 若假设 $[E:F]=[E:F]_s$, 则对任意 $x \in E$ 皆有 $[F(x):F]_i \mid [E:F]_i = 1$, 引理 \ref{prop:field-sdegree-F(x)} 遂确保 $x$ 可分. 至此证出 (iv). 最后 (v) 是引理 \ref{prop:field-sdegree-F(x)} 的直接结论.
 \end{proof}
 
 \begin{definition}\index{yukuozhang!可分 (separable)}
@@ -810,7 +810,7 @@
 \begin{proof}
 	(i) $\implies$ (ii): 显然.
 
-	(ii) $\implies$ (iii): 取代数闭包 $\overline{F}|F$, 并回忆 $\Hom_F(E, \overline{F})$ 非空 (推论 \ref{prop:alg-ext-embedding}), $\iota \in \Hom_F(E, \overline{F})$ 由它在一族生成元上的作用确定. 先前的讨论已指出每个不可分生成元 $x$ 的极小多项式都形如 $X^{p^m} - a$, 故 $\iota \in \Hom_F(E, \overline{F})$ 必将 $x$ 映至 $X^{p^m} - a$ 在 $\overline{F}$ 中的唯一根 $a^{-p^m}$, 这就意谓着 $[E:F]_s = |\Hom_F(E, \overline{F})| = 1$.
+	(ii) $\implies$ (iii): 取代数闭包 $\overline{F}|F$, 并回忆 $\Hom_F(E, \overline{F})$ 非空 (推论 \ref{prop:alg-ext-embedding}), $\iota \in \Hom_F(E, \overline{F})$ 由它在一族生成元上的作用确定. 先前的讨论已指出每个不可分生成元 $x$ 的极小多项式都形如 $X^{p^m} - a$, 故 $\iota \in \Hom_F(E, \overline{F})$ 必将 $x$ 映至 $X^{p^m} - a$ 在 $\overline{F}$ 中的唯一根 $a^{p^{-m}}$, 这就意谓着 $[E:F]_s = |\Hom_F(E, \overline{F})| = 1$.
 	
 	(iii) $\implies$ (i): 设 $x \in E$, 命题 \ref{prop:field-tower-sdegree} 蕴涵 $1 = [E:F]_s = [E:F(x)]_s [F(x):F]_s$, 于是 $[F(x):F]_s = 1$. 按先前讨论可知这等价于 $x$ 纯不可分.
 \end{proof}
@@ -850,7 +850,7 @@
 	将任一 $x \in E$ 的极小多项式记为 $P_x \in F[X]$, 实行 \eqref{eqn:P-to-P-flat} 的操作以得到 $P_x(X) = P_x^\flat\left( X^{p^m} \right)$, 其中 $P_x^\flat$ 不可约且在代数闭包上无重根. 这就表明 $y := x^{p^m}$ 在 $F$ 上可分, 于是 $x^{p^m} \in F(y) \subset E^\flat$ 表明 $x$ 在 $E^\flat$ 上纯不可分.
 \end{proof}
 
-既然纯不可分扩张是特出的, 我们同样能对 $E|F$ 定义极大纯不可分子扩张 $E^\natural$, 或称 $F$ 在 $E$ 中的\emph{纯不可分闭包}. 与前述结果比较, 人们自然会问: $E|E^\natural$ 是否可分? 对此有以下简单的刻画.
+既然纯不可分扩张对复合封闭, 我们同样能对 $E|F$ 定义极大纯不可分子扩张 $E^\natural$, 或称 $F$ 在 $E$ 中的\emph{纯不可分闭包}. 与前述结果比较, 人们自然会问: $E|E^\natural$ 是否可分? 对此有以下简单的刻画.
 \begin{proposition}\label{prop:pins-compositum}
 	沿用以上符号, 扩张 $E|E^\natural$ 可分 $\iff E = E^\flat E^\natural$.
 \end{proposition}

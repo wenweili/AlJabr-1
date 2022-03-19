@@ -639,7 +639,7 @@ Galois 理论的原初目的是研究多项式方程的解, 方法是考察根�
 \begin{proof}
 	因为 $[E:F]=|G|$, 子集 $\{ x_\sigma : \sigma \in G \}$ 为基等价于它在 $F$ 上线性无关, 又等价于它是生成集. 如有关系式 $\sum_\tau a_\tau x_\tau = 0$, 其中 $a_\tau \in F$ 不全为零, 则对每个 $\sigma \in G$ 皆有 $\sum_\tau a_\tau \sigma(x_\tau) = \sigma\left( \sum_\tau a_\tau x_\tau \right) = 0$; 这相当于说 $\mathcal{T}$ 左乘以横向量 $(a_\tau)_\tau$ 为零, 故 $\mathcal{T}$ 不可逆.
 	
-	反过来说, 设 $T$ 不可逆, 因此 $\mathcal{T}$ 右乘以一个非零竖向量 $(a_\sigma)_\sigma$ 后为零, 其中 $a_\sigma \in E$; 换言之, $\forall \tau, \; \sum_\sigma \sigma(x_\tau) a_\sigma = 0$. 若 $x \in E$ 能表作 $\sum_\tau b_\tau x_\tau$, 其中 $b_\tau \in F$, 则 $x$ 满足于
+	反过来说, 设 $\mathcal{T}$ 不可逆, 因此 $\mathcal{T}$ 右乘以一个非零竖向量 $(a_\sigma)_\sigma$ 后为零, 其中 $a_\sigma \in E$; 换言之, $\forall \tau, \; \sum_\sigma \sigma(x_\tau) a_\sigma = 0$. 若 $x \in E$ 能表作 $\sum_\tau b_\tau x_\tau$, 其中 $b_\tau \in F$, 则 $x$ 满足于
 	\[ \sum_\sigma a_\sigma \sigma(x) = \sum_\sigma \sum_\tau a_\sigma b_\tau \sigma(x_\tau) = \sum_\tau b_\tau \left( \sum_\sigma \sigma(x_\tau) a_\sigma \right) = 0. \]
 	因此 $\{x_\sigma: \sigma \in G\}$ 无法生成 $F$-向量空间 $E$, 否则将有 $\sum_\sigma a_\sigma \sigma(x) = 0$ 对所有 $x \in E$ 成立, 违背定理 \ref{prop:indep-character-Artin}.
 \end{proof}

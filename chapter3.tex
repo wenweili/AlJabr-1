@@ -215,12 +215,14 @@
 \end{example}
 
 \begin{definition}\index{ziranbianhuan!幺半情形}
-	设 $F, G: \mathcal{V}_1 \to \mathcal{V}_2$ 为幺半函子, 其间的自然变换(或曰态射), 且记作 $\theta$, 是使得下图对所有 $X, Y$ 都交换的自然变换
+	设 $F, G: \mathcal{V}_1 \to \mathcal{V}_2$ 为幺半函子, 其间的自然变换(或曰态射), 且记作 $\theta$, 是使得 $\theta_{\munit_1}$ 为同构, 而且使下图对所有 $X, Y$ 都交换的自然变换
 	\[ \begin{tikzcd}[column sep=huge]
 		F(X) \otimes F(Y) \arrow[r, "{\xi_F(X, Y)}"] \arrow[d, "{\theta_X \otimes \theta_Y}"'] & F(X \otimes Y) \arrow[d, "{\theta_{X \otimes Y}}"] \\
 		G(X) \otimes G(Y) \arrow[r, "{\xi_G(X, Y)}"'] & G(X \otimes Y) .
 	\end{tikzcd} \]
+	作为练习, 可以证明对标准的 $\varphi_F$ 和 $\varphi_G$ 必然有 $\varphi_G = \theta_{\mathbf{1}_1} \varphi_F$.
 \end{definition}
+
 幺半函子和自然变换之间有自明的合成运算, 借此可以定义幺半范畴的同构与等价性, 参看定义 \ref{def:cat-equivalence}. 为资区分, 有时也将幺半范畴间的等价称作幺半等价.\index{fanchoudengjia!幺半情形}
 
 \section{严格性与融贯定理}\label{sec:coherence}

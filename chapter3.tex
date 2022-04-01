@@ -188,20 +188,20 @@
 
 注意到对于幺半函子 $F$, 同构 $\varphi_F: \munit_2 \rightiso F(\munit_1)$ 有一种标准的取法: 以下图表
 \begin{equation} \begin{tikzcd}
-	\munit_2 \otimes F(\munit_1) \arrow[d, "{\varphi_F \otimes \identity}"'] & F(\munit_1) \arrow[l, "{\lambda_2^{-1}}"'] \arrow[d, "{F(\iota_1)^{-1}}"] \\
+	\munit_2 \otimes F(\munit_1) \arrow[r, "{\lambda_2}"] \arrow[d, "{\varphi_F \otimes \identity}"'] & F(\munit_1) \arrow[d, "{F(\iota_1)^{-1}}"] \\
 	F(\munit_1) \otimes F(\munit_1) \arrow[r, "{\xi_F}"'] & F(\munit_1 \otimes \munit_1)
 \end{tikzcd} \quad
 \begin{tikzcd}
-	F(\munit_1) \otimes \munit_2 \arrow[d, "{\identity \otimes \varphi_F}"'] & F(\munit_1) \arrow[l, "{\rho_2^{-1}}"'] \arrow[d, "{F(\iota_1)^{-1}}"] \\
+	F(\munit_1) \otimes \munit_2  \arrow[r, "{\rho_2}"] \arrow[d, "{\identity \otimes \varphi_F}"'] & F(\munit_1) \arrow[d, "{F(\iota_1)^{-1}}"] \\
 	F(\munit_1) \otimes F(\munit_1) \arrow[r, "{\xi_F}"'] & F(\munit_1 \otimes \munit_1)
 \end{tikzcd} \end{equation}
 的交换性是等价的, 确定同一个 $\varphi_F$ (见 \cite[Proposition 2.4.3]{EGNO15}). 推而广之, 对任意 $X$ 皆有交换图表
 \begin{equation}\label{eqn:monoidal-functor-units} \begin{tikzcd}
-	\munit_2 \otimes F(X) \arrow[d, "{\varphi_F \otimes \identity}"'] & F(X) \arrow[l, "{\lambda_2^{-1}}"'] \arrow[d, "{F(\lambda_X)^{-1}}"] \\
+	\munit_2 \otimes F(X) \arrow[r, "{\lambda_2}"] \arrow[d, "{\varphi_F \otimes \identity}"'] & F(X) \arrow[d, "{F(\lambda_X)^{-1}}"] \\
 	F(\munit_1) \otimes F(X) \arrow[r, "{\xi_F}"'] & F(\munit_1 \otimes X)
 \end{tikzcd} \quad
 \begin{tikzcd}
-	F(X) \otimes \munit_2 \arrow[d, "{\identity \otimes \varphi_F}"'] & F(X) \arrow[l, "{\rho_2^{-1}}"']  \arrow[d, "{F(\rho_X)^{-1}}"] \\
+	F(X) \otimes \munit_2 \arrow[r, "{\rho_2}"] \arrow[d, "{\identity \otimes \varphi_F}"'] & F(X) \arrow[d, "{F(\rho_X)^{-1}}"] \\
 	F(X) \otimes F(\munit_1) \arrow[r, "{\xi_F}"'] & F(X \otimes \munit_1)
 \end{tikzcd} \end{equation}
 由于用途有限, 我们不详细证明等价性. 提示: 从第一个图表出发定义 $\varphi_F$, 将全图同取 $F(X) \otimes \bullet$ 并运用结合约束, 幺元和 $\xi_F$ 的性质, 最后适当地从右边消去 $F(\munit_1)$ 即得第四个交换图表; 其余论证留给读者.

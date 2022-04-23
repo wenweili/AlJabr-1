@@ -7,7 +7,7 @@
 
 % To be included
 \chapter{模论}\label{sec:modules}
-模按纯量乘法的方式分成左右两种. 环 $R$ 上的左模 $M$ 粗看可以类比于向量空间, $M$ 本身对加法成群, 兼具 $R$ 的左纯量乘法 $R \times M \to M$. 从这个观点看, 向量空间是域上的模, 而交换群无非是 $\Z$-模.
+模按纯量乘法的方式分成左右两种. 环 $R$ 上的左模 $M$ 粗看可以类比于向量空间, $M$ 本身对加法成群, 兼具 $R$ 的左纯量乘法 $R \times M \to M$. 从这个观点看, 向量空间是域上的模, 而交换群无非是 $\Z$-模.复
 
 模是数学中一种富于弹性, 用途特别广泛的结构; 例如
 \begin{inparaenum}[(a)]
@@ -1621,7 +1621,7 @@ $\begin{tikzcd}
 \begin{proof}
 	由 $R \llbracket X_1, \ldots, X_{n+1}\rrbracket \simeq R \llbracket X_1, \ldots, X_n \rrbracket \llbracket X_{n+1}\rrbracket$ 化约到环 $R \llbracket X \rrbracket$ 的情形. 以下的证明理路与 $R[X]$ 的情形类似, 差异在于要考虑最低次项:
 	\begin{compactitem}
-		\item 对任意 $f = \sum_{n \geq m} a_n X^n \in R\llbracket X \rrbracket$, 其中 $a_m \neq 0$, 置 $v_X(f) := \min\{n: a_n \geq 0\}$;
+		\item 对任意 $f = \sum_{n \geq m} a_n X^n \in R\llbracket X \rrbracket$, 其中 $a_m \neq 0$, 置 $v_X(f) := \min\{n: a_n \neq 0\}$;
 		\item 并将 $\text{in}(f)$ 的定义改为 $a_m$;
 		\item 在论证中以 $v_X$ 代 $\deg$;
 	\end{compactitem}

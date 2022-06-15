@@ -507,7 +507,7 @@
 			1 \arrow[r] & N \arrow[r] & G \arrow[r, "p"] & H \arrow[bend left=30, l, "s"] \arrow[r] & 1
 		\end{tikzcd} \]
 		其中 $p: G \to H$ 是投影同态 $(n, h) \mapsto h$, 而 $s: H \hookrightarrow G$ 是包含同态 $s(h) = (1,h)$.
-	\item 反之, 给定如上的群扩张及其分裂 $s$, 定义 $\alpha: H \to \Aut(G)$ 为伴随自同构 $\alpha(h) = \Ad(s(h))|_G$, 则有群扩张的等价
+	\item 反之, 给定如上的群扩张及其分裂 $s$, 定义 $\alpha: H \to \Aut(N)$ 为伴随自同构 $\alpha(h) = \Ad(s(h))|_N$, 则有群扩张的等价
 		\[ \begin{tikzcd}
 			1 \arrow[r] & N \arrow[r] \arrow[equal, d] & N \rtimes_\alpha H \arrow[r] \arrow[d, "\varphi"] & H \arrow[equal, d] \arrow[r] & 1 \\
 			1 \arrow[r] & N \arrow[r] & G \arrow[r] & H \arrow[r] & 1
@@ -969,7 +969,7 @@
 	\item $\mathscr{D}^i G \subset \mathscr{C}^i G$;
 	\item $\mathscr{D}^i G \lhd G$, $\mathscr{C}^i G \lhd G$: 事实上 $G$ 的任何自同构都保持子群 $\mathscr{D}^i G$ 和 $\mathscr{C}^i G$.
 \end{compactitem}
-关于 $\mathscr{D}^i G$, $\mathscr{C}^i G$ 的性质可以递归地证明. 我们也称 $G_\text{der} := \mathscr{D}^1 G$ 为 $G$ 的\emph{导出子群}. 而 $G_\text{ab} := G/G_\text{der}$ 称为 $G$ 的\emph{交换化}. 下述泛性质表明了 $G \twoheadrightarrow G_\text{ab}$ 是 $G$ 的''极大交换商''. \index{daochuziqun@导出子群 (derived subgroup)}\index[sym1]{$G_\text{der}$} \index[sym1]{$G_\text{ab}$}
+关于 $\mathscr{D}^i G$, $\mathscr{C}^i G$ 的性质可以递归地证明. 我们也称 $G_\text{der} := \mathscr{D}^1 G$ 为 $G$ 的\emph{导出子群}. 而 $G_\text{ab} := G/G_\text{der}$ 称为 $G$ 的\emph{交换化}. 下述泛性质表明了 $G \twoheadrightarrow G_\text{ab}$ 是 $G$ 的``极大交换商''. \index{daochuziqun@导出子群 (derived subgroup)}\index[sym1]{$G_\text{der}$} \index[sym1]{$G_\text{ab}$}
 
 \begin{lemma}\label{prop:abelianization}
 	商群 $G_{\mathrm{ab}}$ 是交换群. 对任意交换群 $A$ 和同态 $\varphi: G \to A$, 存在唯一的同态 $\psi: G_{\mathrm{ab}} \to A$ 使下图交换.

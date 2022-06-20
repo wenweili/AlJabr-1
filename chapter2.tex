@@ -1411,17 +1411,17 @@ $\begin{tikzcd}
 \end{definition}
 举例明之, $\cate{Set}$ 既是完备也是余完备的, 见例 \ref{eg:set-limits}. 定义中如不要求 $\mathcal{C}$ 比 $I$ 来得``大'', 应用范围将大大地受限. 请看以下结果.
 \begin{proposition}[P.\ Freyd]\label{prop:preorder-complete}
-	小范畴 $\mathcal{C}$ 完备当且仅当 $\mathcal{C}$ 来自一个预序集 $(P, \leq)$ (例 \ref{eg:categories}), 其中每个子集都有上确界.
+	小范畴 $\mathcal{C}$ 完备当且仅当 $\mathcal{C}$ 来自一个预序集 $(P, \leq)$ (例 \ref{eg:categories}), 其中每个子集都有下确界.
 \end{proposition}
 \begin{proof}
-	假设 $\mathcal{C}$ 完备. 假若存在相异的态射 $f, g: X \to Y$, 对于小集合 $I$ 可构造 $\prod_{i \in I} Y$, 故 $\Hom_{\mathcal{C}}(X, \prod_{i \in I} Y) \supset \{f, g\}^I$. 取 $|I| = |\Mor(\mathcal{C})|$ 并运用定理 \ref{prop:Cantor} 便导出矛盾. 因此 $\mathcal{C}$ 是预序集. 另一方面, 从 \eqref{eqn:lim-diagrams} 不难看出一个预序集 $(P, \leq)$ 中的 $\varprojlim \beta$ 无非是子集 $\{\beta(i) : i \in \Obj(I) \}$ 的上确界; 注意到上确界在同构意义下是唯一的. 证毕.
+	假设 $\mathcal{C}$ 完备. 假若存在相异的态射 $f, g: X \to Y$, 对于小集合 $I$ 可构造 $\prod_{i \in I} Y$, 故 $\Hom_{\mathcal{C}}(X, \prod_{i \in I} Y) \supset \{f, g\}^I$. 取 $|I| = |\Mor(\mathcal{C})|$ 并运用定理 \ref{prop:Cantor} 便导出矛盾. 因此 $\mathcal{C}$ 是预序集. 另一方面, 从 \eqref{eqn:lim-diagrams} 不难看出一个预序集 $(P, \leq)$ 中的 $\varprojlim \beta$ 无非是子集 $\{\beta(i) : i \in \Obj(I) \}$ 的下确界; 注意到下确界在同构意义下是唯一的. 证毕.
 \end{proof}
 
 \begin{theorem}\label{prop:limit-buildingblocks}
 	设 $I$ 为小范畴, $\mathcal{C}$ 为范畴.
 	\begin{compactenum}
-		\item 若对所有子集 $J \subset \Obj(I)$ 和 $\mathcal{C}$ 中的对象族 $(X_j)_{j \in J}$ 都存在 $\prod_{j \in J} X_j$, 而且对所有 $f, g: X \to Y$ 都存在 $\Ker(f,g)$, 则 $\mathcal{C}$ 有所有以 $I$ 为指标的 $\varprojlim$.
-		\item 若对所有子集 $J \subset \Obj(I)$ 和 $(X_j)_{j \in J}$ 都存在 $\coprod_{j \in J} X_j$, 而且对所有 $f, g: X \to Y$ 都存在 $\Coker(f,g)$, 则 $\mathcal{C}$ 有所有以 $I$ 为指标的 $\varinjlim$.
+		\item 若对所有子集 $J \subset \Mor(I)$ 和 $\mathcal{C}$ 中的对象族 $(X_j)_{j \in J}$ 都存在 $\prod_{j \in J} X_j$, 而且对所有 $f, g: X \to Y$ 都存在 $\Ker(f,g)$, 则 $\mathcal{C}$ 有所有以 $I$ 为指标的 $\varprojlim$.
+		\item 若对所有子集 $J \subset \Mor(I)$ 和 $(X_j)_{j \in J}$ 都存在 $\coprod_{j \in J} X_j$, 而且对所有 $f, g: X \to Y$ 都存在 $\Coker(f,g)$, 则 $\mathcal{C}$ 有所有以 $I$ 为指标的 $\varinjlim$.
 	\end{compactenum}
 \end{theorem}
 \begin{proof}

@@ -1218,7 +1218,7 @@
 \end{gather}
 今引入条件
 \begin{equation}\label{eqn:free-product-condition}\begin{gathered}
-	\forall i \in I, \; \exists \text{ 子集 }\; H_i \subset M_i \; \text{ 使得 }\;
+	\forall i \in I, \; \exists \text{ 子集 }\; 1 \in H_i \subset M_i \; \text{ 使得 }\;
 	\begin{tikzcd}[column sep=small, row sep=tiny]
 		A \times H_i \arrow[r, "1:1"] & M_i \\
 		(a, x_i) \arrow[mapsto, r] \arrow[phantom, u, sloped, "\in" description] & f_i(a) x_i. \arrow[phantom, u, sloped, "\in" description]
@@ -1231,7 +1231,7 @@
 \begin{lemma}
 	假设融合积中的 $A$ 满足条件 \eqref{eqn:free-product-condition}, 则每个元素都有唯一的既约表法, 两元素相等当且仅当其既约表法相同. 特别地, 此时每个 $\varphi_i: M_i \to M$ 皆单.
 \end{lemma}
-当 $A$ 是群而且 $f_i$ 单时引理条件自动成立: 考虑 $A$ 透过 $f_i$ 在 $M_i$ 上的左乘作用, 为每个轨道选取代表元即得 $H_i$.
+当每个 $f_i$ 都是群之间的单同态时, 引理条件自动成立: 考虑 $A$ 透过 $f_i$ 在 $M_i$ 上的左乘作用, 为每个轨道选取代表元即得 $H_i$.
 
 \begin{proof}
 	以下思路并不难, 写严谨了则颇费笔墨, 所以我们仅述其概要. 选定一族子集 $(H_i \subset M_i)_{i \in I}$ 满足 \eqref{eqn:free-product-condition}, 定义 $\Sigma$ 为如下形式的序列所成集合
@@ -1243,11 +1243,11 @@
 	\end{align*}
 	它映 $[1]$ (取 $n=0$) 为 $1$. 先前关于既约表达式的推导蕴涵 $\Phi$ 为满, 以下仅需说明 $\Phi$ 为单.
 
-	我们欲借 $\Phi$ 在 $\Sigma$ 中模拟 $M$ 的左乘作用. 先取定 $i \in I$. 定义幺半群作用 $\alpha_i: M_i \times \Sigma \to \Sigma$ 如下. 任意 $\xi \in M_i$ 有唯一写法 $\xi = f_i(a'') x$ (此处 $a'' \in A$, $x \in H_i$); 对于 $\sigma = [a; x_1, \ldots, x_n] \in \Sigma$, 仿前段方法定义 $(a', x')$ 使得 $x f_i(a) = f_i(a')x'$. 置
+	我们欲借 $\Phi$ 在 $\Sigma$ 中模拟 $M$ 的左乘作用. 先取定 $i \in I$. 定义幺半群作用 $\alpha_i: M_i \times \Sigma \to \Sigma$ 如下. 任意 $\xi \in M_i$ 有唯一写法 $\xi = f_i(a'') x$ (此处 $a'' \in A$, $x \in H_i$); 对于 $\sigma = [a; x_1, \ldots, x_n] \in \Sigma$, 仿前段方法定义下式涉及的 $(a', x') \in A \times H_i$: 置
 	\[ \alpha_i(\xi, \sigma) :=
-		\begin{cases}
-			[a'' a'; x'x_1, \ldots, x_n], & i_1 = i, \\
-			[a'' a'; x', x_1, \ldots, x_n], & i_1 \neq i.
+	\begin{cases}
+		[a'' a'; x', x_2, \ldots, x_n], \;\text{其中}\; x f_i(a) x_1 = f_i(a') x', & i_1 = i, \\
+		[a'' a'; x', x_1, \ldots, x_n], \;\text{其中}\; x f_i(a) = f_i(a') x', & i_1 \neq i.
 	\end{cases} \]
 	另定义作用 $\alpha_A: A \times \Sigma \to \Sigma$ 使得 $\alpha_A(a, [b; \ldots]) = [ab; \ldots]$. 视此诸作用为同态族 $M_i \to \End(\Sigma)$, $A \to \End(\Sigma)$, 其中 $\End(\Sigma)$ 表所有映射 $\Sigma \to \Sigma$ 所成幺半群.
 

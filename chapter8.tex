@@ -95,7 +95,7 @@
 \end{example}
 
 \begin{lemma}\label{prop:finiteness-generation}
-	若域扩张 $E|F$ 满足 $E=F(y_1, \ldots, y_m)$, 其中每个 $y_i$ 都是 $F$-上的代数元, 则 $E|F$ 为有限扩张, 此时 $E=F[y_1, \ldots, y_m]$.
+	若域扩张 $E|F$ 满足 $E=F(y_1, \ldots, y_m)$, 其中每个 $y_i$ 都是 $F$ 上的代数元, 则 $E|F$ 为有限扩张, 此时 $E=F[y_1, \ldots, y_m]$.
 \end{lemma}
 \begin{proof}
 	由 $F(y_1, \ldots, y_m) = F(y_1, \ldots, y_{m-1})(y_m)$, $1 \leq m \leq n$, 命题 \ref{prop:field-tower-degree} 连同上述观察可得
@@ -235,7 +235,7 @@
 \begin{proof}
 	设 $E$ 代数闭而 $L|E$ 是代数扩张, 对任意 $x \in L$, 它在 $E$ 上的极小多项式 $P_x$ 必有一次因子; 又由于 $P_x$ 不可约, 从而 $\deg P_x = 1$ 故 $x \in E$.
 	
-	反之假设 $E$ 非代数闭, $P \in E[X]$ 在 $E$ 上无根; 可以假设 $P$ 不可约, 命题 \ref{prop:adjunction-root} 遂给出 $E$ 的扩域 $L := E[X]/(P)$ 使得 $[L:E] = \deg P > 1$. 证毕
+	反之假设 $E$ 非代数闭, $P \in E[X]$ 在 $E$ 上无根; 可以假设 $P$ 不可约, 命题 \ref{prop:adjunction-root} 遂给出 $E$ 的扩域 $L := E[X]/(P)$ 使得 $[L:E] = \deg P > 1$. 证毕.
 \end{proof}
 
 \begin{lemma}\label{prop:alg-closed-decomp}
@@ -331,7 +331,7 @@
 	对任一族非常数多项式 $\mathcal{P}$, 分裂域 $E|F$ 总是存在, 并在 $F$-同构的意义下唯一; 任意 $n \geq 1$ 次多项式 $P$ 的分裂域在 $F$ 上的次数 $\leq n!$.
 \end{proposition}
 \begin{proof}
-	首先证明存在性. 取代数闭包 $\overline{F}|F$. 每个 $P \in \mathcal{P}$ 都在 $\overline{F}$ 上分解为 $P = c_P \prod_{j=1}^{n_P}(X - \alpha_{P,j})$. 取由所有根生成的子扩张 $E = F\left( \alpha_{P,j} : P \in \mathcal{P},\; 1 \leq j \leq n_i \right)$ 即所求. 若要在 $\overline{F}|F$ 的子扩张中寻求 $\mathcal{P}$ 的分裂域, 这显然是唯一选择.
+	首先证明存在性. 取代数闭包 $\overline{F}|F$. 每个 $P \in \mathcal{P}$ 都在 $\overline{F}$ 上分解为 $P = c_P \prod_{j=1}^{n_P}(X - \alpha_{P,j})$. 取由所有根生成的子扩张 $E = F\left( \alpha_{P,j} : P \in \mathcal{P},\; 1 \leq j \leq n_P \right)$ 即所求. 若要在 $\overline{F}|F$ 的子扩张中寻求 $\mathcal{P}$ 的分裂域, 这显然是唯一选择.
 
 	现证唯一性. 设 $E|F$, $E'|F$ 为 $\mathcal{P}$ 的分裂域, 分别取代数闭包 $\overline{F}|E$ 和 $\overline{F}'|E'$, 以下不妨视 $E \subset \overline{F}$, $E' \subset \overline{F}'$. 由定义可知 $\overline{F}|F$ 和 $\overline{F}'|F$ 也是代数闭包, 因此定理 \ref{prop:alg-closure} 给出 $F$-同构 $u: \overline{F} \rightiso \overline{F}'$. 既然 $E|F$ 由 $\mathcal{P}$ 中所有多项式在 $\overline{F}$ 中的根生成, 同样性质透过 $u$ 照搬到 $u(E) \subset \overline{F}'$, 于是 $u(E)|F$ 等同于 $E'|F$, 所求的 $F$-同构无非是 $u|_E$.
 

@@ -7,7 +7,7 @@
 
 % To be included
 \chapter{模论}\label{sec:modules}
-模按纯量乘法的方式分成左右两种. 环 $R$ 上的左模 $M$ 粗看可以类比于向量空间, $M$ 本身对加法成群, 兼具 $R$ 的左纯量乘法 $R \times M \to M$. 从这个观点看, 向量空间是域上的模, 而交换群无非是 $\Z$-模.复
+模按纯量乘法的方式分成左右两种. 环 $R$ 上的左模 $M$ 粗看可以类比于向量空间, $M$ 本身对加法成群, 兼具 $R$ 的左纯量乘法 $R \times M \to M$. 从这个观点看, 向量空间是域上的模, 而交换群无非是 $\Z$-模.
 
 模是数学中一种富于弹性, 用途特别广泛的结构; 例如
 \begin{inparaenum}[(a)]
@@ -1715,7 +1715,7 @@ $\begin{tikzcd}
 	现证 (i) $\implies$ (ii). 设 $M = \sum_{i \in I} M_i$, 每个 $M_i$ 都是单子模. 置
 	\[ \mathcal{J} := \left\{ J \subset I: \sum_{i \in J} M_i \;\text{是直和} \right\}. \]
 	我们将用 Zorn 引理证明偏序集 $(\mathcal{J}, \subset)$ 有极大元. 注意到空和定义为零模故 $\emptyset \in \mathcal{J}$, $\mathcal{J} \neq \emptyset$. 我们断言 $(\mathcal{J}, \subset)$ 中每个链都有上界, 论证如下: 给定全序子集 $\mathcal{J}' \subset \mathcal{J}$, 并集 $J' := \cup_{J \in\mathcal{J}'} J$ 仍属于 $\mathcal{J}$, 这是因为 $\sum_{i \in J'} M_i$ 为直和当且仅当
-	\[ \forall i \in J', \; M_i \cap \sum_{\substack{j \in \mathcal{J}' \\ j \neq i}} M_j = \{0\}, \]
+	\[ \forall i \in J', \; M_i \cap \sum_{\substack{j \in J' \\ j \neq i}} M_j = \{0\}, \]
 	而此条件仅须对 $J'$ 的有限子集检验即可. 
 	
 	取 $J$ 为 $(\mathcal{J}, \subset)$ 的极大元. 若 $\bigoplus_{i \in J} M_i = M$ 则得到 (ii), 否则存在 $k \in I$ 使得 $M_k \not\subset \bigoplus_{i \in J} M_i$; 因为 $M_k$ 单, $M_k \cap \bigoplus_{i \in J} M_i = \{0\}$, 由此可推出 $J \sqcup \{k\} \in \mathcal{J}$, 矛盾.

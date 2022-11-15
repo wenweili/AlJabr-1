@@ -318,7 +318,7 @@
 	定义出函子 $\Spec: \cate{CRing}^\text{op} \to \cate{Set}$, 其中 $\cate{CRing}$ 表示交换环所成的范畴.
 \end{lemma}
 \begin{proof}
-	设 $I_2$ 为 $R_2$ 的素理想. 若在 $R_1$ 中有 $xy \in \varphi^{-1}(I_2)$, 则 $\varphi(x)\varphi(y) \in I_2$, 从而 $x$, $y$ 必有一者落在 $\varphi^{-1}(I_2)$. 于是 $\varphi^{-1}(I_2)$ 为 $R_1$ 的素理想. 为证明 $\Spec$ 给出函子 $\cate{CRing}^\text{op} \to \cate{Set}$, 仅须对任一对可合成的同态 $\varphi$, $\psi$ 证明 $(\varphi \circ \psi)^\sharp = \psi^\sharp \circ \phi^\sharp$: 观察到 $(\varphi \circ \psi)^{-1} = \psi^{-1} \circ \varphi^{-1}$ 足矣.
+	设 $I_2$ 为 $R_2$ 的素理想. 若在 $R_1$ 中有 $xy \in \varphi^{-1}(I_2)$, 则 $\varphi(x)\varphi(y) \in I_2$, 从而 $x$, $y$ 必有一者落在 $\varphi^{-1}(I_2)$. 于是 $\varphi^{-1}(I_2)$ 为 $R_1$ 的素理想. 为证明 $\Spec$ 给出函子 $\cate{CRing}^\text{op} \to \cate{Set}$, 仅须对任一对可合成的同态 $\varphi$, $\psi$ 证明 $(\varphi \circ \psi)^\sharp = \psi^\sharp \circ \varphi^\sharp$: 观察到 $(\varphi \circ \psi)^{-1} = \psi^{-1} \circ \varphi^{-1}$ 足矣.
 \end{proof}
 
 \begin{remark}
@@ -1254,7 +1254,7 @@ Möbius 反演公式是组合学与数论中的基本工具. 之所以专辟一�
 \begin{proof}
 	按定义, 乘积 $e_{\bar{\lambda}} = e_{\bar{\lambda}_1} e_{\bar{\lambda}_2} \cdots$ 为所有单项式
 	\[ \left( X_{i_1} \cdots X_{i_{\bar{\lambda}_1}} \right)  \left( X_{j_1} \cdots X_{j_{\bar{\lambda}_2}} \right) \cdots = X_1^{b_1} \cdots X_n^{b_n} \]
-	的和, 其下标满足 $i_1 < \cdots < i_{\bar{\lambda}_1}$, $j_1 < \cdots j_{\bar{\lambda}_2}$ 等等. 因此有 $e_{\bar{\lambda}} = \sum_\mu a_{\lambda, \mu} m_\mu$, 其中 $a_{\lambda, \mu} \in \Z_{\geq 0}$. 欲进一步理解 $a_{\lambda, \mu}$, 必须梳理每个变元 $X_i$ 在左式中出现的次数 $b_i$. 为此, 我们将下标 $i_1, \ldots$ 和 $j_1, \ldots$ 等等 (作为变元的标记) 逐列填入 $\lambda$ 的 Young 图, 如:
+	的和, 其下标满足 $i_1 < \cdots < i_{\bar{\lambda}_1}$, $j_1 < \cdots < j_{\bar{\lambda}_2}$ 等等. 因此有 $e_{\bar{\lambda}} = \sum_\mu a_{\lambda, \mu} m_\mu$, 其中 $a_{\lambda, \mu} \in \Z_{\geq 0}$. 欲进一步理解 $a_{\lambda, \mu}$, 必须梳理每个变元 $X_i$ 在左式中出现的次数 $b_i$. 为此, 我们将下标 $i_1, \ldots$ 和 $j_1, \ldots$ 等等 (作为变元的标记) 逐列填入 $\lambda$ 的 Young 图, 如:
 	\[ \begin{ytableau}
 		i_1 & j_1 & \none[\cdots] \\
 		i_2 & j_2 & \none[\ddots] \\

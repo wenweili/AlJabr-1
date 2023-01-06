@@ -1,4 +1,4 @@
-This is the LaTeX source for the textbook **Methods of Algebra** (in Chinese: 代数学方法), Volume 1, revised version (November 2022).
+This is the LaTeX source for the textbook **Methods of Algebra** (in Chinese: 代数学方法), Volume 1, revised version (January 2023).
 
 The book is originally published in 2019 by Higher Education Press (Beijing), ISBN 978-7-04-050725-6. The revised version will be published soon.
 

@@ -366,7 +366,7 @@
 	设 $X$ 为 $R$-模 $M$ 的子集. 根据命题 \ref{prop:free-module-property}, 包含映射 $X \hookrightarrow M$ 诱导出同态 $\sigma: R^{\oplus X} \to M$. 我们称
 	\begin{itemize}
 		\item $X$ 是\emph{线性无关}的或\emph{自由}的, 如果 $\sigma$ 是单射, 反之则称 $X$ 是\emph{线性相关}的;
-		\item $X$ 生成或张成 $M$, 如果 $\sigma$ 是满射, 此时称 $X$ 为 $M$ 的\emph{生成集}. 具有有限生成集的模成为\emph{有限生成模}.\index{youxianshengcheng}
+		\item $X$ 生成或张成 $M$, 如果 $\sigma$ 是满射, 此时称 $X$ 为 $M$ 的\emph{生成集}. 具有有限生成集的模称为\emph{有限生成模}.\index{youxianshengcheng}
 	\end{itemize}
 	线性无关生成集称为\emph{基}; 具有基的模亦称\emph{自由模}, 这是定义 \ref{def:free-module} 的内禀版本.
 \end{definition}
@@ -888,7 +888,7 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 		\Hom(S_S, M_S) & \longrightiso M \\
 		\varphi & \longmapsto \varphi(1).
 	\end{align*}
-	这里仍沿用约定 \ref{con:Hom-assoc}. 由于 $(\varphi r)(1) = \varphi(r \cdot 1) = \varphi(1 \cdot f(r)) = \varphi(1) f(r)$, 前述同构给出 $\Hom({}_S S, {}_S M) \rightiso \mathcal{F}_{R \to S}(M)$; 它对 $M$ 的函子性是容易验证的.
+	这里仍沿用约定 \ref{con:Hom-assoc}. 由于 $(\varphi r)(1) = \varphi(r \cdot 1) = \varphi(1 \cdot f(r)) = \varphi(1) f(r)$, 前述同构给出 $\Hom(S_S, M_S) \rightiso \mathcal{F}_{R \to S}(M)$; 它对 $M$ 的函子性是容易验证的.
 
 	另一方面, 命题 \ref{prop:tensor-unit} 给出右 $S$-模的自然同构 $M \dotimes{S} S_S \rightiso M$ 映 $m \otimes s$ 为 $ms$. 回忆 $M \dotimes{S} S$ 的右模结构可知 $\mathcal{F}_{R \to S} (M \dotimes{S} S_S) = M \dotimes{S} \mathcal{F}_{R \to S}(S_S) = M \dotimes{S} S_R$.
 \end{proof}
@@ -1568,7 +1568,7 @@ $\begin{tikzcd}
 	
 	为证第二个断言, 仅须对短正合列
 	\[\begin{tikzcd}
-		0 \arrow[r] & M \arrow[r] & M+N \arrow[r] & (M+N)/N \arrow[r] \arrow[d, "\simeq"] & 0 \\
+		0 \arrow[r] & N \arrow[r] & M+N \arrow[r] & (M+N)/N \arrow[r] \arrow[d, "\simeq"] & 0 \\
 		& & & M/M \cap N & (\because\;\text{命题 \ref{prop:3rd-homomorphism-module}})
 	\end{tikzcd}\]
 	应用上述结果. 

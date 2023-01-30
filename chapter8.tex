@@ -705,7 +705,7 @@
 
 \begin{theorem}\label{prop:norm-trace-F(x)}
 	设 $x$ 在 $F$ 上的极小多项式为 $P_x = X^n + a_{n-1}X^{n-1} + \cdots + a_0$, 则
-	\[ \Nm_{F(x)|F}(x) = (-1)^n a_n, \quad \Tr_{F(x)|F}(x) = -a_{n-1}. \]
+	\[ \Nm_{F(x)|F}(x) = (-1)^n a_0, \quad \Tr_{F(x)|F}(x) = -a_{n-1}. \]
 \end{theorem}
 \begin{proof}
 	使用原始定义 \ref{def:norm-trace}. 取 $F$-向量空间 $F(x)$ 的基 $1, x, \ldots, x^{n-1}$ (计入顺序). 因为 $x \cdot x^{n-1} = \sum_{i=0}^{n-1} (-a_i)x^i$, 对应于左乘映射 $m_x: a \mapsto xa$ 的矩阵是
@@ -758,7 +758,7 @@
 \begin{theorem}
 	设 $E=F(x)$, 其中 $x$ 的极小多项式 $P_x$ 为 $n$ 次, 记
 	\[ \frac{P_x}{X-x} = \sum_{i=0}^{n-1} b_i X^i \quad \in E[X]. \]
-	若 $P'_x(x) \neq 0$, 则对 $E$ 的基 $1, x, \ldots, x^n$, 相对于 $\Tr_{E|F}$ 的对偶基为
+	若 $P'_x(x) \neq 0$, 则对 $E$ 的基 $1, x, \ldots, x^{n-1}$, 相对于 $\Tr_{E|F}$ 的对偶基为
 	\[ \frac{b_0}{P'_x(x)}, \ldots, \frac{b_{n-1}}{P'_x(x)}. \]
 \end{theorem}
 \begin{proof}

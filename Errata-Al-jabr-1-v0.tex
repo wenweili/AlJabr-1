@@ -2,7 +2,7 @@
 %!TEX encoding = UTF-8
 
 % LaTeX source for the errata of the book ``代数学方法'' in Chinese
-% Copyright 2022  李文威 (Wen-Wei Li).
+% Copyright 2023  李文威 (Wen-Wei Li).
 % Permission is granted to copy, distribute and/or modify this
 % document under the terms of the Creative Commons
 % Attribution 4.0 International (CC BY 4.0)
@@ -69,7 +69,7 @@
 
 \begin{document}
 	\maketitle
-	以下页码等信息参照高等教育出版社 2019 年 1 月出版之《代数学方法》第一卷, ISBN: 978-7-04-050725-6. 这些错误已在修订版改正 (2022 年 9 月网络发布, 纸本待出).
+	以下页码等信息参照高等教育出版社 2019 年 1 月出版之《代数学方法》第一卷, ISBN: 978-7-04-050725-6. 这些错误已在修订版改正 (2023 年 2 月网络发布, 纸本待出).
 
 	\begin{Errata}
 		\item[第 12 页, 倒数第 8 行]
@@ -137,19 +137,19 @@
         \Corr $\eta$
         \Thx{感谢蒋之骏指正}
 	
-	\item[第 53 页, 命题 2.6.10 第 2 行]
-	\Orig $Y \in \Obj(\mathcal{C}_1)$
-	\Corr $Y \in \Obj(\mathcal{C}_2)$
-	\Thx{感谢苏福茵指正}
+		\item[第 53 页, 命题 2.6.10 第 2 行]
+		\Orig $Y \in \Obj(\mathcal{C}_1)$
+		\Corr $Y \in \Obj(\mathcal{C}_2)$
+		\Thx{感谢苏福茵指正}
 
-		\item[第 54 页最后] \Corr 图表微调成
-		\begin{center}\begin{tikzpicture}[bend angle=70, auto, fct/.style={circle, draw=gray!40, fill=gray!10}]
-			\node[fct] (G1) {$G$}; \node[fct] (F1) [right=of G1] {$F$} edge[bend right] node[swap] {$\eta$} (G1);
-			\node[fct] (G2) [above right=of F1] {$G$}; \node[fct] (F2) [right=of G2] {$F$} edge[bend left] node {$\eta^{-1}$} (G2);
-			\node[fct] (F3) [right=of F2] {$F$}; \node[fct] (G3) [right=of F3] {$G$} edge[bend left] node {$\varepsilon$} (F3);
-			\node[fct] (F4) [below right=of G3] {$F$}; \node[fct] (G4) [right=of F4] {$G$} edge[bend right] node[swap] {$\varepsilon^{-1}$} (F4);
-		\end{tikzpicture}\end{center}
-		兴许更易懂. \Thx{感谢熊锐提供意见.}
+%		\item[第 54 页最后] \Corr 图表微调成
+%		\begin{center}\begin{tikzpicture}[bend angle=70, auto, fct/.style={circle, draw=gray!40, fill=gray!10}]
+%			\node[fct] (G1) {$G$}; \node[fct] (F1) [right=of G1] {$F$} edge[bend right] node[swap] {$\eta$} (G1);
+%			\node[fct] (G2) [above right=of F1] {$G$}; \node[fct] (F2) [right=of G2] {$F$} edge[bend left] node {$\eta^{-1}$} (G2);
+%			\node[fct] (F3) [right=of F2] {$F$}; \node[fct] (G3) [right=of F3] {$G$} edge[bend left] node {$\varepsilon$} (F3);
+%			\node[fct] (F4) [below right=of G3] {$F$}; \node[fct] (G4) [right=of F4] {$G$} edge[bend right] node[swap] {$\varepsilon^{-1}$} (F4);
+%		\end{tikzpicture}\end{center}
+%		兴许更易懂. \Thx{感谢熊锐提供意见.}
 
 		\item[第 56 页, 倒数第 13 行]
 		\Orig $\epsilon' (FG \epsilon')(F\eta G)$
@@ -687,6 +687,14 @@
         \Orig $\prod_{i=1}^n \cdots$
         \Corr $\prod_{m=1}^n \cdots$
         
+        \item[第 321 页, 定理 8.6.1 的陈述]
+        \Orig $(-1)^n a_n$
+        \Corr $(-1)^n a_0$
+        
+        \item[第 323 页, 定理 8.6.3 的陈述]
+        \Orig $1, x, \ldots, x^n$
+        \Corr $1, x, \ldots, x^{n-1}$
+        
         \item[第 325 页, 第 10 行 (定义--定理 8.7.3 证明)]
         \Orig $a^{-p^m}$
         \Corr $a^{p^{-m}}$
@@ -820,6 +828,8 @@
 
         \item[第 416 页, 定理 10.9.7]
         将陈述的第一段修改为: ``在所有 $\WittV(R)$ 上存在唯一的一族交换环结构, 使得 $w: \WittV(R) \to \prod_{n \geq 0} R$ 为环同态, $(0, 0, \ldots)$ 为零元, $(1, 0, \ldots)$ 为幺元, 而且: '' (换行, 开始表列)
+        
+        对于表列第一项, 改述为``下图皆在 $\cate{CRing}$ 中交换''.
         
         对于表列第二项 (``存在唯一确定的多项式族...所确定''), 最后补上``...所确定, 这些多项式与 $R$ 无关.''
         

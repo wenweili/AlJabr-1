@@ -932,7 +932,7 @@ $\begin{tikzcd}
 	函子 $F: \mathcal{C}_1 \to \mathcal{C}_2$ 有右伴随的充分必要条件是 $A_Y$ 对每个 $Y$ 皆可表; 类似地, $G: \mathcal{C}_2 \to \mathcal{C}_1$ 有左伴随的充分必要条件是 $\Hom_{\mathcal{C}_1}(X, G(\cdot))$ 对每个 $X$ 皆可表.
 \end{proposition}
 \begin{proof}
-	证明 $F$ 的情形即可. 必要性是显然的. 反之, 假设对每个 $Y$ 存在对象 $GY$ 和同构 $\psi_Y: h_{\mathcal{C}_1}(GY) \rightiso A_Y := \Hom(F(\cdot), Y)$.  请留意 $h_{\mathcal{C}}(GY) = \Hom_{\mathcal{C}_2}(\cdot, GY)$. 引理 \ref{prop:representable-functor-uniqueness} 断言 $(GY, \psi_Y)$ 的唯一性: 它是逗号范畴 $(h_{\mathcal{C}_1} / A_Y)$ 的终对象. 对每个 $Y$ 选定 $(GY, \psi_Y)$. 任意态射 $h: Y \to Y'$ 诱导 $h_*: A_Y \to A_{Y'}$, 因而存在唯一的 $Gh: GY \to GY'$ 使得下图交换
+	证明 $F$ 的情形即可. 必要性是显然的. 反之, 假设对每个 $Y$ 存在对象 $GY$ 和同构 $\psi_Y: h_{\mathcal{C}_1}(GY) \rightiso A_Y := \Hom(F(\cdot), Y)$.  请留意 $h_{\mathcal{C}_1}(GY) = \Hom_{\mathcal{C}_2}(\cdot, GY)$. 引理 \ref{prop:representable-functor-uniqueness} 断言 $(GY, \psi_Y)$ 的唯一性: 它是逗号范畴 $(h_{\mathcal{C}_1} / A_Y)$ 的终对象. 对每个 $Y$ 选定 $(GY, \psi_Y)$. 任意态射 $h: Y \to Y'$ 诱导 $h_*: A_Y \to A_{Y'}$, 因而存在唯一的 $Gh: GY \to GY'$ 使得下图交换
 	\[ \begin{tikzcd}
 		h_{\mathcal{C}_1}(GY) \arrow[d, "{h_{\mathcal{C}_1}(Gh)}"'] \arrow[r, "\psi_Y", "\sim"'] & A_Y \arrow[d, "h_*"] \\
 		h_{\mathcal{C}_1}(GY') \arrow[r, "{\psi_{Y'}}"', "\sim"] & A_{Y'} .
@@ -1066,7 +1066,7 @@ $\begin{tikzcd}
 		\node[fct] (Y2) [left=of Y3] {$F$} edge[bend left] node {$\varepsilon^{-1}$} (Y3);
 		\coordinate (X) at ($(X0)!.5!(Y0)$);
 	\end{tikzpicture} \]
-	等式右边的底部再装配 $\epsilon \cdot (F\eta^{-1}G)$, 便是 \eqref{eqn:adj-equiv-two-expression}.
+	等式右边的底部再装配 $\varepsilon \cdot (F\eta^{-1}G)$, 便是 \eqref{eqn:adj-equiv-two-expression}.
 
 	现在来证明 \eqref{eqn:adj-zigzag-2}. 将 \eqref{eqn:adj-equiv-two-expression} 的左图代入 $\varepsilon'$, 省略函子标记以表 $(G\varepsilon')(\eta G)$ 为
 	\[ \begin{tikzpicture}[baseline=(X), bend angle=70, auto, fct/.style={circle, draw=gray!40, fill=gray!10}]
@@ -1637,7 +1637,7 @@ $\begin{tikzcd}
 		交换. 米田引理 (定理 \ref{prop:Yoneda-lemma}) 表明 $\eta_Y: Y \rightiso GFY$ 当且仅当 $f \mapsto \eta_Y f$ 给出双射 $\Hom(X, Y) \rightiso \Hom(X, GFY)$, 其中 $X$ 取遍 $\mathcal{C}_1$ 的对象; 既然 $\varphi$ 是同构, 这又相当于 $f \mapsto Ff$ 是双射, 亦即 $F$ 是全忠实的. }
 
 	\item 假设 $\mathcal{C}$ 既是完备也是余完备的. 对于小范畴 $I$, 证明对角函子 $\Delta: \mathcal{C} \to \mathcal{C}^I$ (定义 \ref{def:diagonal-functor}) 有左, 右伴随函子, 阐释它们与 $\mathcal{C}$ 中的 $\varinjlim$ 与 $\varprojlim$ 的关系, 相应的单位和余单位作何解释?
-	\item 设域 $\Bbbk$ 为域, 证明在 $\Bbbk$-向量空间范畴 $\cate{Vect}_f(\Bbbk)$ 里, 每个对象都同构于一些有限维子空间的 $\varinjlim$. 将此想法移植到交换群范畴 $\cate{Ab}$ (考虑有限生成交换群的 $\varinjlim$).
+	\item 设域 $\Bbbk$ 为域, 证明在 $\Bbbk$-向量空间范畴 $\cate{Vect}(\Bbbk)$ 里, 每个对象都同构于一些有限维子空间的 $\varinjlim$. 将此想法移植到交换群范畴 $\cate{Ab}$ (考虑有限生成交换群的 $\varinjlim$).
 	\item 设 $\mathcal{C}$ 是 $\mathcal{C}'$ 的全子范畴, 包含函子记为 $J: \mathcal{C} \to \mathcal{C}'$. 说明对任意两个函子 $F, G: \mathcal{C}_0 \rightrightarrows \mathcal{C}$, 与 $J$ 的横合成诱导双射
 		\[ \Hom_{\text{Fct}(\mathcal{C}_0, \mathcal{C}')}(JF, JG) = \Hom_{\text{Fct}(\mathcal{C}_0, \mathcal{C})}(F, G). \]
 	\item 在带基点的集合范畴 $\cate{Set}_\bullet$ 中描述积和余积, 证明它是完备且余完备的. 推广到 $\cate{Top}_\bullet$ 的情形.

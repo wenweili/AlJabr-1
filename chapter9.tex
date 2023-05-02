@@ -407,7 +407,7 @@ Galois 理论的原初目的是研究多项式方程的解, 方法是考察根�
 	A \arrow[r, "\varphi"] \arrow[d, "\Frob_q"'] & B \arrow[d, "\Frob_q"] \\
 	A \arrow[r, "\varphi"'] & B
 \end{tikzcd} \qquad \begin{tikzcd}
-	a \arrow[mapsto, r] \arrow[mapsto, d] & \varphi(b) \arrow[mapsto, d] \\
+	a \arrow[mapsto, r] \arrow[mapsto, d] & \varphi(a) \arrow[mapsto, d] \\
 	a^q \arrow[mapsto, r] & \varphi(a^q) = \varphi(a)^q
 \end{tikzcd}\]
 利用范畴语言, Frobenius 自同态的上述``自然性''归结为一条陈述: $\Frob_q$ 给出恒等函子 $\identity: \F_q\dcate{Alg} \rightiso \F_q\dcate{Alg}$ 的自同态. 落实到代数扩域 $E|\F_q$ 上, 引理 \ref{prop:alg-ext-endomorphism} 立刻给出 $\Frob_q \in \Aut_{\F_q}(E)$.
@@ -497,7 +497,7 @@ Galois 理论的原初目的是研究多项式方程的解, 方法是考察根�
 \end{definition}
 
 \begin{proposition}
-	对于任意 $n$, 全体 $n$ 次单位根对乘法构成循环群 $\mu_n(\overline{F})$. 当 $\mathrm{char}(F) \nmid n$ 时, 我们有 $\mu_n(\overline{F}) \subset F^{\mathrm{sep}\times}$, 而且 $\mu_n$ 是 $n$ 阶循环群, 其生成元正是 $n$ 次本原单位根.
+	对于任意 $n$, 全体 $n$ 次单位根对乘法构成循环群 $\mu_n(\overline{F})$. 当 $\mathrm{char}(F) \nmid n$ 时, 我们有 $\mu_n(\overline{F}) \subset F^{\mathrm{sep}\times}$, 而且 $\mu_n(\overline{F})$ 是 $n$ 阶循环群, 其生成元正是 $n$ 次本原单位根.
 \end{proposition}
 \begin{proof}
 	由于 $|\mu_n(\overline{F})| \leq n$, 第一部分是定理 \ref{prop:field-subgroup-cyclic} 的直接推论. 当 $\text{char}(F) \nmid n$ 时, $(X^n-1)' = nX^{n-1}$ 与 $X^n-1$ 无公因子, 引理 \ref{prop:separable-polynomial-gen} 遂确保 $\Z/n\Z \simeq \mu_n(\overline{F}) \subset F^\text{sep}$. 关于生成元的断言是水到渠成的.
@@ -558,7 +558,7 @@ Galois 理论的原初目的是研究多项式方程的解, 方法是考察根�
 \end{theorem}
 我们称 $\Q(\zeta_n)$ 为第 $n$ 个\emph{分圆域}. \index{fenyuanyu@分圆域 (cyclotomic field)}
 \begin{proof}
-	上来已阐明 $\Q(\mu_n) \simeq \Q[X]/(\Phi_n)$, 故 $[\Q(\zeta_n) : \Q] = \deg \Phi_n = \varphi(n)$, 这也是 Galois 群的阶数. 另一方面 $\varphi(n) = |(\Z/n\Z)^\times|$. 因此命题 \ref{prop:cyclotomic-ext-general} 的群嵌入自动是同构.
+	上来已阐明 $\Q(\zeta_n) \simeq \Q[X]/(\Phi_n)$, 故 $[\Q(\zeta_n) : \Q] = \deg \Phi_n = \varphi(n)$, 这也是 Galois 群的阶数. 另一方面 $\varphi(n) = |(\Z/n\Z)^\times|$. 因此命题 \ref{prop:cyclotomic-ext-general} 的群嵌入自动是同构.
 \end{proof}
 
 \begin{proposition}

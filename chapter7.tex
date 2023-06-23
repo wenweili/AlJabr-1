@@ -498,7 +498,7 @@
 \end{gather}
 当 $2 \in R^\times$ 时, $\epsilon$-交换性蕴涵 $\epsilon(\deg x)=1 \implies x^2 = -x^2 \implies x^2=0$, 条件 \eqref{eqn:strong-anti-commutation} 自动成立. 在微分几何等应用中常取 $R = \CC, \R$, 故无差异.
 
-不难从定义验证 $I$-分次代数 $A$, $B$ 的张量积对 $(A \otimes B)_i = \bigoplus_{j+k=i} A_i \otimes B_j$ 仍然成 $I$-分次代数, 而且交换约束 $c(A,B): A \otimes B \rightiso B \otimes A$ 是分次代数的同构. 不消说, 无穷多个分次代数的张量积也有类似的结果. 对于反交换分次代数的情形, 譬如 $A(X)$, 则须稍加``扭转'' $A \otimes B$ 的乘法以获得期望的性质. 我们希望用一套统一的框架来理解这一机制.
+不难从定义验证 $I$-分次代数 $A$, $B$ 的张量积对 $(A \otimes B)_i = \bigoplus_{j+k=i} A_j \otimes B_k$ 仍然成 $I$-分次代数, 而且交换约束 $c(A,B): A \otimes B \rightiso B \otimes A$ 是分次代数的同构. 不消说, 无穷多个分次代数的张量积也有类似的结果. 对于反交换分次代数的情形, 譬如 $A(X)$, 则须稍加``扭转'' $A \otimes B$ 的乘法以获得期望的性质. 我们希望用一套统一的框架来理解这一机制.
 
 处理此类问题的制高点是引入 $I$-分次模范畴 $R\dcate{Mod}_I$ 的一个辫结构 (定义 \ref{def:braiding}), 亦即自然同构 $c_\epsilon(M, N): M \otimes N \rightiso N \otimes M$ 如下
 \begin{align*}
@@ -920,7 +920,7 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 	\[ \iota(\check{v})(v_0 \wedge \cdots \wedge v_h) = \sum_{i=0}^k (-1)^i v_0 \wedge \cdots \wedge \lrangle{\check{v}, v_i} \wedge \cdots \wedge v_h \]
 	其中 $v_0, \ldots, v_h \in V$. 反之, 要验证这确实给出良定的 $\iota(\check{v}) \in \Hom_F( \bigwedge^{h+1} V, \bigwedge^h V)$, 仅须回顾 $\bigwedge V$ 在定义 \ref{def:Sym-wedge} 中的构造. 细节留给有兴趣的读者.
 \end{proof}
-为了具体地了解 $\iota$, 且取定一组基 $v_1, \ldots, v_n$, 并令 $\check{v}_1, \ldots, \check{v}_n$ 为 $V^\vee$ 的对偶基. 因此 $\bigwedge^k V$ 有一组基形如 $\{ v_{i_1} \wedge \cdots \wedge v_{i_k}: 1 \leq i_1 < \cdots < i_l \leq n \}$. 不妨考虑 $\check{v} = \check{v}_1$ 的情形, 以上刻画立刻给出
+为了具体地了解 $\iota$, 且取定一组基 $v_1, \ldots, v_n$, 并令 $\check{v}_1, \ldots, \check{v}_n$ 为 $V^\vee$ 的对偶基. 因此 $\bigwedge^k V$ 有一组基形如 $\{ v_{i_1} \wedge \cdots \wedge v_{i_k}: 1 \leq i_1 < \cdots < i_k \leq n \}$. 不妨考虑 $\check{v} = \check{v}_1$ 的情形, 以上刻画立刻给出
 \begin{gather}\label{eqn:contraction-concrete}
 	\iota(\check{v}_1)(v_{i_1} \wedge \cdots \wedge v_{i_k}) = \begin{cases}
 		v_{i_2} \wedge \cdots \wedge v_{i_k}, & i_1 = 1 \\
@@ -1048,7 +1048,7 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 \begin{align*}
 	\det(\varphi\psi) & = \det(\varphi)\det(\psi), \quad \det(\identity_E)=1, \quad \det(0)=0 \\
 	\det(r\varphi) &= r^{\rank_R(E)} \det(\varphi), \quad r \in R, \\
-	\Tr(r\varphi + s\psi) & = r\cdot\Tr(\varphi) + s\cdot\Tr(\varphi), \quad r,s \in R, \\
+	\Tr(r\varphi + s\psi) & = r\cdot\Tr(\varphi) + s\cdot\Tr(\psi), \quad r,s \in R, \\
 	\Tr(1) & = \rank_R(E). 
 \end{align*}
 

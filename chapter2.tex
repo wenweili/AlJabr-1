@@ -482,13 +482,13 @@
 		\item 余积(又称无交并)范畴 $\coprod_{i \in I} \mathcal{C}_i$ 定义如下:
 			\begin{align*}
 				\Obj\left( \coprod_{i \in I} \mathcal{C}_i \right) & := \coprod_{i \in I} \Obj(\mathcal{C}_i), \\
-				\Hom_{\coprod_{i \in I} \mathcal{C}_i}(X_j, X_k) & :=
+				\Hom_{\coprod_{i \in I} \mathcal{C}_i}(X_j, X'_k) & :=
 				\begin{cases}
-					\Hom_{\mathcal{C}_j}(X_j, X_k), & j = k, \\
+					\Hom_{\mathcal{C}_j}(X_j, X'_k), & j = k, \\
 					\emptyset, & j \neq k;
 				\end{cases}
 			\end{align*}
-			其中对每个 $j \in I$, $X_j \in \Obj(\mathcal{C}_j)$. 态射的合成是在各个 $\mathcal{C}_i$ 中个别定义的.
+			其中对每个 $j \in I$, $X_j, X'_j \in \Obj(\mathcal{C}_j)$. 态射的合成是在各个 $\mathcal{C}_i$ 中个别定义的.
 	\end{itemize}
 \end{definition}
 由于 $I$ 已假设是 $\mathcal{U}$-集, 我们造出的范畴仍然是 $\mathcal{U}$-范畴; 如果每个 $\mathcal{C}_i$ 都是 $\mathcal{U}$-小范畴, 则它们的积和余积亦然.

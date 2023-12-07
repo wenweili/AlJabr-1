@@ -303,7 +303,7 @@
 
 \begin{remark}\label{rem:filtrant-mod-limit}
 	类似于集合情形, 模的滤过 $\varinjlim$ 具有更容易掌握的构造, 它涵摄了代数学中俗称的直极限. 设 $I$ 为滤过小范畴 (定义 \ref{def:filtrant-cat}) 并考虑函子 $\alpha: I \to R\dcate{Mod}$, 对象层面记作 $i \mapsto M_i$, 则 $\varinjlim_i M_i := \varinjlim \alpha$ 作为集合可以取为:
-	\[ \varinjlim_i M_i := \left( \bigoplus_{i \in \Obj(I)} M_i \right) \bigg/\sim \]
+	\[ \varinjlim_i M_i := \left( \bigsqcup_{i \in \Obj(I)} M_i \right) \bigg/\sim \]
 	其中 $\sim$ 是由 \eqref{eqn:filtrant-equiv} 定义的等价关系; 换句话说, 它是合成函子 $I \xrightarrow{\alpha} R\dcate{Mod} \to \cate{Set}$ 的 $\varinjlim$. 与环的情形 (命题 \ref{prop:ring-filtrant-limit}) 类似, 要点在于选取 $R$-模结构使得 $M_j \to \varinjlim_i M_i$ 成为同态, 选取既是明显的也是唯一的. 请读者仿照环的情形进行论证. 当 $I$ 是全序集而所有转移同态 $i \leq j \implies M_i \to M_j$ 都是单射时, 极限可以合理地写作 $\bigcup_i M_i$.
 \end{remark}
 

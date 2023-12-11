@@ -683,7 +683,7 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 	对任意左, 右 $R$-模族 $(N_j)_{j \in J}$ 和 $(M_i)_{i \in I}$, 存在自然同态
 	\[\begin{tikzcd}[row sep=small]
 		\left( \prod_{i \in I} M_i\right) \dotimes{R} \left( \prod_{j \in J} N_j \right) \arrow[r] & \prod_{(i,j) \in I \times J} M_i \dotimes{R} N_j \\
-		\left( \bigoplus_{i \in I} M_i\right) \dotimes{R} \left( \bigoplus_{j \in J} N_j \right) \arrow[r, "\sim"] \arrow[phantom, u, sloped, "\subset" description] & \bigoplus_{(i,j) \in I \times J} M_i \dotimes{R} N_j \arrow[phantom, u, sloped, "\subset" description]
+		\left( \bigoplus_{i \in I} M_i\right) \dotimes{R} \left( \bigoplus_{j \in J} N_j \right) \arrow[r, "\sim"] \arrow[u] & \bigoplus_{(i,j) \in I \times J} M_i \dotimes{R} N_j \arrow[phantom, u, sloped, "\subset" description]
 	\end{tikzcd}\]
 	它对变元 $(N_j)_{j \in J}$ 和 $(M_i)_{i \in I}$ 具备函子性. 当 $M_i$, $N_j$ 具有双模结构时, 此性质可以延伸到注记 \ref{rem:bimodule-balanced} 版本的张量积.
 \end{proposition}
@@ -693,7 +693,7 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 		\prod_{i \in I} M_i \times \prod_{j \in J} N_j & \longrightarrow \prod_{(i,j) \in I \times J} M_i \dotimes{R} N_j \\
 		((x_i)_i, (y_j)_j) & \longmapsto (x_i \otimes y_j)_{i,j}
 	\end{align*}
-	它在 $\bigoplus_{i \in I} M_i \times \bigoplus_{j \in J} N_j$ 上的限制的像落在 $\bigoplus_{(i,j) \in I \times J} M_i \dotimes{R} N_j$ 中, 因为仅涉及有限个非零的 $x_i \otimes y_j$. 这就给出了断言中的两个同态, 且记涉及直和的同态为 $\Phi$.
+	它在 $\bigoplus_{i \in I} M_i \times \bigoplus_{j \in J} N_j$ 上的限制的像落在 $\bigoplus_{(i,j) \in I \times J} M_i \dotimes{R} N_j$ 中, 因为仅涉及有限个非零的 $x_i \otimes y_j$. 这就给出了断言中的两个横向同态, 且记涉及直和的同态为 $\Phi$.
 
 	为了证明 $\Phi$ 为同构, 仅须验证对每个交换群 $A$ 有以下交换图表 (可参看定理 \ref{prop:Yoneda-lemma})
 	\[\begin{tikzcd}
@@ -1625,7 +1625,7 @@ $\begin{tikzcd}
 		\item 并将 $\text{in}(f)$ 的定义改为 $a_m$;
 		\item 在论证中以 $v_X$ 代 $\deg$;
 	\end{compactitem}
-	生成元 $f_1, \ldots, f_m$ 的构造法是完全相同的.
+	生成元 $f_1, \ldots, f_m$ 的构造法是完全相同的. 最后一步改为用形如 $\sum_{i=1}^m u_i f_i X^{d_i}$ 的元素不断消去 $f_{m+1}$ 的最低次项, 最终推得 $f_{m+1} \in \mathfrak{a}$.
 \end{proof}
 
 现在我们不用花太大力气, 就可以把 \S\ref{sec:composition-series-grp} 的合成列概念移植到模论. 以下固定环 $R$ 并考虑其左模.

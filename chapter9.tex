@@ -812,12 +812,12 @@ Galois 理论的原初目的是研究多项式方程的解, 方法是考察根�
 	\begin{equation}\label{eqn:abstract-Kummer-aux} \begin{tikzcd}[row sep=tiny]
 		\left\{ \text{子群}\; \Delta: \wp(A_F) \subset \Delta \subset A_F \right\} \arrow[r, yshift=0.5ex] & \left\{ \Gamma \stackrel{\text{闭}}{\lhd} \Gamma_F: \; \Gamma_F/\Gamma \;\text{交换并且有指数}\; n  \right\} \arrow[l, yshift=-0.5ex] \\
 		& \xleftrightarrow{1:1} \left\{ \bar{\Gamma} \subset \Gal(F_n|F) : \text{闭子群} \right\} \\
-		\Delta \arrow[mapsto]{r} & \Gamma := \left\{\gamma \in \Gamma_F: \chi(\Delta, \gamma) \stackrel{\text{恒等}}{=} 1 \right\}  \\
-		\Delta := \left\{a \in A_F: \chi(a, \Gamma) \stackrel{\text{恒等}}{=} 1 \right\} & \Gamma \arrow[mapsto]{l}.
+		\Delta \arrow[mapsto]{r} & \Gamma := \left\{\gamma \in \Gamma_F: \chi(\Delta, \gamma) \stackrel{\text{恒等}}{=} 0 \right\}  \\
+		\Delta := \left\{a \in A_F: \chi(a, \Gamma) \stackrel{\text{恒等}}{=} 0 \right\} & \Gamma \arrow[mapsto]{l}.
 	\end{tikzcd}\end{equation}
 	映射 $\leftarrow$ 良定是显然的. 接着观察到 $\rightarrow$ 也良定: 闭子群之交 $\bigcap_{\delta \in \Delta} \Ker(\chi_\delta) = \Gamma$ 仍闭. 又因为 $\gamma \mapsto \chi(\cdot, \gamma)$ 诱导群嵌入 $\Gamma_F/\Gamma \hookrightarrow \Hom\left( \Delta/\wp(A_F), \mu_\wp \right)$, 故 $\Gamma_F/\Gamma$ 确实是有指数 $n$ 的交换群.
 
-	从 $\chi$ 的定义可见 $\chi(\Delta, \gamma) = 1$ 等价于 $\gamma$ 固定 $F(\wp^{-1}(\Delta))$, 而 $\chi(a, \Gamma_E)=1$ 等价于 $a \in \wp(A_E)$, 于是在 Galois 对应 $\Gamma = \Gamma_E \leftrightarrow E$ 下, \eqref{eqn:abstract-Kummer-aux} 无非是定理所断言的双射. 剩下的任务是证明 \eqref{eqn:abstract-Kummer-aux} 的映射互逆, 并且 $\chi$ 诱导出 $\Delta/\wp(A_F) \rightiso \Hom_{\text{c}}\left( \Gamma_F/\Gamma, \mu_\wp \right)$ 和 $\Gamma_F/\Gamma \rightiso \Hom\left( \Delta/\wp(A_F), \mu_\wp \right)$.
+	从 $\chi$ 的定义可见 $\chi(\Delta, \gamma) = 0$ 等价于 $\gamma$ 固定 $F(\wp^{-1}(\Delta))$, 而 $\chi(a, \Gamma_E) = 0$ 等价于 $a \in \wp(A_E)$, 于是在 Galois 对应 $\Gamma = \Gamma_E \leftrightarrow E$ 下, \eqref{eqn:abstract-Kummer-aux} 无非是定理所断言的双射. 剩下的任务是证明 \eqref{eqn:abstract-Kummer-aux} 的映射互逆, 并且 $\chi$ 诱导出 $\Delta/\wp(A_F) \rightiso \Hom_{\text{c}}\left( \Gamma_F/\Gamma, \mu_\wp \right)$ 和 $\Gamma_F/\Gamma \rightiso \Hom\left( \Delta/\wp(A_F), \mu_\wp \right)$.
 	
 	后续推导是拓扑群理论中 Pontryagin 对偶性 \cite[第三章]{FL14} 的标准结果. 此处将从代数角度勾勒. 考虑不带拓扑 (或曰带离散拓扑) 的指数 $n$ 交换群 $A$, 构成的范畴记为 $\mathcal{I}_n$. 若考虑兼为 pro-有限群的 $A$ (定义 \ref{def:profinite-group}), 相应范畴记为 $\mathcal{P}_n$, 这时 $A$ 成为紧 Hausdorff 群, 而态射取作连续同态. 择定同构 $\mu_\wp \simeq \frac{1}{n}\Z \big/ \Z$.
 	\begin{enumerate}
@@ -1170,7 +1170,7 @@ I.\ M.\ Isaacs \cite{Is85} 发现一个有趣的相关结果: 设不可约多项
 					\in F^{\times 2} & \text{可约} & V & 1
 				\end{array}\]
 		\end{enumerate}
-	\item 继续考虑上题中 $\delta \notin F^{\times 2}$ 而 $Q$ 可约的情形, 此时 $Q$ 的分裂域是 $F(\sqrt{\delta})$. 若 $P$ 在 $F(\sqrt{\delta})$ 上可约则 $G \simeq D_8$, 否则 $G \simeq \Z/4\Z$. 然而这并不是唯一的区分方法.
+	\item 继续考虑上题中 $\delta \notin F^{\times 2}$ 而 $Q$ 可约的情形, 此时 $Q$ 的分裂域是 $F(\sqrt{\delta})$. 若 $P$ 在 $F(\sqrt{\delta})$ 上不可约则 $G \simeq D_8$, 否则 $G \simeq \Z/4\Z$. 然而这并不是唯一的区分方法.
 	\item 补全定理 \ref{prop:characterization-constructible-2} 的证明.
 	\item 有序域指的是一个域 $F$ 配上一个子集 $P \subset F$ (称为正锥), 满足于
 		\begin{compactitem}

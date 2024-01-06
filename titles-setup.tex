@@ -162,10 +162,10 @@
 \titlespacing*{name=\subsubsection}	% 设置间隔
 	{0pt}{*1}{1em}    % {left}{before-sep}{after-sep}
 
-\renewcommand{\thepart}{\CJKnumber{\arabic{part}}}	% 部分的标题编号汉化
+% 不应重新定义 \thepart 命令, 否则 PDF bookmark 将有问题. 改为在 Label 部份转换中文数字.
 \titleformat{name=\part}[display]	% 各部分标题
 	{\filcenter\sffamily\bfseries\CJKfamily{song}\Huge}	% Format
-	{第{\thepart}部分}	% Label
+	{第{\CJKnumber{\arabic{part}}}部分}	% Label
 	{1.5em}	% Sep
 	{#1}	% Before-code
 	[]	% After-code

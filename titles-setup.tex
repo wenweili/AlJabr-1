@@ -13,9 +13,9 @@
 
 % 目录部分: 章名除附录外仍用中文标号, 黑体显示. 以参数是否为大写拉丁字母来判定是否在附录 (烂招)
 \if@AJ@traditional
-	\providecommand{\AJchapterttl}[1]{\IfSubStr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}{#1}{附錄 #1	}{第\CJKnumber{#1}章}}
+	\providecommand{\AJchapterttl}[1]{\IfSubStr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}{#1}{附錄 #1	}{第\zhnumber{#1}章}}
 \else
-	\providecommand{\AJchapterttl}[1]{\IfSubStr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}{#1}{附录 #1	}{第\CJKnumber{#1}章}}
+	\providecommand{\AJchapterttl}[1]{\IfSubStr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}{#1}{附录 #1	}{第\zhnumber{#1}章}}
 \fi
 
 \newlength{\BoxTtlwidth}	% 用来计算各种盒子所需宽度
@@ -162,10 +162,11 @@
 \titlespacing*{name=\subsubsection}	% 设置间隔
 	{0pt}{*1}{1em}    % {left}{before-sep}{after-sep}
 
-% 不应重新定义 \thepart 命令, 否则 PDF bookmark 将有问题. 改为在 Label 部份转换中文数字.
+% 部分编号汉化
+\renewcommand{\thepart}{\zhnum{part}}
 \titleformat{name=\part}[display]	% 各部分标题
 	{\filcenter\sffamily\bfseries\CJKfamily{song}\Huge}	% Format
-	{第{\CJKnumber{\arabic{part}}}部分}	% Label
+	{第{\thepart}部分}	% Label
 	{1.5em}	% Sep
 	{#1}	% Before-code
 	[]	% After-code

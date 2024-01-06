@@ -18,7 +18,7 @@
 
 \RequirePackage{fontspec}				% XeLaTeX
 \RequirePackage[CJKchecksingle]{xeCJK}	% XeCJK
-\RequirePackage{CJKnumb}				% 使用 CJK 数字
+\RequirePackage{zhnumber}				% 中文数字转换
 
 % 引入 AMS 宏包 + mathtools
 \RequirePackage[intlimits]{amsmath}

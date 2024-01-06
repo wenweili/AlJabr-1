@@ -48,7 +48,7 @@
 
 \RequirePackage{fontspec}				% XeLaTeX
 \RequirePackage[CJKchecksingle]{xeCJK}	% XeCJK
-\RequirePackage{CJKnumb}				% 使用 CJK 数字
+\RequirePackage{zhnumber}				% 中文数字转换
 
 % 引入 AMS 宏包 + mathtools
 \RequirePackage[intlimits]{amsmath}
@@ -359,7 +359,7 @@
 	\pagestyle{fancy}
 	\if@AJ@CJKthechapter
 		\renewcommand{\chaptermark}[1]{\markboth{
-			第\CJKnumber{\thechapter}章\quad #1
+			第\zhnumber{\thechapter}章\quad #1
 			}{}}
 	\else
 		\renewcommand{\chaptermark}[1]{\markboth{

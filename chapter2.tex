@@ -43,7 +43,7 @@
 	一个范畴 $\mathcal{C}$ 系指以下资料:
 	\begin{enumerate}
 		\item 集合 $\Obj(\mathcal{C})$, 其元素称作 $\mathcal{C}$ 的\emph{对象}.\index{duixiang@对象 (object)}
-		\item 集合 $\Mor(\mathcal{C})$, 其元素称作 $\mathcal{C}$ 的\emph{态射}, 配上一对映射 $\begin{tikzcd} \Mor(\mathcal{C}) \arrow[yshift=-0.5ex, r, "t"'] \arrow[yshift=0.5ex, r, "s"] & \Obj(\mathcal{C}) \end{tikzcd}$, 其中 $s$ 和 $t$ 分别给出态射的\emph{来源}和\emph{目标}. 对于 $X, Y \in \Obj(\mathcal{C})$, 一般习惯记$\Hom_{\mathcal{C}}(X, Y) := s^{-1}(X) \cap t^{-1}(Y)$ 或简记为 $\Hom(X, Y)$, 称为$\Hom$-集, 其元素称为从 $X$ 到 $Y$ 的态射.\index{taishe@态射 (morphism)}\index[sym1]{HomC@$\Hom_{\mathcal{C}}(X,Y)$}
+		\item 集合 $\Mor(\mathcal{C})$, 其元素称作 $\mathcal{C}$ 的\emph{态射}, 配上一对映射 $\begin{tikzcd} \Mor(\mathcal{C}) \arrow[yshift=-0.5ex, r, "t"'] \arrow[yshift=0.5ex, r, "s"] & \Obj(\mathcal{C}) \end{tikzcd}$, 其中 $s$ 和 $t$ 分别给出态射的\emph{来源}和\emph{目标}. 对于 $X, Y \in \Obj(\mathcal{C})$, 一般习惯记 $\Hom_{\mathcal{C}}(X, Y) := s^{-1}(X) \cap t^{-1}(Y)$ 或简记为 $\Hom(X, Y)$, 称为$\Hom$-集, 其元素称为从 $X$ 到 $Y$ 的态射.\index{taishe@态射 (morphism)}\index[sym1]{HomC@$\Hom_{\mathcal{C}}(X,Y)$}
 		\item 对每个对象 $X$ 给定元素 $\identity_X \in \Hom_{\mathcal{C}}(X, X)$, 称为 $X$ 到自身的\emph{恒等态射}.\index{taishe!恒等态射}\index[sym1]{id_X@$\identity_X$}
 		\item 对于任意 $X, Y, Z \in \Obj(\mathcal{C})$, 给定态射间的\emph{合成映射}
 		\begin{align*}

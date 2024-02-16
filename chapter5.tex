@@ -579,7 +579,7 @@ Möbius 反演公式是组合学与数论中的基本工具. 之所以专辟一�
 	\end{align*}
 	左端实际是之前解释过的受限积, 取 $\mathring{x}_p = 0$. 因此 $\prod_p p^{n_p}$ 有限, 映射是良定的. 根据引理 \ref{prop:Mobius-prod} 的受限积版本, $(\Z_{\geq 1}, \prec)$ 的 Möbius 函数 $\mu$ 表作
 	\begin{align*}
-		\mu\left( \prod_p n_p, \prod_p m_p \right) & = \prod_{p: \text{素数}} \mu_{(\Z_{\geq 0}, \leq)}(n_p, m_p) \\
+		\mu\left( \prod_p p^{n_p}, \prod_p p^{m_p} \right) & = \prod_{p: \text{素数}} \mu_{(\Z_{\geq 0}, \leq)}(n_p, m_p) \\
 		& =\begin{cases}
 			\prod_{\substack{p: \text{素数}}} (-1)^{n_p - m_p}, & \forall p \quad n_p-m_p \geq -1 \\
 			0, & \exists p\quad n_p - m_p < -1.

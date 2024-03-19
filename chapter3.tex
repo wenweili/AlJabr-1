@@ -179,7 +179,7 @@
 	\[ \xi_F:  F(\cdot) \otimes F(\cdot) \rightiso F(\cdot \otimes \cdot) \]
 	是二元函子之间的同构, 使得 $\exists \varphi_F: F(\munit_1) \simeq \munit_2$, 并且下图对所有对象 $X,Y,Z$ 交换.
 	\[ \begin{tikzcd}[column sep=10em]
-		F((X \otimes Y) \otimes Z) \arrow[r, "{F a(X,Y,Z)}"] & F(X \otimes (Y \times Z)) \\
+		F((X \otimes Y) \otimes Z) \arrow[r, "{F a(X,Y,Z)}"] & F(X \otimes (Y \otimes Z)) \\
 		F(X \otimes Y) \otimes F(Z) \arrow[u, "{\xi_F(X \otimes Y, Z)}"] & F(X) \otimes F(Y \otimes Z) \arrow[u, "{\xi_F(X, Y \otimes Z)}"'] \\
 		(F(X) \otimes F(Y)) \otimes F(Z) \arrow[r, "{a(F(X), F(Y), F(Z))}"'] \arrow[u, "{\xi_F(X, Y) \otimes \identity}"] & F(X) \otimes (F(Y) \otimes F(Z)) \arrow[u, "{\identity \otimes \xi_F(Y, Z)}"']
 	\end{tikzcd} \]

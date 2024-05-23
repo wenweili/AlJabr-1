@@ -825,7 +825,7 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 	关于自由模 $M$ 的断言可由推论 \ref{prop:Sym-wedge-direct-sum} 化约为秩一的情形, 亦即例 \ref{eg:Sym-wedge-rank1}. 设 $R$-模 $N$ 带有满同态 $R^{\oplus n} \twoheadrightarrow N$, 则推论 \ref{prop:Sym-wedge-rightexact} 蕴涵分次同态 $\bigwedge(R^{\oplus n}) \twoheadrightarrow \bigwedge(N)$ 为满, 关于 $\bigwedge^m N$ 的断言因之化约到自由模情形.
 \end{proof}
 
-最后, 我们来看看如何会通微分几何等学科里常见的定义. 命题 \ref{prop:Symm-Alt-univ} 的泛性质表明 $\Sym(M)$ 与 $\bigwedge(M)$ 定为 $T(M)$ 的商实属合理, 然而在一些场合 (如 \cite[\S 2.2]{ChCh}) 它们被定为全体对称张量 $T_{\Sym}(M)$ 和斜称张量 $T_\wedge(M)$, 是 $T(M)$ 的子模而非商模; 我们简要地回顾这些定义. 留意到对称群 $\mathfrak{S}_n$ 在 $T^n(M)$ 上有左作用 $\sigma(x_1 \otimes \cdots \otimes x_m) = x_{\sigma(1)} \otimes \cdots \otimes x_{\sigma(m)}$, 对于任意群同态 $\chi: \mathfrak{S}_n \to \{\pm 1\}$, 我们定义
+最后, 我们来看看如何会通微分几何等学科里常见的定义. 命题 \ref{prop:Symm-Alt-univ} 的泛性质表明 $\Sym(M)$ 与 $\bigwedge(M)$ 定为 $T(M)$ 的商实属合理, 然而在一些场合 (如 \cite[\S 2.2]{ChCh}) 它们被定为全体对称张量 $T_{\Sym}(M)$ 和斜称张量 $T_\wedge(M)$, 是 $T(M)$ 的子模而非商模; 我们简要地回顾这些定义. 留意到对称群 $\mathfrak{S}_n$ 在 $T^n(M)$ 上有左作用 $\sigma(x_1 \otimes \cdots \otimes x_m) = x_{\sigma^{-1}(1)} \otimes \cdots \otimes x_{\sigma^{-1}(m)}$, 对于任意群同态 $\chi: \mathfrak{S}_n \to \{\pm 1\}$, 我们定义
 \begin{gather*}
 	T^n_\chi := \{x \in T^n(M): \forall \sigma \in \mathfrak{S}_n,\; \sigma x = \chi(\sigma)x\}, \\
 	T_\chi(M) := \bigoplus_{n \geq 1} T^n_\chi(M), \\

@@ -1910,7 +1910,7 @@ $\begin{tikzcd}
 			\item 证明赋值环 $R$ 是 Noether 环当且仅当 $R$ 是主理想环;
 			\item 说明 $\CC\llbracket t \rrbracket$ 是 Noether 赋值环, 而 $\bigcup_{n \geq 1} \CC \llbracket t^{1/2^n} \rrbracket$ 是非 Noether 的赋值环.
 		\end{compactenum}
-	\item 定义 $\Z$-模 $D := \R \dotimes{\Z} (\R/\pi\Z)$, 此处 $\pi$ 表圆周率. 证明在 $D$ 中 $a \otimes b = 0 \iff b \in \Q\pi$.
+	\item 定义 $\Z$-模 $D := \R \dotimes{\Z} (\R/\pi\Z)$, 此处 $\pi$ 表圆周率. 证明在 $D$ 中 $a \otimes b = 0 \iff a = 0 \;\text{或}\; b \in \Q\pi$.
 		\begin{hint}
 			方向 $\impliedby$ 比较容易. 对于 $\implies$, 一种方法是表 $\R$ 为其一切有限生成 $\Z$-子模 $M$ 的滤过 $\varinjlim$, 则命题 \ref{prop:tensor-mod-exact} 说明 $D \simeq \varinjlim_M \left( M \dotimes{\Z} \R/\pi\Z \right)$, 右侧仍是滤过 $\varinjlim$. 故若 $a \in \R \smallsetminus \{0\}$ 满足 $a \otimes b = 0$, 则存在有限生成 $\Z$-子模 $M \subset \R$, $M \supset \Z a$ 满足于 $a \otimes b \mapsto 0 \in M \dotimes{\Z} \R/\pi\Z$; 用初等因子定理 \ref{prop:elementary-divisor-sub} 证明此时必有 $b \in \Q\pi$.
 		\end{hint}

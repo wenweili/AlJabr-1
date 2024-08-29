@@ -1480,7 +1480,7 @@ $\begin{tikzcd}
 \begin{proof}
 	内射模的性质相当于说对任意模嵌入 $g: M' \hookrightarrow M$, 每个同态 $h: M' \to I$ 都能延拓为 $\tilde{h}: M \to I$. 断言的刻画无非是特例 $M' = \mathfrak{a} \hookrightarrow R = M$. 今假设断言的延拓性质成立. 考虑非空偏序集 $(\mathcal{P}, \leq)$, 其元素形如 $(M_1, h_1)$, 在此 $M' \subset M_1 \subset M$ 是中间模, $h_1: M_1 \to I$ 是 $h$ 的延拓, 而 $(M_1, h_1) \leq (M_2, h_2)$ 当且仅当 $(M_1 \subset M_2) \wedge (h_2|_{M_1} = h_1)$. 习见的取并手法和 Zorn 引理确保 $\mathcal{P}$ 中存在极大元, 我们断言 $(M_1, h_1) \in \mathcal{P}$ 如极大必满足 $M_1=M$.
 	
-	假若 $M_1 \neq M$, 取 $x \in M \smallsetminus M_1$ 并定义左理想 $\mathfrak{a} := \{r \in R: rx \in M_1 \}$. 故有合成同态 $\phi: \mathfrak{a} \stackrel{r \mapsto rx}{\hookrightarrow} M_1 \xrightarrow{h_1} I$. 据假设存在 $\phi$ 的延拓 $\tilde{\phi}: R \to I$, 置
+	假若 $M_1 \neq M$, 取 $x \in M \smallsetminus M_1$ 并定义左理想 $\mathfrak{a} := \{r \in R: rx \in M_1 \}$. 故有合成同态 $\phi: \mathfrak{a} \xrightarrow{r \mapsto rx} M_1 \xrightarrow{h_1} I$. 据假设存在 $\phi$ 的延拓 $\tilde{\phi}: R \to I$, 置
 	\begin{align*}
 		h_2: (M_2 := M_1 + Rx) & \longrightarrow I \\
 		x_1 + rx & \longmapsto h_1(x_1) + \tilde{\phi}(r);
@@ -1688,8 +1688,8 @@ $\begin{tikzcd}
 \end{proof}
 
 作为推论, 给定有限直和分解 $M = \bigoplus_{i=1}^r M_i^{\oplus n_i}$, 其中 $M_1, \ldots, M_r$ 是互不同构的单模, 则引理 \ref{prop:Hom-matrix} 表明
-\[ \End_R(M) \rightiso \prod_{i=1}^r M_{n_i}(D_i) \]
-其中 $D_i := \End_R(M_i)^\text{op}$ 是除环, $M_i^{\oplus n_i}$ 是右 $D_i$-模, 而 $M$ 是右 $\End_R(M)^\text{op}$-模, 上述同构保持这些模结构.
+\[ \End_R(M)^\text{op} \rightiso \prod_{i=1}^r M_{n_i}(D_i) \]
+其中 $D_i := \End_R(M_i)^\text{op}$ 是除环, $M_i^{\oplus n_i}$ 是右 $M_{n_i}(D_i)$-模, 而 $M$ 是右 $\End_R(M)^\text{op}$-模, 上述同构保持这些模结构.
 
 \begin{lemma}\label{prop:existence-simple-subquotient}
 	对任意非零模 $M$ 皆存在子模 $M_2 \subset M_1 \subset M$ 使得 $M_1/M_2$ 为单.

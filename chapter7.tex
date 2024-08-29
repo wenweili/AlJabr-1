@@ -750,7 +750,7 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 	\text{Sym}(M \times n; A) & := \left\{ B \in \text{Mul}(\underbracket{M, \ldots, M}_{n \text{份}}; A) : B(\ldots, x,y, \ldots) = B(\ldots, y,x, \ldots) \right\}, \\
 	\text{Alt}(M \times n; A) & := \left\{ B \in \text{Mul}(\underbracket{M, \ldots, M}_{n \text{份}}; A) : B(\ldots, x,x, \ldots)=0 \right\}
 \end{align*}
-定义式中 $x,y \in M$ 而且比邻出现的位置是任意的. 我们分别称 $\text{Sym}(M \times n; A)$ 和 $\text{Alt}(M \times n; A)$ 的元素为 $M$ 上取值在 $A$ 中的对称和反对称 $n$ 重线性映射. 为了会通线性代数中相似的概念, 请先注意到对称群 $\mathfrak{S}_n$ 以 $(\sigma B)(x_1, \ldots, x_n) = B(x_{\sigma^{-1}(1)}, \ldots, x_{\sigma^{-1}(n)})$ 左作用于 $\text{Mul}(M, \ldots, M; A)$, 并回忆 $\mathfrak{S}_n$ 由对换 $\tau_i := (i \quad i+1)$ 生成, $1 \leq i < n$ (引理 \ref{prop:S_n-generation}).
+定义式中 $x,y \in M$ 而且比邻出现的位置是任意的. 我们分别称 $\text{Sym}(M \times n; A)$ 和 $\text{Alt}(M \times n; A)$ 的元素为 $M$ 上取值在 $A$ 中的对称和反对称 $n$ 重线性映射. 为了会通线性代数中相似的概念, 请先注意到对称群 $\mathfrak{S}_n$ 以 $(\sigma B)(x_1, \ldots, x_n) = B(x_{\sigma(1)}, \ldots, x_{\sigma(n)})$ 左作用于 $\text{Mul}(M, \ldots, M; A)$, 并回忆 $\mathfrak{S}_n$ 由对换 $\tau_i := (i \quad i+1)$ 生成, $1 \leq i < n$ (引理 \ref{prop:S_n-generation}).
 \begin{compactitem}
 	\item 对于 $\text{Sym}(M \times n; A)$, 定义可以改写为 $\forall i, \;\tau_i B = B$, 或者进一步 $\forall \sigma \in \mathfrak{S}_n,\; \sigma B =B$. 这是对称多重线性映射的合理定义.
 	\item 对于 $\text{Alt}(M \times n; A)$, 参照先前推导 $\bigwedge(M)$ 反交换的办法, 依样画葫芦地从
@@ -827,7 +827,7 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 
 最后, 我们来看看如何会通微分几何等学科里常见的定义. 命题 \ref{prop:Symm-Alt-univ} 的泛性质表明 $\Sym(M)$ 与 $\bigwedge(M)$ 定为 $T(M)$ 的商实属合理, 然而在一些场合 (如 \cite[\S 2.2]{ChCh}) 它们被定为全体对称张量 $T_{\Sym}(M)$ 和斜称张量 $T_\wedge(M)$, 是 $T(M)$ 的子模而非商模; 我们简要地回顾这些定义. 留意到对称群 $\mathfrak{S}_n$ 在 $T^n(M)$ 上有左作用 $\sigma(x_1 \otimes \cdots \otimes x_m) = x_{\sigma^{-1}(1)} \otimes \cdots \otimes x_{\sigma^{-1}(m)}$, 对于任意群同态 $\chi: \mathfrak{S}_n \to \{\pm 1\}$, 我们定义
 \begin{gather*}
-	T^n_\chi := \{x \in T^n(M): \forall \sigma \in \mathfrak{S}_n,\; \sigma x = \chi(\sigma)x\}, \\
+	T^n_\chi(M) := \{x \in T^n(M): \forall \sigma \in \mathfrak{S}_n,\; \sigma x = \chi(\sigma)x\}, \\
 	T_\chi(M) := \bigoplus_{n \geq 1} T^n_\chi(M), \\
 	T_{\Sym}(M) := T_1(M), \quad T_\wedge := T_{\sgn}(M).
 \end{gather*}

@@ -419,7 +419,7 @@ Galois 理论的原初目的是研究多项式方程的解, 方法是考察根�
 	令 $E|F$ 为特征 $p$ 的有限域的扩张, $|F|=q$, 则 $E|F$ 是 Galois 扩张, 群 $\Gal(E|F)$ 是由 $\Frob_q$ 生成的 $[E:F]$ 阶循环群.
 \end{theorem}
 \begin{proof}
-	已知 $E|\F_p$ 是 Galois 扩张, 引理 \ref{prop:Galois-properties} 确保 $E|F$ 也是 Galois 扩张. 因为 $\Gal(E|F) = [E:F] =: n$, 仅须再证 $\Frob_q$ 是群中的 $n$ 阶元即足.
+	已知 $E|\F_p$ 是 Galois 扩张, 引理 \ref{prop:Galois-properties} 确保 $E|F$ 也是 Galois 扩张. 因为 $|\Gal(E|F)| = [E:F] =: n$, 仅须再证 $\Frob_q$ 是群中的 $n$ 阶元即足.
 
 	我们业已看到任何 $x \in E$ 都满足 $x^{q^n}=x$, 故 $\Frob_q^n = \identity_E$; 若 $d \mid n$ 且 $\Frob^d_q = \identity_E$, 则在 $E$ 中恒有 $x^{q^d}=x$ ,因为 $X^{q^d}-X \in F[X]$ 至多只有 $q^d$ 个根, 故 $q^n = |E| \leq q^d$, 从此立即导出 $d=n$.
 \end{proof}

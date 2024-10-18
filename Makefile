@@ -27,7 +27,7 @@ clean:
 
 tarball:
 	@rm -f ../AlJabr-1.tar.gz
-	@tar cvfz ../AlJabr-1.tar.gz .
+	@tar --exclude .git -zcvf ../AlJabr-1.tar.gz .
 
 zip:
 	@rm -f ../AlJabr-1.zip

@@ -406,7 +406,7 @@
 \begin{lemma}\label{prop:Hom-matrix}
 	对于 $\phi: \bigoplus_{i=1}^n M_i \to \bigoplus_{i=1}^{n'} M'_i$ 和 $\psi: \bigoplus_{i=1}^{n'} M'_i \to \bigoplus_{i=1}^{n''} M''_i$, 相应的矩阵满足
 	\[ \mathcal{M}(\psi\phi) = \mathcal{M}(\psi) \mathcal{M}(\phi) \]
-	其中矩阵元的相乘由合成 $\Hom(M_k, M'_j) \times \Hom(M'_j, M''_i) \to \Hom(M_k, M''_i)$ 给出.
+	其中矩阵元的相乘由合成 $\Hom(M'_j, M''_i) \times \Hom(M_k, M'_j) \to \Hom(M_k, M''_i)$ 给出.
 \end{lemma}
 \begin{proof}
 	应用环 $\End_R(\bigoplus_i M'_i)$ 中的等式 $\sum_{j=1}^{n'} \iota'_j p'_j = 1$, $p'_i \iota'_i = \identity_{M'_i}$ 和 $i \neq j \implies p'_i \iota'_j = 0$ (双积定义 \ref{def:biproduct} 的多元版本) 计算 $\psi\phi$ 的第 $(i, k)$ 个矩阵系数 $\mathcal{M}(\psi\phi)_{ik}$: 根据同态合成的结合律与双线性, 可得
@@ -1688,7 +1688,7 @@ $\begin{tikzcd}
 \end{proof}
 
 作为推论, 给定有限直和分解 $M = \bigoplus_{i=1}^r M_i^{\oplus n_i}$, 其中 $M_1, \ldots, M_r$ 是互不同构的单模, 则引理 \ref{prop:Hom-matrix} 表明
-\[ \End_R(M)^\text{op} \rightiso \prod_{i=1}^r M_{n_i}(D_i) \]
+\[ \End_R(M)^{\text{op}} \rightiso \prod_{i=1}^n M_{n_i}\left(D_i^{\text{op}}\right)^{\text{op}} \xrightarrow[\text{转置}]{\sim} \prod_{i=1}^n M_{n_i}(D_i) \]
 其中 $D_i := \End_R(M_i)^\text{op}$ 是除环, $M_i^{\oplus n_i}$ 是右 $M_{n_i}(D_i)$-模, 而 $M$ 是右 $\End_R(M)^\text{op}$-模, 上述同构保持这些模结构.
 
 \begin{lemma}\label{prop:existence-simple-subquotient}

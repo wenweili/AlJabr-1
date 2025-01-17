@@ -751,7 +751,7 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 \begin{proof}
 	以下仅证明 $M \dotimes{S} S \rightiso M$, 另一侧完全类似. 以 $\Hom_{(R,S)}$ 表 $(R,S)\dcate{Mod}$ 的 $\Hom$. 对任意 $(R, S)$-双模 $A$ 都有
 	\[\begin{tikzcd}[column sep=small, row sep=tiny]
-		\Hom_{(R,S)}(M, A) \arrow[leftrightarrow, r, "1:1"] & \left\{ M \dotimes{S} S \xrightarrow{\text{平衡积}} A \right\} \arrow[leftrightarrow, r, "1:1"] & \Hom_{(R,S)}\left( M \dotimes{S} S, A \right) \\
+		\Hom_{(R,S)}(M, A) \arrow[leftrightarrow, r, "1:1"] & \left\{ M \times S \xrightarrow{\text{平衡积}} A \right\} \arrow[leftrightarrow, r, "1:1"] & \Hom_{(R,S)}\left( M \dotimes{S} S, A \right) \\
 		\phi & B \arrow[mapsto, l] \arrow[mapsto, r, "{\varphi(m \otimes s)=B(m,s)}"'] & \varphi.
 	\end{tikzcd}\]
 	第一个双射由 $\phi(m)=B(m,1)$ 给出, 这是因为 $B(m,s) = B(ms,1)$ 故 $B$ 由 $\phi$ 确定, 而平衡积性质转译为双模同态的性质

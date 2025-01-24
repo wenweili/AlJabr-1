@@ -11,7 +11,13 @@
 
 % 设置 xeCJK 字体及中文数字
 %\setmainfont{TeX Gyre Pagella}	% 设置西文衬线字体
-\setsansfont{TeX Gyre Heros}	% 设置西文无衬线字体
+%\setsansfont{TeX Gyre Heros}[	% 设置西文无衬线字体
+\setsansfont{texgyreheros}[     % 设置西文无衬线字体
+Extension=.otf,
+UprightFont=*-regular,
+BoldFont=*-bold,
+ItalicFont=*-italic,
+BoldItalicFont=*-bolditalic]
 
 % 自用模式: Fandol 字体 + 思源黑体 (Noto Sans CJK SC), 宜留意字体高低差异.
 \setCJKmainfont[

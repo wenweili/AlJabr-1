@@ -84,3 +84,7 @@ In case of problems of compilation, please kindly report to the author. Make sur
 
 # License
 The entire codebase is under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/).
+
+# Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=wenweili/AlJabr-1&type=Date)](https://star-history.com/#wenweili/AlJabr-1&Date)

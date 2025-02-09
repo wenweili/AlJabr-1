@@ -563,7 +563,7 @@
 \[\begin{tikzcd}[column sep=large, row sep=large]
 	A \otimes B \otimes A \otimes B \arrow[r, "{c_\epsilon(A,B) \otimes c_\epsilon(A,B)}" inner sep=1em] \arrow[d, "{\identity_A \otimes c_\epsilon(B,A) \otimes \identity_B}"'] & B \otimes A \otimes B \otimes A \arrow[d, "{\identity_B \otimes c_\epsilon(A,B) \otimes A}"] \\
 	A \otimes A \otimes B \otimes B \arrow[r, "{c_\epsilon(A \otimes A, B \otimes B)}" inner sep=1em] \arrow[d, "{\mu_A \otimes \mu_B}"'] &  B \otimes B \otimes A \otimes A \arrow[d, "{\mu_B \otimes \mu_A}"] \\
-	A \otimes B \arrow[r, "{c(A,B)}"'] & B \otimes A
+	A \otimes B \arrow[r, "{c_\epsilon(A,B)}"'] & B \otimes A
 \end{tikzcd}\]
 交换, 其中 $\mu_A$, $\mu_B$ 表代数的乘法, 并在图中省去交换约束. 下块的交换性可归结于 $c_\epsilon(-,-)$ 的函子性. 上块交换性从辫子观点则一目了然 (回忆 \S\ref{sec:braiding}):
 \begin{equation*}\begin{tikzpicture}[baseline=(braid)]

@@ -1304,7 +1304,7 @@ $\begin{tikzcd}
 	列 $\Ker' \to \Ker \to \Ker'' \xrightarrow{\delta} \Coker' \to \Coker \to \Coker''$ 正合.
 \end{proposition}
 \begin{proof}
-	我们只验证 $\Ker''$ 和 $\Coker'$ 两项, 其余是容易的. 假设在以上构造中 $x'' \mapsto \bar{y}' = 0$, 细审构造可知这相当于存在 $x' \in X'$ 使得 $x-x' \in \Ker$; 由于 $X' \to X \to X''$ 正合, 后者等价于 $x'' \in \Image[\Ker \to \Ker'']$. 在 $\Ker''$ 处的正合性成立.
+	我们只验证 $\Ker''$ 和 $\Coker'$ 两项, 其余是容易的. 假设在以上构造中 $x'' \mapsto \bar{y}' = 0$, 细审构造可知这相当于存在 $x' \in X'$ 使得 $x - (x'\;\text{的像}) \in \Ker$; 由于 $X' \to X \to X''$ 正合, 后者等价于 $x'' \in \Image[\Ker \to \Ker'']$. 在 $\Ker''$ 处的正合性成立.
 
 	今考虑 $y' \in Y'$ 及其像 $\bar{y}' \in \Coker'$. 条件 $\bar{y}' \mapsto 0 \in \Coker$ 等价于 $\exists x_0 \in X$ 映至 $y' \in Y'$ 在 $Y$ 中的像; 此 $x_0$ 在 $X \to X'' \to Y''$ 下的像自动是零, 因此 $x_0 \mapsto x'' \in \Ker''$. 因此回忆连接同态 $\delta$ 的构造可知 $\bar{y}' \mapsto 0$ 等价于 $\exists x'' \in \Ker''$ 使得 $\delta(x'') = \bar{y}'$.
 \end{proof}

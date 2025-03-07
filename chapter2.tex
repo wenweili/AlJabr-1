@@ -932,7 +932,7 @@ $\begin{tikzcd}
 	函子 $F: \mathcal{C}_1 \to \mathcal{C}_2$ 有右伴随的充分必要条件是 $A_Y$ 对每个 $Y$ 皆可表; 类似地, $G: \mathcal{C}_2 \to \mathcal{C}_1$ 有左伴随的充分必要条件是 $\Hom_{\mathcal{C}_1}(X, G(\cdot))$ 对每个 $X$ 皆可表.
 \end{proposition}
 \begin{proof}
-	证明 $F$ 的情形即可. 必要性是显然的. 反之, 假设对每个 $Y$ 存在对象 $GY$ 和同构 $\psi_Y: h_{\mathcal{C}_1}(GY) \rightiso A_Y := \Hom(F(\cdot), Y)$.  请留意 $h_{\mathcal{C}_1}(GY) = \Hom_{\mathcal{C}_2}(\cdot, GY)$. 引理 \ref{prop:representable-functor-uniqueness} 断言 $(GY, \psi_Y)$ 的唯一性: 它是逗号范畴 $(h_{\mathcal{C}_1} / A_Y)$ 的终对象. 对每个 $Y$ 选定 $(GY, \psi_Y)$. 任意态射 $h: Y \to Y'$ 诱导 $h_*: A_Y \to A_{Y'}$, 因而存在唯一的 $Gh: GY \to GY'$ 使得下图交换
+	证明 $F$ 的情形即可. 必要性是显然的. 反之, 假设对每个 $Y$ 存在对象 $GY$ 和同构 $\psi_Y: h_{\mathcal{C}_1}(GY) \rightiso A_Y := \Hom(F(\cdot), Y)$. 请留意 $h_{\mathcal{C}_1}(GY) = \Hom_{\mathcal{C}_1}(\cdot, GY)$. 引理 \ref{prop:representable-functor-uniqueness} 断言 $(GY, \psi_Y)$ 的唯一性: 它是逗号范畴 $(h_{\mathcal{C}_1} / A_Y)$ 的终对象. 对每个 $Y$ 选定 $(GY, \psi_Y)$. 任意态射 $h: Y \to Y'$ 诱导 $h_*: A_Y \to A_{Y'}$, 因而存在唯一的 $Gh: GY \to GY'$ 使得下图交换
 	\[ \begin{tikzcd}
 		h_{\mathcal{C}_1}(GY) \arrow[d, "{h_{\mathcal{C}_1}(Gh)}"'] \arrow[r, "\psi_Y", "\sim"'] & A_Y \arrow[d, "h_*"] \\
 		h_{\mathcal{C}_1}(GY') \arrow[r, "{\psi_{Y'}}"', "\sim"] & A_{Y'} .

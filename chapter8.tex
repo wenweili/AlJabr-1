@@ -1115,7 +1115,7 @@
 			\item 引入自由变元 $Z, W$, 证明 $P(Z,W) := r(Z) - Ws(Z)$ 作为 $F[Z,W]$ 的元素不可约, 继而 $P(Z,u)$ 作为 $F(u)[Z]$ 的元素不可约;
 			\item 导出 $[F(X):F(u)] = \max\{\deg r, \deg s\}$.
 		\end{compactenum}
-	\item 承上, 证明 $\Aut_F(F(X)) \simeq \PGL(2,F) := \GL(2,F)/F^\times$, 作用方式为 $\bigl( \begin{smallmatrix} a & b \\ c & d \end{smallmatrix} \bigr) \cdot X = \frac{aX+b}{cX+d}$.
+	\item 承上, 证明 $\Aut_F(F(X))^{\mathrm{op}} \simeq \PGL(2,F) := \GL(2,F)/F^\times$, 作用方式为 $X \cdot \bigl( \begin{smallmatrix} a & b \\ c & d \end{smallmatrix} \bigr) = \frac{aX+b}{cX+d}$.
 	\item (Lüroth 定理) 证明 $F(X)|F$ 的子扩张 $K|F$ 或者是 $F$, 或如上题的形式 $K=F(u)$. \index{Lüroth 定理}
 	\begin{hint}
 		设 $X$ 在 $K \neq F$ 上有极小多项式 $Q(Z) = Z^n + u_{n-1} Z^{n-1} + \cdots + u_0$; 取 $i$ 使得 $u = \frac{r}{s} = u_i \notin F$. 我们有 $Q(Z) \mid P(Z,u)$. 证明 $P(Z,u) \in F^\times Q(Z)$ 以得出 $K=F(u)$.

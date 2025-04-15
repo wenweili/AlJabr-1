@@ -446,7 +446,7 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 	此外, $K$ 的两个赋值 $v_1, v_2$ 等价当且仅当它们对应的绝对值等价.
 \end{proposition}
 \begin{proof}
-	给定秩 $1$ 赋值 $v: K \to \Gamma \sqcup\{\infty\}$ (亦即 $(\Gamma, \leq) \subset (\R, \leq)$), 置 $|\cdot| := e^{-v(\cdot)}$, 则因为 $x \mapsto e^x$ 给出保序同构 $(\R, +) \rightiso (\R_{>0}, \times)$, 性质 $|xy|=|x| \cdot |y|$ 和 $|x|+|y| \leq \max\{|x|,|y|\}$ 分别对应到 \eqref{eqn:valuation-homo} 和 \eqref{eqn:valuation-ineq}, 而且 $v^{-1}(\infty)=\{0\}$ (因 $K$ 是域) 对应于 $x \neq 0 \implies |x| > 0$. 综上, 秩 $1$ 赋值 $v: K \to \Gamma \sqcup \{\infty\}$ 一一对应于满足强三角不等式的绝对值 $|\cdot|: K \to \R_{\geq 0}$. 公式 $|x|>|y| \implies |x+y|=|x|$ 无非是引理 \ref{prop:ultrametric} 的转译. 此时 $|n| = |1+ \cdots + 1| \leq |1|$.
+	给定秩 $1$ 赋值 $v: K \to \Gamma \sqcup\{\infty\}$ (亦即 $(\Gamma, \leq) \subset (\R, \leq)$), 置 $|\cdot| := e^{-v(\cdot)}$, 则因为 $x \mapsto e^x$ 给出保序同构 $(\R, +) \rightiso (\R_{>0}, \times)$, 性质 $|xy|=|x| \cdot |y|$ 和 $|x+y| \leq \max\{|x|,|y|\}$ 分别对应到 \eqref{eqn:valuation-homo} 和 \eqref{eqn:valuation-ineq}, 而且 $v^{-1}(\infty)=\{0\}$ (因 $K$ 是域) 对应于 $x \neq 0 \implies |x| > 0$. 综上, 秩 $1$ 赋值 $v: K \to \Gamma \sqcup \{\infty\}$ 一一对应于满足强三角不等式的绝对值 $|\cdot|: K \to \R_{\geq 0}$. 公式 $|x|>|y| \implies |x+y|=|x|$ 无非是引理 \ref{prop:ultrametric} 的转译. 此时 $|n| = |1+ \cdots + 1| \leq |1|$.
 	
 	反设存在 $N$ 使得 $\forall n \in \Z_{\geq 1}, \; |n| \leq N$. 对任意 $x,y \in K$,
 	\begin{gather*}

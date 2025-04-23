@@ -1313,7 +1313,7 @@ Witt 环上还有如下几种简单然而极重要的运算.
 	处理 $x_i = X_i$ 是自由变元而 $R=\Z[X_0, \ldots]$ 的情形即可. 定义 $F_n \in \Z[X_0, \ldots]$ 的条件是当 $n \geq 0$ 时 $w_n(F_0, F_1, \ldots) = w_{n+1}(X_0, X_1, \ldots)$, 亦即
 	\[ \sum_{i=0}^n F_i^{p^{n-i}} p^i = \sum_{i=0}^{n+1} X_i^{p^{n+1-i}} p^i. \]
 	当 $n=0$ 时这表明 $F_0 = X_0^p + pX_1 \equiv X_0^p \pmod {pR}$. 今假设 $i < n \implies F_i \equiv X_i^p \pmod{pR}$, 上式变为
-	\[ F_n p^n = X_0 p^{n+1} + X_n^p p^n + \sum_{i<n} \left( X_i^{p^{n+1-i}} - F_i^{p^{n-i}} \right) p^i. \]
+	\[ F_n p^n = X_{n+1} p^{n+1} + X_n^p p^n + \sum_{i<n} \left( X_i^{p^{n+1-i}} - F_i^{p^{n-i}} \right) p^i. \]
 	引理 \ref{prop:aux-p-power} 及递归假设蕴涵 $i < n \implies F_i^{p^{n-i}} \equiv X_i^{p^{n+1-i}} \pmod{p^{n+1-i} R}$, 故
 	\[ F_n p^n \equiv X_n^p p^n \pmod{p^{n+1} R}. \]
 	由于 $R$ 是 $p$-无挠的, 因之有 $F_n \equiv X_n^p \pmod{pR}$. 证毕.
@@ -1376,7 +1376,7 @@ Witt 环上还有如下几种简单然而极重要的运算.
 		\sum_{i=0}^n \tau\left( x_i^{p^{-n}} \right)^{p^{n-i}} p^i + \sum_{i=0}^n \tau\left( y_i^{p^{-n}} \right)^{p^{n-i}} p^i \quad \bmod p^{n+1}A.
 	\end{gather}
 	从 $\WittV(A)$ 环结构的刻画可见
-	\[ \sum_{i=0}^n S_i\left( \tau(x_0^{p^{-n}}), \ldots \right)^{p^{n-i}} p^i = \sum_{i=0}^n \tau\left( x_i^{p^{-n}} \right)^{p^{n-i}} p^i + \sum_{i=0}^n \tau\left( x_i^{p^{-n}} \right)^{p^{n-i}} p^i. \]
+	\[ \sum_{i=0}^n S_i\left( \tau(x_0^{p^{-n}}), \ldots \right)^{p^{n-i}} p^i = \sum_{i=0}^n \tau\left( x_i^{p^{-n}} \right)^{p^{n-i}} p^i + \sum_{i=0}^n \tau\left( y_i^{p^{-n}} \right)^{p^{n-i}} p^i. \]
 	暂以 $[\cdots]$ 记 $\kappa$ 中元素在 $A$ 中的任意原像, 应用引理 \ref{prop:aux-p-power} 导出
 	\[ \sum_{i=0}^n \left[ S_i(x_0^{p^{-n}}, \ldots, y_0^{p^{-n}}, \ldots) \right]^{p^{n-i}} p^i \equiv \eqref{eqn:strict-p-ring-sum} \pmod{p^{n+1}A}; \]
 	原像 $[\cdots]$ 的选取不影响上式, 不妨就取为 $\tau(\cdots)$. 整系数蕴涵 $S_i(x_0^{p^{-n}}, \ldots, y_0^{p^{-n}}) = S_i(x_0, \ldots, y_0, \ldots)^{p^{-n}}$. 综合 $\tau$ 的乘性遂导出

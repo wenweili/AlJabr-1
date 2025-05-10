@@ -670,14 +670,14 @@ Archimedes 绝对值的典型例子是 $K=\R, \CC$ 连同标准的绝对值 $|\c
 	\item 尽头点: 设 $B_1 \supset B_2 \supset \ldots$ 为 $K^\circ$ 中一列闭圆盘, 并且 $\bigcap_{k \geq 1} B_k = \emptyset$, 定义乘性范数 $|f|_{(B_k)_{k \geq 1}} := \inf_{k \geq 1} |f|_{B_k}$; 同样地, 我们也有相应的秩 $1$ 赋值 $w_{(B_k)_{k \geq 1}}$. 留意到 $\CC$ 中递相嵌套的闭圆盘 $B_1 \supset B_2 \supset \cdots$ 必然有交, 在此则未必.
 	\item 赋予 $\Gamma := \R \oplus \Z\alpha$ 全序交换群的结构 ($\alpha$ 仅是一个方便的符号), 以使
 		\[ r > 0 \implies r > \alpha > 0; \]
-		思路: $\alpha$ 是``正无穷小''. 现在对 $x \in K^\circ$ 和 $0 \leq r < 1$ 定义赋值
+		思路: $\alpha$ 是``正无穷小''. 现在对 $x \in K^\circ$ 和 $0 < r \leq 1$ 定义赋值
 		\begin{align*}
 			w_{x,-}: K\lrangle{t} & \longrightarrow \Gamma \sqcup\{\infty\} \\
 			f = \sum_{n \geq 0} c_n (t-x)^n & \longmapsto \inf\left\{ v(c_n) - n \log r + n\alpha : n=0,1,2, \ldots \right\}.
 		\end{align*}
 		不妨想象它对应到 $B(x, re^{-\alpha})$, 其半径小于但无穷接近 $r$. 可以证明 $w_{x,-}$ 只和开圆盘 $\{y: |y-x| < r\}$ 有关. 当 $r \notin |K|$ 时, $w_{x,-}$ 等价于 III 的 $w_{B(x,r)} = -\log|\cdot|_{B(x,r)}$; 而当 $r \in |K|$ 时 $w_{x,-}$ 与上述几种赋值皆不等价.
 		
-		同理, 对于 $0 < r \leq 1$ 的情形引进负无穷小 $-\alpha$, 则得赋值 $w_{x,+}$; 它只和 $B(x,r)$ 有关.
+		同理, 对于 $0 < r < 1$ 的情形引进负无穷小 $-\alpha$, 则得赋值 $w_{x,+}$; 它只和 $B(x,r)$ 有关, 并且在 $r \in |K|$ 时与前几种赋值不等价.
 \end{enumerate}
 
 这些赋值的共性之一在于它们限制到 $K^\circ\lrangle{t} = K\lrangle{t} \cap K^\circ\llbracket t\rrbracket$ 上都 $\geq 0$. 以上 I 型点容易理解, 它们恰是 $K^\circ$ 的元素, 然而 I 型点构成的拓扑空间``完全不连通'' (见 \cite[定义 1.7.3]{FL14}), 照搬经典方法得到的几何乏善可陈. 另外, II 和 III 两型的点可以比作代数几何学中常用的``泛点''. 当 II, III 两型点的 $r \in [0,1]$ 连续地变化时, 在适当的拓扑下, 这些赋值 (或点) 描出一棵无穷分枝的树:

@@ -360,7 +360,7 @@ $\begin{tikzcd}[row sep=small, column sep=small]
 对于赋值域 $K$ 中的任意非零元 $x$, 必有 $x \in K^\circ$ 或 $x^{-1} \in K^\circ$, 因此 $K$ 可视同 $K^\circ$ 的分式域; 相关理论见诸 \S\ref{sec:comm-ring-intro}. 许多情形下只需向 $K^\circ$ 添入一个逆元就能得到 $K$.
 
 \begin{lemma}\label{prop:valuation-localization}
-	对于 $(K, v)$ 如上, 设 $\varpi \in K^\circ \smallsetminus \{0\}$, $\gamma := v(\varpi)$ 满足于 $\{ k\gamma : k=0,1,2,\ldots \}$ 在 $\Gamma$ 中无上界, 则有自然同构 $K = K^\circ[\frac{1}{\varpi}]$; 此处 $K^\circ[\frac{1}{\varpi}]$ 表整环 $K^\circ$ 对乘性子集 $\varpi^\Z$ 的局部化, 见 \S\ref{sec:comm-ring-intro}.
+	对于 $(K, v)$ 如上, 设 $\varpi \in K^\circ \smallsetminus \{0\}$, $\gamma := v(\varpi)$ 满足于 $\{ k\gamma : k=0,1,2,\ldots \}$ 在 $\Gamma$ 中无上界, 则有自然同构 $K = K^\circ[\frac{1}{\varpi}]$; 此处 $K^\circ[\frac{1}{\varpi}]$ 表整环 $K^\circ$ 对乘性子集 $\varpi^{\Z_{\geq 0}}$ 的局部化, 见 \S\ref{sec:comm-ring-intro}.
 \end{lemma}
 \begin{proof}
 	由于 $K$ 是 $K^\circ$ 的分式域, $K^\circ[\frac{1}{\varpi}]$ 可嵌入 $K$. 对任意 $x \in K$ 取 $k \geq 0$ 使得 $k\gamma \geq -v(x)$, 则 $x \varpi^k \in K^\circ$, 亦即 $x \in K^\circ[\frac{1}{\varpi}]$. 证毕.

@@ -26,8 +26,8 @@ clean:
 	@rm -f .metadonnees*
 
 tarball:
-	@rm -f ../AlJabr-1.tar.gz
-	@tar --exclude .git -zcvf ../AlJabr-1.tar.gz .
+	@rm -f ../AlJabr-1.tar.zst
+	@tar --exclude .git --zstd -cf ../AlJabr-1.tar.zst .
 
 zip:
 	@rm -f ../AlJabr-1.zip

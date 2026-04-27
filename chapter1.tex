@@ -37,7 +37,7 @@
 		空集 $\emptyset$ 的形式定义是 $\{u \in X: u \neq u\}$, 其中 $X$ 是任意集合. 外延公理一个近乎无聊的应用是证明 $\emptyset$ 无关 $X$ 的选取, 前提是集合确实存在, 这点既可以独立成另一条``存在公理'', 也可以划入稍后的无穷公理.
 	\item \emph{配对公理}: 对任意 $x,y$, 存在集合 $\{x,y\}$, 其元素恰好是 $x$ 与 $y$.
 	
-		有序对 $(x,y)$ 的概念可用配对公理来实作: 我们能定义 $(x,y) := \{\{x\}, \{x,y\} \}$, 由此定义积集 $X \times Y := \{(x,y) : x \in X,\; y \in Y \}$; 准此要领可定义有限多个集合的积 $X \times Y \times \cdots$. 集合间的映射 $f: X \to Y$ 等同于它的图形 $\Gamma_f \subset X \times Y$: 对每个 $x \in X$, 交集 $\Gamma_f \cap (\{x\} \times Y)$ 是独点集, 记作 $\{f(x)\}$.
+		有序对 $(x,y)$ 的概念可用配对公理来实作: 我们能定义 $(x,y) := \{\{x\}, \{x,y\} \}$, 由此定义积集 $X \times Y := \{(x,y) : x \in X,\; y \in Y \}$; 准此要领可定义有限多个集合的积 $X \times Y \times \cdots$. 集合间的映射 $f: X \to Y$ 等同于它的图形 $\Gamma_f \subset X \times Y$: 对每个 $x \in X$, 交集 $\Gamma_f \cap (\{x\} \times Y)$ 是独点集, 记作 $\{(x, f(x))\}$.
 	\item \emph{分离公理模式}: 设 $P$ 为关于集合的一个性质, 并以 $P(u)$ 表示集合 $u$ 满足性质 $P$, 则对任意集合 $X$ 存在集合 $Y = \{u \in X : P(u) \}$.
 	\item \emph{并集公理}:  对任意集合 $X$, 存在相应的并集 $\bigcup X := \{u : \exists v \in X \; \text{ 使得 }\; u \in v\}$.
 	
@@ -270,7 +270,7 @@
 	任意集合 $S$ 都能被赋予良序.
 \end{theorem}
 \begin{proof}
-	我们断言 $S$ 和某个序数 $\theta$ 间存在双射. 选取元素 $\mho \notin S$ 如上. 由选择公理, 可以在 $S$ 的每个子集 $S'$ 里拣选元素 $g(S')$. 设 $a_0 := g(S)$, 并用超穷递归对每个序数 $\alpha$ 定义
+	我们断言 $S$ 和某个序数 $\theta$ 间存在双射. 选取元素 $\mho \notin S$ 如上. 由选择公理, 可以在 $S$ 的每个非空子集 $S'$ 里拣选元素 $g(S')$. 不妨设 $S$ 非空, 命 $a_0 := g(S)$, 并用超穷递归对每个序数 $\alpha$ 定义
 	\[ a_\alpha := \begin{cases}
 		g \left( S \smallsetminus \{ a_\beta : \beta < \alpha \} \right), & S \neq \{ a_\beta : \beta < \alpha \} \\
 		\mho, & S = \{ a_\beta : \beta < \alpha \}.
@@ -517,7 +517,7 @@
 		\begin{compactenum}[(i)]
 			\item $\beta < \gamma \implies \alpha + \beta < \alpha + \gamma$;
 			\item 若 $\alpha < \beta$, 则存在唯一的 $\delta$ 使得 $\beta = \alpha + \delta$. \begin{hint} 取 $\delta$ 为良序集 $\{\xi : \alpha \leq \xi < \beta \}$;\end{hint}
-			\item (带余除法) 对于 $\gamma, \alpha > 0$, 存在唯一的 $\beta, \rho$ 使得 $\rho < \alpha$ 且 $\gamma = \alpha \beta + \rho$. \begin{hint}取满足 $\alpha\beta < \gamma$ 的最大序数 $\beta$, 并应用 (ii); \end{hint}
+			\item (带余除法) 对于 $\gamma, \alpha > 0$, 存在唯一的 $\beta, \rho$ 使得 $\rho < \alpha$ 且 $\gamma = \alpha \beta + \rho$. \begin{hint}取满足 $\alpha\beta \leq \gamma$ 的最大序数 $\beta$, 并应用 (ii); \end{hint}
 			\item 若 $\alpha > 1$, 则 $\beta < \gamma \implies \alpha^\beta < \alpha^\gamma$.
 		\end{compactenum}
 	\item 举例说明对于序数 $\alpha, \beta$, 一般而言 $\alpha \beta \neq \beta \alpha$. \begin{hint}不妨取 $\alpha < \beta = \omega$.\end{hint}
@@ -527,7 +527,7 @@
 	\item 证明 $f(a,b) = 2^a(2b+1)-1$ 是从 $\Z_{\geq 0} \times \Z_{\geq 0}$ 到 $\Z_{\geq 0}$ 的双射.
 	\item 以下结果称作 König 引理: 设 $\kappa_i, \lambda_i$ 为两族以 $i \in I$ 为下标的基数, 且对每个 $i \in I$ 皆有 $\kappa_i < \lambda_i$. 证明
 		\[ \sum_{i \in I} \kappa_i < \prod_{i \in I} \lambda_i. \]
-		导出 Cantor 定理 $\kappa \leq 2^\kappa$ 作为特例.
+		导出 Cantor 定理 $\kappa < 2^\kappa$ 作为特例.
 		\begin{hint}
 			容易看出 $\leq$ 成立. 接着取 $E := \prod_i E_i$, 其中 $|E_i| = \lambda_i$; 若断言不成立, 则存在分解 $E = \bigcup_i F_i$, 其中 $F_i \subset E$, $|F_i| = \kappa_i$. 为导出矛盾, 将每个 $f \in E$ 按分量表成 $(f_j)_{j \in I}$, $f_j \in E_j$, 并考虑集合
 			\[ G_i := \Image\left[ F_i \hookrightarrow E \xrightarrow{\text{取 $i$ 分量}} E_i \right], \quad i \in I. \]

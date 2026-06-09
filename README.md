@@ -2,9 +2,9 @@ This is the LaTeX source for the textbook **Methods of Algebra** (in Chinese: ไป
 
 The book was originally published in 2019 by Higher Education Press (Beijing), ISBN 978-7-04-050725-6. The revised version has been published.
 
-The PDF version and the errata are available on the author's web page. The contents in this revised version are "frozen": any spotted mistakes will be corrected in the next revision/edition.
+The PDF version and the errata are available on the author's web page. The contents of this revised version are "frozen": any spotted mistakes will be corrected in the next revision/edition.
 
-It is hoped that these files will be of some help to those professors, students as well as amateurs who wish to write serious Chinese books in Mathematics or Physics without too much TeXnical trouble.
+It is hoped that these files will be of some help to those professors, students, as well as amateurs who wish to write serious Chinese books in Mathematics or Physics without too much TeXnical trouble.
 
 # How to compile
 
@@ -21,7 +21,7 @@ We only need the standard packages and fonts, such as
 Make sure that all the relevant packages/programs are installed. For reference, the author made the compilation using Arch-based Linux distributions with TeX Live 2018 and/or 2020; the packages **biber** and **texlive-science** are required.
 
 ## Clone the files
-Assume that [Git](https://git-scm.com/) has been installed on your computer. As a preparation for the compilation process, we will clone the files into `~/AlJabr-1` in our home directory. In the command line, type
+We assume that [Git](https://git-scm.com/) has been installed on your computer. As a preparation for the compilation process, we will clone the files into `~/AlJabr-1` in our home directory. In the command line, type
 ```
 cd ~
 git clone https://github.com/wenweili/AlJabr-1
@@ -31,7 +31,7 @@ All the source files are encoded in UTF-8, which is the de facto standard for st
 
 ## Compile the TeX source
 
-Move to the directory
+Change to the directory
 ```
 cd ~/AlJabr-1
 ```
@@ -39,12 +39,12 @@ Then, either type
 ```
 latexmk -pdf -pdflatex="xelatex -shell-escape -interaction=nonstopmode %O %S" Al-jabr-1
 ```
-under bash, or more simply
+or more simply
 ```
 make
 ```
 
-Have a cup of coffee since this will take several minutes. The resulting PDF file should appear as **Al-jabr-1.pdf** in the same directory. Note that the main file is **Al-jabr-1.tex**.
+Have a cup of coffee since this will take several minutes. The resulting PDF file should be **Al-jabr-1.pdf** in the same directory. Note that the main file is **Al-jabr-1.tex**.
 
 To clean up everything in our directory except the PDF file, type
 ```
@@ -77,7 +77,7 @@ make errata
 ```
 in the same directory.
 
-The errata to the previous editions are named as **Errata-Al-jabr-1-v0.tex**, and so forth.
+The errata to the previous editions are named **Errata-Al-jabr-1-v0.tex**, and so forth.
 
 # Feedback
 In case of problems with compilation, please kindly report them to the author. Make sure that all the system requirements above are met, and provide detailed error messages. Other suggestions are also welcome.

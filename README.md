@@ -87,4 +87,4 @@ The entire codebase is under [CC BY 4.0](http://creativecommons.org/licenses/by/
 
 # Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=wenweili/AlJabr-1&type=Date)](https://star-history.com/#wenweili/AlJabr-1&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=wenweili/AlJabr-1&type=Date)](https://star-history.dera.page/#wenweili/AlJabr-1&Date)

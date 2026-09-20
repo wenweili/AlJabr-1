@@ -108,7 +108,7 @@
 \begin{example}\label{eg:categories}
 	考虑几个基本例子.
 	\begin{enumerate}
-		\item 预序集 (定义 \ref{def:partial-order}) 等同于任两个对象间至多只有一个态射的范畴: 对于预序集 $(P, \leq)$, 定义范畴使得其对象集为 $P$, 而存在态射 $p \to p'$ 当且仅当 $p \leq p'$, 此时这样的态射唯一. 特别地, 根据 \S\ref{sec:order} 对有限序数的递归定义, 任意 $n \in \Z_{\geq 0}$ 视为序数等同于全序集 $\{0, \ldots, n-1\}$, 而 $0$ 等同于 $\emptyset$. 相应的范畴记为 $\mathbf{n}$, 其结构可以形象地表为
+		\item 预序集 (定义 \ref{def:partial-order}) 等同于对任一对对象 $(X, Y)$ 至多只有一个态射 $X \to Y$ 的范畴: 对于预序集 $(P, \leq)$, 定义范畴使得其对象集为 $P$, 而存在态射 $p \to p'$ 当且仅当 $p \leq p'$, 此时这样的态射唯一. 特别地, 根据 \S\ref{sec:order} 对有限序数的递归定义, 任意 $n \in \Z_{\geq 0}$ 视为序数等同于全序集 $\{0, \ldots, n-1\}$, 而 $0$ 等同于 $\emptyset$. 相应的范畴记为 $\mathbf{n}$, 其结构可以形象地表为
 		\[ 0 \to 1 \to \cdots \to (n-1) \qquad \text{(略去恒等态射)}. \]
 		作为特例, $0$ 给出空范畴 $\mathbf{0}$, 而 $1$ 给出恰有一个对象和一个态射的范畴 $\mathbf{1}$. \index[sym1]{01n@$\mathbf{0}, \mathbf{1}, \ldots \mathbf{n}$}
 		\item 令 $\cate{Set}$ 为所有集合构成的范畴, 对象 $X, Y$ 之间的态射定义为集合 $X$ 到 $Y$ 的映射. 态射的合成就是映射的合成, 而恒等态射无非是恒等映射. 这是一个 $\mathcal{U}$-范畴.\index[sym1]{Set@$\cate{Set}$}
